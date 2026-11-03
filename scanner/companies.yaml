@@ -71,6 +71,9 @@ greenhouse:
   - { board: kununu, name: kununu }
   - { board: konux, name: KONUX }
   - { board: dataiku, name: Dataiku }
+  - { board: wppmedia, name: WPP Media }
+  - { board: marvelfusion, name: Marvel Fusion }
+  - { board: tide, name: Tide }
 
 ashby:
   - { board: parloa, name: Parloa }
@@ -97,12 +100,18 @@ ashby:
   - { board: notion, name: Notion }
   - { board: supabase, name: Supabase }
   - { board: heyjobs, name: HeyJobs }
+  - { board: upvest, name: Upvest }
+  - { board: sereact, name: Sereact }
+  - { board: oviva, name: Oviva }
+  - { board: wemolo, name: wemolo }
 
 lever:
   - { board: pigment, name: Pigment }
   - { board: agicap, name: Agicap }
   - { board: contentsquare, name: Contentsquare }
   - { board: spotify, name: Spotify }
+  - { board: finn, name: FINN }
+  - { board: veeva, name: Veeva }
 
 smartrecruiters:
   - { board: BoschGroup, name: Bosch }
@@ -110,6 +119,36 @@ smartrecruiters:
   - { board: DeliveryHero, name: Delivery Hero }
   - { board: Auto1, name: AUTO1 Group }
   - { board: Sixt, name: SIXT }
+  - { board: DreesSommerSE, name: "Drees & Sommer" }
+  - { board: SopraSteria1, name: Sopra Steria }
+  - { board: eurofins, name: Eurofins }
+  - { board: rolandberger, name: Roland Berger }
+  - { board: abbvie, name: AbbVie }
+  - { board: gerresheimer, name: Gerresheimer }
+  - { board: StepStoneGroup, name: StepStone }
+  - { board: brainlab, name: Brainlab }
+  - { board: sgs, name: SGS }
+  - { board: AntonPaar1, name: Anton Paar }
+  - { board: ATParchitekteningenieure, name: ATP architekten ingenieure }
+  - { board: afry, name: AFRY }
+  - { board: intuitive, name: Intuitive }
+  - { board: nielseniq, name: NielsenIQ }
+  - { board: turnertownsend, name: "Turner & Townsend" }
+  - { board: somfygroup, name: Somfy }
+  - { board: WAREMARenkhoffSE, name: WAREMA }
+  - { board: avaloq1, name: Avaloq }
+  - { board: Konecranes, name: Konecranes }
+  - { board: rexel1, name: Rexel }
+  - { board: umdaschgroup, name: Umdasch Group }
+  - { board: kanadeviainova, name: Kanadevia Inova }
+  - { board: staubligroup, name: Stäubli }
+  - { board: SYNTEGON, name: Syntegon }
+  - { board: JACOBSDOUWEEGBERTS, name: "JDE Peet's" }
+  - { board: nagarro1, name: Nagarro }
+  - { board: VeoliaEnvironnementSA, name: Veolia }
+  - { board: wabtec, name: Wabtec }
+  - { board: averydennison, name: Avery Dennison }
+  - { board: RedBull, name: Red Bull }
 
 personio:
   - { board: tado, name: tado° }
@@ -117,14 +156,19 @@ personio:
   - { board: 1komma5grad, name: 1KOMMA5° }
   - { board: everphone, name: Everphone }
   - { board: clark, name: CLARK }
+  - { board: westhouse, name: Westhouse }
 
 recruitee:
   - { board: exeon, name: Exeon }
   - { board: makersitegmbh, name: Makersite }
   - { board: tether, name: Tether }
+  - { board: cbsconsulting, name: cbs Corporate Business Solutions }
+  - { board: 8advisory, name: Eight Advisory }
 
 teamtailor:
   - { board: proxima, name: Proxima }
+  - { board: huaweidusseldorf-1719303222, name: Huawei }
+  - { board: infrontsportsmediaag, name: Infront }
 
 # d.vinci hosts (universities, research). See docs/research/institutions.md.
 dvinci:
@@ -145,6 +189,14 @@ workday:
   - { board: alcon, instance: wd5, site: careers_alcon, name: Alcon }
   - { board: ferring, instance: wd3, site: Ferring, name: Ferring }
   - { board: roche, instance: wd3, site: roche-ext, name: Roche }
+  - { board: rhe, instance: wd3, site: R1111, name: Rhenus }
+  - { board: richemont, instance: wd3, site: richemont, name: Richemont }
+  - { board: msd, instance: wd5, site: SearchJobs, name: MSD }
+  - { board: lindtspruengli, instance: wd103, site: LindtSpruengliGroupCareers, name: "Lindt & Sprüngli" }
+  - { board: vontobel, instance: wd3, site: Vontobel_External_Career, name: Vontobel }
+  - { board: alpiq, instance: wd103, site: AlpiqWorkdayExternalCareers, name: Alpiq }
+  - { board: pierrefabre, instance: wd3, site: External_Career_Site, name: Pierre Fabre }
+  - { board: amgen, instance: wd1, site: Careers, name: Amgen }
 
 # SAP SuccessFactors career sites: board = host. Set `country: DE` only where the
 # site's Germany facet works (see the adapter docstring).

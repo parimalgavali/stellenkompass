@@ -92,7 +92,8 @@ Plan: [PLANS.md](PLANS.md) phases 5–12. Review: [research/source-expansion-han
 - [x] Workday adapter (D19)
 - [x] SuccessFactors (RMK) adapter, re-check Fraunhofer/DLR (D20: Fraunhofer enabled, DLR still blocked)
 - [ ] softgarden + join.com adapters
-- [ ] Re-check the 110 upstream boards for German roles
+- [x] Re-check the 110 upstream boards for German roles (52 added; skips in reference-projects.md)
+- [ ] Greenhouse EU host (`boards-api.eu.greenhouse.io`?) for Doctolib
 - [ ] Seniority label + filter (Junior, Graduate/Trainee, Senior, Lead)
 - [ ] Years-of-experience chip
 - [ ] Tracker: flag saved roles missing from the latest scan
