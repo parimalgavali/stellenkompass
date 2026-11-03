@@ -115,3 +115,8 @@ Short records. Newest at the bottom. Format: context → decision → why.
 - Idea from the reference projects' level filters; our own rules in `classify.detect_seniority`.
 - Levels: `lead` (Lead, Head of, Principal, Director, Staff engineer, Teamleiter/Leitung), `senior` (Senior, Sr.), `junior` (Junior, Jr.), `graduate` (Graduate, Trainee, Entry level, Berufseinsteiger, Absolvent, Direkteinstieg). First match wins in that order; empty when the title doesn't say (most roles).
 - Title only: job text often mentions other levels ("you'll work with senior engineers"). The filter shows only roles with that exact level, so unlabelled roles are hidden when a level is picked.
+
+## D23. Years of experience as a hint (2026-11-03)
+- Idea from career-ops `jd-years`; our own rules in `classify.detect_experience_years`.
+- Reads "3+ years of experience", "2-4 years … experience", "mindestens 3 Jahre Berufserfahrung", "Erfahrung von drei Jahren" (digits and one–eight / ein–sechs). The smallest match wins (the entry bar); values above 15 are ignored, since they are usually the company's age.
+- Shown as a chip only; no role is dropped. Only roles with job text can have it (BA and SuccessFactors/softgarden lists have titles only).

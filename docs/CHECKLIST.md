@@ -96,7 +96,7 @@ Plan: [PLANS.md](PLANS.md) phases 5–12. Review: [research/source-expansion-han
 - [x] Re-check the 110 upstream boards for German roles (52 added; skips in reference-projects.md)
 - [ ] Greenhouse EU host (`boards-api.eu.greenhouse.io`?) for Doctolib
 - [x] Seniority label + filter (Junior, Graduate/Trainee, Senior, Lead) (D22)
-- [ ] Years-of-experience chip
+- [x] Years-of-experience chip (D23)
 - [ ] Tracker: flag saved roles missing from the latest scan
 - [ ] Deadlines: "closes in N days" where the source has one
 

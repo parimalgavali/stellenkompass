@@ -59,3 +59,31 @@ def detect_seniority(title: str) -> str:
     """'lead', 'senior', 'junior', 'graduate' from the title; '' when it doesn't say."""
     low = (title or "").lower()
     return next((level for level, pattern in _SENIORITY if re.search(pattern, low)), "")
+
+
+_NUMBER_WORDS = {
+    "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8,
+    "ein": 1, "eine": 1, "einem": 1, "zwei": 2, "drei": 3, "vier": 4, "fünf": 5, "sechs": 6,
+}  # fmt: skip
+_N = r"(\d{1,2}|" + "|".join(_NUMBER_WORDS) + r")"
+_SPAN = r"\s*\+?\s*(?:(?:-|–|bis|to)\s*\d{1,2}\s*)?\+?\s*"
+_YEARS = (
+    re.compile(_N + _SPAN + r"(?:years?|yrs|jahre?n?)\b[^.;:\n]{0,50}?(?:experience|erfahrung)"),
+    re.compile(
+        r"(?:experience|erfahrung)[^.;:\n]{0,40}?\b" + _N + _SPAN + r"(?:years?|yrs|jahre?n?)\b"
+    ),
+)
+MAX_YEARS = 15  # beyond this it's usually the company's age ("50 years of experience")
+
+
+def detect_experience_years(text: str) -> int | None:
+    """Smallest number of years of experience the ad asks for, or None when it doesn't say."""
+    low = (text or "").lower()
+    found = []
+    for pattern in _YEARS:
+        for m in pattern.finditer(low):
+            g = m.group(1)
+            n = int(g) if g.isdigit() else _NUMBER_WORDS[g]
+            if 1 <= n <= MAX_YEARS:
+                found.append(n)
+    return min(found) if found else None

@@ -17,6 +17,7 @@ class Job:
     remote: bool = False  # fully remote only
     workplace_type: str = "unknown"  # onsite / hybrid / remote / unknown
     job_type: str = "full_time"
+    experience_years: int | None = None  # smallest number of years the ad asks for
     seniority: str = ""  # lead / senior / junior / graduate / "" (title doesn't say)
     language: str = "en"
     posted_at: str = ""

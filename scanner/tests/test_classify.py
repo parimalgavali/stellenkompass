@@ -1,6 +1,11 @@
 import pytest
 
-from stellenkompass_scanner.classify import detect_job_type, detect_language, detect_seniority
+from stellenkompass_scanner.classify import (
+    detect_experience_years,
+    detect_job_type,
+    detect_language,
+    detect_seniority,
+)
 
 
 @pytest.mark.parametrize(
@@ -50,3 +55,23 @@ def test_language():
 )
 def test_detect_seniority(title, level):
     assert detect_seniority(title) == level
+
+
+@pytest.mark.parametrize(
+    ("text", "years"),
+    [
+        ("You have 3+ years of experience with Python.", 3),
+        ("2-4 years of professional experience in data engineering", 2),
+        ("At least two years of hands-on experience", 2),
+        ("Mindestens 3 Jahre Berufserfahrung in der Softwareentwicklung", 3),
+        ("Du bringst 5 Jahre relevante Erfahrung mit", 5),
+        ("Erfahrung von mindestens drei Jahren im Vertrieb", 3),
+        ("5+ years of experience in ML. 2 years of experience leading teams.", 2),
+        ("With over 50 years of experience in the industry, we build pumps.", None),
+        ("Erste Erfahrung mit SQL", None),
+        ("We offer 30 days of holiday per year.", None),
+        ("", None),
+    ],
+)
+def test_detect_experience_years(text, years):
+    assert detect_experience_years(text) == years
