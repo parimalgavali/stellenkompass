@@ -23,9 +23,9 @@ to find the board name from the company's careers page.
 1. Each adapter in `src/stellenkompass_scanner/sources/` fetches one platform and
    turns its postings into the common `Job` format (`models.py`).
 2. `geo.py` keeps only roles in Germany, or remote roles open to Germany/EU.
-3. `classify.py` detects the posting language (en/de) and the job type; `skills.py` tags
-   skills (Python, React, SQL, …) from title + description, and
-   (full-time, working student, internship, thesis, part-time).
+3. `classify.py` detects the posting language (en/de) and the job type
+   (full-time, working student, internship, thesis, part-time). `skills.py` tags skills
+   (Python, React, SQL, …) found in the title and description.
 4. `dedupe.py` removes the same role posted on several sources (company board wins).
 5. `run.py` writes `data/jobs.json` and `data/scan_report.json` (counts, errors and
    time per source). A failing board is recorded in the report, and its jobs from the last scan are
