@@ -15,6 +15,7 @@ interface Props {
 const TITLE: Record<TodayItem['kind'], string> = {
   interview: 'Upcoming interview',
   thank_you: 'Thank-you note',
+  closing: 'Closing soon',
   gone: 'Role may have closed',
   follow_up: 'Follow up',
   apply_or_close: 'Apply or close',
@@ -34,6 +35,7 @@ function Actions({ item, onUpdate }: { item: TodayItem; onUpdate: Props['onUpdat
           <button className="btn btn-quiet" onClick={() => onUpdate(id, { stillOpen: true })}>Still open</button>
         </>
       )
+    case 'closing':
     case 'apply_or_close':
       return (
         <>

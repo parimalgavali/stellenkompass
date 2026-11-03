@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+from datetime import UTC, date, datetime, timedelta
 
 _EN = {
     "the", "and", "you", "your", "with", "for", "our", "we", "are", "will", "of", "to",
@@ -87,3 +88,64 @@ def detect_experience_years(text: str) -> int | None:
             if 1 <= n <= MAX_YEARS:
                 found.append(n)
     return min(found) if found else None
+
+
+_MONTHS = {
+    "january": 1, "february": 2, "march": 3, "april": 4, "may": 5, "june": 6, "july": 7,
+    "august": 8, "september": 9, "october": 10, "november": 11, "december": 12,
+    "januar": 1, "februar": 2, "märz": 3, "mai": 5, "juni": 6, "juli": 7, "oktober": 10,
+    "dezember": 12,
+}  # fmt: skip
+_DEADLINE_CUE = re.compile(
+    r"bewerbungsfrist|bewerbungsschluss|application deadline|closing date|"
+    r"deadline for applications|bewerben sie sich bis|bewirb dich bis|apply (?:by|before|until)"
+)
+_DATE_FORMS = (
+    (re.compile(r"(\d{1,2})\.\s?(\d{1,2})\.\s?(\d{4}|\d{2})\b"), "dmy"),
+    (re.compile(r"(\d{4})-(\d{2})-(\d{2})"), "ymd"),
+    (re.compile(r"([a-zä]+),?\s+(\d{1,2})(?:st|nd|rd|th)?,?\s+(\d{4})"), "mdy"),
+    (re.compile(r"(\d{1,2})\.?(?:st|nd|rd|th)?\s+([a-zä]+),?\s+(\d{4})"), "dmy"),
+)
+DEADLINE_WINDOW = 40  # characters after the cue to look for a date
+MAX_DEADLINE_DAYS = 365
+
+
+def _first_date(text: str) -> date | None:
+    best: tuple[int, date] | None = None
+    for pattern, order in _DATE_FORMS:
+        m = pattern.search(text)
+        if not m or (best and m.start() >= best[0]):
+            continue
+        parts = dict(zip(order, m.groups(), strict=True))
+        month = int(parts["m"]) if parts["m"].isdigit() else _MONTHS.get(parts["m"])
+        year = int(parts["y"]) + (2000 if len(parts["y"]) == 2 else 0)
+        try:
+            best = (m.start(), date(year, month or 0, int(parts["d"])))
+        except ValueError:
+            continue
+    return best[1] if best else None
+
+
+def _in_range(day: date | None, today: date | None) -> str:
+    today = today or datetime.now(UTC).date()
+    ok = day and today <= day <= today + timedelta(days=MAX_DEADLINE_DAYS)
+    return day.isoformat() if ok else ""
+
+
+def clean_deadline(iso: str, today: date | None = None) -> str:
+    """YYYY-MM-DD from a source's ISO date, or '' when missing, past or over a year ahead."""
+    try:
+        day = date.fromisoformat((iso or "")[:10])
+    except ValueError:
+        return ""
+    return _in_range(day, today)
+
+
+def detect_deadline(text: str, today: date | None = None) -> str:
+    """Last day to apply from phrases like 'Bewerbungsfrist: 30.11.2026', else ''."""
+    low = (text or "").lower()
+    for m in _DEADLINE_CUE.finditer(low):
+        day = _in_range(_first_date(low[m.end() : m.end() + DEADLINE_WINDOW]), today)
+        if day:
+            return day
+    return ""

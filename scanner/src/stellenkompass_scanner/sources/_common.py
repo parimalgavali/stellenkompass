@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from ..classify import (
+    clean_deadline,
+    detect_deadline,
     detect_experience_years,
     detect_job_type,
     detect_language,
@@ -51,6 +53,7 @@ def build_job(
     workplace: str | None = None,
     type_hints: list[str] | None = None,
     posted_at: str = "",
+    deadline: str = "",
     tags: list[str] | None = None,
     language: str | None = None,
 ) -> Job | None:
@@ -84,6 +87,7 @@ def build_job(
         source_board=board,
         source_job_id=str(job_id),
         posted_at=posted_at,
+        deadline=clean_deadline(deadline) or detect_deadline(description),
         tags=[t.strip() for t in (tags or []) if t and t.strip()][:8],
         skills=extract_skills(f"{title}\n{description}"),
         snippet=snippet(description),

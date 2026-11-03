@@ -19,6 +19,8 @@ export interface Job {
   experience_years?: number | null
   language: 'en' | 'de'
   posted_at: string
+  /** YYYY-MM-DD, last day to apply. */
+  deadline?: string
   first_seen: string
   tags: string[]
   skills?: string[]
@@ -77,6 +79,7 @@ export interface TrackedJob {
   appliedAt?: string
   interviewAt?: string
   thankYouSent?: boolean
+  deadline?: string
   /** You checked: still open although it left the scan. */
   stillOpen?: boolean
   notes: string

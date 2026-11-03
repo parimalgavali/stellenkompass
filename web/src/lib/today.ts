@@ -1,8 +1,8 @@
 import type { Job, Profile, TrackedJob, Tracker } from '../types'
 import { matchJob } from './match'
-import { daysBetween } from './time'
+import { closesText, daysBetween, daysLeft } from './time'
 
-export type TodayKind = 'interview' | 'thank_you' | 'gone' | 'follow_up' | 'apply_or_close'
+export type TodayKind = 'interview' | 'thank_you' | 'closing' | 'gone' | 'follow_up' | 'apply_or_close'
 
 export interface TodayItem {
   kind: TodayKind
@@ -13,6 +13,7 @@ export interface TodayItem {
 export const FOLLOW_UP_DAYS = 7
 export const INTERVIEW_AHEAD_DAYS = 7
 export const STALE_SAVED_DAYS = 5
+export const CLOSING_SOON_DAYS = 3
 
 /** `liveIds`: every id in the latest scan; leave it out while jobs are loading. */
 export function todayItems(tracker: Tracker, now: Date = new Date(), liveIds?: Set<string>): TodayItem[] {
@@ -37,6 +38,13 @@ export function todayItems(tracker: Tracker, now: Date = new Date(), liveIds?: S
         items.push({ kind: 'follow_up', job, text: `No update for ${Math.floor(idle)} days. Send a follow-up.` })
       }
     }
+    if (job.stage === 'saved' && job.deadline) {
+      const left = daysLeft(job.deadline, now)
+      if (left >= 0 && left <= CLOSING_SOON_DAYS) {
+        items.push({ kind: 'closing', job, text: `${closesText(left)}. Apply soon.` })
+        continue
+      }
+    }
     if (job.stage === 'saved') {
       const idle = daysBetween(job.savedAt, now)
       if (idle >= STALE_SAVED_DAYS) {
@@ -44,7 +52,7 @@ export function todayItems(tracker: Tracker, now: Date = new Date(), liveIds?: S
       }
     }
   }
-  const order: TodayKind[] = ['interview', 'thank_you', 'gone', 'follow_up', 'apply_or_close']
+  const order: TodayKind[] = ['interview', 'thank_you', 'closing', 'gone', 'follow_up', 'apply_or_close']
   return items.sort((a, b) => order.indexOf(a.kind) - order.indexOf(b.kind))
 }
 

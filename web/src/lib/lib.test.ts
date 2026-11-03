@@ -5,7 +5,7 @@ import { newMatches, todayItems } from './today'
 import { makeBackup, mergeBackup, parseBackup } from './backup'
 import { canonicalSkills, extractSkills, fitScore } from './skills'
 import { findTracked, liveIdSet, setStage, trackJob, updateTracked } from './tracker'
-import { relativeTime } from './time'
+import { daysLeft, relativeTime } from './time'
 import { JOBS, NOW, job } from '../test/data'
 import type { Tracker } from '../types'
 
@@ -60,6 +60,18 @@ describe('matchJob', () => {
 })
 
 describe('tracker and today', () => {
+  it('counts days left to a deadline and flags saved roles closing soon', () => {
+    expect(daysLeft('2026-11-03', NOW)).toBe(0)
+    expect(daysLeft('2026-11-05', NOW)).toBe(2)
+    expect(daysLeft('2026-11-02', NOW)).toBeLessThan(0)
+    let t = trackJob({}, job({ id: 'soon', deadline: '2026-11-05' }), NOW)
+    t = trackJob(t, job({ id: 'later', deadline: '2026-12-20' }), NOW)
+    expect(t.soon.deadline).toBe('2026-11-05')
+    const items = todayItems(t, NOW)
+    expect(items.map((i) => `${i.kind}:${i.job.id}`)).toEqual(['closing:soon'])
+    expect(items[0].text).toBe('Closes in 2 days. Apply soon.')
+  })
+
   it('flags saved and applied roles that left the scan, unless you kept them', () => {
     let t = trackJob({}, job({ id: 'a' }), NOW)
     t = setStage(trackJob(t, job({ id: 'b' }), NOW), 'b', 'applied', NOW)

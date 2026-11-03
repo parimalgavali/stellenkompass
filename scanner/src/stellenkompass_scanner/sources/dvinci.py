@@ -56,6 +56,7 @@ def parse(raw: list[dict], board: str, company: str | None = None) -> list[Job]:
             description=html_to_text(" ".join(i.get(k) or "" for i in group for k in TEXT_FIELDS)),
             type_hints=_names(opening.get("workingTimes")),
             posted_at=iso_date(item.get("startDate")),
+            deadline=item.get("endDate") or "",
             tags=[unit, *_names(opening.get("categories"))],
             language=item.get("language"),
         )
