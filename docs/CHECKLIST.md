@@ -79,7 +79,7 @@ Plan: [PLANS.md](PLANS.md) phases 5–12. Review: [research/source-expansion-han
 - [x] Lever EU host + pagination
 - [x] Personio `.com` + language variants
 - [x] SmartRecruiters full job text (cached)
-- [ ] SmartRecruiters: German towns whose `region` is a district (e.g. Ansbach, "Mittelfranken") are dropped by the region check
+- [x] SmartRecruiters: German towns whose `region` is a district (e.g. Ansbach, "Mittelfranken") are dropped by the region check (coordinates or postcode now decide; ~110 roles back)
 
 ### Phase 11: Universities and research
 - [x] Pilot inventory of 12 institutions: `docs/research/institutions.md`
@@ -94,7 +94,7 @@ Plan: [PLANS.md](PLANS.md) phases 5–12. Review: [research/source-expansion-han
 - [x] softgarden adapter (D21: RENK)
 - [ ] join.com adapter, once we know German companies on it (D21)
 - [x] Re-check the 110 upstream boards for German roles (52 added; skips in reference-projects.md)
-- [ ] Greenhouse EU host (`boards-api.eu.greenhouse.io`?) for Doctolib
+- [x] ~~Greenhouse EU host for Doctolib~~: dropped. Doctolib's Greenhouse board is gone (API 404, job links redirect to an error page), and `boards-api.eu.greenhouse.io` doesn't resolve
 - [x] Seniority label + filter (Junior, Graduate/Trainee, Senior, Lead) (D22)
 - [x] Years-of-experience chip (D23)
 - [x] Tracker: flag saved roles missing from the latest scan (Today: Close / Still open; D24)

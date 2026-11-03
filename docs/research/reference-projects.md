@@ -40,6 +40,6 @@ Each board from the parent list's roles was run through our adapters; only board
 Skipped:
 - No roles in Germany: Lombard Odier, Lonza, Julius Baer, DB (Workday), Accelleron, Huntsman, Arxada, Bossard, H&M, CERN, Bitpanda, IMC, Wingtra, ANYbotics, skydio, adaptyv, DeepJudge, CH Media, Kellerhals Carrard, small Swiss boards.
 - Retail, hospitality, security and vet staffing (JYSK, Securitas, Accor, Relais & Châteaux, Rentokil, Ace & Tate, Mountfitchet, MET, AniCura) and a recruiter (David Kennedy): many roles, little overlap with our search, and each new SmartRecruiters board costs up to 150 detail requests per run.
-- Doctolib: its Greenhouse board is on the EU host, which our adapter doesn't read yet. GE Vernova: no Germany facet, so the scan hits the page cap.
+- Doctolib: no public Greenhouse board any more (API 404, old job links redirect to an error page). GE Vernova: no Germany facet, so the scan hits the page cap.
 - Parloa on Greenhouse: already on Ashby.
 
