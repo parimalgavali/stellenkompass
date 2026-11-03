@@ -111,3 +111,7 @@ Short records. Newest at the bottom. Format: context → decision → why.
 - softgarden: the job widget that company careers sites embed (`/de/widgets/jobs`), our own parser. No country field, so Germany comes from the city text. Title-only skills. Only RENK found so far (58 roles); tenants are added one by one.
 - join.com: its public GraphQL route is allowed by robots.txt, but none of our or the reference list's companies use it, and its company sitemap (14k slugs) has no country. Deferred until we have German companies on it.
 
+## D22. Seniority from the title (2026-11-03)
+- Idea from the reference projects' level filters; our own rules in `classify.detect_seniority`.
+- Levels: `lead` (Lead, Head of, Principal, Director, Staff engineer, Teamleiter/Leitung), `senior` (Senior, Sr.), `junior` (Junior, Jr.), `graduate` (Graduate, Trainee, Entry level, Berufseinsteiger, Absolvent, Direkteinstieg). First match wins in that order; empty when the title doesn't say (most roles).
+- Title only: job text often mentions other levels ("you'll work with senior engineers"). The filter shows only roles with that exact level, so unlabelled roles are hidden when a level is picked.

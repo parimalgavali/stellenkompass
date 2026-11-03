@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from ..classify import detect_job_type, detect_language
+from ..classify import detect_job_type, detect_language, detect_seniority
 from ..geo import city_of, in_germany, is_remote
 from ..models import Job
 from ..skills import extract_skills
@@ -71,6 +71,7 @@ def build_job(
         remote=workplace == "remote",
         workplace_type=workplace,
         job_type=detect_job_type(title, type_hints),
+        seniority=detect_seniority(title),
         language=lang,
         url=url,
         source=source,

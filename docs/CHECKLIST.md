@@ -95,7 +95,7 @@ Plan: [PLANS.md](PLANS.md) phases 5–12. Review: [research/source-expansion-han
 - [ ] join.com adapter, once we know German companies on it (D21)
 - [x] Re-check the 110 upstream boards for German roles (52 added; skips in reference-projects.md)
 - [ ] Greenhouse EU host (`boards-api.eu.greenhouse.io`?) for Doctolib
-- [ ] Seniority label + filter (Junior, Graduate/Trainee, Senior, Lead)
+- [x] Seniority label + filter (Junior, Graduate/Trainee, Senior, Lead) (D22)
 - [ ] Years-of-experience chip
 - [ ] Tracker: flag saved roles missing from the latest scan
 - [ ] Deadlines: "closes in N days" where the source has one

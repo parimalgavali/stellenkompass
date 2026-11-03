@@ -42,3 +42,20 @@ def detect_job_type(title: str, hints: list[str] | None = None) -> str:
             if re.search(pattern, low):
                 return job_type
     return "full_time"
+
+
+_SENIORITY: tuple[tuple[str, str], ...] = (
+    ("lead", r"\blead\b(?! generation| management)|\bhead of\b|\bprincipal\b|\bdirector\b|"
+             r"\bstaff (?:engineer|scientist|software|data|machine)|"
+             r"\b(?:team|gruppen|abteilungs|bereichs)?leit(?:er|erin|ung)\b"),
+    ("senior", r"\bsenior\b|\bsr\.?\s"),
+    ("junior", r"\bjunior\b|\bjr\.?\s"),
+    ("graduate", r"graduate|trainee|entry[ -]level|berufseinsteiger|absolvent|young professional|"
+                 r"new grad|direkteinstieg"),
+)  # fmt: skip
+
+
+def detect_seniority(title: str) -> str:
+    """'lead', 'senior', 'junior', 'graduate' from the title; '' when it doesn't say."""
+    low = (title or "").lower()
+    return next((level for level, pattern in _SENIORITY if re.search(pattern, low)), "")
