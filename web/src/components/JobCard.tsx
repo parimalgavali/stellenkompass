@@ -2,7 +2,7 @@ import type { Job, Profile, TrackedJob } from '../types'
 import { JOB_TYPE_LABEL, SENIORITY_LABEL, STAGE_LABEL } from '../types'
 import { matchJob } from '../lib/match'
 import { fitScore } from '../lib/skills'
-import { relativeTime } from '../lib/time'
+import { closesText, daysLeft, relativeTime } from '../lib/time'
 
 interface Props {
   job: Job
@@ -12,6 +12,7 @@ interface Props {
 }
 
 const MAX_SKILLS = 5
+const CLOSES_SOON_CHIP_DAYS = 30
 
 export function JobCard({ job, profile, tracked, onSave }: Props) {
   const match = matchJob(job, profile)
@@ -19,6 +20,7 @@ export function JobCard({ job, profile, tracked, onSave }: Props) {
   const skills = (job.skills ?? []).filter((s) => !matched.has(s.toLowerCase())).slice(0, MAX_SKILLS)
   const mine = new Set((profile.skills ?? []).map((s) => s.toLowerCase()))
   const fit = fitScore(job, profile.skills ?? [])
+  const left = job.deadline ? daysLeft(job.deadline) : null
   return (
     <article className="card">
       <div className="card-main">
@@ -34,6 +36,11 @@ export function JobCard({ job, profile, tracked, onSave }: Props) {
           {fit !== null && (
             <span className="chip chip-fit" title="Share of this role's skills that are in your profile">
               Fit {fit}%
+            </span>
+          )}
+          {left !== null && left >= 0 && left <= CLOSES_SOON_CHIP_DAYS && (
+            <span className="chip chip-deadline" title={`Last day to apply: ${job.deadline}`}>
+              {closesText(left)}
             </span>
           )}
           <span className="chip">{JOB_TYPE_LABEL[job.job_type]}</span>

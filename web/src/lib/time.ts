@@ -28,3 +28,12 @@ export function toDateInput(iso?: string): string {
 export function fromDateInput(value: string): string | undefined {
   return value ? new Date(`${value}T12:00:00`).toISOString() : undefined
 }
+
+/** Whole days left until the end of `day` (YYYY-MM-DD): 0 on the day itself, negative after it. */
+export function daysLeft(day: string, now: Date = new Date()): number {
+  return Math.floor((new Date(`${day}T23:59:59`).getTime() - now.getTime()) / DAY)
+}
+
+export function closesText(left: number): string {
+  return left === 0 ? 'Closes today' : `Closes in ${left} day${left === 1 ? '' : 's'}`
+}

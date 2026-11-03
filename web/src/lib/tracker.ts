@@ -25,6 +25,7 @@ export function trackJob(tracker: Tracker, job: Job, now: Date = new Date()): Tr
     savedAt: at,
     updatedAt: at,
     notes: '',
+    ...(job.deadline ? { deadline: job.deadline } : {}),
   }
   return { ...tracker, [job.id]: entry }
 }

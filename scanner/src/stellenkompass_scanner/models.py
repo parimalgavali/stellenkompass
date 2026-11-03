@@ -21,6 +21,7 @@ class Job:
     seniority: str = ""  # lead / senior / junior / graduate / "" (title doesn't say)
     language: str = "en"
     posted_at: str = ""
+    deadline: str = ""  # YYYY-MM-DD, last day to apply; "" when unknown
     first_seen: str = ""
     tags: list[str] = field(default_factory=list)
     skills: list[str] = field(default_factory=list)

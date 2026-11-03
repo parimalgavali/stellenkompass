@@ -124,3 +124,9 @@ Short records. Newest at the bottom. Format: context → decision → why.
 ## D24. Roles that left the scan (2026-11-03)
 - Idea from career-ops liveness checks, done without extra requests: a Saved or Applied role whose id and aliases are not in the latest `jobs.json` shows on Today as "Role may have closed", with **Close** or **Still open** (`stillOpen` stops the reminder).
 - Nothing is flagged while jobs are loading or failed to load. A source that failed keeps its roles by carry-over (D6), so a failed scan doesn't flag them either.
+
+## D25. Application deadlines (2026-11-03)
+- Idea from career-ops `closing-soon`; our own rules in `classify.detect_deadline` / `clean_deadline`.
+- Source field first: d.vinci `endDate` (end of the publication, KIT). Otherwise the ad text: a cue (Bewerbungsfrist, Bewerbungsschluss, Application deadline, Closing date, "bewerben Sie sich bis", "apply by/before/until") followed within 40 characters by a date (30.11.2026, 2026-11-30, December 16, 2026, 15. Januar 2027).
+- Past dates and dates over a year ahead are dropped. Few ads have one (about 0.5% of Greenhouse ads).
+- Web: "Closes in N days" chip within 30 days; Today shows a saved role closing within 3 days as "Closing soon". The deadline is copied into the tracker when you save.

@@ -1,6 +1,10 @@
+from datetime import date
+
 import pytest
 
 from stellenkompass_scanner.classify import (
+    clean_deadline,
+    detect_deadline,
     detect_experience_years,
     detect_job_type,
     detect_language,
@@ -75,3 +79,31 @@ def test_detect_seniority(title, level):
 )
 def test_detect_experience_years(text, years):
     assert detect_experience_years(text) == years
+
+
+TODAY = date(2026, 11, 3)
+
+
+@pytest.mark.parametrize(
+    ("text", "deadline"),
+    [
+        ("Bewerbungsfrist: 30.11.2026. Wir freuen uns!", "2026-11-30"),
+        ("Application Deadline: December 16, 2026", "2026-12-16"),
+        ("Application Deadline: January, 17 2027", "2027-01-17"),
+        ("Bitte bewerben Sie sich bis zum 15. Januar 2027 online.", "2027-01-15"),
+        ("Closing date: 2026-11-20", "2026-11-20"),
+        ("Bewerbungsschluss 1.12.26", "2026-12-01"),
+        ("Bewerbungsfrist: 30.09.2026", ""),  # past
+        ("Application deadline: none, we hire on a rolling basis.", ""),
+        ("Start date: 01.01.2027", ""),  # no cue
+        ("Apply by submitting your CV", ""),
+    ],
+)
+def test_detect_deadline(text, deadline):
+    assert detect_deadline(text, today=TODAY) == deadline
+
+
+def test_clean_deadline():
+    assert clean_deadline("2026-11-30T22:59:59.999Z", today=TODAY) == "2026-11-30"
+    assert clean_deadline("2099-12-31T00:00:00Z", today=TODAY) == ""
+    assert clean_deadline("", today=TODAY) == ""
