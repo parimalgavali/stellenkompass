@@ -7,6 +7,8 @@
 #   smartrecruiters: jobs.smartrecruiters.com/<board>
 #   personio:        <board>.jobs.personio.de
 #   recruitee:       <board>.recruitee.com
+# Options: lever `region: eu` (jobs.eu.lever.co); personio `domain: jobs.personio.com`,
+# `languages: [de, en]` (one feed per language, merged by job id).
 #   teamtailor:      <board>.teamtailor.com, or the careers host itself (e.g. careers.example.de)
 
 aggregators:

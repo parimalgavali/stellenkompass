@@ -75,3 +75,9 @@ Short records. Newest at the bottom. Format: context → decision → why.
 - Recruitee: `/api/offers/`; id = offer `id`, url = `careers_url`, one country code per entry in `locations`. Workplace from the `remote` / `hybrid` / `on_site` flags (hybrid, or remote + on-site → hybrid).
 - Teamtailor: `jobs.rss`; id = RSS `guid` (never title/date), country per `tt:location`, `remoteStatus` fully / hybrid / none → remote / hybrid / onsite. Paged with `offset` + `per_page=100`; stopping at 20 pages raises `Capped`. The board is the careers host (`name` → `name.teamtailor.com`, or a custom host with a dot).
 - Tenants: found by guessing and from links in Arbeitnow ads, then checked for roles in Germany. Few German tenants so far; add more as they are found (one role is enough).
+
+## D16. Board options: Lever EU, Personio domain and languages (2026-11-03)
+- Any key on a board entry besides `board` and `name` is passed to the adapter's `fetch` as a keyword option. Old entries need no change.
+- Lever: `region: eu` → `api.eu.lever.co`. Postings are paged (`skip` + `limit=100`, max 20 pages → `Capped`).
+- Personio: `domain` is `jobs.personio.de` (default) or `jobs.personio.com`; with `languages`, one feed per language is fetched and merged by position id (first language gives the title, all add description text, so ids don't change).
+- No EU Lever tenant with German roles is configured yet; .de and .com serve the same Personio feed for today's boards.

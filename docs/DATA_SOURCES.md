@@ -36,8 +36,8 @@ Every adapter returns roles in this shape (see `scanner/stellenkompass_scanner/m
 | Greenhouse | Public board API per company | `scanner/companies.yaml` → `greenhouse` |
 | Ashby | Public posting API per company | `scanner/companies.yaml` → `ashby` |
 | SmartRecruiters | Public postings API per company, `country=de` | `scanner/companies.yaml` → `smartrecruiters` |
-| Lever | Public postings API per company | `scanner/companies.yaml` → `lever` |
-| Personio | Public XML feed per company | `scanner/companies.yaml` → `personio` |
+| Lever | Public postings API per company, paged; `region: eu` for jobs.eu.lever.co | `scanner/companies.yaml` → `lever` |
+| Personio | Public XML feed per company (`domain: jobs.personio.com`, `languages: [de, en]` optional) | `scanner/companies.yaml` → `personio` |
 | Recruitee | Public offers API `https://<board>.recruitee.com/api/offers/` | `scanner/companies.yaml` → `recruitee` |
 | Teamtailor | Public RSS `https://<host>/jobs.rss`, paged with `offset`/`per_page` (100 per page, max 20 pages) | `scanner/companies.yaml` → `teamtailor` |
 

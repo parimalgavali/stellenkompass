@@ -177,3 +177,46 @@ def test_teamtailor_paginates_past_first_page():
     pages = Pages()
     raw = teamtailor.fetch(pages, "careers.example.de")
     assert pages.offsets == [0, 100] and len(raw) == 2
+
+
+class _Recorder:
+    def __init__(self, reply):
+        self.reply, self.calls = reply, []
+
+    def get_json(self, url, params=None, headers=None):
+        self.calls.append((url, params))
+        return self.reply(params)
+
+    def get_text(self, url, params=None):
+        self.calls.append((url, params))
+        return self.reply(params)
+
+
+def test_lever_eu_host_and_paging():
+    rec = _Recorder(
+        lambda p: [{"id": f"{p['skip']}-{i}"} for i in range(100 if p["skip"] == 0 else 7)]
+    )
+    postings = lever.fetch(rec, "acme", region="eu")
+    assert len(postings) == 107
+    assert [c[1]["skip"] for c in rec.calls] == [0, 100]
+    assert rec.calls[0][0] == "https://api.eu.lever.co/v0/postings/acme"
+
+
+def test_lever_capped_at_page_limit():
+    rec = _Recorder(lambda p: [{"id": f"{p['skip']}-{i}"} for i in range(100)])
+    with pytest.raises(Capped):
+        lever.fetch(rec, "acme", max_pages=2)
+
+
+def test_personio_languages_merge_by_id(fixture):
+    xml = fixture("personio_ottonova.xml")
+    rec = _Recorder(
+        lambda p: xml.replace("<value>", "<value>Kubernetes ") if p["language"] == "en" else xml
+    )
+    raw = personio.fetch(rec, "ottonova", domain="jobs.personio.com", languages=["de", "en"])
+    assert [c[0] for c in rec.calls] == ["https://ottonova.jobs.personio.com/xml"] * 2
+    jobs = personio.parse(raw, "ottonova")
+    one = personio.parse(xml, "ottonova")
+    assert [j.id for j in jobs] == [j.id for j in one]
+    assert jobs[0].url.startswith("https://ottonova.jobs.personio.com/job/")
+    assert "Kubernetes" in jobs[0].skills and "Kubernetes" not in one[0].skills
