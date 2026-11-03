@@ -23,6 +23,22 @@ greenhouse:
   - { board: flix, name: Flix }
   - { board: solarisbank, name: Solaris }
   - { board: moia, name: MOIA }
+  - { board: traderepublicbank, name: Trade Republic }
+  - { board: isaraerospace, name: Isar Aerospace }
+  - { board: ionos, name: IONOS }
+  - { board: trivago, name: trivago }
+  - { board: staffbase, name: Staffbase }
+  - { board: moonfare, name: Moonfare }
+  - { board: freenow, name: FREENOW }
+  - { board: databricks, name: Databricks }
+  - { board: stripe, name: Stripe }
+  - { board: cloudflare, name: Cloudflare }
+  - { board: gitlab, name: GitLab }
+  - { board: mongodb, name: MongoDB }
+  - { board: elastic, name: Elastic }
+  - { board: datadog, name: Datadog }
+  - { board: figma, name: Figma }
+  - { board: okta, name: Okta }
 
 ashby:
   - { board: parloa, name: Parloa }
@@ -32,6 +48,22 @@ ashby:
   - { board: pliant, name: Pliant }
   - { board: wayve, name: Wayve }
   - { board: deepl, name: DeepL }
+  - { board: alephalpha, name: Aleph Alpha }
+  - { board: black-forest-labs, name: Black Forest Labs }
+  - { board: tacto, name: tacto }
+  - { board: enpal, name: Enpal }
+  - { board: moss, name: Moss }
+  - { board: buena, name: Buena }
+  - { board: ostrom, name: Ostrom }
+  - { board: knowunity, name: Knowunity }
+  - { board: openai, name: OpenAI }
+  - { board: cohere, name: Cohere }
+  - { board: elevenlabs, name: ElevenLabs }
+  - { board: synthesia, name: Synthesia }
+  - { board: perplexity, name: Perplexity }
+  - { board: linear, name: Linear }
+  - { board: notion, name: Notion }
+  - { board: supabase, name: Supabase }
 
 lever:
   - { board: pigment, name: Pigment }
@@ -41,7 +73,12 @@ lever:
 smartrecruiters:
   - { board: BoschGroup, name: Bosch }
   - { board: Continental, name: Continental }
+  - { board: DeliveryHero, name: Delivery Hero }
+  - { board: Auto1, name: AUTO1 Group }
+  - { board: Sixt, name: SIXT }
 
 personio:
   - { board: tado, name: tado° }
   - { board: ottonova, name: ottonova }
+  - { board: 1komma5grad, name: 1KOMMA5° }
+  - { board: everphone, name: Everphone }

@@ -34,7 +34,20 @@ Every adapter returns roles in this shape (see `scanner/stellenkompass_scanner/m
 | Lever | Public postings API per company | `scanner/companies.yaml` → `lever` |
 | Personio | Public XML feed per company | `scanner/companies.yaml` → `personio` |
 
-To follow a new company: find which job platform its careers page uses, then add its board name under that platform in `scanner/companies.yaml`.
+### Adding a company board
+1. Open the company's careers page and click a role. The apply link shows the platform and board name:
+   - `boards.greenhouse.io/<board>` or `job-boards.greenhouse.io/<board>` → `greenhouse`
+   - `jobs.ashbyhq.com/<board>` → `ashby`
+   - `jobs.lever.co/<board>` → `lever`
+   - `jobs.smartrecruiters.com/<board>` → `smartrecruiters` (case-sensitive, e.g. `BoschGroup`)
+   - `<board>.jobs.personio.de` → `personio`
+2. Check that it has roles in Germany (from `scanner/`):
+   ```bash
+   uv run python -c "from stellenkompass_scanner.http import HttpFetcher; from stellenkompass_scanner.sources import greenhouse as s; print(len(s.parse(s.fetch(HttpFetcher(), 'n26'), 'n26')))"
+   ```
+3. Add `- { board: <board>, name: <Display name> }` under the platform in `scanner/companies.yaml`.
+
+Boards that answered but had fewer than 3 roles in Germany (2026-11-03) were left out: Wunderflats, kununu, KONUX, Dataiku, Rasa, HeyJobs, Spotify (Lever), Clark.
 
 ## Not used (yet)
 - Bundesagentur für Arbeit Jobsuche API: returned 403 from our dev machine. Retry from GitHub Actions in Phase 4.
