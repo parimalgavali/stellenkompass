@@ -1,47 +1,54 @@
 {
-  "generated_at": "2026-11-03T06:09:57Z",
-  "total_jobs": 4283,
+  "generated_at": "2026-11-03T07:01:46Z",
+  "total_jobs": 8515,
   "sources": {
     "arbeitnow": {
       "boards": 1,
-      "jobs": 1504,
+      "jobs": 1509,
       "errors": [],
-      "seconds": 56.0,
+      "seconds": 45.4,
+      "carried": 0
+    },
+    "bundesagentur": {
+      "boards": 1,
+      "jobs": 4401,
+      "errors": [],
+      "seconds": 53.5,
       "carried": 0
     },
     "greenhouse": {
       "boards": 28,
       "jobs": 872,
       "errors": [],
-      "seconds": 29.9,
+      "seconds": 32.0,
       "carried": 0
     },
     "ashby": {
       "boards": 23,
       "jobs": 422,
       "errors": [],
-      "seconds": 17.3,
+      "seconds": 17.0,
       "carried": 0
     },
     "smartrecruiters": {
       "boards": 5,
-      "jobs": 1381,
+      "jobs": 1377,
       "errors": [],
-      "seconds": 17.2,
+      "seconds": 17.3,
       "carried": 0
     },
     "lever": {
       "boards": 3,
       "jobs": 16,
       "errors": [],
-      "seconds": 4.3,
+      "seconds": 3.3,
       "carried": 0
     },
     "personio": {
       "boards": 4,
       "jobs": 267,
       "errors": [],
-      "seconds": 8.5,
+      "seconds": 7.4,
       "carried": 0
     }
   }
