@@ -10,8 +10,12 @@ interface Props {
   onSave: (job: Job) => void
 }
 
+const MAX_SKILLS = 5
+
 export function JobCard({ job, profile, tracked, onSave }: Props) {
   const match = matchJob(job, profile)
+  const matched = new Set(match?.keywords.map((k) => k.toLowerCase()))
+  const skills = (job.skills ?? []).filter((s) => !matched.has(s.toLowerCase())).slice(0, MAX_SKILLS)
   return (
     <article className="card">
       <div className="card-main">
@@ -33,6 +37,11 @@ export function JobCard({ job, profile, tracked, onSave }: Props) {
             </span>
           ))}
           {match?.company && <span className="chip chip-match">Followed</span>}
+          {skills.map((s) => (
+            <span key={s} className="chip chip-skill">
+              {s}
+            </span>
+          ))}
         </div>
       </div>
       <button

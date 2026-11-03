@@ -43,7 +43,7 @@ First real scan (2026-11-03): 2,911 roles in Germany from 27 boards + Arbeitnow,
 
 ## Phase 4: Better matching (v2)
 - [ ] CV upload (in browser) + fit score
-- [ ] Skill tags per role
+- [x] Skill tags per role (scanner `skills.py`, ~75 skills with EN/DE aliases; web skill filter + chips)
 - [ ] More company boards
 - [ ] Try Bundesagentur für Arbeit API from GitHub Actions
 

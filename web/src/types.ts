@@ -14,6 +14,7 @@ export interface Job {
   posted_at: string
   first_seen: string
   tags: string[]
+  skills?: string[]
   snippet: string
 }
 

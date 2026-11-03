@@ -3,6 +3,7 @@ from __future__ import annotations
 from ..classify import detect_job_type, detect_language
 from ..geo import city_of, in_germany, is_remote
 from ..models import Job
+from ..skills import extract_skills
 from ..text import snippet
 
 
@@ -41,5 +42,6 @@ def build_job(
         source=source,
         posted_at=posted_at,
         tags=[t.strip() for t in (tags or []) if t and t.strip()][:8],
+        skills=extract_skills(f"{title}\n{description}"),
         snippet=snippet(description),
     )

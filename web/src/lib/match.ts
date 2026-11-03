@@ -13,7 +13,7 @@ function containsWord(haystack: string, needle: string): boolean {
 }
 
 export function matchJob(job: Job, profile: Profile): Match | null {
-  const text = norm(`${job.title} ${job.tags.join(' ')}`)
+  const text = norm(`${job.title} ${job.tags.join(' ')} ${(job.skills ?? []).join(' ')}`)
   const keywords = profile.keywords.filter((k) => k.trim() && containsWord(text, norm(k.trim())))
   const company = norm(job.company)
   const followed = profile.companies.some((c) => {

@@ -20,6 +20,7 @@ class Job:
     posted_at: str = ""
     first_seen: str = ""
     tags: list[str] = field(default_factory=list)
+    skills: list[str] = field(default_factory=list)
     snippet: str = ""
 
     def to_dict(self) -> dict:

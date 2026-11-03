@@ -92,6 +92,7 @@ h3 { margin: 0 0 4px; font-size: 16px; }
 
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 .chip { font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--bg); border: 1px solid var(--line); color: var(--muted); }
+.chip-skill { background: transparent; }
 .chip-match { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
 .chip-removable { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; color: var(--text); }
 .chip-removable button { background: none; border: 0; cursor: pointer; color: var(--muted); padding: 0 2px; }
