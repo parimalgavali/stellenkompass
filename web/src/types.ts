@@ -41,6 +41,8 @@ export interface ScanReport {
 export interface Profile {
   keywords: string[]
   companies: string[]
+  /** Your skills, usually read from your CV; drives the fit score. */
+  skills?: string[]
 }
 
 export const STAGES = ['saved', 'applied', 'interview', 'offer', 'rejected', 'closed'] as const

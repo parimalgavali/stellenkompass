@@ -1,6 +1,8 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, type ReactNode } from 'react'
 import type { Profile, Tracker } from '../types'
 import { makeBackup, mergeBackup, parseBackup } from '../lib/backup'
+import { readCvText } from '../lib/cv'
+import { canonicalSkills, extractSkills, SKILL_NAMES } from '../lib/skills'
 
 interface Props {
   profile: Profile
@@ -9,8 +11,18 @@ interface Props {
   onRestore: (p: Profile, t: Tracker) => void
 }
 
-function ListEditor({ label, hint, items, onChange }: { label: string; hint: string; items: string[]; onChange: (v: string[]) => void }) {
+interface ListEditorProps {
+  label: string
+  hint: string
+  items: string[]
+  onChange: (v: string[]) => void
+  suggestions?: readonly string[]
+  children?: ReactNode
+}
+
+function ListEditor({ label, hint, items, onChange, suggestions, children }: ListEditorProps) {
   const [draft, setDraft] = useState('')
+  const listId = `${label.toLowerCase().replace(/\W+/g, '-')}-options`
   const add = () => {
     const values = draft.split(',').map((v) => v.trim()).filter(Boolean)
     const fresh = values.filter((v) => !items.some((i) => i.toLowerCase() === v.toLowerCase()))
@@ -21,6 +33,7 @@ function ListEditor({ label, hint, items, onChange }: { label: string; hint: str
     <div className="editor">
       <h3>{label}</h3>
       <p className="hint">{hint}</p>
+      {children}
       <form
         className="add-row"
         onSubmit={(e) => {
@@ -28,9 +41,21 @@ function ListEditor({ label, hint, items, onChange }: { label: string; hint: str
           add()
         }}
       >
-        <input value={draft} onChange={(e) => setDraft(e.target.value)} placeholder="Type and press Enter" aria-label={`Add ${label.toLowerCase()}`} />
+        <input
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)} placeholder="Type and press Enter"
+          aria-label={`Add ${label.toLowerCase()}`}
+          list={suggestions ? listId : undefined}
+        />
         <button className="btn" type="submit">Add</button>
       </form>
+      {suggestions && (
+        <datalist id={listId}>
+          {suggestions.map((s) => (
+            <option key={s} value={s} />
+          ))}
+        </datalist>
+      )}
       <div className="chips">
         {items.map((item) => (
           <span key={item} className="chip chip-removable">
@@ -49,6 +74,27 @@ export function ProfilePage({ profile, tracker, onProfile, onRestore }: Props) {
   const fileRef = useRef<HTMLInputElement>(null)
   const [mode, setMode] = useState<'merge' | 'replace'>('merge')
   const [status, setStatus] = useState<{ ok: boolean; text: string } | null>(null)
+  const cvRef = useRef<HTMLInputElement>(null)
+  const [cvStatus, setCvStatus] = useState<{ ok: boolean; text: string } | null>(null)
+  const [reading, setReading] = useState(false)
+
+  const loadCv = async (file: File) => {
+    setReading(true)
+    try {
+      const found = extractSkills(await readCvText(file))
+      if (found.length) {
+        onProfile({ ...profile, skills: found })
+        setCvStatus({ ok: true, text: `Found ${found.length} skills in ${file.name}. The file itself was not stored.` })
+      } else {
+        setCvStatus({ ok: false, text: `No known skills found in ${file.name}.` })
+      }
+    } catch {
+      setCvStatus({ ok: false, text: `Could not read ${file.name}. Try a PDF with selectable text, or a .txt file.` })
+    } finally {
+      setReading(false)
+      if (cvRef.current) cvRef.current.value = ''
+    }
+  }
 
   const exportFile = () => {
     const blob = new Blob([JSON.stringify(makeBackup(profile, tracker), null, 2)], { type: 'application/json' })
@@ -92,6 +138,28 @@ export function ProfilePage({ profile, tracker, onProfile, onRestore }: Props) {
         items={profile.companies}
         onChange={(companies) => onProfile({ ...profile, companies })}
       />
+      <ListEditor
+        label="Your skills"
+        hint="Load your CV to fill this list, or add skills by hand. The CV is read in this browser and never uploaded; only the skills are kept. Each role then shows a fit score: the share of its skills that you have."
+        items={profile.skills ?? []}
+        suggestions={SKILL_NAMES}
+        onChange={(skills) => onProfile({ ...profile, skills: canonicalSkills(skills) })}
+      >
+        <div className="add-row">
+          <button className="btn btn-quiet" onClick={() => cvRef.current?.click()} disabled={reading}>
+            {reading ? 'Reading…' : 'Load CV (PDF or text)…'}
+          </button>
+          <input
+            ref={cvRef}
+            type="file"
+            accept=".pdf,.txt,.md,application/pdf,text/plain"
+            hidden
+            data-testid="cv-file"
+            onChange={(e) => e.target.files?.[0] && loadCv(e.target.files[0])}
+          />
+        </div>
+        {cvStatus && <p className={cvStatus.ok ? 'notice' : 'notice notice-error'}>{cvStatus.text}</p>}
+      </ListEditor>
       <div className="editor">
         <h3>Backup</h3>
         <p className="hint">Your profile and tracker live only in this browser. Export them to keep a copy or move to another device.</p>

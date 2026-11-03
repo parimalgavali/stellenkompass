@@ -1,5 +1,6 @@
 import type { Job, Profile } from '../types'
 import { matchJob } from './match'
+import { fitScore } from './skills'
 import { DAY } from './time'
 
 export interface Filters {
@@ -48,6 +49,12 @@ export function filterJobs(jobs: Job[], f: Filters, profile: Profile, now: Date 
 
 export function sortNewest(jobs: Job[]): Job[] {
   return [...jobs].sort((a, b) => (b.posted_at || b.first_seen).localeCompare(a.posted_at || a.first_seen))
+}
+
+/** Best fit first; roles without a score go last. Stable, so ties keep the incoming order. */
+export function sortByFit(jobs: Job[], mySkills: string[]): Job[] {
+  const score = new Map(jobs.map((j) => [j.id, fitScore(j, mySkills) ?? -1]))
+  return [...jobs].sort((a, b) => (score.get(b.id) ?? -1) - (score.get(a.id) ?? -1))
 }
 
 export function topValues(jobs: Job[], pick: (j: Job) => string | string[]): [string, number][] {

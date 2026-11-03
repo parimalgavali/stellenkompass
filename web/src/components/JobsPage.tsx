@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import type { Job, Profile, Tracker } from '../types'
 import { JOB_TYPE_LABEL } from '../types'
-import { EMPTY_FILTERS, filterJobs, sortNewest, topValues, type Filters } from '../lib/filters'
+import { EMPTY_FILTERS, filterJobs, sortByFit, sortNewest, topValues, type Filters } from '../lib/filters'
 import { JobCard } from './JobCard'
 
 const PAGE = 50
@@ -16,12 +16,15 @@ interface Props {
 export function JobsPage({ jobs, profile, tracker, onSave }: Props) {
   const [filters, setFilters] = useState<Filters>(EMPTY_FILTERS)
   const [limit, setLimit] = useState(PAGE)
+  const [byFit, setByFit] = useState(false)
+  const mySkills = useMemo(() => profile.skills ?? [], [profile.skills])
   const set = (patch: Partial<Filters>) => {
     setFilters((f) => ({ ...f, ...patch }))
     setLimit(PAGE)
   }
 
-  const sorted = useMemo(() => sortNewest(jobs), [jobs])
+  const newest = useMemo(() => sortNewest(jobs), [jobs])
+  const sorted = useMemo(() => (byFit && mySkills.length ? sortByFit(newest, mySkills) : newest), [newest, byFit, mySkills])
   const cities = useMemo(() => topValues(jobs, (j) => j.city).slice(0, 40), [jobs])
   const skills = useMemo(() => topValues(jobs, (j) => j.skills ?? []).slice(0, 60), [jobs])
   const sources = useMemo(() => topValues(jobs, (j) => j.source), [jobs])
@@ -98,12 +101,28 @@ export function JobsPage({ jobs, profile, tracker, onSave }: Props) {
         </label>
       </div>
       <div className="results-bar">
-        <span>{results.length.toLocaleString('en')} roles</span>
-        {dirty && (
-          <button className="link" onClick={() => set(EMPTY_FILTERS)}>
-            Clear filters
-          </button>
-        )}
+        <span>
+          {results.length.toLocaleString('en')} roles
+          {dirty && (
+            <button className="link" onClick={() => set(EMPTY_FILTERS)}>
+              Clear filters
+            </button>
+          )}
+        </span>
+        <select
+          value={byFit && mySkills.length ? 'fit' : 'newest'}
+          onChange={(e) => {
+            setByFit(e.target.value === 'fit')
+            setLimit(PAGE)
+          }}
+          aria-label="Sort"
+          title={mySkills.length ? '' : 'Load your CV in Profile first'}
+        >
+          <option value="newest">Newest first</option>
+          <option value="fit" disabled={!mySkills.length}>
+            Best fit first
+          </option>
+        </select>
       </div>
       {results.length === 0 ? (
         <p className="empty">No roles match these filters.</p>

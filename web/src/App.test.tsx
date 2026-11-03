@@ -64,4 +64,20 @@ describe('App', () => {
     expect(await screen.findByText(/Imported 0 tracked roles/)).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Remove rust' })).toBeInTheDocument()
   })
+
+  it('reads skills from a CV and sorts by fit', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await screen.findByText('3 roles')
+    await user.click(screen.getByRole('link', { name: 'Profile' }))
+    const cv = new File(['Data engineer: Python, SQL and Docker. Maschinelles Lernen.'], 'cv.txt', { type: 'text/plain' })
+    await user.upload(screen.getByTestId('cv-file'), cv)
+    expect(await screen.findByText(/Found 4 skills in cv.txt/)).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Remove Docker' })).toBeInTheDocument()
+    expect(JSON.parse(localStorage.getItem('stellenkompass.profile')!).skills).toEqual(['Python', 'SQL', 'Machine Learning', 'Docker'])
+
+    await user.click(screen.getByRole('link', { name: 'Jobs' }))
+    await user.selectOptions(screen.getByLabelText('Sort'), 'fit')
+    expect(screen.getAllByText(/^Fit \d+%$/).map((el) => el.textContent)).toEqual(['Fit 100%', 'Fit 67%', 'Fit 0%'])
+  })
 })

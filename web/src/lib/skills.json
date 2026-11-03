@@ -1,0 +1,362 @@
+[
+  {
+    "name": "Python",
+    "pattern": "python",
+    "flags": "i"
+  },
+  {
+    "name": "Java",
+    "pattern": "java(?![ -]?script)",
+    "flags": "i"
+  },
+  {
+    "name": "JavaScript",
+    "pattern": "javascript|\\bjs\\b",
+    "flags": "i"
+  },
+  {
+    "name": "TypeScript",
+    "pattern": "typescript",
+    "flags": "i"
+  },
+  {
+    "name": "Go",
+    "pattern": "golang|\\bGo\\b(?=\\s*(?:,|/|\\)|and\\b|or\\b|developer|engineer|backend|services))|(?<=[,/(] )Go\\b|(?<=[,/(])Go\\b",
+    "flags": ""
+  },
+  {
+    "name": "Rust",
+    "pattern": "\\brust\\b",
+    "flags": "i"
+  },
+  {
+    "name": "C++",
+    "pattern": "c\\+\\+",
+    "flags": "i"
+  },
+  {
+    "name": "C#",
+    "pattern": "c#|\\.net\\b",
+    "flags": "i"
+  },
+  {
+    "name": "Kotlin",
+    "pattern": "kotlin",
+    "flags": "i"
+  },
+  {
+    "name": "Swift",
+    "pattern": "\\bswift\\b",
+    "flags": "i"
+  },
+  {
+    "name": "Scala",
+    "pattern": "\\bscala\\b",
+    "flags": "i"
+  },
+  {
+    "name": "R",
+    "pattern": "(?<![\\w-])R(?=\\s*(?:,|/|and\\b|or\\b|&)\\s*(?:Python|SQL|SAS|Matlab|Stata))|(?<=Python)\\s*(?:,|/|and|or|&)\\s*R(?![\\w+#-])|RStudio",
+    "flags": ""
+  },
+  {
+    "name": "PHP",
+    "pattern": "\\bphp\\b",
+    "flags": "i"
+  },
+  {
+    "name": "Ruby",
+    "pattern": "\\bruby\\b|\\brails\\b",
+    "flags": "i"
+  },
+  {
+    "name": "SQL",
+    "pattern": "\\bsql\\b|postgres|mysql|t-sql",
+    "flags": "i"
+  },
+  {
+    "name": "React",
+    "pattern": "\\breact(?:\\.js|js)?\\b(?! native)",
+    "flags": "i"
+  },
+  {
+    "name": "React Native",
+    "pattern": "react native",
+    "flags": "i"
+  },
+  {
+    "name": "Angular",
+    "pattern": "\\bangular\\b",
+    "flags": "i"
+  },
+  {
+    "name": "Vue",
+    "pattern": "\\bvue(?:\\.js|js)?\\b",
+    "flags": "i"
+  },
+  {
+    "name": "Node.js",
+    "pattern": "\\bnode(?:\\.js|js)\\b|\\bnode\\b(?= ?/| backend)",
+    "flags": "i"
+  },
+  {
+    "name": "Next.js",
+    "pattern": "next\\.js|nextjs",
+    "flags": "i"
+  },
+  {
+    "name": "Django",
+    "pattern": "django",
+    "flags": "i"
+  },
+  {
+    "name": "FastAPI",
+    "pattern": "fastapi",
+    "flags": "i"
+  },
+  {
+    "name": "Flask",
+    "pattern": "\\bflask\\b",
+    "flags": "i"
+  },
+  {
+    "name": "Spring",
+    "pattern": "spring boot|\\bspring\\b(?= framework)",
+    "flags": "i"
+  },
+  {
+    "name": "GraphQL",
+    "pattern": "graphql",
+    "flags": "i"
+  },
+  {
+    "name": "PostgreSQL",
+    "pattern": "postgres(?:ql)?",
+    "flags": "i"
+  },
+  {
+    "name": "MongoDB",
+    "pattern": "mongodb|\\bmongo\\b",
+    "flags": "i"
+  },
+  {
+    "name": "Redis",
+    "pattern": "\\bredis\\b",
+    "flags": "i"
+  },
+  {
+    "name": "Elasticsearch",
+    "pattern": "elasticsearch|opensearch",
+    "flags": "i"
+  },
+  {
+    "name": "Kafka",
+    "pattern": "\\bkafka\\b",
+    "flags": "i"
+  },
+  {
+    "name": "Spark",
+    "pattern": "\\bspark\\b|pyspark",
+    "flags": "i"
+  },
+  {
+    "name": "Airflow",
+    "pattern": "airflow",
+    "flags": "i"
+  },
+  {
+    "name": "dbt",
+    "pattern": "\\bdbt\\b",
+    "flags": "i"
+  },
+  {
+    "name": "Snowflake",
+    "pattern": "snowflake",
+    "flags": "i"
+  },
+  {
+    "name": "Databricks",
+    "pattern": "databricks",
+    "flags": "i"
+  },
+  {
+    "name": "BigQuery",
+    "pattern": "bigquery",
+    "flags": "i"
+  },
+  {
+    "name": "Pandas",
+    "pattern": "\\bpandas\\b",
+    "flags": "i"
+  },
+  {
+    "name": "Machine Learning",
+    "pattern": "machine learning|maschinelles lernen|\\bml\\b",
+    "flags": "i"
+  },
+  {
+    "name": "Deep Learning",
+    "pattern": "deep learning",
+    "flags": "i"
+  },
+  {
+    "name": "PyTorch",
+    "pattern": "pytorch",
+    "flags": "i"
+  },
+  {
+    "name": "TensorFlow",
+    "pattern": "tensorflow|keras",
+    "flags": "i"
+  },
+  {
+    "name": "scikit-learn",
+    "pattern": "scikit-learn|sklearn",
+    "flags": "i"
+  },
+  {
+    "name": "NLP",
+    "pattern": "\\bnlp\\b|natural language processing",
+    "flags": "i"
+  },
+  {
+    "name": "Computer Vision",
+    "pattern": "computer vision|bildverarbeitung",
+    "flags": "i"
+  },
+  {
+    "name": "LLM",
+    "pattern": "\\bllms?\\b|large language model|generative ai|\\bgenai\\b|\\brag\\b",
+    "flags": "i"
+  },
+  {
+    "name": "MLOps",
+    "pattern": "mlops",
+    "flags": "i"
+  },
+  {
+    "name": "Data Science",
+    "pattern": "data scien",
+    "flags": "i"
+  },
+  {
+    "name": "Statistics",
+    "pattern": "statistic|statistik",
+    "flags": "i"
+  },
+  {
+    "name": "AWS",
+    "pattern": "\\baws\\b|amazon web services",
+    "flags": "i"
+  },
+  {
+    "name": "Azure",
+    "pattern": "\\bazure\\b",
+    "flags": "i"
+  },
+  {
+    "name": "GCP",
+    "pattern": "\\bgcp\\b|google cloud",
+    "flags": "i"
+  },
+  {
+    "name": "Docker",
+    "pattern": "docker|container",
+    "flags": "i"
+  },
+  {
+    "name": "Kubernetes",
+    "pattern": "kubernetes|\\bk8s\\b",
+    "flags": "i"
+  },
+  {
+    "name": "Terraform",
+    "pattern": "terraform",
+    "flags": "i"
+  },
+  {
+    "name": "CI/CD",
+    "pattern": "ci/cd|continuous integration|github actions|gitlab ci|jenkins",
+    "flags": "i"
+  },
+  {
+    "name": "Linux",
+    "pattern": "\\blinux\\b",
+    "flags": "i"
+  },
+  {
+    "name": "Git",
+    "pattern": "\\bgit\\b",
+    "flags": "i"
+  },
+  {
+    "name": "Microservices",
+    "pattern": "microservice",
+    "flags": "i"
+  },
+  {
+    "name": "REST APIs",
+    "pattern": "\\b(?:REST|[Rr]est)ful\\b|\\b[Rr]est[ -]?APIs?\\b|\\bREST\\b",
+    "flags": ""
+  },
+  {
+    "name": "Excel",
+    "pattern": "\\bexcel\\b",
+    "flags": "i"
+  },
+  {
+    "name": "Power BI",
+    "pattern": "power ?bi",
+    "flags": "i"
+  },
+  {
+    "name": "Tableau",
+    "pattern": "tableau",
+    "flags": "i"
+  },
+  {
+    "name": "SAP",
+    "pattern": "\\bsap\\b",
+    "flags": "i"
+  },
+  {
+    "name": "Salesforce",
+    "pattern": "salesforce",
+    "flags": "i"
+  },
+  {
+    "name": "Figma",
+    "pattern": "figma",
+    "flags": "i"
+  },
+  {
+    "name": "Jira",
+    "pattern": "\\bjira\\b",
+    "flags": "i"
+  },
+  {
+    "name": "Agile",
+    "pattern": "\\bagile\\b|\\bagil\\b|scrum|kanban",
+    "flags": "i"
+  },
+  {
+    "name": "SEO",
+    "pattern": "\\bseo\\b",
+    "flags": "i"
+  },
+  {
+    "name": "Embedded",
+    "pattern": "embedded",
+    "flags": "i"
+  },
+  {
+    "name": "MATLAB",
+    "pattern": "matlab",
+    "flags": "i"
+  },
+  {
+    "name": "CAD",
+    "pattern": "\\bcad\\b|solidworks|catia",
+    "flags": "i"
+  }
+]

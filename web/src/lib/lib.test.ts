@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { EMPTY_FILTERS, filterJobs, sortNewest, topValues } from './filters'
+import { EMPTY_FILTERS, filterJobs, sortByFit, sortNewest, topValues } from './filters'
 import { matchJob } from './match'
 import { newMatches, todayItems } from './today'
 import { makeBackup, mergeBackup, parseBackup } from './backup'
+import { canonicalSkills, extractSkills, fitScore } from './skills'
 import { setStage, trackJob, updateTracked } from './tracker'
 import { relativeTime } from './time'
 import { JOBS, NOW, job } from '../test/data'
@@ -117,4 +118,38 @@ it('relativeTime', () => {
   expect(relativeTime(days(0.5), NOW)).toBe('12 h ago')
   expect(relativeTime(days(1), NOW)).toBe('yesterday')
   expect(relativeTime(days(5), NOW)).toBe('5 days ago')
+})
+
+describe('skills and fit', () => {
+  it('reads skills from CV text with the scanner patterns', () => {
+    const cv = 'Python, R and SQL. Built RESTful services in JavaScript. Maschinelles Lernen; R&D team; go-to-market.'
+    expect(extractSkills(cv)).toEqual(['Python', 'JavaScript', 'R', 'SQL', 'Machine Learning', 'REST APIs'])
+    expect(extractSkills('')).toEqual([])
+  })
+
+  it('uses canonical names for known skills', () => {
+    expect(canonicalSkills([' python', 'PYTHON', 'Haskell', ''])).toEqual(['Python', 'Haskell'])
+  })
+
+  it('scores the share of role skills you have', () => {
+    expect(fitScore(job(), ['python', 'SQL'])).toBe(67)
+    expect(fitScore(job(), ['Python', 'SQL', 'Airflow', 'Docker'])).toBe(100)
+    expect(fitScore(job(), [])).toBeNull()
+    expect(fitScore(job({ skills: [] }), ['Python'])).toBeNull()
+    expect(fitScore(job({ skills: undefined }), ['Python'])).toBeNull()
+  })
+
+  it('sorts best fit first and keeps unscored roles last', () => {
+    const jobs = [...JOBS, job({ id: 'none', skills: [] })]
+    expect(sortByFit(jobs, ['Machine Learning', 'Python']).map((j) => j.id)).toEqual(['ashby:x-2', 'greenhouse:acme-1', 'lever:y-3', 'none'])
+  })
+
+  it('keeps skills in backups', () => {
+    const profile = { keywords: [], companies: [], skills: ['Python'] }
+    expect(parseBackup(JSON.stringify(makeBackup(profile, {}))).profile.skills).toEqual(['Python'])
+    expect(() => parseBackup(JSON.stringify(makeBackup({ ...profile, skills: [1] as never }, {})))).toThrow(/skills/)
+    const merged = mergeBackup(profile, {}, makeBackup({ keywords: [], companies: [], skills: ['python', 'SQL'] }, {}))
+    expect(merged.profile.skills).toEqual(['Python', 'SQL'])
+    expect(mergeBackup({ keywords: [], companies: [] }, {}, makeBackup({ keywords: [], companies: [] }, {})).profile).not.toHaveProperty('skills')
+  })
 })
