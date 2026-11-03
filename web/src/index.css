@@ -1,0 +1,139 @@
+:root {
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --text: #1c1917;
+  --muted: #78716c;
+  --line: #e7e5e4;
+  --accent: #2563eb;
+  --accent-soft: #dbeafe;
+  --danger: #b91c1c;
+  --radius: 10px;
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0c0a09;
+    --surface: #1c1917;
+    --text: #f5f5f4;
+    --muted: #a8a29e;
+    --line: #292524;
+    --accent: #60a5fa;
+    --accent-soft: #1e3a5f;
+    --danger: #f87171;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #0c0a09;
+  --surface: #1c1917;
+  --text: #f5f5f4;
+  --muted: #a8a29e;
+  --line: #292524;
+  --accent: #60a5fa;
+  --accent-soft: #1e3a5f;
+  --danger: #f87171;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+
+.app { max-width: 860px; margin: 0 auto; padding: 0 20px 40px; }
+
+.header {
+  display: flex; align-items: center; gap: 20px;
+  padding: 20px 0; border-bottom: 1px solid var(--line); margin-bottom: 24px;
+}
+.brand { font-weight: 650; text-decoration: none; letter-spacing: -0.01em; }
+.header nav { display: flex; gap: 4px; flex: 1; flex-wrap: wrap; }
+.header nav a {
+  text-decoration: none; color: var(--muted); padding: 4px 10px; border-radius: 999px;
+}
+.header nav a[aria-current='page'] { color: var(--text); background: var(--line); }
+.theme { background: none; border: 0; cursor: pointer; font-size: 18px; color: var(--muted); }
+
+h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 28px 0 12px; font-weight: 600; }
+h2:first-child { margin-top: 0; }
+h3 { margin: 0 0 4px; font-size: 16px; }
+
+.search, .filters select, .add-row input, .add-row select, .tracked-fields select, .tracked-fields input, textarea {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px;
+}
+.search { width: 100%; padding: 12px 14px; font-size: 16px; }
+.search:focus, select:focus, input:focus, textarea:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.filters select { padding: 6px 8px; font-size: 14px; }
+.toggle { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); padding: 0 6px; }
+
+.results-bar { display: flex; justify-content: space-between; color: var(--muted); font-size: 14px; margin: 16px 0 8px; }
+
+.list { display: flex; flex-direction: column; gap: 10px; }
+.card {
+  display: flex; gap: 16px; align-items: flex-start; justify-content: space-between;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px;
+}
+.card-main { min-width: 0; flex: 1; }
+.card-title { font-weight: 600; text-decoration: none; }
+.card-title:hover { color: var(--accent); }
+.card-meta { display: flex; flex-wrap: wrap; gap: 4px 14px; color: var(--muted); font-size: 14px; margin-top: 2px; }
+.followed { color: var(--accent); font-weight: 500; }
+.gone { color: var(--danger); }
+.eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); font-weight: 600; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.chip { font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--bg); border: 1px solid var(--line); color: var(--muted); }
+.chip-match { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+.chip-removable { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; color: var(--text); }
+.chip-removable button { background: none; border: 0; cursor: pointer; color: var(--muted); padding: 0 2px; }
+
+.btn {
+  border: 1px solid var(--accent); background: var(--accent); color: #fff; border-radius: 8px;
+  padding: 6px 14px; cursor: pointer; white-space: nowrap; font-size: 14px;
+}
+.btn:disabled { cursor: default; }
+.btn-quiet { background: transparent; color: var(--muted); border-color: var(--line); }
+.btn-wide { width: 100%; margin-top: 16px; background: transparent; color: var(--text); border-color: var(--line); }
+.link { background: none; border: 0; color: var(--accent); cursor: pointer; padding: 0; font-size: 14px; }
+.danger { color: var(--danger); }
+.actions { display: flex; gap: 6px; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 14px; }
+.tabs button { background: none; border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; cursor: pointer; color: var(--muted); font-size: 14px; }
+.tabs button[aria-selected='true'] { color: var(--text); border-color: var(--text); }
+.count { opacity: 0.6; margin-left: 2px; }
+
+.tracked-fields { display: flex; flex-wrap: wrap; gap: 12px; margin: 12px 0 8px; }
+.tracked-fields label { display: flex; flex-direction: column; font-size: 12px; color: var(--muted); gap: 2px; }
+.tracked-fields select, .tracked-fields input { padding: 5px 8px; font-size: 14px; color: var(--text); }
+textarea { width: 100%; min-height: 56px; resize: vertical; font-size: 14px; }
+
+.editor { margin-bottom: 32px; }
+.hint { color: var(--muted); font-size: 14px; margin: 0 0 10px; }
+.add-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.add-row input { flex: 1; min-width: 180px; }
+
+.empty { color: var(--muted); text-align: center; padding: 32px 0; }
+.notice { font-size: 14px; color: var(--accent); }
+.notice-error { color: var(--danger); }
+
+.footer {
+  margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 2px; color: var(--muted); font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .header { flex-wrap: wrap; gap: 8px; }
+  .header nav { order: 3; flex-basis: 100%; }
+  .card { flex-direction: column; }
+  .card-tracked .link { align-self: flex-end; }
+}
