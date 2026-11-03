@@ -46,8 +46,12 @@ def _boards(config: dict[str, Any], source: str) -> list[dict[str, Any]]:
     return boards
 
 
-def scan(fetcher: Fetcher, config: dict[str, Any]) -> tuple[list[Job], dict[str, Any]]:
+def scan(
+    fetcher: Fetcher, config: dict[str, Any], previous: dict[str, Any] | None = None
+) -> tuple[list[Job], dict[str, Any]]:
+    """Adapters with `USES_PREVIOUS` get last scan's jobs of their source as `known`."""
     jobs: list[Job] = []
+    old = [j for j in (previous or {}).get("jobs", []) if isinstance(j, dict) and "id" in j]
     report: dict[str, Any] = {}
 
     for source, module in AGGREGATORS.items():
@@ -72,6 +76,9 @@ def scan(fetcher: Fetcher, config: dict[str, Any]) -> tuple[list[Job], dict[str,
             continue
         started = time.monotonic()
         entry = _entry(len(boards))
+        if getattr(module, "USES_PREVIOUS", False):
+            known = {j["id"]: j for j in old if j.get("source") == source}
+            boards = [{**b, "options": {**b["options"], "known": known}} for b in boards]
         for b in boards:
             _collect(
                 entry, jobs, source, b["board"],
@@ -203,14 +210,13 @@ def main(argv: list[str] | None = None) -> int:
     logging.getLogger("httpx").setLevel(logging.WARNING)
 
     now = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
-    fetcher = HttpFetcher(pause=args.pause)
-    try:
-        raw_jobs, report = scan(fetcher, load_config(args.config))
-    finally:
-        fetcher.close()
-
     previous_path = args.out / "jobs.json"
     previous = json.loads(previous_path.read_text("utf-8")) if previous_path.exists() else None
+    fetcher = HttpFetcher(pause=args.pause)
+    try:
+        raw_jobs, report = scan(fetcher, load_config(args.config), previous)
+    finally:
+        fetcher.close()
     carried = carry_over_failed(raw_jobs, report, previous)
     jobs = dedupe(raw_jobs)
     carry_first_seen(jobs, previous, now)

@@ -35,7 +35,7 @@ Every adapter returns roles in this shape (see `scanner/stellenkompass_scanner/m
 | Bundesagentur für Arbeit | Jobsuche API v6, one search per term, `wo=Deutschland`, last 30 days | `scanner/companies.yaml` → `bundesagentur` (search terms) |
 | Greenhouse | Public board API per company | `scanner/companies.yaml` → `greenhouse` |
 | Ashby | Public posting API per company | `scanner/companies.yaml` → `ashby` |
-| SmartRecruiters | Public postings API per company, `country=de` | `scanner/companies.yaml` → `smartrecruiters` |
+| SmartRecruiters | Public postings API per company, `country=de`, plus each German posting's detail (`ref`) for the job text | `scanner/companies.yaml` → `smartrecruiters` |
 | Lever | Public postings API per company, paged; `region: eu` for jobs.eu.lever.co | `scanner/companies.yaml` → `lever` |
 | Personio | Public XML feed per company (`domain: jobs.personio.com`, `languages: [de, en]` optional) | `scanner/companies.yaml` → `personio` |
 | Recruitee | Public offers API `https://<board>.recruitee.com/api/offers/` | `scanner/companies.yaml` → `recruitee` |

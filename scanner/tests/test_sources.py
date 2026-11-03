@@ -220,3 +220,59 @@ def test_personio_languages_merge_by_id(fixture):
     assert [j.id for j in jobs] == [j.id for j in one]
     assert jobs[0].url.startswith("https://ottonova.jobs.personio.com/job/")
     assert "Kubernetes" in jobs[0].skills and "Kubernetes" not in one[0].skills
+
+
+def _sr_fetcher(fixture, detail):
+    listing = fixture("smartrecruiters_bosch.json")
+
+    class F:
+        def __init__(self):
+            self.details: list[str] = []
+
+        def get_json(self, url, params=None, headers=None):
+            if "/postings/" in url:
+                self.details.append(url)
+                return detail(url)
+            return listing
+
+    return F(), listing
+
+
+def _sr_ad(url):
+    return {"jobAd": {"sections": {"qualifications": {"text": "<p>Python und SQL</p>"}}}}
+
+
+def test_smartrecruiters_fetches_details_for_german_postings(fixture):
+    fetcher, listing = _sr_fetcher(fixture, _sr_ad)
+    raw = smartrecruiters.fetch(fetcher, "BoschGroup")
+    jobs = smartrecruiters.parse(raw, "BoschGroup", "Bosch")
+    assert len(fetcher.details) == len(jobs) == 1  # only for postings that are kept
+    assert all({"Python", "SQL"} <= set(j.skills) and j.snippet for j in jobs)
+
+
+def test_smartrecruiters_reuses_unchanged_details(fixture):
+    fetcher, listing = _sr_fetcher(fixture, _sr_ad)
+    first = smartrecruiters.parse(smartrecruiters.fetch(fetcher, "BoschGroup"), "BoschGroup")
+    known = {j.id: j.to_dict() for j in first}
+    again, _ = _sr_fetcher(fixture, _sr_ad)
+    jobs = smartrecruiters.parse(
+        smartrecruiters.fetch(again, "BoschGroup", known=known), "BoschGroup"
+    )
+    assert again.details == []
+    assert [(j.snippet, j.skills) for j in jobs] == [(j.snippet, j.skills) for j in first]
+
+
+def test_smartrecruiters_detail_failure_keeps_role(fixture):
+    def broken(url):
+        raise RuntimeError("HTTP 500")
+
+    fetcher, _ = _sr_fetcher(fixture, broken)
+    jobs = smartrecruiters.parse(smartrecruiters.fetch(fetcher, "BoschGroup"), "BoschGroup")
+    assert len(jobs) == 1 and all(j.snippet == "" for j in jobs)
+
+
+def test_smartrecruiters_caps_new_details(fixture, monkeypatch):
+    monkeypatch.setattr(smartrecruiters, "MAX_DETAILS", 0)
+    fetcher, _ = _sr_fetcher(fixture, _sr_ad)
+    jobs = smartrecruiters.parse(smartrecruiters.fetch(fetcher, "BoschGroup"), "BoschGroup")
+    assert fetcher.details == [] and len(jobs) == 1
