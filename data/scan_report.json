@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-03T10:05:28Z",
-  "total_jobs": 9610,
-  "collected": 8226,
-  "carried": 1394,
-  "duplicates_removed": 10,
+  "generated_at": "2026-11-03T10:18:39Z",
+  "total_jobs": 11015,
+  "collected": 9631,
+  "carried": 1389,
+  "duplicates_removed": 5,
   "sources": {
     "arbeitnow": {
       "boards": 1,
@@ -16,12 +16,12 @@
       ],
       "capped": [],
       "status": "failed",
-      "seconds": 21.8,
-      "carried": 1394
+      "seconds": 21.6,
+      "carried": 1389
     },
     "bundesagentur": {
       "boards": 1,
-      "jobs": 4410,
+      "jobs": 4413,
       "errors": [],
       "capped": [
         {
@@ -30,34 +30,34 @@
         }
       ],
       "status": "partial",
-      "seconds": 51.5,
+      "seconds": 55.6,
       "carried": 0
     },
     "greenhouse": {
       "boards": 32,
-      "jobs": 885,
+      "jobs": 884,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 35.4,
+      "seconds": 30.5,
       "carried": 0
     },
     "ashby": {
       "boards": 24,
-      "jobs": 387,
+      "jobs": 388,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 16.8,
+      "seconds": 16.1,
       "carried": 0
     },
     "smartrecruiters": {
       "boards": 5,
-      "jobs": 1385,
+      "jobs": 1386,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 156.3,
+      "seconds": 157.3,
       "carried": 0
     },
     "lever": {
@@ -66,7 +66,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 11.6,
+      "seconds": 17.3,
       "carried": 0
     },
     "personio": {
@@ -75,7 +75,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 8.5,
+      "seconds": 7.7,
       "carried": 0
     },
     "recruitee": {
@@ -84,7 +84,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 2.9,
+      "seconds": 3.4,
       "carried": 0
     },
     "teamtailor": {
@@ -93,7 +93,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 1.0,
+      "seconds": 1.2,
       "carried": 0
     },
     "dvinci": {
@@ -102,16 +102,25 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 1.6,
+      "seconds": 2.0,
       "carried": 0
     },
     "workday": {
       "boards": 12,
-      "jobs": 818,
+      "jobs": 820,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 88.3,
+      "seconds": 86.3,
+      "carried": 0
+    },
+    "successfactors": {
+      "boards": 6,
+      "jobs": 1399,
+      "errors": [],
+      "capped": [],
+      "status": "complete",
+      "seconds": 76.4,
       "carried": 0
     }
   }
