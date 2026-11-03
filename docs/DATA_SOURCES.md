@@ -52,7 +52,7 @@ Every adapter returns roles in this shape (see `scanner/stellenkompass_scanner/m
    ```
 3. Add `- { board: <board>, name: <Display name> }` under the platform in `scanner/companies.yaml`.
 
-Add a verified board even if it has only one role in Germany; a board with zero roles today can stay too. (Earlier we skipped boards with fewer than 3 roles: Wunderflats, kununu, KONUX, Dataiku, Rasa, HeyJobs, Spotify (Lever), Clark. They are being re-checked, see CHECKLIST Phase 9.)
+Add a verified board even if it has only one role in Germany; a board with zero roles today can stay too. (Boards once skipped by the old 3-role rule were re-checked and added: Wunderflats, kununu, KONUX, Dataiku (Greenhouse), HeyJobs (Ashby), Spotify (Lever), CLARK (Personio). Rasa stays out: its only role is "Worldwide · Remote".)
 
 Candidate sources still to verify live in [research/source-catalog.json](research/source-catalog.json); never enable them in bulk.
 

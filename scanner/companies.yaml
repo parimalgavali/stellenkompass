@@ -63,6 +63,10 @@ greenhouse:
   - { board: datadog, name: Datadog }
   - { board: figma, name: Figma }
   - { board: okta, name: Okta }
+  - { board: wunderflats, name: Wunderflats }
+  - { board: kununu, name: kununu }
+  - { board: konux, name: KONUX }
+  - { board: dataiku, name: Dataiku }
 
 ashby:
   - { board: parloa, name: Parloa }
@@ -88,11 +92,13 @@ ashby:
   - { board: linear, name: Linear }
   - { board: notion, name: Notion }
   - { board: supabase, name: Supabase }
+  - { board: heyjobs, name: HeyJobs }
 
 lever:
   - { board: pigment, name: Pigment }
   - { board: agicap, name: Agicap }
   - { board: contentsquare, name: Contentsquare }
+  - { board: spotify, name: Spotify }
 
 smartrecruiters:
   - { board: BoschGroup, name: Bosch }
@@ -106,3 +112,4 @@ personio:
   - { board: ottonova, name: ottonova }
   - { board: 1komma5grad, name: 1KOMMA5° }
   - { board: everphone, name: Everphone }
+  - { board: clark, name: CLARK }
