@@ -23,6 +23,12 @@ describe('filters', () => {
     expect(filterJobs(JOBS, { ...EMPTY_FILTERS, postedWithin: 7 }, noProfile, NOW)).toHaveLength(2)
     expect(filterJobs(JOBS, { ...EMPTY_FILTERS, jobType: 'working_student' }, noProfile, NOW)[0].city).toBe('Munich')
   })
+
+  it('filters by seniority and treats a missing level as unknown', () => {
+    const jobs = [job({ id: 'a', seniority: 'senior' }), job({ id: 'b', seniority: '' }), job({ id: 'c' })]
+    expect(filterJobs(jobs, { ...EMPTY_FILTERS, seniority: 'senior' }, noProfile, NOW).map((j) => j.id)).toEqual(['a'])
+    expect(filterJobs(jobs, EMPTY_FILTERS, noProfile, NOW)).toHaveLength(3)
+  })
   it('keeps only matches when asked', () => {
     const f = { ...EMPTY_FILTERS, matchesOnly: true }
     expect(filterJobs(JOBS, f, { keywords: ['machine learning'], companies: [] }, NOW)).toHaveLength(1)

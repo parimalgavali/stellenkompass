@@ -1,6 +1,6 @@
 import pytest
 
-from stellenkompass_scanner.classify import detect_job_type, detect_language
+from stellenkompass_scanner.classify import detect_job_type, detect_language, detect_seniority
 
 
 @pytest.mark.parametrize(
@@ -28,3 +28,25 @@ def test_language():
     assert detect_language("We are looking for an engineer to join our team.") == "en"
     assert detect_language("Wir suchen dich für unser Team und deine Aufgaben sind") == "de"
     assert detect_language("") == "en"
+
+
+@pytest.mark.parametrize(
+    ("title", "level"),
+    [
+        ("Senior Data Scientist (m/w/d)", "senior"),
+        ("Sr. Backend Engineer", "senior"),
+        ("Junior Python Developer", "junior"),
+        ("Graduate Programme Software 2027", "graduate"),
+        ("Trainee Data Analytics", "graduate"),
+        ("Berufseinsteiger Softwareentwicklung", "graduate"),
+        ("Head of Machine Learning", "lead"),
+        ("Senior Tech Lead Payments", "lead"),
+        ("Teamleiter IT-Infrastruktur", "lead"),
+        ("Staff Engineer, Platform", "lead"),
+        ("Bauleiter Tiefbau", ""),
+        ("Data Engineer", ""),
+        ("Lead Generation Werkstudent", ""),
+    ],
+)
+def test_detect_seniority(title, level):
+    assert detect_seniority(title) == level

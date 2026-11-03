@@ -1,5 +1,5 @@
 import type { Job, Profile, TrackedJob } from '../types'
-import { JOB_TYPE_LABEL, STAGE_LABEL } from '../types'
+import { JOB_TYPE_LABEL, SENIORITY_LABEL, STAGE_LABEL } from '../types'
 import { matchJob } from '../lib/match'
 import { fitScore } from '../lib/skills'
 import { relativeTime } from '../lib/time'
@@ -37,6 +37,7 @@ export function JobCard({ job, profile, tracked, onSave }: Props) {
             </span>
           )}
           <span className="chip">{JOB_TYPE_LABEL[job.job_type]}</span>
+          {job.seniority && <span className="chip">{SENIORITY_LABEL[job.seniority]}</span>}
           <span className="chip" title="Language of the job ad, not of the job">{job.language === 'de' ? 'German ad' : 'English ad'}</span>
           {job.remote && <span className="chip">Remote</span>}
           {job.workplace_type === 'hybrid' && <span className="chip">Hybrid</span>}

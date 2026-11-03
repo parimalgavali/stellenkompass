@@ -9,6 +9,7 @@ export interface Filters {
   city: string
   skill: string
   jobType: string
+  seniority: string
   remote: boolean
   source: string
   postedWithin: number
@@ -21,6 +22,7 @@ export const EMPTY_FILTERS: Filters = {
   city: '',
   skill: '',
   jobType: '',
+  seniority: '',
   remote: false,
   source: '',
   postedWithin: 0,
@@ -35,6 +37,7 @@ export function filterJobs(jobs: Job[], f: Filters, profile: Profile, now: Date 
     if (f.city && job.city !== f.city) return false
     if (f.skill && !(job.skills ?? []).includes(f.skill)) return false
     if (f.jobType && job.job_type !== f.jobType) return false
+    if (f.seniority && job.seniority !== f.seniority) return false
     if (f.remote && !job.remote) return false
     if (f.source && job.source !== f.source) return false
     if (cutoff && new Date(job.posted_at || job.first_seen).getTime() < cutoff) return false

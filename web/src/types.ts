@@ -1,5 +1,7 @@
 export type JobType = 'full_time' | 'part_time' | 'working_student' | 'internship' | 'thesis' | 'other'
 
+export type Seniority = 'graduate' | 'junior' | 'senior' | 'lead'
+
 export interface Job {
   id: string
   title: string
@@ -11,6 +13,8 @@ export interface Job {
   remote: boolean
   workplace_type?: 'onsite' | 'hybrid' | 'remote' | 'unknown'
   job_type: JobType
+  /** From the title; missing when it doesn't say. */
+  seniority?: Seniority | ''
   language: 'en' | 'de'
   posted_at: string
   first_seen: string
@@ -83,6 +87,13 @@ export const JOB_TYPE_LABEL: Record<JobType, string> = {
   internship: 'Internship',
   thesis: 'Thesis',
   other: 'Other',
+}
+
+export const SENIORITY_LABEL: Record<Seniority, string> = {
+  graduate: 'Graduate / Trainee',
+  junior: 'Junior',
+  senior: 'Senior',
+  lead: 'Lead / Head',
 }
 
 export const STAGE_LABEL: Record<Stage, string> = {

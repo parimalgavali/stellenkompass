@@ -1,7 +1,7 @@
 import { findTracked } from '../lib/tracker'
 import { useMemo, useState } from 'react'
 import type { Job, Profile, Tracker } from '../types'
-import { JOB_TYPE_LABEL } from '../types'
+import { JOB_TYPE_LABEL, SENIORITY_LABEL } from '../types'
 import { EMPTY_FILTERS, filterJobs, sortByFit, sortNewest, topValues, type Filters } from '../lib/filters'
 import { JobCard } from './JobCard'
 
@@ -68,6 +68,14 @@ export function JobsPage({ jobs, profile, tracker, onSave }: Props) {
         <select value={filters.jobType} onChange={(e) => set({ jobType: e.target.value })} aria-label="Job type">
           <option value="">Any type</option>
           {Object.entries(JOB_TYPE_LABEL).map(([v, l]) => (
+            <option key={v} value={v}>
+              {l}
+            </option>
+          ))}
+        </select>
+        <select value={filters.seniority} onChange={(e) => set({ seniority: e.target.value })} aria-label="Level">
+          <option value="">Any level</option>
+          {Object.entries(SENIORITY_LABEL).map(([v, l]) => (
             <option key={v} value={v}>
               {l}
             </option>
