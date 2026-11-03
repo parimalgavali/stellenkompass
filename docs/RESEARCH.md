@@ -63,4 +63,4 @@ Indian job + interview-prep platform.
 | SmartRecruiters | `api.smartrecruiters.com/v1/companies/{company}/postings` | Yes |
 | Lever | `api.lever.co/v0/postings/{company}?mode=json` | Yes |
 | Personio | `{company}.jobs.personio.de/xml` | Yes |
-| Bundesagentur für Arbeit | `rest.arbeitsagentur.de/jobboerse/jobsuche-service/...` | No (HTTP 403 from the VM). Retry from GitHub Actions later. |
+| Bundesagentur für Arbeit | `rest.arbeitsagentur.de/jobboerse/jobsuche-service/pc/v6/jobs` | Yes (v6; the old v4 path returns 403) |

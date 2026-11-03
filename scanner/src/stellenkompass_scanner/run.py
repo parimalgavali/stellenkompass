@@ -47,7 +47,7 @@ def scan(fetcher: Fetcher, config: dict[str, Any]) -> tuple[list[Job], dict[str,
         started = time.monotonic()
         entry = {"boards": 1, "jobs": 0, "errors": []}
         try:
-            found = module.parse(module.fetch(fetcher))
+            found = module.parse(module.fetch(fetcher, config.get(source) or {}))
             jobs.extend(found)
             entry["jobs"] = len(found)
         except Exception as exc:  # noqa: BLE001 - one source must not stop the scan

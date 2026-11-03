@@ -1,0 +1,305 @@
+{
+ "ergebnisliste": [
+  {
+   "stellenangebotsart": "PRAKTIKUM_TRAINEE",
+   "stellenangebotsTitel": "Werkstudent Informatik, IT-Management (m/w/d)",
+   "quereinstiegGeeignet": false,
+   "arbeitszeitSchichtNachtWochenende": false,
+   "arbeitszeitTeilzeitAbend": false,
+   "arbeitszeitTeilzeitNachmittag": false,
+   "arbeitszeitTeilzeitVormittag": true,
+   "arbeitszeitTeilzeitFlexibel": false,
+   "arbeitszeitVollzeit": false,
+   "eintrittszeitraum": {
+    "von": "2026-11-03"
+   },
+   "verguetungsangabe": "JAHRESGEHALT",
+   "artDerVerguetung": "FESTGEHALT",
+   "festgehalt": 29023.2,
+   "vertragsdauer": "KEINE_ANGABE",
+   "istGeringfuegigeBeschaeftigung": false,
+   "stellenlokationen": [
+    {
+     "adresse": {
+      "strasse": "Hospitalstraße",
+      "hausnummer": "16",
+      "plz": "56743",
+      "ort": "Mendig",
+      "region": "RHEINLAND_PFALZ",
+      "land": "DEUTSCHLAND"
+     },
+     "breite": 50.369076,
+     "laenge": 7.281063
+    }
+   ],
+   "homeofficemoeglich": true,
+   "homeofficetyp": "NACH_VEREINBARUNG",
+   "veroeffentlichungszeitraum": {
+    "von": "2026-10-25"
+   },
+   "datumErsteVeroeffentlichung": "2026-09-10",
+   "aenderungsdatum": "2026-11-03T07:45:33.787",
+   "externeURL": "https://www.jobvector.de/job/werkstudent-3170264583da19a7/?utm_source=arbeitsagentur&utm_medium=partner&utm_campaign=tmcfdae_job_jid271049&utm_content=b2c&utm_term=tmf8eca_uic2e2800e",
+   "hauptberuf": "Informatiker/in",
+   "firma": "St. Raphael Caritas Alten-und Behindertenhilfe",
+   "referenznummer": "14225-3170264583da19a7-S",
+   "alleBerufe": [
+    "Informatiker/in"
+   ]
+  },
+  {
+   "stellenangebotsart": "ARBEIT",
+   "stellenangebotsTitel": "Werkstudent Informatik (m/w/d)",
+   "quereinstiegGeeignet": true,
+   "weitereBerufe": [
+    "IT-Administrator/in",
+    "IT-Netzwerktechniker (m/w/d)",
+    "IT System Administrator (m/w/d)",
+    "Fachinformatiker/in - Systemintegration"
+   ],
+   "arbeitszeitSchichtNachtWochenende": false,
+   "arbeitszeitTeilzeitAbend": false,
+   "arbeitszeitTeilzeitNachmittag": true,
+   "arbeitszeitTeilzeitVormittag": true,
+   "arbeitszeitTeilzeitFlexibel": false,
+   "arbeitszeitVollzeit": false,
+   "eintrittszeitraum": {
+    "von": "2026-09-07"
+   },
+   "verguetungsangabe": "KEINE_ANGABEN",
+   "vertragsdauer": "UNBEFRISTET",
+   "stellenlokationen": [
+    {
+     "adresse": {
+      "strasse": "Boddenweg",
+      "hausnummer": "3c",
+      "adresszusatz": "PC-Reparatur.Shop GmbH",
+      "plz": "18439",
+      "ort": "Stralsund",
+      "region": "MECKLENBURG_VORPOMMERN",
+      "land": "DEUTSCHLAND"
+     },
+     "breite": 54.2760687,
+     "laenge": 13.1090033
+    }
+   ],
+   "veroeffentlichungszeitraum": {
+    "von": "2026-09-07"
+   },
+   "datumErsteVeroeffentlichung": "2026-03-17",
+   "aenderungsdatum": "2026-11-03T00:16:49.598",
+   "hauptberuf": "Informatiker/in",
+   "alternativBeruf1": "Wirtschaftsinformatiker/in (Hochschule)",
+   "alternativBeruf2": "Sicherheitstechniker/in (IT)",
+   "firma": "PC-Reparatur. Shop GmbH",
+   "arbeitgeberKundennummerHash": "rB8U7VlMhbldeg5e10aZ5w-VzdySl_tnKoYR7HyNO4A=",
+   "referenznummer": "10001-1002778647-S",
+   "alleBerufe": [
+    "Wirtschaftsinformatiker/in (Hochschule)",
+    "Fachinformatiker/in - Systemintegration",
+    "IT-Netzwerktechniker (m/w/d)",
+    "Informatiker/in",
+    "Sicherheitstechniker/in (IT)",
+    "IT-Administrator/in",
+    "IT System Administrator (m/w/d)"
+   ]
+  },
+  {
+   "stellenangebotsart": "ARBEIT",
+   "stellenangebotsTitel": "Werkstudent / studentische Aushilfe Softwareentwicklung / Informatik (m/w/d)",
+   "quereinstiegGeeignet": false,
+   "arbeitszeitSchichtNachtWochenende": false,
+   "arbeitszeitTeilzeitAbend": false,
+   "arbeitszeitTeilzeitNachmittag": true,
+   "arbeitszeitTeilzeitVormittag": true,
+   "arbeitszeitTeilzeitFlexibel": false,
+   "arbeitszeitVollzeit": false,
+   "eintrittszeitraum": {
+    "von": "2026-11-02"
+   },
+   "verguetungsangabe": "KEINE_ANGABEN",
+   "vertragsdauer": "KEINE_ANGABE",
+   "istGeringfuegigeBeschaeftigung": false,
+   "stellenlokationen": [
+    {
+     "adresse": {
+      "strasse": "Paul-Gauselmann-Straße 1",
+      "plz": "32312",
+      "ort": "Lübbecke, Westfalen",
+      "region": "NORDRHEIN_WESTFALEN",
+      "land": "DEUTSCHLAND"
+     },
+     "breite": 52.329771,
+     "laenge": 8.6224095
+    }
+   ],
+   "homeofficemoeglich": false,
+   "veroeffentlichungszeitraum": {
+    "von": "2026-11-02"
+   },
+   "datumErsteVeroeffentlichung": "2026-05-06",
+   "aenderungsdatum": "2026-11-02T06:31:10.065",
+   "hauptberuf": "Softwareentwickler/in",
+   "firma": "adp Merkur GmbH",
+   "arbeitgeberKundennummerHash": "pRSPgpw0dYzUQgLHz_yzT2H4o0j2ThuBFzkGL_O7k74=",
+   "referenznummer": "14820-0064601318-S",
+   "alleBerufe": [
+    "Softwareentwickler/in"
+   ]
+  },
+  {
+   "stellenangebotsart": "AUSBILDUNG",
+   "ausbildungsart": "DUALES_STUDIUM",
+   "studienform": "PRAXISINTEGRIEREND",
+   "stellenangebotsTitel": "Werkstudent/in in der Welt der Informatik (m/w/d)",
+   "arbeitszeitSchichtNachtWochenende": false,
+   "arbeitszeitTeilzeitAbend": false,
+   "arbeitszeitTeilzeitNachmittag": false,
+   "arbeitszeitTeilzeitVormittag": false,
+   "arbeitszeitTeilzeitFlexibel": false,
+   "arbeitszeitVollzeit": true,
+   "eintrittszeitraum": {
+    "von": "2026-10-22"
+   },
+   "verguetungsangabe": "KEINE_ANGABEN",
+   "vertragsdauer": "KEINE_ANGABE",
+   "stellenlokationen": [
+    {
+     "adresse": {
+      "strasse": "Lange Straße",
+      "hausnummer": "36",
+      "plz": "89537",
+      "ort": "Giengen an der Brenz",
+      "region": "BADEN_WUERTTEMBERG",
+      "land": "DEUTSCHLAND"
+     },
+     "breite": 48.621078,
+     "laenge": 10.2465945
+    },
+    {
+     "adresse": {
+      "strasse": "Lammstraße",
+      "hausnummer": "6",
+      "plz": "77933",
+      "ort": "Lahr, Schwarzwald",
+      "region": "BADEN_WUERTTEMBERG",
+      "land": "DEUTSCHLAND"
+     },
+     "breite": 48.341052,
+     "laenge": 7.871481
+    },
+    {
+     "adresse": {
+      "strasse": "Ob der Eck",
+      "hausnummer": "4",
+      "plz": "78148",
+      "ort": "Gütenbach",
+      "region": "BADEN_WUERTTEMBERG",
+      "land": "DEUTSCHLAND"
+     },
+     "breite": 48.041334,
+     "laenge": 8.1702225
+    }
+   ],
+   "homeofficemoeglich": false,
+   "veroeffentlichungszeitraum": {
+    "von": "2026-05-11"
+   },
+   "datumErsteVeroeffentlichung": "2026-05-11",
+   "aenderungsdatum": "2026-10-22T09:15:11.503",
+   "studiengang": "Bachelor of Science - Allgemeine Informatik",
+   "firma": "Netzint GmbH",
+   "arbeitgeberKundennummerHash": "-6CIE0nfKa-E_6JGJ6CqbOSmbsiOC3LFDC0nAymggcU=",
+   "referenznummer": "10001-1003057521-S"
+  },
+  {
+   "stellenangebotsart": "ARBEIT",
+   "stellenangebotsTitel": "Informatiker/in (Weiterbildung)",
+   "quereinstiegGeeignet": false,
+   "arbeitszeitSchichtNachtWochenende": false,
+   "arbeitszeitTeilzeitAbend": false,
+   "arbeitszeitTeilzeitNachmittag": false,
+   "arbeitszeitTeilzeitVormittag": false,
+   "arbeitszeitTeilzeitFlexibel": false,
+   "arbeitszeitVollzeit": true,
+   "eintrittszeitraum": {
+    "von": "2026-10-22"
+   },
+   "verguetungsangabe": "KEINE_ANGABEN",
+   "vertragsdauer": "UNBEFRISTET",
+   "istGeringfuegigeBeschaeftigung": false,
+   "stellenlokationen": [
+    {
+     "adresse": {
+      "plz": "1010",
+      "ort": "Wien,Innere Stadt",
+      "region": "WIEN",
+      "land": "OESTERREICH"
+     }
+    }
+   ],
+   "homeofficemoeglich": false,
+   "veroeffentlichungszeitraum": {
+    "von": "2026-10-21"
+   },
+   "datumErsteVeroeffentlichung": "2026-10-21",
+   "aenderungsdatum": "2026-10-21T17:06:21.297",
+   "externeURL": "https://jobs.ams.at/public/emps/jobs/8fc370a3-8dce-3fe1-8b78-674fa901b0c4",
+   "hauptberuf": "Informatiker/in (Weiterbildung)",
+   "firma": "Bundesministerium für Arbeit,Soziales, Gesundheit, Pflege u. Konsumentenschutz",
+   "referenznummer": "11949-17397852-S",
+   "alleBerufe": [
+    "Informatiker/in (Weiterbildung)"
+   ]
+  },
+  {
+   "stellenangebotsart": "ARBEIT",
+   "stellenangebotsTitel": "Informatiker (m/w/d)",
+   "quereinstiegGeeignet": false,
+   "arbeitszeitSchichtNachtWochenende": false,
+   "arbeitszeitTeilzeitAbend": false,
+   "arbeitszeitTeilzeitNachmittag": false,
+   "arbeitszeitTeilzeitVormittag": false,
+   "arbeitszeitTeilzeitFlexibel": false,
+   "arbeitszeitVollzeit": true,
+   "eintrittszeitraum": {
+    "von": "2026-11-01"
+   },
+   "verguetungsangabe": "JAHRESGEHALT",
+   "artDerVerguetung": "FESTGEHALT",
+   "festgehalt": 80203.51,
+   "vertragsdauer": "KEINE_ANGABE",
+   "istGeringfuegigeBeschaeftigung": false,
+   "stellenlokationen": [
+    {
+     "adresse": {
+      "strasse": "Livry-Gargan-Straße",
+      "hausnummer": "6",
+      "plz": "82256",
+      "ort": "Fürstenfeldbruck",
+      "region": "BAYERN",
+      "land": "DEUTSCHLAND"
+     },
+     "breite": 48.165741,
+     "laenge": 11.2221945
+    }
+   ],
+   "homeofficemoeglich": false,
+   "veroeffentlichungszeitraum": {
+    "von": "2026-10-30"
+   },
+   "datumErsteVeroeffentlichung": "2026-10-30",
+   "aenderungsdatum": "2026-11-01T07:43:41.662",
+   "externeURL": "https://www.jobvector.de/job/informatiker-acaf1cff9b0a84dd/?utm_source=arbeitsagentur&utm_medium=partner&utm_campaign=tmcfdae_job_jid275689&utm_content=b2c&utm_term=tmf8eca_uic1497334",
+   "hauptberuf": "Informatiker/in",
+   "firma": "HENSOLDT Sensors GmbH",
+   "referenznummer": "14225-acaf1cff9b0a84dd-S",
+   "alleBerufe": [
+    "Informatiker/in"
+   ]
+  }
+ ],
+ "maxErgebnisse": 6,
+ "page": 1,
+ "size": 100
+}

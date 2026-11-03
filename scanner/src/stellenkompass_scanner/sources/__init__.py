@@ -1,6 +1,10 @@
-"""One module per job source. Each has `fetch(fetcher, board)` and `parse(raw, board)`."""
+"""One module per job source.
 
-from . import arbeitnow, ashby, greenhouse, lever, personio, smartrecruiters
+Company boards have `fetch(fetcher, board)` and `parse(raw, board)`; aggregators have
+`fetch(fetcher, options)` and `parse(raw)`, with options from their section in companies.yaml.
+"""
+
+from . import arbeitnow, ashby, bundesagentur, greenhouse, lever, personio, smartrecruiters
 
 PER_COMPANY = {
     "greenhouse": greenhouse,
@@ -12,4 +16,5 @@ PER_COMPANY = {
 
 AGGREGATORS = {
     "arbeitnow": arbeitnow,
+    "bundesagentur": bundesagentur,
 }
