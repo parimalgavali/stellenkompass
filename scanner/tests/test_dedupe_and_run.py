@@ -145,3 +145,11 @@ def test_first_seen_and_history_follow_aliases():
     carry_first_seen([job], previous, "2026-11-03T05:00:00Z")
     assert job.first_seen == "2026-10-01T00:00:00Z"
     assert job.aliases == ["arbeitnow:acme-data-engineer", "arbeitnow:older-slug"]
+
+
+def test_every_registered_source_has_a_dedupe_rank():
+    from stellenkompass_scanner.dedupe import rank
+    from stellenkompass_scanner.sources import AGGREGATORS, PER_COMPANY
+
+    for source in {**PER_COMPANY, **AGGREGATORS}:
+        rank(source)
