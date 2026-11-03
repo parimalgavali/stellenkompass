@@ -23,3 +23,7 @@ Short records. Newest at the bottom. Format: context → decision → why.
 - Decision: static React app; profile (keywords, companies) and tracker live in `localStorage`. Profile → Backup exports/imports one JSON file (merge or replace).
 - Why: no login and no server (D2, D3); a friend's data never leaves their browser. Tracked roles keep a copy of title, company and link, so they survive after the role leaves the scan.
 - Also: hash routing (`#/jobs`, `#/today`, …) so GitHub Pages needs no rewrites; plain CSS with light/dark theme; vitest + Testing Library; oxlint.
+
+## D6. A failed source keeps its last good roles (2026-11-03)
+- Decision: when a source or board fails, the scanner copies that board's roles from the previous `jobs.json` and records `carried` in `scan_report.json`. 429s wait for `Retry-After` (max 60 s).
+- Why: the first scan from GitHub Actions got HTTP 429 from Arbeitnow and dropped from 2,911 to 1,460 roles. Showing yesterday's roles beats showing none; roles that are really gone vanish after the next good scan.

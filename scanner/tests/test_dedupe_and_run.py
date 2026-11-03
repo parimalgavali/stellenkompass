@@ -4,7 +4,7 @@ from conftest import load
 
 from stellenkompass_scanner.dedupe import dedupe
 from stellenkompass_scanner.models import Job
-from stellenkompass_scanner.run import carry_first_seen, scan, write_outputs
+from stellenkompass_scanner.run import carry_first_seen, carry_over_failed, scan, write_outputs
 
 
 def _job(source, title="Data Engineer (m/w/d)", company="Acme GmbH", city="Berlin"):
@@ -80,3 +80,29 @@ def test_write_outputs_and_first_seen(tmp_path):
     assert set(data["jobs"][0]) >= {"id", "title", "company", "city", "job_type", "language"}
     summary = json.loads((tmp_path / "scan_report.json").read_text())
     assert summary["sources"]["greenhouse"]["errors"]
+
+
+def test_failed_boards_keep_last_scan_jobs():
+    jobs, report = scan(FakeFetcher(), CONFIG)
+    report["arbeitnow"]["errors"] = [{"board": "arbeitnow", "error": "HTTP 429"}]
+    previous = {
+        "jobs": [
+            {"id": "arbeitnow:old-role", "title": "Old", "company": "A", "location": "Berlin",
+             "url": "u", "source": "arbeitnow", "skills_unknown_field": 1},
+            {"id": "greenhouse:gone-company-7", "title": "Gone", "company": "G",
+             "location": "Munich", "url": "u", "source": "greenhouse"},
+            {"id": "greenhouse:n26-1", "title": "Live board", "company": "N26",
+             "location": "Berlin", "url": "u", "source": "greenhouse"},
+        ]
+    }  # fmt: skip
+    before = len(jobs)
+    assert carry_over_failed(jobs, report, previous) == 2
+    assert {j.id for j in jobs[before:]} == {"arbeitnow:old-role", "greenhouse:gone-company-7"}
+    assert report["arbeitnow"]["carried"] == 1
+    assert report["greenhouse"]["carried"] == 1
+    assert report["ashby"]["carried"] == 0
+
+
+def test_carry_over_without_previous_scan():
+    jobs, report = scan(FakeFetcher(), CONFIG)
+    assert carry_over_failed(jobs, report, None) == 0

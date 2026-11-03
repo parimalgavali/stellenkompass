@@ -27,4 +27,6 @@ to find the board name from the company's careers page.
    (full-time, working student, internship, thesis, part-time).
 4. `dedupe.py` removes the same role posted on several sources (company board wins).
 5. `run.py` writes `data/jobs.json` and `data/scan_report.json` (counts, errors and
-   time per source). A failing board is recorded in the report and skipped.
+   time per source). A failing board is recorded in the report, and its jobs from the last scan are
+   kept (`carried` in the report), so one rate limit doesn't empty the list. 429s wait for
+   `Retry-After` (max 60 s) before retrying.

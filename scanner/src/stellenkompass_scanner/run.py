@@ -77,6 +77,25 @@ def scan(fetcher: Fetcher, config: dict[str, Any]) -> tuple[list[Job], dict[str,
     return jobs, report
 
 
+def _id_prefix(source: str, board: str) -> str:
+    return f"{source}:" if source in AGGREGATORS else f"{source}:{board}-"
+
+
+def carry_over_failed(
+    jobs: list[Job], report: dict[str, Any], previous: dict[str, Any] | None
+) -> int:
+    """Keep last scan's jobs from boards that failed now, so a rate limit doesn't empty the list."""
+    old = [j for j in (previous or {}).get("jobs", []) if isinstance(j, dict) and "id" in j]
+    carried = 0
+    for source, entry in report.items():
+        prefixes = tuple(_id_prefix(source, e["board"]) for e in entry["errors"])
+        kept = [Job.from_dict(j) for j in old if prefixes and j["id"].startswith(prefixes)]
+        entry["carried"] = len(kept)
+        jobs.extend(kept)
+        carried += len(kept)
+    return carried
+
+
 def carry_first_seen(jobs: list[Job], previous: dict[str, Any] | None, now: str) -> None:
     """Keep the date we first saw each job across runs, so the app can show 'new'."""
     seen = {j["id"]: j.get("first_seen") for j in (previous or {}).get("jobs", [])}
@@ -120,13 +139,17 @@ def main(argv: list[str] | None = None) -> int:
     finally:
         fetcher.close()
 
-    jobs = dedupe(raw_jobs)
     previous_path = args.out / "jobs.json"
     previous = json.loads(previous_path.read_text("utf-8")) if previous_path.exists() else None
+    carried = carry_over_failed(raw_jobs, report, previous)
+    jobs = dedupe(raw_jobs)
     carry_first_seen(jobs, previous, now)
     summary = write_outputs(args.out, jobs, report, now)
     summary["duplicates_removed"] = len(raw_jobs) - len(jobs)
-    log.info("wrote %d jobs (%d duplicates removed)", len(jobs), len(raw_jobs) - len(jobs))
+    log.info(
+        "wrote %d jobs (%d duplicates removed, %d kept from last scan)",
+        len(jobs), len(raw_jobs) - len(jobs), carried,
+    )  # fmt: skip
     for source, entry in report.items():
         log.info("  %-16s %5d jobs, %d errors", source, entry["jobs"], len(entry["errors"]))
     if raw_jobs == []:

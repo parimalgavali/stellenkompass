@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, fields
 
 JOB_TYPES = ("full_time", "part_time", "working_student", "internship", "thesis", "other")
 
@@ -24,3 +24,8 @@ class Job:
 
     def to_dict(self) -> dict:
         return asdict(self)
+
+    @classmethod
+    def from_dict(cls, data: dict) -> Job:
+        names = {f.name for f in fields(cls)}
+        return cls(**{k: v for k, v in data.items() if k in names})

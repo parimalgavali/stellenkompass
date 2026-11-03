@@ -121,7 +121,7 @@ export default function App() {
         {report && (
           <span>
             {Object.entries(report.sources)
-              .map(([name, s]) => `${name} ${s.jobs}${s.errors.length ? ` (${s.errors.length} failed)` : ''}`)
+              .map(([name, s]) => `${name} ${s.jobs}${s.errors.length ? ` (${s.errors.length} failed${s.carried ? `, ${s.carried} kept` : ''})` : ''}`)
               .join(' · ')}
           </span>
         )}
