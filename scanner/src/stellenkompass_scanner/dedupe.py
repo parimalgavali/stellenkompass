@@ -12,6 +12,8 @@ _SOURCE_RANK = {
     "lever": 0,
     "personio": 0,
     "smartrecruiters": 0,
+    "recruitee": 0,
+    "teamtailor": 0,
     "arbeitnow": 1,
     "bundesagentur": 1,
 }
