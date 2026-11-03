@@ -42,8 +42,8 @@ First real scan (2026-11-03): 2,911 roles in Germany from 27 boards + Arbeitnow,
 - [x] Failed source keeps last scan's roles; 429s honour `Retry-After` (first live scan lost all Arbeitnow roles to a 429)
 
 ## Phase 4: Better matching (v2)
-- [ ] CV upload (in browser) + fit score
-- [x] Skill tags per role (scanner `skills.py`, ~75 skills with EN/DE aliases; web skill filter + chips)
+- [x] CV upload (in browser) + fit score: Profile → "Your skills" → Load CV (PDF/text); cards show "Fit N%", jobs list sorts by best fit
+- [x] Skill tags per role (scanner `skills.py`, 72 skills with EN/DE aliases; web skill filter + chips)
 - [x] More company boards: 63 boards (+37: Trade Republic, Isar Aerospace, Enpal, Aleph Alpha, AUTO1, SIXT, Delivery Hero, 1KOMMA5°, …). Test scan: 4,283 roles, 0 errors, 2 min
 - [ ] Try Bundesagentur für Arbeit API from GitHub Actions
 

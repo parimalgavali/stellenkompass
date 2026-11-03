@@ -28,6 +28,9 @@ export function parseBackup(text: string): Backup {
   if (!d.profile || !isStringArray(d.profile.keywords) || !isStringArray(d.profile.companies)) {
     throw new Error('The profile in this file is broken.')
   }
+  if (d.profile.skills !== undefined && !isStringArray(d.profile.skills)) {
+    throw new Error('The skills in this file are broken.')
+  }
   if (!d.tracker || typeof d.tracker !== 'object') throw new Error('The tracker in this file is broken.')
   for (const [id, job] of Object.entries(d.tracker)) {
     if (!job || job.id !== id || typeof job.title !== 'string' || !STAGES.includes(job.stage)) {
@@ -47,10 +50,12 @@ export function mergeBackup(profile: Profile, tracker: Tracker, incoming: Backup
   for (const [id, job] of Object.entries(incoming.tracker)) {
     if (!merged[id] || job.updatedAt > merged[id].updatedAt) merged[id] = job
   }
+  const skills = union(profile.skills ?? [], incoming.profile.skills ?? [])
   return {
     profile: {
       keywords: union(profile.keywords, incoming.profile.keywords),
       companies: union(profile.companies, incoming.profile.companies),
+      ...(skills.length ? { skills } : {}),
     },
     tracker: merged,
   }

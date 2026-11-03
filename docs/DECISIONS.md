@@ -29,6 +29,10 @@ Short records. Newest at the bottom. Format: context → decision → why.
 - Why: the first scan from GitHub Actions got HTTP 429 from Arbeitnow and dropped from 2,911 to 1,460 roles. Showing yesterday's roles beats showing none; roles that are really gone vanish after the next good scan.
 
 ## D7. Skill tags from a curated list (2026-11-03)
-- Decision: `scanner/.../skills.py` holds ~75 skills, each with regex aliases (EN + DE, e.g. "maschinelles Lernen" → Machine Learning). Each job gets `skills` from title + full description.
+- Decision: `scanner/.../skills.py` holds 72 skills, each with regex aliases (EN + DE, e.g. "maschinelles Lernen" → Machine Learning). Each job gets `skills` from title + full description.
 - Why: deterministic, fast and testable; no LLM or API key. It's also the base for the CV fit score: same list, CV skills ∩ role skills.
-- Add a skill: one line in `_SKILLS` plus a test case in `tests/test_skills.py`.
+- Add a skill: one line in `_SKILLS` plus a test case in `tests/test_skills.py`, then `uv run python -m stellenkompass_scanner.skills` to update the web copy (D8).
+
+## D8. CV fit score = share of a role's skills you have (2026-11-03)
+- Decision: the CV is read in the browser (pdf.js for PDFs, loaded only when used) and run through the same skill list as the scanner. `web/src/lib/skills.json` is generated from `skills.py` (`uv run python -m stellenkompass_scanner.skills`); a scanner test fails if it drifts. Fit = role skills you have ÷ role skills. Only the skill list is stored (localStorage + backup), never the CV text.
+- Why: no server, no upload, no API key, and the score is easy to explain ("you have 2 of its 3 skills"). Roles without skill tags get no score instead of a misleading 0%. An LLM-based score can come later with the apply kit.
