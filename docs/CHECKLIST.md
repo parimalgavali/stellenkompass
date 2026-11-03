@@ -88,6 +88,16 @@ Plan: [PLANS.md](PLANS.md) phases 5–12. Review: [research/source-expansion-han
 - [ ] JobPosting JSON-LD extractor (none of the pilot pages has JSON-LD)
 - [ ] Pilot follow-ups: Uni Bonn HTML parser, Max Planck institutes, Helmholtz centres, find more d.vinci hosts
 
+### Phase 11b: Ideas from reference projects (`docs/research/reference-projects.md`)
+- [ ] Workday adapter
+- [ ] SuccessFactors (RMK) adapter, re-check Fraunhofer/DLR
+- [ ] softgarden + join.com adapters
+- [ ] Re-check the 110 upstream boards for German roles
+- [ ] Seniority label + filter (Junior, Graduate/Trainee, Senior, Lead)
+- [ ] Years-of-experience chip
+- [ ] Tracker: flag saved roles missing from the latest scan
+- [ ] Deadlines: "closes in N days" where the source has one
+
 ### Phase 12: Later sources
 - [ ] Public sector (INTERAMT, service.bund.de)
 - [ ] Adzuna / Jooble (API keys)
