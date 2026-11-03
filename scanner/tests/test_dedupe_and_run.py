@@ -32,6 +32,7 @@ class FakeFetcher:
         "api.smartrecruiters.com/v1/companies/BoschGroup/": "smartrecruiters_bosch.json",
         "ottonova.jobs.personio.de/xml": "personio_ottonova.xml",
         "www.arbeitnow.com/api/job-board-api": "arbeitnow.json",
+        "rest.arbeitsagentur.de/": "bundesagentur.json",
     }
 
     def _find(self, url):
@@ -40,7 +41,7 @@ class FakeFetcher:
                 return load(name)
         raise RuntimeError(f"HTTP 404 for {url}")
 
-    def get_json(self, url, params=None):
+    def get_json(self, url, params=None, headers=None):
         return self._find(url)
 
     def get_text(self, url, params=None):
@@ -48,7 +49,8 @@ class FakeFetcher:
 
 
 CONFIG = {
-    "aggregators": {"arbeitnow": True},
+    "aggregators": {"arbeitnow": True, "bundesagentur": True},
+    "bundesagentur": {"queries": ["Informatik"]},
     "greenhouse": [{"board": "n26", "name": "N26"}, "gone-company"],
     "ashby": [{"board": "parloa", "name": "Parloa"}],
     "lever": ["pigment"],
@@ -63,7 +65,7 @@ def test_scan_survives_a_failing_board():
     assert report["greenhouse"]["errors"][0]["board"] == "gone-company"
     assert report["greenhouse"]["jobs"] == 2
     assert {j.source for j in jobs} == {
-        "arbeitnow", "greenhouse", "ashby", "lever", "smartrecruiters", "personio",
+        "arbeitnow", "bundesagentur", "greenhouse", "ashby", "lever", "smartrecruiters", "personio",
     }  # fmt: skip
 
 

@@ -9,6 +9,30 @@
 
 aggregators:
   arbeitnow: true
+  bundesagentur: true
+
+# Bundesagentur für Arbeit: each search term returns up to max_per_query roles in Germany
+# published in the last `days` days. Broad terms ("Software", "KI") return tens of thousands.
+bundesagentur:
+  days: 30
+  max_per_query: 500
+  queries:
+    - Data Scientist
+    - Data Engineer
+    - Data Analyst
+    - Machine Learning
+    - Python
+    - Software Engineer
+    - Softwareentwickler
+    - Frontend
+    - Backend
+    - DevOps
+    - Cloud Engineer
+    - Bioinformatik
+    - Werkstudent Informatik
+    - Werkstudent Data
+    - Praktikum Informatik
+    - Abschlussarbeit Informatik
 
 greenhouse:
   - { board: n26, name: N26 }

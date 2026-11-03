@@ -12,6 +12,7 @@ _SOURCE_RANK = {
     "personio": 0,
     "smartrecruiters": 0,
     "arbeitnow": 1,
+    "bundesagentur": 1,
 }
 _LEGAL = re.compile(r"\b(gmbh|ag|se|kg|inc|ltd|llc|group|co|& co)\b\.?")
 _GENDER = re.compile(r"\((?:[mwfdx]\s*/\s*){1,3}[mwfdx]\)|\b[mwfdx]/[mwfdx]/[mwfdx]\b")

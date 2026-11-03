@@ -45,7 +45,7 @@ First real scan (2026-11-03): 2,911 roles in Germany from 27 boards + Arbeitnow,
 - [x] CV upload (in browser) + fit score: Profile → "Your skills" → Load CV (PDF/text); cards show "Fit N%", jobs list sorts by best fit
 - [x] Skill tags per role (scanner `skills.py`, 72 skills with EN/DE aliases; web skill filter + chips)
 - [x] More company boards: 63 boards (+37: Trade Republic, Isar Aerospace, Enpal, Aleph Alpha, AUTO1, SIXT, Delivery Hero, 1KOMMA5°, …). Test scan: 4,283 roles, 0 errors, 2 min
-- [ ] Try Bundesagentur für Arbeit API from GitHub Actions
+- [x] Bundesagentur für Arbeit source (Jobsuche API v6, 16 search terms in `companies.yaml`). Test scan: 8,509 roles (+4,226 from the BA), 0 errors, 3.3 min
 
 ## Phase 5: AI help (v2, optional)
 - [ ] Apply kit per role with the user's own LLM key

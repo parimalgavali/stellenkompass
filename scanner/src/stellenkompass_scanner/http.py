@@ -22,7 +22,9 @@ def retry_after(value: str | None) -> float:
 
 
 class Fetcher(Protocol):
-    def get_json(self, url: str, params: dict | None = None) -> Any: ...
+    def get_json(
+        self, url: str, params: dict | None = None, headers: dict | None = None
+    ) -> Any: ...
     def get_text(self, url: str, params: dict | None = None) -> str: ...
 
 
@@ -38,14 +40,14 @@ class HttpFetcher:
             follow_redirects=True,
         )
 
-    def _get(self, url: str, params: dict | None) -> httpx.Response:
+    def _get(self, url: str, params: dict | None, headers: dict | None = None) -> httpx.Response:
         last: Exception | None = None
         wait = self.pause
         for attempt in range(self.retries + 1):
             time.sleep(wait)
             wait = self.pause * 4 * (attempt + 1)
             try:
-                response = self._client.get(url, params=params)
+                response = self._client.get(url, params=params, headers=headers)
                 if response.status_code in (429, 500, 502, 503, 504):
                     last = httpx.HTTPStatusError(
                         f"HTTP {response.status_code}", request=response.request, response=response
@@ -59,8 +61,8 @@ class HttpFetcher:
         assert last is not None
         raise last
 
-    def get_json(self, url: str, params: dict | None = None) -> Any:
-        return self._get(url, params).json()
+    def get_json(self, url: str, params: dict | None = None, headers: dict | None = None) -> Any:
+        return self._get(url, params, headers).json()
 
     def get_text(self, url: str, params: dict | None = None) -> str:
         return self._get(url, params).text

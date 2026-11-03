@@ -10,7 +10,7 @@ from ._common import build_job
 URL = "https://www.arbeitnow.com/api/job-board-api"
 
 
-def fetch(fetcher: Fetcher, max_pages: int = 30) -> list[dict]:
+def fetch(fetcher: Fetcher, options: dict | None = None, max_pages: int = 30) -> list[dict]:
     items: list[dict] = []
     for page in range(1, max_pages + 1):
         body = fetcher.get_json(URL, params={"page": page})

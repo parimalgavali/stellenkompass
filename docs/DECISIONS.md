@@ -36,3 +36,7 @@ Short records. Newest at the bottom. Format: context → decision → why.
 ## D8. CV fit score = share of a role's skills you have (2026-11-03)
 - Decision: the CV is read in the browser (pdf.js for PDFs, loaded only when used) and run through the same skill list as the scanner. `web/src/lib/skills.json` is generated from `skills.py` (`uv run python -m stellenkompass_scanner.skills`); a scanner test fails if it drifts. Fit = role skills you have ÷ role skills. Only the skill list is stored (localStorage + backup), never the CV text.
 - Why: no server, no upload, no API key, and the score is easy to explain ("you have 2 of its 3 skills"). Roles without skill tags get no score instead of a misleading 0%. An LLM-based score can come later with the apply kit.
+
+## D9. Bundesagentur für Arbeit via search terms (2026-11-03)
+- Decision: read the BA Jobsuche API v6 with a list of search terms in `companies.yaml` (tech, data, AI, Werkstudent, Praktikum, Abschlussarbeit), last 30 days, max 500 roles per term, Germany only. Keep regular jobs and internships; drop apprenticeships and self-employment. Language is `de`, link is the BA job page. Company boards win in dedupe.
+- Why: the BA is the biggest German job board (~1M postings), so a full copy would bury the roles we care about and make `jobs.json` huge. Search terms keep it focused and are easy to change. The earlier "403" was the retired v4 path, not a block, so it works from GitHub Actions too.

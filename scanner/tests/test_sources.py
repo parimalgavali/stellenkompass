@@ -1,6 +1,7 @@
 from stellenkompass_scanner.sources import (
     arbeitnow,
     ashby,
+    bundesagentur,
     greenhouse,
     lever,
     personio,
@@ -74,3 +75,40 @@ def test_arbeitnow_fetch_stops_at_last_page():
     pages = Pages()
     assert len(arbeitnow.fetch(pages, max_pages=10)) == 2
     assert pages.calls == 2
+
+
+def test_bundesagentur_keeps_jobs_in_germany(fixture):
+    jobs = bundesagentur.parse(fixture("bundesagentur.json")["ergebnisliste"])
+    # Of 6 items: one apprenticeship and one role in Vienna are dropped.
+    assert len(jobs) == 4
+    assert all(j.source == "bundesagentur" and j.language == "de" for j in jobs)
+    assert all(j.url.startswith("https://www.arbeitsagentur.de/jobsuche/jobdetail/") for j in jobs)
+    assert not any("Wien" in j.location for j in jobs)
+    first = jobs[0]
+    assert first.id == "bundesagentur:14225-3170264583da19a7-S"
+    assert first.job_type == "working_student"
+    assert first.remote is True
+    assert first.posted_at.endswith("T00:00:00Z")
+
+
+class _BaPages:
+    """Two full pages for every query, then an empty one."""
+
+    def __init__(self):
+        self.calls = []
+
+    def get_json(self, url, params=None, headers=None):
+        self.calls.append((params["was"], params["page"], headers))
+        if params["page"] > 2:
+            return {"ergebnisliste": [], "maxErgebnisse": 250}
+        start = (params["page"] - 1) * 100
+        rows = [{"referenznummer": f"ref-{i}"} for i in range(start, start + 100)]
+        return {"ergebnisliste": rows, "maxErgebnisse": 250}
+
+
+def test_bundesagentur_fetch_caps_pages_and_dedupes_queries():
+    fetcher = _BaPages()
+    items = bundesagentur.fetch(fetcher, {"queries": ["A", "B"], "max_per_query": 150})
+    assert [(q, p) for q, p, _ in fetcher.calls] == [("A", 1), ("A", 2), ("B", 1), ("B", 2)]
+    assert all(h == bundesagentur.HEADERS for _, _, h in fetcher.calls)
+    assert len(items) == 200

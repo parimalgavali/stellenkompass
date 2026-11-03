@@ -17,7 +17,7 @@ Every adapter returns roles in this shape (see `scanner/stellenkompass_scanner/m
 | `job_type` | `full_time`, `working_student`, `internship`, `part_time` or `other` |
 | `language` | `en` or `de`: language the posting is written in |
 | `url` | Link to the original posting (apply there) |
-| `source` | `arbeitnow`, `greenhouse`, `ashby`, `smartrecruiters`, `lever`, `personio` |
+| `source` | `arbeitnow`, `bundesagentur`, `greenhouse`, `ashby`, `smartrecruiters`, `lever`, `personio` |
 | `posted_at` | ISO date if known |
 | `tags` | Short tags from the source (skills, categories) |
 | `skills` | Skills found in title + description by `skills.py` (curated list, max 12) |
@@ -28,6 +28,7 @@ Every adapter returns roles in this shape (see `scanner/stellenkompass_scanner/m
 | Source | How we read it | Config |
 | --- | --- | --- |
 | Arbeitnow | Paginated public API | none |
+| Bundesagentur für Arbeit | Jobsuche API v6, one search per term, `wo=Deutschland`, last 30 days | `scanner/companies.yaml` → `bundesagentur` (search terms) |
 | Greenhouse | Public board API per company | `scanner/companies.yaml` → `greenhouse` |
 | Ashby | Public posting API per company | `scanner/companies.yaml` → `ashby` |
 | SmartRecruiters | Public postings API per company, `country=de` | `scanner/companies.yaml` → `smartrecruiters` |
@@ -49,6 +50,12 @@ Every adapter returns roles in this shape (see `scanner/stellenkompass_scanner/m
 
 Boards that answered but had fewer than 3 roles in Germany (2026-11-03) were left out: Wunderflats, kununu, KONUX, Dataiku, Rasa, HeyJobs, Spotify (Lever), Clark.
 
+### Bundesagentur für Arbeit (BA)
+- Endpoint: `https://rest.arbeitsagentur.de/jobboerse/jobsuche-service/pc/v6/jobs` with header `X-API-Key: jobboerse-jobsuche` (the public key the BA's own apps use; documented at github.com/bundesAPI/jobsuche-api).
+- The old `pc/v4` path now answers `403 No match found for request`; that was the "403" we saw before, not an IP block.
+- The BA has about 1 million postings, so we only ask for the search terms listed in `companies.yaml` (max 500 roles each). Add or remove terms there.
+- Kept: `ARBEIT` and `PRAKTIKUM_TRAINEE` roles in Germany. Dropped: apprenticeships (`AUSBILDUNG`), self-employment, and roles abroad.
+- The list API has no description, so skills come from the title only and language is set to `de`. Links go to the BA job page.
+
 ## Not used (yet)
-- Bundesagentur für Arbeit Jobsuche API: returned 403 from our dev machine. Retry from GitHub Actions in Phase 4.
 - workingstudentjobs.de, LinkedIn, StepStone, Indeed: no public API, bot-protected or terms forbid scraping.
