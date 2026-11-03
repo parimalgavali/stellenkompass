@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-03T10:18:39Z",
-  "total_jobs": 11015,
-  "collected": 9631,
+  "generated_at": "2026-11-03T10:51:06Z",
+  "total_jobs": 14920,
+  "collected": 13556,
   "carried": 1389,
-  "duplicates_removed": 5,
+  "duplicates_removed": 25,
   "sources": {
     "arbeitnow": {
       "boards": 1,
@@ -16,12 +16,12 @@
       ],
       "capped": [],
       "status": "failed",
-      "seconds": 21.6,
+      "seconds": 22.3,
       "carried": 1389
     },
     "bundesagentur": {
       "boards": 1,
-      "jobs": 4413,
+      "jobs": 4411,
       "errors": [],
       "capped": [
         {
@@ -30,70 +30,70 @@
         }
       ],
       "status": "partial",
-      "seconds": 55.6,
+      "seconds": 59.8,
       "carried": 0
     },
     "greenhouse": {
-      "boards": 32,
-      "jobs": 884,
+      "boards": 35,
+      "jobs": 934,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 30.5,
+      "seconds": 39.6,
       "carried": 0
     },
     "ashby": {
-      "boards": 24,
-      "jobs": 388,
+      "boards": 28,
+      "jobs": 470,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 16.1,
+      "seconds": 21.1,
       "carried": 0
     },
     "smartrecruiters": {
-      "boards": 5,
-      "jobs": 1386,
+      "boards": 35,
+      "jobs": 4269,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 157.3,
+      "seconds": 1710.7,
       "carried": 0
     },
     "lever": {
-      "boards": 4,
-      "jobs": 17,
+      "boards": 6,
+      "jobs": 99,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 17.3,
+      "seconds": 15.7,
       "carried": 0
     },
     "personio": {
-      "boards": 5,
-      "jobs": 269,
+      "boards": 6,
+      "jobs": 274,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 7.7,
+      "seconds": 11.2,
       "carried": 0
     },
     "recruitee": {
-      "boards": 3,
-      "jobs": 10,
+      "boards": 5,
+      "jobs": 164,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 3.4,
+      "seconds": 6.9,
       "carried": 0
     },
     "teamtailor": {
-      "boards": 1,
-      "jobs": 6,
+      "boards": 3,
+      "jobs": 69,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 1.2,
+      "seconds": 6.1,
       "carried": 0
     },
     "dvinci": {
@@ -102,25 +102,34 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 2.0,
+      "seconds": 2.2,
       "carried": 0
     },
     "workday": {
-      "boards": 12,
-      "jobs": 820,
+      "boards": 20,
+      "jobs": 1371,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 86.3,
+      "seconds": 185.8,
       "carried": 0
     },
     "successfactors": {
       "boards": 6,
-      "jobs": 1399,
+      "jobs": 1398,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 76.4,
+      "seconds": 84.2,
+      "carried": 0
+    },
+    "softgarden": {
+      "boards": 1,
+      "jobs": 58,
+      "errors": [],
+      "capped": [],
+      "status": "complete",
+      "seconds": 1.1,
       "carried": 0
     }
   }
