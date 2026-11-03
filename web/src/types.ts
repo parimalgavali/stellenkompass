@@ -77,6 +77,8 @@ export interface TrackedJob {
   appliedAt?: string
   interviewAt?: string
   thankYouSent?: boolean
+  /** You checked: still open although it left the scan. */
+  stillOpen?: boolean
   notes: string
 }
 

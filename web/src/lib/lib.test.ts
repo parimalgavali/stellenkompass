@@ -60,6 +60,16 @@ describe('matchJob', () => {
 })
 
 describe('tracker and today', () => {
+  it('flags saved and applied roles that left the scan, unless you kept them', () => {
+    let t = trackJob({}, job({ id: 'a' }), NOW)
+    t = setStage(trackJob(t, job({ id: 'b' }), NOW), 'b', 'applied', NOW)
+    t = updateTracked(trackJob(t, job({ id: 'c' }), NOW), 'c', { stillOpen: true }, NOW)
+    t = trackJob(t, job({ id: 'd' }), NOW)
+    const items = todayItems(t, NOW, new Set(['d']))
+    expect(items.map((i) => `${i.kind}:${i.job.id}`).sort()).toEqual(['gone:a', 'gone:b'])
+    expect(todayItems(t, NOW).some((i) => i.kind === 'gone')).toBe(false)
+  })
+
   it('saves, sets applied date when stage becomes applied', () => {
     let t: Tracker = trackJob({}, job(), NOW)
     expect(t[job().id].stage).toBe('saved')

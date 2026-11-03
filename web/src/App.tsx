@@ -96,9 +96,9 @@ export default function App() {
         {!jobsFile && !error && <p className="empty">Loading roles…</p>}
         {jobsFile && page === 'jobs' && <JobsPage jobs={jobs} profile={profile} tracker={tracker} onSave={save} />}
         {jobsFile && page === 'today' && (
-          <TodayPage tracker={tracker} newMatches={fresh} profile={profile} onUpdate={update} onSave={save} />
+          <TodayPage tracker={tracker} liveIds={liveIds} newMatches={fresh} profile={profile} onUpdate={update} onSave={save} />
         )}
-        {page === 'tracker' && <TrackerPage tracker={tracker} liveIds={liveIds} onUpdate={update} onRemove={remove} />}
+        {page === 'tracker' && <TrackerPage tracker={tracker} liveIds={jobsFile ? liveIds : null} onUpdate={update} onRemove={remove} />}
         {page === 'profile' && (
           <ProfilePage
             profile={profile}
