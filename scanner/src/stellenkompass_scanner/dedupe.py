@@ -17,6 +17,7 @@ _SOURCE_RANK = {
     "dvinci": 0,
     "workday": 0,
     "successfactors": 0,
+    "softgarden": 0,
     "arbeitnow": 1,
     "bundesagentur": 1,
 }

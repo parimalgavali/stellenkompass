@@ -10,6 +10,7 @@ from stellenkompass_scanner.sources import (
     personio,
     recruitee,
     smartrecruiters,
+    softgarden,
     successfactors,
     teamtailor,
     workday,
@@ -425,3 +426,17 @@ def test_successfactors_stops_when_page_repeats_and_caps(monkeypatch):
     monkeypatch.setattr(successfactors, "MAX_PAGES", 3)
     with pytest.raises(Capped):
         successfactors.fetch(Pages(repeat=False), "jobs.example.de")
+
+
+def test_softgarden_parses_widget_and_skips_training():
+    from pathlib import Path
+
+    raw = (Path(__file__).parent / "fixtures" / "softgarden_renk.html").read_text("utf-8")
+    jobs = softgarden.parse(raw, "renk-group", company="RENK")
+    first = jobs[0]
+    assert first.id == "softgarden:renk-group-67620152"
+    assert (first.city, first.posted_at) == ("Augsburg", "2026-11-02T00:00:00Z")
+    assert first.url.startswith("https://renk-group.softgarden.io/job/67620152/")
+    assert "&amp;" not in first.title and len({j.id for j in jobs}) == len(jobs)
+    assert not any("Ausbildung" in j.title for j in jobs)
+    assert any(j.job_type == "thesis" for j in jobs)

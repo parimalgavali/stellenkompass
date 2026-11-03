@@ -43,6 +43,7 @@ Every adapter returns roles in this shape (see `scanner/stellenkompass_scanner/m
 | d.vinci | Public widget feed `https://<host>/jobPublication/list.json` (universities, research); Ausbildung skipped | `scanner/companies.yaml` → `dvinci`, see `docs/research/institutions.md` |
 | Workday | Public CXS route `POST https://<tenant>.<wdN>.myworkdayjobs.com/wday/cxs/<tenant>/<site>/jobs`, filtered to Germany by facet; title and location only, no job text | `scanner/companies.yaml` → `workday` (`board`, `instance`, `site`) |
 | SAP SuccessFactors | Career-site HTML fragment `https://<host>/tile-search-results/?startrow=N` (robots.txt allows it; `/services/` is disallowed); Germany facet where it works; Ausbildung skipped | `scanner/companies.yaml` → `successfactors` (`board` = host, optional `country: DE`) |
+| softgarden | Career widget `https://<tenant>.softgarden.io/de/widgets/jobs` (all roles on one page; robots.txt allows it); Germany from city text; Ausbildung skipped | `scanner/companies.yaml` → `softgarden` (`board` = tenant) |
 
 ### Adding a company board
 1. Open the company's careers page and click a role. The apply link shows the platform and board name:

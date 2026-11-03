@@ -107,3 +107,7 @@ Short records. Newest at the bottom. Format: context → decision → why.
 - Paging advances by the tiles returned and stops when a page adds no new ids. ZF and Volkswagen repeat pages, so they are not added.
 - City falls back to the job URL slug. Ausbildung/dual study skipped (D9). No job text yet.
 
+## D21. softgarden widget; join.com later (2026-11-03)
+- softgarden: the job widget that company careers sites embed (`/de/widgets/jobs`), our own parser. No country field, so Germany comes from the city text. Title-only skills. Only RENK found so far (58 roles); tenants are added one by one.
+- join.com: its public GraphQL route is allowed by robots.txt, but none of our or the reference list's companies use it, and its company sitemap (14k slugs) has no country. Deferred until we have German companies on it.
+
