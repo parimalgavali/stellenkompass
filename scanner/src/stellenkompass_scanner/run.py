@@ -30,12 +30,19 @@ def load_config(path: Path) -> dict[str, Any]:
     return yaml.safe_load(path.read_text(encoding="utf-8")) or {}
 
 
-def _boards(config: dict[str, Any], source: str) -> list[dict[str, str]]:
+def _boards(config: dict[str, Any], source: str) -> list[dict[str, Any]]:
     boards = []
     for entry in config.get(source) or []:
         if isinstance(entry, str):
             entry = {"board": entry}
-        boards.append({"board": entry["board"], "name": entry.get("name") or entry["board"]})
+        options = {k: v for k, v in entry.items() if k not in ("board", "name")}
+        boards.append(
+            {
+                "board": entry["board"],
+                "name": entry.get("name") or entry["board"],
+                "options": options,
+            }
+        )
     return boards
 
 
@@ -68,7 +75,7 @@ def scan(fetcher: Fetcher, config: dict[str, Any]) -> tuple[list[Job], dict[str,
         for b in boards:
             _collect(
                 entry, jobs, source, b["board"],
-                lambda m=module, b=b: m.fetch(fetcher, b["board"]),
+                lambda m=module, b=b: m.fetch(fetcher, b["board"], **b["options"]),
                 lambda raw, m=module, b=b: m.parse(raw, b["board"], company=b["name"]),
             )  # fmt: skip
         _finish(entry, started)

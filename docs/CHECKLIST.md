@@ -76,8 +76,8 @@ Plan: [PLANS.md](PLANS.md) phases 5–12. Review: [research/source-expansion-han
 - [x] Teamtailor adapter (RSS, paginated past 100; Proxima)
 
 ### Phase 10: Adapter depth
-- [ ] Lever EU host + pagination
-- [ ] Personio `.com` + language variants
+- [x] Lever EU host + pagination
+- [x] Personio `.com` + language variants
 - [ ] SmartRecruiters full job text (cached)
 
 ### Phase 11: Universities and research
