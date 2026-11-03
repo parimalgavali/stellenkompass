@@ -31,9 +31,10 @@ Updated after every PR. `[x]` = done and merged.
 - [ ] Light/dark theme, works on phone
 
 ## Phase 3: Daily automation and hosting
-- [ ] Daily scan workflow commits fresh `jobs.json`
-- [ ] Deploy to GitHub Pages (Parimal enables Pages: Settings → Pages → Source: GitHub Actions)
-- [ ] Scan health shown in the app
+- [x] Daily scan workflow commits fresh `jobs.json` (`.github/workflows/daily.yml`, 05:15 Berlin)
+- [x] Deploy to GitHub Pages workflow
+- [ ] Enable Pages (Parimal enables Pages: Settings → Pages → Source: GitHub Actions)
+- [x] Scan health shown in the app (footer: last scan time + roles per source)
 
 ## Phase 4: Better matching (v2)
 - [ ] CV upload (in browser) + fit score

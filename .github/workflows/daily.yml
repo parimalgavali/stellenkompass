@@ -1,0 +1,73 @@
+name: Daily scan and deploy
+
+on:
+  schedule:
+    - cron: "15 4 * * *" # 05:15 Berlin in winter, 06:15 in summer
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["web/**", "data/**", ".github/workflows/daily.yml"]
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    if: github.event_name != 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.13.7"
+      - name: Scan job sources
+        working-directory: scanner
+        run: |
+          uv sync --locked --no-dev
+          uv run stellenkompass-scan --out ../data
+      - name: Commit fresh data
+        run: |
+          git config user.name "stellenkompass-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Daily scan: $(jq .count data/jobs.json) roles"
+            git push
+          fi
+
+  deploy:
+    needs: scan
+    if: ${{ !cancelled() && needs.scan.result != 'failure' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Build site
+        working-directory: web
+        run: |
+          npm ci
+          npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web/dist
+      - id: deployment
+        uses: actions/deploy-pages@v4
