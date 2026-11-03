@@ -5,6 +5,7 @@ import { JobCard } from './JobCard'
 
 interface Props {
   tracker: Tracker
+  liveIds: Set<string>
   newMatches: Job[]
   profile: Profile
   onUpdate: (id: string, patch: Partial<TrackedJob>) => void
@@ -14,6 +15,7 @@ interface Props {
 const TITLE: Record<TodayItem['kind'], string> = {
   interview: 'Upcoming interview',
   thank_you: 'Thank-you note',
+  gone: 'Role may have closed',
   follow_up: 'Follow up',
   apply_or_close: 'Apply or close',
 }
@@ -25,6 +27,13 @@ function Actions({ item, onUpdate }: { item: TodayItem; onUpdate: Props['onUpdat
       return <button className="btn" onClick={() => onUpdate(id, {})}>Followed up</button>
     case 'thank_you':
       return <button className="btn" onClick={() => onUpdate(id, { thankYouSent: true })}>Sent</button>
+    case 'gone':
+      return (
+        <>
+          <button className="btn" onClick={() => onUpdate(id, { stage: 'closed' })}>Close</button>
+          <button className="btn btn-quiet" onClick={() => onUpdate(id, { stillOpen: true })}>Still open</button>
+        </>
+      )
     case 'apply_or_close':
       return (
         <>
@@ -37,8 +46,8 @@ function Actions({ item, onUpdate }: { item: TodayItem; onUpdate: Props['onUpdat
   }
 }
 
-export function TodayPage({ tracker, newMatches, profile, onUpdate, onSave }: Props) {
-  const items = todayItems(tracker)
+export function TodayPage({ tracker, liveIds, newMatches, profile, onUpdate, onSave }: Props) {
+  const items = todayItems(tracker, undefined, liveIds)
   return (
     <section>
       <h2>To do</h2>

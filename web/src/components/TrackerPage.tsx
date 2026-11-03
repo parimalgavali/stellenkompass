@@ -4,7 +4,8 @@ import { formatDate, fromDateInput, toDateInput } from '../lib/time'
 
 interface Props {
   tracker: Tracker
-  liveIds: Set<string>
+  /** Null while jobs are loading or failed to load, so nothing is flagged as gone. */
+  liveIds: Set<string> | null
   onUpdate: (id: string, patch: Partial<TrackedJob>) => void
   onRemove: (id: string) => void
 }
@@ -41,7 +42,7 @@ export function TrackerPage({ tracker, liveIds, onUpdate, onRemove }: Props) {
                 <span>{job.company}</span>
                 <span>{job.city || job.location}</span>
                 <span>Saved {formatDate(job.savedAt)}</span>
-                {!liveIds.has(job.id) && <span className="gone">No longer in scan</span>}
+                {liveIds && !liveIds.has(job.id) && !job.stillOpen && <span className="gone">No longer in scan</span>}
               </div>
               <div className="tracked-fields">
                 <label>

@@ -120,3 +120,7 @@ Short records. Newest at the bottom. Format: context → decision → why.
 - Idea from career-ops `jd-years`; our own rules in `classify.detect_experience_years`.
 - Reads "3+ years of experience", "2-4 years … experience", "mindestens 3 Jahre Berufserfahrung", "Erfahrung von drei Jahren" (digits and one–eight / ein–sechs). The smallest match wins (the entry bar); values above 15 are ignored, since they are usually the company's age.
 - Shown as a chip only; no role is dropped. Only roles with job text can have it (BA and SuccessFactors/softgarden lists have titles only).
+
+## D24. Roles that left the scan (2026-11-03)
+- Idea from career-ops liveness checks, done without extra requests: a Saved or Applied role whose id and aliases are not in the latest `jobs.json` shows on Today as "Role may have closed", with **Close** or **Still open** (`stillOpen` stops the reminder).
+- Nothing is flagged while jobs are loading or failed to load. A source that failed keeps its roles by carry-over (D11), so a failed scan doesn't flag them either.

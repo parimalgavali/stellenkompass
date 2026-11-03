@@ -97,7 +97,7 @@ Plan: [PLANS.md](PLANS.md) phases 5–12. Review: [research/source-expansion-han
 - [ ] Greenhouse EU host (`boards-api.eu.greenhouse.io`?) for Doctolib
 - [x] Seniority label + filter (Junior, Graduate/Trainee, Senior, Lead) (D22)
 - [x] Years-of-experience chip (D23)
-- [ ] Tracker: flag saved roles missing from the latest scan
+- [x] Tracker: flag saved roles missing from the latest scan (Today: Close / Still open; D24)
 - [ ] Deadlines: "closes in N days" where the source has one
 
 ### Phase 12: Later sources

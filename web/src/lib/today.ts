@@ -2,7 +2,7 @@ import type { Job, Profile, TrackedJob, Tracker } from '../types'
 import { matchJob } from './match'
 import { daysBetween } from './time'
 
-export type TodayKind = 'interview' | 'thank_you' | 'follow_up' | 'apply_or_close'
+export type TodayKind = 'interview' | 'thank_you' | 'gone' | 'follow_up' | 'apply_or_close'
 
 export interface TodayItem {
   kind: TodayKind
@@ -14,9 +14,14 @@ export const FOLLOW_UP_DAYS = 7
 export const INTERVIEW_AHEAD_DAYS = 7
 export const STALE_SAVED_DAYS = 5
 
-export function todayItems(tracker: Tracker, now: Date = new Date()): TodayItem[] {
+/** `liveIds`: every id in the latest scan; leave it out while jobs are loading. */
+export function todayItems(tracker: Tracker, now: Date = new Date(), liveIds?: Set<string>): TodayItem[] {
   const items: TodayItem[] = []
   for (const job of Object.values(tracker)) {
+    if ((job.stage === 'saved' || job.stage === 'applied') && liveIds && !liveIds.has(job.id) && !job.stillOpen) {
+      items.push({ kind: 'gone', job, text: 'Not in the latest scan, so it has probably closed. Check the ad.' })
+      continue
+    }
     if (job.stage === 'interview' && job.interviewAt) {
       const ahead = daysBetween(now, job.interviewAt)
       if (ahead >= -0.5 && ahead <= INTERVIEW_AHEAD_DAYS) {
@@ -39,7 +44,7 @@ export function todayItems(tracker: Tracker, now: Date = new Date()): TodayItem[
       }
     }
   }
-  const order: TodayKind[] = ['interview', 'thank_you', 'follow_up', 'apply_or_close']
+  const order: TodayKind[] = ['interview', 'thank_you', 'gone', 'follow_up', 'apply_or_close']
   return items.sort((a, b) => order.indexOf(a.kind) - order.indexOf(b.kind))
 }
 
