@@ -71,7 +71,7 @@ Plan: [PLANS.md](PLANS.md) phases 5–12. Review: [research/source-expansion-han
 - [x] Label "English ad" / "German ad" (posting language), not "English only"
 
 ### Phase 9: Onboarding + new platforms
-- [ ] Re-check skipped boards (Wunderflats, kununu, KONUX, Dataiku, Rasa, HeyJobs, Spotify, Clark)
+- [x] Re-check skipped boards: 7 added; Rasa left out (worldwide remote only)
 - [ ] Recruitee adapter
 - [ ] Teamtailor adapter (RSS, paginated past 100)
 
