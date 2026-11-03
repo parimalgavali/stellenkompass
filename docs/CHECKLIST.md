@@ -36,7 +36,7 @@ First real scan (2026-11-03): 2,911 roles in Germany from 27 boards + Arbeitnow,
 ## Phase 3: Daily automation and hosting
 - [x] Daily scan workflow commits fresh `jobs.json` (`.github/workflows/daily.yml`, 05:15 Berlin)
 - [x] Deploy to GitHub Pages workflow
-- [ ] Enable Pages (Parimal: Settings → Pages → Source: GitHub Actions). Until then the deploy step fails with "Get Pages site failed"; the bot token can't enable it (HTTP 403).
+- [x] Enable Pages (Parimal: Settings → Pages → Source: GitHub Actions; the bot token can't do it, HTTP 403)
 - [x] Working loop documented → [WORKFLOW.md](WORKFLOW.md)
 - [x] Scan health shown in the app (footer: last scan time + roles per source)
 - [x] Failed source keeps last scan's roles; 429s honour `Retry-After` (first live scan lost all Arbeitnow roles to a 429)
@@ -47,5 +47,47 @@ First real scan (2026-11-03): 2,911 roles in Germany from 27 boards + Arbeitnow,
 - [x] More company boards: 63 boards (+37: Trade Republic, Isar Aerospace, Enpal, Aleph Alpha, AUTO1, SIXT, Delivery Hero, 1KOMMA5°, …). Test scan: 4,283 roles, 0 errors, 2 min
 - [x] Bundesagentur für Arbeit source (Jobsuche API v6, 16 search terms in `companies.yaml`). Test scan: 8,509 roles (+4,226 from the BA), 0 errors, 3.3 min
 
-## Phase 5: AI help (v2, optional)
+## Roadmap after the source review
+Plan: [PLANS.md](PLANS.md) phases 5–12. Review: [research/source-expansion-handoff.md](research/source-expansion-handoff.md). Candidates: [research/source-catalog.json](research/source-catalog.json).
+- [x] Import the review + catalog, rebuild plan and checklist, drop the "3 roles minimum" rule
+
+### Phase 5: Job identity
+- [ ] Distinct openings with the same company/title/city survive dedupe
+- [ ] `source_board` + `source_job_id` on every role; carry-over by exact board (no `foo` vs `foo-bar` mix-up)
+- [ ] Tracker and `first_seen` survive a job moving to another source (aliases)
+
+### Phase 6: Safe scans
+- [ ] Board outcome: complete / capped / partial / failed in `scan_report.json`
+- [ ] Capped or failed scans never drop roles; bad records don't kill a board
+- [ ] Validate before writing; atomic replace of `data/*.json`; `duplicates_removed` written to the report
+
+### Phase 7: Geography
+- [ ] Country per location; explicit foreign country beats a city-name match
+- [ ] Ashby secondary addresses; German small towns with country DE kept
+- [ ] `workplace_type`: onsite / hybrid / remote
+
+### Phase 8: UI discoverability
+- [ ] Search includes location; city filter lists all cities
+- [ ] Label "English ad" (posting language), not "English only"
+
+### Phase 9: Onboarding + new platforms
+- [ ] Re-check skipped boards (Wunderflats, kununu, KONUX, Dataiku, Rasa, HeyJobs, Spotify, Clark)
+- [ ] Recruitee adapter
+- [ ] Teamtailor adapter (RSS, paginated past 100)
+
+### Phase 10: Adapter depth
+- [ ] Lever EU host + pagination
+- [ ] Personio `.com` + language variants
+- [ ] SmartRecruiters full job text (cached)
+
+### Phase 11: Universities and research
+- [ ] Institution inventory (Hochschulkompass) + JobPosting JSON-LD extractor
+- [ ] Pilot: TUM, KIT, RWTH, DFKI, Fraunhofer, Max Planck, Helmholtz
+
+### Phase 12: Later sources
+- [ ] Public sector (INTERAMT, service.bund.de)
+- [ ] Adzuna / Jooble (API keys)
+- [ ] Remote-Europe feeds with explicit Germany eligibility
+
+## Phase 13: AI help (optional)
 - [ ] Apply kit per role with the user's own LLM key

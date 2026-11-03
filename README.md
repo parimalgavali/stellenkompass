@@ -18,3 +18,4 @@ Status: v1 live (scanner, web app, daily deploy). See [docs/PLANS.md](docs/PLANS
 | [docs/RESEARCH.md](docs/RESEARCH.md) | What we learned from Arbeit49, Arbeitnow, workingstudentjobs.de and Astra |
 | [docs/DECISIONS.md](docs/DECISIONS.md) | Short records of decisions and why we made them |
 | [docs/DATA_SOURCES.md](docs/DATA_SOURCES.md) | Every job source we read, how, and its limits |
+| [docs/research/](docs/research/) | External source-expansion review and the candidate source catalog (backlog) |

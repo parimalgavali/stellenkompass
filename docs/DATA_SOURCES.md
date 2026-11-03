@@ -48,7 +48,9 @@ Every adapter returns roles in this shape (see `scanner/stellenkompass_scanner/m
    ```
 3. Add `- { board: <board>, name: <Display name> }` under the platform in `scanner/companies.yaml`.
 
-Boards that answered but had fewer than 3 roles in Germany (2026-11-03) were left out: Wunderflats, kununu, KONUX, Dataiku, Rasa, HeyJobs, Spotify (Lever), Clark.
+Add a verified board even if it has only one role in Germany; a board with zero roles today can stay too. (Earlier we skipped boards with fewer than 3 roles: Wunderflats, kununu, KONUX, Dataiku, Rasa, HeyJobs, Spotify (Lever), Clark. They are being re-checked, see CHECKLIST Phase 9.)
+
+Candidate sources still to verify live in [research/source-catalog.json](research/source-catalog.json); never enable them in bulk.
 
 ### Bundesagentur für Arbeit (BA)
 - Endpoint: `https://rest.arbeitsagentur.de/jobboerse/jobsuche-service/pc/v6/jobs` with header `X-API-Key: jobboerse-jobsuche` (the public key the BA's own apps use; documented at github.com/bundesAPI/jobsuche-api).
@@ -56,6 +58,7 @@ Boards that answered but had fewer than 3 roles in Germany (2026-11-03) were lef
 - The BA has about 1 million postings, so we only ask for the search terms listed in `companies.yaml` (max 500 roles each). Add or remove terms there.
 - Kept: `ARBEIT` and `PRAKTIKUM_TRAINEE` roles in Germany. Dropped: apprenticeships (`AUSBILDUNG`), self-employment, and roles abroad.
 - The list API has no description, so skills come from the title only and language is set to `de`. Links go to the BA job page.
+- Access caveat: this is the API the BA's own job search uses, not a data contract with us. Keep requests low (one daily scan) and switch it off in `aggregators` if the BA objects or changes its terms.
 
 ## Not used (yet)
 - workingstudentjobs.de, LinkedIn, StepStone, Indeed: no public API, bot-protected or terms forbid scraping.

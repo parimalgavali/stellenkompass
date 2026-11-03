@@ -50,12 +50,26 @@ Hosted on GitHub Pages.
 - GitHub Actions workflow that runs the scan every day, commits `jobs.json`, and deploys the site to GitHub Pages.
 - Scan health: count per source, errors, last run time, shown in the app footer.
 
-### Phase 4: Better matching (v2)
+### Phase 4: Better matching (v2) — done
 - CV upload in the browser and a simple "fit" score per role (skills overlap), computed locally.
-- More sources (more company boards, Bundesagentur für Arbeit if reachable).
+- More sources (more company boards, Bundesagentur für Arbeit).
 - Skill tags per role.
 
-### Phase 5: AI help (v2, optional)
+### Phases 5–12: Correct first, then wider coverage
+Based on the external review in [research/source-expansion-handoff.md](research/source-expansion-handoff.md) (finding numbers F1–F12 refer to it). What we adopt and where we deviate: [DECISIONS.md](DECISIONS.md) D10.
+
+5. **Job identity (F1, F2, F7):** keep distinct openings with the same title and city; add `source_board` + `source_job_id`; carry over by exact board, not id prefix; keep tracker and `first_seen` when a job moves to a better source (aliases).
+6. **Safe scans (F6, F8, F12):** each board reports complete / capped / partial / failed; a capped or broken scan never drops roles; validate output before replacing it (atomic write); correct report counts.
+7. **Geography (F3, F4):** country per location; foreign "Frankfurt" stays out, German small towns with country DE stay in; Ashby secondary addresses; `workplace_type` (onsite / hybrid / remote).
+8. **UI discoverability (F9, F11):** search by location, all cities in the filter, "English ad" instead of "English".
+9. **Onboarding (F10) + new platforms:** re-check skipped low-volume companies (one good role is enough); Recruitee and Teamtailor adapters with full pagination.
+10. **Adapter depth (F5):** Lever EU host + pagination, Personio `.com` + languages, SmartRecruiters full job text (cached).
+11. **Universities and research:** institution inventory from Hochschulkompass; pilot TUM, KIT, RWTH, DFKI, Fraunhofer, Max Planck, Helmholtz through JobPosting JSON-LD or their ATS.
+12. **Later, one at a time:** public sector (INTERAMT, service.bund.de), keyed APIs (Adzuna, Jooble), remote-Europe feeds with explicit eligibility.
+
+The candidate list is [research/source-catalog.json](research/source-catalog.json). It is a research backlog, not scanner config: a source is enabled only after it is verified.
+
+### Phase 13: AI help (optional)
 - "Apply kit" per role: why this company/role, likely questions, CV tailoring hints.
 - Needs an LLM key. Runs only when the user asks, with their own key, never in the daily scan.
 
