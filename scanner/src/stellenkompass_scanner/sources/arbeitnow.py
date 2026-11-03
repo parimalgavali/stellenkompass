@@ -26,7 +26,7 @@ def parse(items: list[dict]) -> list[Job]:
     for item in items:
         job = build_job(
             source="arbeitnow",
-            source_id=item["slug"],
+            job_id=item["slug"],
             title=item.get("title", ""),
             company=item.get("company_name", ""),
             locations=[item.get("location", "")] + (["Remote"] if item.get("remote") else []),

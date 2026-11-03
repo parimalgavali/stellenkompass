@@ -1,7 +1,18 @@
 import type { Job, Stage, TrackedJob, Tracker } from '../types'
 
+/** The tracker entry for a job, also when it was saved under an older id or another source. */
+export function findTracked(tracker: Tracker, job: Job): TrackedJob | undefined {
+  for (const id of [job.id, ...(job.aliases ?? [])]) if (tracker[id]) return tracker[id]
+  return undefined
+}
+
+/** Every id under which a role in the current scan can be tracked. */
+export function liveIdSet(jobs: Job[]): Set<string> {
+  return new Set(jobs.flatMap((j) => [j.id, ...(j.aliases ?? [])]))
+}
+
 export function trackJob(tracker: Tracker, job: Job, now: Date = new Date()): Tracker {
-  if (tracker[job.id]) return tracker
+  if (findTracked(tracker, job)) return tracker
   const at = now.toISOString()
   const entry: TrackedJob = {
     id: job.id,

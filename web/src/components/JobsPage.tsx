@@ -1,3 +1,4 @@
+import { findTracked } from '../lib/tracker'
 import { useMemo, useState } from 'react'
 import type { Job, Profile, Tracker } from '../types'
 import { JOB_TYPE_LABEL } from '../types'
@@ -129,7 +130,7 @@ export function JobsPage({ jobs, profile, tracker, onSave }: Props) {
       ) : (
         <div className="list">
           {results.slice(0, limit).map((job) => (
-            <JobCard key={job.id} job={job} profile={profile} tracked={tracker[job.id]} onSave={onSave} />
+            <JobCard key={job.id} job={job} profile={profile} tracked={findTracked(tracker, job)} onSave={onSave} />
           ))}
         </div>
       )}

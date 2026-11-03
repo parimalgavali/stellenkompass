@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+from collections import defaultdict
 
 from .models import Job
 
@@ -28,12 +29,29 @@ def key(job: Job) -> tuple[str, str, str]:
     return (_norm(job.company), _norm(job.title), job.city or _norm(job.location))
 
 
+def rank(source: str) -> int:
+    if source not in _SOURCE_RANK:
+        raise KeyError(f"add {source!r} to dedupe._SOURCE_RANK")
+    return _SOURCE_RANK[source]
+
+
 def dedupe(jobs: list[Job]) -> list[Job]:
-    """Keep one job per (company, title, city), preferring the company's own board."""
-    best: dict[tuple[str, str, str], Job] = {}
-    for job in jobs:
-        k = key(job)
-        current = best.get(k)
-        if current is None or _SOURCE_RANK.get(job.source, 9) < _SOURCE_RANK.get(current.source, 9):
-            best[k] = job
-    return list(best.values())
+    """Collapse copies of the same role across sources; keep distinct openings.
+
+    Same id twice -> one job. Same (company, title, city) on several sources -> keep the
+    best-ranked source's jobs (all of them: different ids there are different openings) and
+    record the other sources' ids as aliases of the first kept job.
+    """
+    unique = list({job.id: job for job in jobs}.values())
+    groups: dict[tuple[str, str, str], list[Job]] = defaultdict(list)
+    for job in unique:
+        groups[key(job)].append(job)
+    kept: list[Job] = []
+    for group in groups.values():
+        winner = min(group, key=lambda j: rank(j.source)).source
+        keep = [j for j in group if j.source == winner]
+        copies = [j.id for j in group if j.source != winner]
+        if copies:
+            keep[0].aliases = list(dict.fromkeys([*keep[0].aliases, *copies]))
+        kept.extend(keep)
+    return kept

@@ -68,7 +68,7 @@ def parse(items: list[dict]) -> list[Job]:
         refnr = item["referenznummer"]
         job = build_job(
             source="bundesagentur",
-            source_id=refnr,
+            job_id=refnr,
             title=item.get("stellenangebotsTitel", ""),
             company=item.get("firma", ""),
             locations=[p.get("ort") or "Germany" for p in places],

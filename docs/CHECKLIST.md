@@ -52,9 +52,9 @@ Plan: [PLANS.md](PLANS.md) phases 5–12. Review: [research/source-expansion-han
 - [x] Import the review + catalog, rebuild plan and checklist, drop the "3 roles minimum" rule
 
 ### Phase 5: Job identity
-- [ ] Distinct openings with the same company/title/city survive dedupe
-- [ ] `source_board` + `source_job_id` on every role; carry-over by exact board (no `foo` vs `foo-bar` mix-up)
-- [ ] Tracker and `first_seen` survive a job moving to another source (aliases)
+- [x] Distinct openings with the same company/title/city survive dedupe
+- [x] `source_board` + `source_job_id` on every role; carry-over by exact board (no `foo` vs `foo-bar` mix-up)
+- [x] Tracker and `first_seen` survive a job moving to another source (aliases)
 
 ### Phase 6: Safe scans
 - [ ] Board outcome: complete / capped / partial / failed in `scan_report.json`

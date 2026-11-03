@@ -1,3 +1,4 @@
+import { findTracked } from '../lib/tracker'
 import type { Job, Profile, TrackedJob, Tracker } from '../types'
 import { todayItems, type TodayItem } from '../lib/today'
 import { JobCard } from './JobCard'
@@ -74,7 +75,7 @@ export function TodayPage({ tracker, newMatches, profile, onUpdate, onSave }: Pr
       ) : (
         <div className="list">
           {newMatches.slice(0, 30).map((job) => (
-            <JobCard key={job.id} job={job} profile={profile} tracked={tracker[job.id]} onSave={onSave} />
+            <JobCard key={job.id} job={job} profile={profile} tracked={findTracked(tracker, job)} onSave={onSave} />
           ))}
         </div>
       )}

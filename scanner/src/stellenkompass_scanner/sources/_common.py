@@ -10,7 +10,8 @@ from ..text import snippet
 def build_job(
     *,
     source: str,
-    source_id: str,
+    job_id: str,
+    board: str = "",
     title: str,
     company: str,
     locations: list[str],
@@ -23,14 +24,17 @@ def build_job(
     tags: list[str] | None = None,
     language: str | None = None,
 ) -> Job | None:
-    """Common job, or None when the role is not in Germany (or remote open to Germany)."""
+    """Common job, or None when the role is not in Germany (or remote open to Germany).
+
+    Company boards pass `board`; ids are `source:board-job_id`, aggregators `source:job_id`.
+    """
     locations = [x.strip() for x in locations if x and x.strip()]
     if not in_germany(locations, country_codes):
         return None
     location_text = " · ".join(dict.fromkeys(locations))
     lang = language if language in ("en", "de") else detect_language(f"{title} {description}")
     return Job(
-        id=f"{source}:{source_id}",
+        id=f"{source}:{board}-{job_id}" if board else f"{source}:{job_id}",
         title=title.strip(),
         company=company.strip(),
         location=location_text,
@@ -40,6 +44,8 @@ def build_job(
         language=lang,
         url=url,
         source=source,
+        source_board=board,
+        source_job_id=str(job_id),
         posted_at=posted_at,
         tags=[t.strip() for t in (tags or []) if t and t.strip()][:8],
         skills=extract_skills(f"{title}\n{description}"),

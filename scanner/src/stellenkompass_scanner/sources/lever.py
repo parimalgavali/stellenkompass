@@ -22,7 +22,8 @@ def parse(raw: list[dict], board: str, company: str | None = None) -> list[Job]:
             locations.append("Remote")
         job = build_job(
             source="lever",
-            source_id=f"{board}-{item['id']}",
+            board=board,
+            job_id=str(item["id"]),
             title=item.get("text", ""),
             company=company or board,
             locations=locations,
