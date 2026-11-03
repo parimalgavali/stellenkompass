@@ -1,0 +1,58 @@
+{
+ "jobs": [
+  {
+   "id": "c65730bb-fef1-419e-b664-4da177262188",
+   "title": "TEST - Forward Deployed Engineer - Alex",
+   "department": "Engineering",
+   "team": "Engineering",
+   "employmentType": "FullTime",
+   "location": "Berlin",
+   "secondaryLocations": [
+    {
+     "location": "Munich",
+     "address": {
+      "postalAddress": {
+       "addressCountry": "Germany"
+      }
+     }
+    }
+   ],
+   "publishedAt": "2026-10-22T19:31:06.654+00:00",
+   "isListed": true,
+   "isRemote": true,
+   "workplaceType": "Hybrid",
+   "address": {
+    "postalAddress": {
+     "addressCountry": "Germany"
+    }
+   },
+   "jobUrl": "https://jobs.ashbyhq.com/parloa/c65730bb-fef1-419e-b664-4da177262188",
+   "applyUrl": "https://jobs.ashbyhq.com/parloa/c65730bb-fef1-419e-b664-4da177262188/application",
+   "descriptionHtml": "<h2>About Parloa</h2><p style=\"min-height:1.5em\">Parloa's mission is to make every customer conversation feel effortless for both customers and the companies serving them. As agentic AI accelerates, Parloans are shaping the foundation of a new era in customer experience, one where customer support is no longer transactions, but meaningful exchanges. It is not just a vision; Parloa has powered over ONE BILLION interactions between global enterprise brands and their customers, with companies like Booking.com,  HealthEquity, Allianz, SAP, BarmeniaGothaer, and TUI already deploying Parloa at scale",
+   "descriptionPlain": "ABOUT PARLOA\n\nParloa's mission is to make every customer conversation feel effortless for both customers and the companies serving them. As agentic AI accelerates, Parloans are shaping the foundation of a new era in customer experience, one where customer support is no longer transactions, but meaningful exchanges. It is not just a vision; Parloa has powered over ONE BILLION interactions between global enterprise brands and their customers, with companies like Booking.com,  HealthEquity, Allianz, SAP, BarmeniaGothaer, and TUI already deploying Parloa at scale.\n\n\nABOUT PARLOA\n\nParloa’s mission "
+  },
+  {
+   "id": "e97475fd-81c6-4755-93dd-b714766d7f02",
+   "title": "TEST - Forward Deployed Engineer",
+   "department": "Engineering",
+   "team": "Engineering",
+   "employmentType": "FullTime",
+   "location": "New York",
+   "secondaryLocations": [],
+   "publishedAt": "2026-10-18T14:25:20.118+00:00",
+   "isListed": true,
+   "isRemote": null,
+   "workplaceType": null,
+   "address": {
+    "postalAddress": {
+     "addressCountry": "USA"
+    }
+   },
+   "jobUrl": "https://jobs.ashbyhq.com/parloa/e97475fd-81c6-4755-93dd-b714766d7f02",
+   "applyUrl": "https://jobs.ashbyhq.com/parloa/e97475fd-81c6-4755-93dd-b714766d7f02/application",
+   "descriptionHtml": "<h2>About Parloa</h2><p style=\"min-height:1.5em\">Parloa's mission is to make every customer conversation feel effortless for both customers and the companies serving them. As agentic AI accelerates, Parloans are shaping the foundation of a new era in customer experience, one where customer support is no longer transactions, but meaningful exchanges. It is not just a vision; Parloa has powered over ONE BILLION interactions between global enterprise brands and their customers, with companies like Booking.com,  HealthEquity, Allianz, SAP, BarmeniaGothaer, and TUI already deploying Parloa at scale",
+   "descriptionPlain": "ABOUT PARLOA\n\nParloa's mission is to make every customer conversation feel effortless for both customers and the companies serving them. As agentic AI accelerates, Parloans are shaping the foundation of a new era in customer experience, one where customer support is no longer transactions, but meaningful exchanges. It is not just a vision; Parloa has powered over ONE BILLION interactions between global enterprise brands and their customers, with companies like Booking.com,  HealthEquity, Allianz, SAP, BarmeniaGothaer, and TUI already deploying Parloa at scale.\n\n\nFORWARD DEPLOYED ENGINEER (NEW "
+  }
+ ],
+ "apiVersion": "1"
+}

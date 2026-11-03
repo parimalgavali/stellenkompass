@@ -1,0 +1,149 @@
+{
+ "offset": 0,
+ "limit": 100,
+ "totalFound": 3,
+ "content": [
+  {
+   "id": "744000159153954",
+   "name": "Praktikum im Bereich digitale und integrierte Produktionslösungen (w/m/div.)",
+   "uuid": "79179a1d-30e8-4d55-bdbc-9da50ab784e3",
+   "jobAdId": "fe796bc2-22bb-41e7-ae0d-d935b6ffd6a4",
+   "defaultJobAd": false,
+   "refNumber": "REF299939V",
+   "company": {
+    "identifier": "BoschGroup",
+    "name": "Bosch Group"
+   },
+   "releasedDate": "2026-11-02T14:25:39.731Z",
+   "location": {
+    "city": "Stuttgart",
+    "region": "BW",
+    "country": "de",
+    "address": "Wernerstraße 51",
+    "postalCode": "70469",
+    "remote": false,
+    "hybrid": true,
+    "latitude": "48.8169376",
+    "longitude": "9.1655158",
+    "fullLocation": "Stuttgart, BW, Germany"
+   },
+   "industry": {
+    "id": "mechanical_engineering",
+    "label": "Mechanical Or Industrial Engineering"
+   },
+   "department": {},
+   "function": {
+    "id": "information_technology",
+    "label": "Information Technology"
+   },
+   "typeOfEmployment": {
+    "id": "permanent",
+    "label": "Full-time"
+   },
+   "experienceLevel": {
+    "id": "internship",
+    "label": "Internship"
+   },
+   "visibility": "PUBLIC",
+   "ref": "https://api.smartrecruiters.com/v1/companies/BoschGroup/postings/744000159153954",
+   "language": {
+    "code": "de",
+    "label": "German",
+    "labelNative": "Deutsch"
+   }
+  },
+  {
+   "id": "744000159289109",
+   "name": "Key Account Manager/in (w/m/div.)",
+   "uuid": "ca79525a-593a-413d-be8e-8c55cefece81",
+   "jobAdId": "88e29da8-087b-4d2f-b86f-f7eddc22445f",
+   "defaultJobAd": false,
+   "refNumber": "REF299972U",
+   "company": {
+    "identifier": "BoschGroup",
+    "name": "Bosch Group"
+   },
+   "releasedDate": "2026-11-03T02:58:09.810Z",
+   "location": {
+    "city": "Shanghai",
+    "region": "SHANGHAI",
+    "country": "de",
+    "address": "Shanghai",
+    "remote": false,
+    "hybrid": false,
+    "fullLocation": "Shanghai, SHANGHAI, Germany"
+   },
+   "industry": {
+    "id": "mechanical_engineering",
+    "label": "Mechanical Or Industrial Engineering"
+   },
+   "department": {},
+   "function": {
+    "id": "engineering",
+    "label": "Engineering"
+   },
+   "typeOfEmployment": {
+    "id": "permanent",
+    "label": "Full-time"
+   },
+   "experienceLevel": {
+    "id": "executive",
+    "label": "Executive"
+   },
+   "visibility": "PUBLIC",
+   "ref": "https://api.smartrecruiters.com/v1/companies/BoschGroup/postings/744000159289109",
+   "language": {
+    "code": "de",
+    "label": "German",
+    "labelNative": "Deutsch"
+   }
+  },
+  {
+   "id": "744000158672879",
+   "name": "Praktikum  Energie- und Gebäudetechnik",
+   "uuid": "18131285-048f-4c6a-be39-8c3c7ebe3b1b",
+   "jobAdId": "8b753745-1b24-44b1-87b9-bca3a24d2039",
+   "defaultJobAd": true,
+   "refNumber": "REF299694M",
+   "company": {
+    "identifier": "BoschGroup",
+    "name": "Bosch Group"
+   },
+   "releasedDate": "2026-10-30T06:59:28.793Z",
+   "location": {
+    "city": "Ansbach",
+    "region": "Mittelfranken",
+    "country": "de",
+    "address": "Robert-Bosch-Straße 1",
+    "postalCode": "91522",
+    "remote": false,
+    "hybrid": false,
+    "fullLocation": "Ansbach, Mittelfranken, Germany"
+   },
+   "industry": {
+    "id": "electrical_manufacturing",
+    "label": "Electrical And Electronic Manufacturing"
+   },
+   "department": {},
+   "function": {
+    "id": "engineering",
+    "label": "Engineering"
+   },
+   "typeOfEmployment": {
+    "id": "intern",
+    "label": "Intern"
+   },
+   "experienceLevel": {
+    "id": "internship",
+    "label": "Internship"
+   },
+   "visibility": "PUBLIC",
+   "ref": "https://api.smartrecruiters.com/v1/companies/BoschGroup/postings/744000158672879",
+   "language": {
+    "code": "de",
+    "label": "German",
+    "labelNative": "Deutsch"
+   }
+  }
+ ]
+}

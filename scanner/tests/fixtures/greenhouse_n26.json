@@ -1,0 +1,132 @@
+{
+ "jobs": [
+  {
+   "absolute_url": "https://n26.com/en-eu/careers/positions/8242571?gh_jid=8242571",
+   "location": {
+    "name": "Berlin"
+   },
+   "metadata": [
+    {
+     "id": 746453,
+     "name": "Time Type",
+     "value": "Full time",
+     "value_type": "single_select"
+    }
+   ],
+   "id": 8242571,
+   "updated_at": "2026-10-30T08:54:12-04:00",
+   "title": "Business Audit Manager",
+   "company_name": "N26",
+   "first_published": "2026-10-01T07:42:40-04:00",
+   "content": "&lt;p&gt;&lt;strong&gt;About the opportunity&lt;/strong&gt;&lt;br&gt;The Manager, Business Audit function supports internal audit activities across the N26 group, including external contractors and subsidiaries, in line with professional and regulatory standards. Key responsibilities include conducting internal audits, preparing detailed audit reports within defined scopes, and ensuring audit findings are addressed on time. The position also involves contributing to key projects while maintaining independence, avoiding conflicts of interest, and upholding internal audit policies and profession",
+   "departments": [
+    {
+     "id": 81312,
+     "name": "Group Internal Audit",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "offices": [
+    {
+     "id": 49747,
+     "name": "Berlin",
+     "location": "Berlin, Berlin, Germany",
+     "child_ids": [
+      270550,
+      270551,
+      270552,
+      354771
+     ],
+     "parent_id": null
+    }
+   ]
+  },
+  {
+   "absolute_url": "https://n26.com/en-eu/careers/positions/8161394?gh_jid=8161394",
+   "location": {
+    "name": "Berlin"
+   },
+   "metadata": [
+    {
+     "id": 746453,
+     "name": "Time Type",
+     "value": "Full time",
+     "value_type": "single_select"
+    }
+   ],
+   "id": 8161394,
+   "updated_at": "2026-10-30T08:52:11-04:00",
+   "title": "Complaints Compliance & Prevention Manager",
+   "company_name": "N26",
+   "first_published": "2026-08-27T07:53:19-04:00",
+   "content": "&lt;p&gt;&lt;strong&gt;About the Role&lt;/strong&gt;&lt;br&gt;&lt;br&gt;N26 is seeking an analytical, regulatory-minded &lt;strong&gt;Complaints Compliance &amp;amp; Prevention Manager&lt;/strong&gt; to lead compliance governance, audit remediation, and the preventive control framework within our Complaints Management &amp;amp; Prevention department. Reporting directly to the head of the department, you will own the end-to-end planning and execution of our regulatory remediation roadmap, separating administrative control and preventive functions from operational case handling. In this role, yo",
+   "departments": [
+    {
+     "id": 81310,
+     "name": "Complaints Management ",
+     "child_ids": [],
+     "parent_id": 67006
+    }
+   ],
+   "offices": [
+    {
+     "id": 63744,
+     "name": "Madrid",
+     "location": "Madrid, Madrid, Spain",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ]
+  },
+  {
+   "absolute_url": "https://n26.com/en-eu/careers/positions/8184721?gh_jid=8184721",
+   "location": {
+    "name": "Paris"
+   },
+   "metadata": [
+    {
+     "id": 746453,
+     "name": "Time Type",
+     "value": "Full time",
+     "value_type": "single_select"
+    }
+   ],
+   "id": 8184721,
+   "updated_at": "2026-10-30T08:52:44-04:00",
+   "title": "AFC Associate - SAR Delegate (Déclarant Tracfin)",
+   "company_name": "N26",
+   "first_published": "2026-09-07T09:34:25-04:00",
+   "content": "&lt;h2&gt;&lt;strong&gt;About the opportunity&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;We are currently seeking an AFC Associate / SAR Delegate (Déclarant Tracfin) to join the French MLRO function. In this role, you will be responsible for coordinating and taking ownership of key Anti-Financial Crime Operations activities, including decision-making on matters such as: review AML-CFT investigations, support the teams in charge of ongoing due diligence and EDD process (including decisions on requests for information to the customer), as well as review and submission of SARs. You will be the reference ",
+   "departments": [
+    {
+     "id": 78128,
+     "name": "Risk",
+     "child_ids": [
+      220856,
+      363971,
+      363972,
+      363973,
+      363974,
+      363975,
+      363976,
+      389688
+     ],
+     "parent_id": null
+    }
+   ],
+   "offices": [
+    {
+     "id": 63741,
+     "name": "Paris",
+     "location": "Paris, Paris, France",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ]
+  }
+ ],
+ "meta": {
+  "total": 3
+ }
+}
