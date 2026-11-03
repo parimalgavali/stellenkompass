@@ -207,3 +207,7 @@ successfactors:
   - { board: jobs.bayer.com, country: DE, name: Bayer }
   - { board: careers.eon.com, country: DE, name: E.ON }
   - { board: jobs.rwe.com, country: DE, name: RWE }
+
+# softgarden: board = tenant from https://<board>.softgarden.io
+softgarden:
+  - { board: renk-group, name: RENK }

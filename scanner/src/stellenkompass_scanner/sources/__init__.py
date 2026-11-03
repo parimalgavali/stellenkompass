@@ -14,6 +14,7 @@ from . import (
     personio,
     recruitee,
     smartrecruiters,
+    softgarden,
     successfactors,
     teamtailor,
     workday,
@@ -30,6 +31,7 @@ PER_COMPANY = {
     "dvinci": dvinci,
     "workday": workday,
     "successfactors": successfactors,
+    "softgarden": softgarden,
 }
 
 AGGREGATORS = {

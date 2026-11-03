@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.sourceforge.net/" lang="de" class="no-ie" style="display: none;">
+    <head><style type="text/css" id="jobSearchCss">
+#jobsContainer .matchContainer .date { width: 12% } #jobsContainer .matchContainer .title { width: 38.26% } #jobsContainer .matchContainer .audience { width: 21.86% } #jobsContainer .matchContainer .ProjectGeoLocationCity { width: 21.86% } </style>
+<script type="text/javascript" src="../../wicket/resource/com.softgarden.staffit.webclient.webfrontend.core.WebFrontendApplication/core-ver-46480A77CA2574AB851CD35B365719CA.js"></script>
+<script type="text/javascript" id="jobsearchjs">
+/*<![CDATA[*/
+
+var criterions = [
+    {
+        "id": "audience",
+        "name": "Zielgruppe",
+        "options": {
+            "00001": "Auszubildende",
+            "3a3af3667f000002010ad49215c3a5f4": "Berufseinsteiger",
+            "106ceaa6-e8cb-4184-a117-1e9248c072e7": "Berufseinsteiger und -erfahrene",
+            "3a3b1f6e7f000002010ad492e7837dd6": "Berufserfahrene",
+            "3a3ab7987f000002010ad4925ffa0cf4": "Schüler/in",
+            "dd3d1984-171e-4a41-b685-fc95bebda306": "Schüler/in und Auszubildende",
+            "6179d1a00a0b0cce01ed3de8643a0e39": "Student/in"
+        }
+    },
+    {
+        "id": "jobcategory",
+        "name": "Jobkategorie",
+        "options": {
+            "sam42_physicians": "Ärzte",
+            "sam42_administration": "Administration und Sekretariat",
+            "sam42_banking": "Banken, Finanzdienstleister und Versicherungen",
+            "sam42_education": "Bildung und Soziales",
+            "sam42_design": "Design, Gestaltung und Architektur",
+            "sam42_purchase": "Einkauf, Materialwirtschaft und Logistik",
+            "sam42_finance": "Finanzen",
+            "sam42_management": "Führungskräfte",
+            "sam42_manualwork": "Handwerk, Dienstleistung und Fertigung",
+            "sam42_engineering": "Ingenieure und technische Berufe",
+            "sam42_it": "IT",
+            "sam42_marketing": "Marketing und Kommunikation",
+            "sam42_science": "Naturwissenschaften und Forschung",
+            "sam42_publicsector": "Öffentlicher Dienst",
+            "sam42_hr": "Personal",
+            "sam42_therapy": "Pflege, Therapie und Assistenz",
+            "sam42_law": "Recht",
+            "sam42_sales": "Vertrieb und Verkauf"
+        }
+    }
+];
+var sg_jobsearch_hide_inactive = true;
+var jobs_selected = Array();
+var current_page = 1;
+var order_by = 0;
+var jobs_per_page = 10;
+var paging_window = -1;
+var JobResultAnimationOff = false;
+var showInfoBoxSeeEndOfPage = true;
+var jobs_selected_per_list = Array();
+var preselected_location = '';
+var preselected_location_radius = '';
+var preselected_values = {};
+var geocodingOverride = {"OSM":{"62782":{"boundingBox":"[\"53.3951118\", \"53.7393983\", \"9.7275419\", \"10.3252805\"]"}},"GOOGLE":{}};
+jQuery(document).ready(function() {
+    jQuery('#selector_0').change(function () {
+    	jQuery('#jobsContainer').show();
+    	updateLists(0, order_by);
+	 	jQuery('.resetForm').show();
+	});
+    jQuery('#selector_1').change(function () {
+    	jQuery('#jobsContainer').show();
+    	updateLists(1, order_by);
+	 	jQuery('.resetForm').show();
+	});
+jQuery('.matchHeadline').show();
+initialize(order_by);
+});jobs_selected_per_list[0] = Array();
+jobs_selected_per_list[1] = Array();
+var job_id_list_ordered = new Array ();
+job_id_list_ordered[0] = [67178010, 67214025, 65511491, 65677926, 66532203, 65109728, 66520478, 67241780, 66580403, 66995710, 67330685, 67356220, 65244981, 68081586, 67585052, 65357901, 68096041, 68096786, 66595688, 66595173, 66596078, 66595718, 66594853, 66594948, 66594913, 61395607, 66755660, 67395292, 68116016, 66243723, 68126296, 68137341, 67205530, 61921509, 64708909, 65102763, 66576203, 61060477, 60842722, 67028975, 68232696, 68236701, 60849857, 66847440, 65400126, 66851925, 67016425, 66852015, 68281901, 61345337, 68228466, 66252793, 66251898, 64789126, 66576228, 64876216, 68228706, 66576183, 68372627, 65070098, 66447853, 68436048, 67703917, 67348750, 67348735, 67758637, 66530213, 67822322, 67098975, 67808762, 66471858, 66395798, 66573753, 51042193, 67851792, 67825269, 67620152];
+job_id_list_ordered[1] = [67178010, 67214025, 65511491, 65677926, 66532203, 65109728, 66520478, 67241780, 66580403, 66995710, 67330685, 67356220, 65244981, 68081586, 67585052, 65357901, 68096041, 68096786, 66595688, 66595173, 66596078, 66595718, 66594853, 66594948, 66594913, 61395607, 66755660, 67395292, 68116016, 66243723, 68126296, 68137341, 67205530, 61921509, 64708909, 65102763, 66576203, 61060477, 60842722, 67028975, 68232696, 68236701, 60849857, 66847440, 65400126, 66851925, 67016425, 66852015, 68281901, 61345337, 68228466, 66252793, 66251898, 64789126, 66576228, 64876216, 68228706, 66576183, 68372627, 65070098, 66447853, 68436048, 67703917, 67348750, 67348735, 67758637, 66530213, 67822322, 67098975, 67808762, 66471858, 66395798, 66573753, 51042193, 67851792, 67825269, 67620152];
+job_id_list_ordered[2] = [66520478, 66252793, 66251898, 66847440, 66851925, 66852015, 67098975, 67348750, 67348735, 68081586, 60842722, 68126296, 66576228, 66576183, 66576203, 67214025, 64876216, 67241780, 66573753, 66594913, 65109728, 51042193, 61395607, 65400126, 67620152, 67851792, 65357901, 64708909, 68281901, 67758637, 67205530, 65070098, 65102763, 68116016, 68372627, 68228466, 66530213, 67330685, 68228706, 65677926, 65511491, 68096786, 67395292, 66243723, 68137341, 67356220, 66995710, 66594948, 66532203, 66594853, 66595718, 66596078, 66595173, 66595688, 61345337, 60849857, 66447853, 67028975, 68436048, 67703917, 66755660, 61921509, 67585052, 67808762, 67825269, 68232696, 67822322, 65244981, 66471858, 67016425, 66580403, 68236701, 68096041, 66395798, 67178010, 61060477, 64789126];
+job_id_list_ordered[3] = [66576228, 66251898, 66252793, 66852015, 66847440, 66576203, 66520478, 67620152, 66573753, 66395798, 67808762, 68372627, 64789126, 68232696, 61060477, 61921509, 67205530, 68137341, 65357901, 68081586, 66995710, 67241780, 65677926, 67178010, 67851792, 51042193, 66530213, 67758637, 67348735, 67348750, 67703917, 68436048, 66447853, 65070098, 68228706, 64876216, 68228466, 68281901, 65400126, 67028975, 60842722, 65102763, 64708909, 68126296, 66243723, 68116016, 66755660, 61395607, 66594913, 66594948, 66594853, 66595718, 66596078, 66595173, 66595688, 67585052, 67356220, 67330685, 65109728, 66532203, 65511491, 67214025, 61345337, 60849857, 67825269, 66471858, 67098975, 67822322, 66576183, 67016425, 66851925, 68236701, 67395292, 68096786, 68096041, 65244981, 66580403];
+job_id_list_ordered[4] = [67620152, 67825269, 67851792, 66471858, 67808762, 67822322, 66530213, 67758637, 67348735, 67348750, 68436048, 66447853, 65070098, 68372627, 66576183, 68228706, 64876216, 66576228, 64789126, 68228466, 61345337, 68281901, 65400126, 68236701, 68232696, 67028975, 60842722, 61060477, 66576203, 65102763, 64708909, 61921509, 68137341, 68126296, 66243723, 68116016, 67395292, 66755660, 66594913, 66594948, 66594853, 66595718, 66596078, 66595173, 66595688, 68096786, 68096041, 65357901, 67585052, 65244981, 67356220, 67330685, 66995710, 66580403, 66520478, 65109728, 65511491, 66573753, 66395798, 67098975, 66847440, 67205530, 65677926, 67178010, 51042193, 66251898, 66252793, 66852015, 67016425, 66851925, 60849857, 68081586, 67241780, 67703917, 67214025, 61395607, 66532203];
+
+var complete_job_id_list = jobs_selected = [51042193, 60842722, 60849857, 61060477, 61345337, 61395607, 61921509, 64708909, 64789126, 64876216, 65070098, 65102763, 65109728, 65244981, 65357901, 65400126, 65511491, 65677926, 66243723, 66251898, 66252793, 66395798, 66447853, 66471858, 66520478, 66530213, 66532203, 66573753, 66576183, 66576203, 66576228, 66580403, 66594853, 66594913, 66594948, 66595173, 66595688, 66595718, 66596078, 66755660, 66847440, 66851925, 66852015, 66995710, 67016425, 67028975, 67098975, 67178010, 67205530, 67214025, 67241780, 67330685, 67348735, 67348750, 67356220, 67395292, 67585052, 67620152, 67703917, 67758637, 67808762, 67822322, 67825269, 67851792, 68081586, 68096041, 68096786, 68116016, 68126296, 68137341, 68228466, 68228706, 68232696, 68236701, 68281901, 68372627, 68436048];
+var jobs_keyword_search = complete_job_id_list;
+var jobs_geoLocation_search = complete_job_id_list;
+var search_criteria = new Array();
+search_criteria[0] = new Object();
+search_criteria[0]["3a3b1f6e7f000002010ad492e7837dd6"] = [51042193, 60842722, 61395607, 64708909, 64876216, 65070098, 65102763, 65109728, 65400126, 65511491, 66243723, 66447853, 66530213, 66532203, 66594853, 66594913, 66594948, 66595173, 66595688, 66595718, 66596078, 66755660, 67028975, 67214025, 67330685, 67348735, 67348750, 67356220, 67585052, 67703917, 67758637, 67851792, 68116016, 68126296, 68228466, 68228706, 68281901, 68436048];
+search_criteria[0]["6179d1a00a0b0cce01ed3de8643a0e39"] = [65244981, 66471858, 66576183, 66580403, 66851925, 67016425, 67098975, 67395292, 67822322, 67825269, 68096041, 68096786, 68236701];
+search_criteria[0]["106ceaa6-e8cb-4184-a117-1e9248c072e7"] = [61060477, 61921509, 64789126, 65357901, 65677926, 66395798, 66573753, 66995710, 67178010, 67205530, 67241780, 67620152, 67808762, 68081586, 68137341, 68232696, 68372627];
+search_criteria[0]["dd3d1984-171e-4a41-b685-fc95bebda306"] = [60849857];
+search_criteria[0]["00001"] = [66251898, 66252793, 66520478, 66576203, 66576228, 66847440, 66852015];
+search_criteria[0]["3a3ab7987f000002010ad4925ffa0cf4"] = [61345337];
+
+search_criteria[1] = new Object();
+search_criteria[1]["sam42_finance"] = [60842722, 65109728, 67348735, 67348750, 67395292, 67822322];
+search_criteria[1]["sam42_administration"] = [66243723];
+search_criteria[1]["sam42_hr"] = [61345337, 67620152, 67851792];
+search_criteria[1]["sam42_it"] = [65244981, 66447853, 66594853, 66594913, 66595173, 66595688, 66595718, 66596078, 66852015, 67758637, 68281901];
+search_criteria[1]["sam42_purchase"] = [65070098, 67016425, 67585052, 68116016];
+search_criteria[1]["sam42_engineering"] = [51042193, 60849857, 61395607, 61921509, 64708909, 65357901, 65400126, 65511491, 66471858, 66532203, 66576183, 66576203, 66576228, 66580403, 66594948, 66755660, 66851925, 67028975, 67098975, 67205530, 67214025, 67241780, 67330685, 67356220, 67808762, 67825269, 68081586, 68096041, 68096786, 68126296, 68137341, 68228466, 68228706, 68236701, 68372627];
+search_criteria[1]["sam42_management"] = [65102763];
+search_criteria[1]["sam42_banking"] = [68436048];
+search_criteria[1]["sam42_sales"] = [65677926];
+search_criteria[1]["sam42_manualwork"] = [61060477, 64789126, 64876216, 66251898, 66252793, 66395798, 66520478, 66530213, 66573753, 66847440, 66995710, 67178010, 67703917, 68232696];
+
+
+/*]]>*/
+</script>
+
+        <meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
+        <meta name="description" content="career board | © softgarden">
+        <meta name="author" content="softgarden e-recruiting GmbH">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Karriere Board | RENK Group</title>
+    <script type="text/javascript" src="../../wicket/resource/com.softgarden.staffit.webclient.webfrontend.pages.main.js.JavaScriptReference/modernizr-ver-BBD564F40D2D602049100DC76FE17C37.js"></script>
+<script type="text/javascript" id="frontend-fonts">
+/*<![CDATA[*/
+WebFont.load({custom:{families:['Open Sans']}});
+/*]]>*/
+</script>
+<link rel="stylesheet" type="text/css" href="../../wicket/resource/com.softgarden.staffit.webclient.webfrontend.pages.main.css.CssReference/webfrontend-v2-ver-591897EFF2EA75250FF42C429E89BE70.css" />
+<style type="text/css" id="companyCss">
+body { background:  #ffffff no-repeat 0% 0%; } 
+.content-wrapper, .narrow-page, header.image-header { background-color: #ffffff; } 
+.content-box { background: #ED7102; } 
+a, label i, label em { color: #1F3044; } 
+a:visited { color: #1F3044; } 
+a:hover, .btn-link:hover, .btn-link:focus, .btn-link:active { color: #1F3044; } 
+body, h1, h2, h3 { color: #1F3044; } 
+.secondary-color, label, .control-group.error .control-label { color: #1F3044; } 
+textarea:focus, select:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus, .chosen-container-active .chosen-single, .chosen-container-active .chosen-choices, .chosen-container .chosen-drop { border-color: #DBD8C9; } 
+.btn, .btn:visited, .btn-primary, .btn-primary:visited, .upload-item { background-color: #DBD8C9; color: #1F3044; background-image: none; } 
+.btn-link, .btn-link:visited { color: #1F3044; } 
+.upload-item a, .upload-item a:visited { color: #1F3044; } 
+.thirdparty-btn.thirdparty-btn--cv-upload > * { color: #1F3044 !important; } 
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active { background-color: #1F3044; color: #DBD8C9; } 
+.thirdparty-btn.thirdparty-btn--cv-upload:hover > *, .thirdparty-btn.thirdparty-btn--cv-upload:active > *, .thirdparty-btn.thirdparty-btn--cv-upload:focus > * { color: #DBD8C9 !important; } 
+.navbar .btn-navbar, .navbar .btn-navbar.active, .navbar .btn-navbar:active, .navbar .btn-navbar:focus, .navbar .btn-navbar:hover { background-color: #ffffff; background-image: none; } 
+.navbar .btn-navbar .icon-bar, .navbar .btn-navbar.active .icon-bar, .navbar .btn-navbar:active .icon-bar, .navbar .btn-navbar:focus .icon-bar, .navbar .btn-navbar:hover .icon-bar { background-color: #1f3044; } 
+.sg-rating__star-icn.is-active, .sg-rating__star.is-hover .sg-rating__star-icn { color: #DBD8C9; } 
+.navbar .navbar-inner, .navbar .dropdown-menu { background-color: #ffffff; } 
+.navbar .nav > li > .dropdown-menu:after { border-bottom-color: #ffffff; } 
+.navbar .nav > li > a, .nav-collapse .dropdown-menu a, .navbar a, .navbar a:visited { color: #1f3044; } 
+.navbar .nav li.dropdown > .dropdown-toggle .caret { border-color: #1f3044; } 
+.navbar .nav > li > a.active, .navbar .nav > li > a:focus, .navbar .nav > li > a:hover, .navbar .nav li.dropdown.open > .dropdown-toggle, .nav-collapse .dropdown-menu a:focus, .nav-collapse .dropdown-menu a:hover, .nav-collapse .nav > li > a:focus, .nav-collapse .nav > li > a:hover { background-color: #ED7102; color: #1f3044; } 
+.navbar .nav li.dropdown > a:focus .caret, .navbar .nav li.dropdown > a:hover .caret, .navbar .nav li.dropdown.open > .dropdown-toggle .caret { border-color: #1f3044; } 
+#application-profile-additional-attachments {
+  display:none;
+}
+
+
+/* ----- loading fonts -------------- */
+@font-face {
+  font-family: HelveticaNeueLT;
+  src: url("https://www.renk-group.com/typo3conf/ext/renk_sitepackage/Resources/Public/Fonts/HelveticaNeueLTPro-Lt.otf") format("opentype"); }
+
+@font-face {
+  font-family: HelveticaNeueLT;
+  font-weight: bold;
+  src: url("https://www.renk-group.com/typo3conf/ext/renk_sitepackage/Resources/Public/Fonts/HelveticaNeueLTPro-Bd.otf") format("opentype"); }
+
+/* ----- general -------------- */
+
+
+.job-search .search_criterion_box select {
+    font-size: 1.125rem;
+    height: 163px;
+}
+.page-wrapper .container {
+    width: 100%;
+}
+.job-search {
+    font-family: "HelveticaNeueLT", Arial, sans-serif;
+  font-size: 1.10rem;
+}
+.job-search input, .job-search select, .job-search .chosen-single  {
+    font-family: "HelveticaNeueLT", Arial, sans-serif;
+  font-size: 1.15rem;
+}
+@media (max-width: 576px) {
+    .job-search {
+        font-size: .875rem;
+    }
+}
+
+/* ----- header - logo, navbar -------------- */
+.navbar .navbar-inner {
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+.navbar  .brand {
+    padding-right: 30px;
+}
+.page-wrapper {
+    margin-top: 70px;
+}
+.navbar .nav li a,  .navbar .nav li a.active,  .navbar .nav li a:hover {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: #1f3044;
+}
+
+/* ----- search fields -------------- */
+/* --- labels */
+.job-search-config label {
+    color: #4a494a;
+}
+/* --- Volltextsuche */
+.keywordSearch input {
+    border: 0;
+    border-bottom: 1px solid #DE792E;
+    border-radius: 0;
+    font-size: 1.125rem;
+}
+@media (max-width: 576px) {
+    .keywordSearch input {
+        font-size: .875rem;
+    }
+}
+/* --- Zielgruppe */
+.job-search-config select {
+    border: 1px solid #DE792E;
+    border-radius: 0;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+    padding-top: .4rem;
+    padding-bottom: .4rem;
+    overflow-y: hidden;
+}
+/* --- Standortsuche */
+.job-search .search-criteria-container {
+   margin-left: 0;
+}
+.job-search .search_criterion_box {
+    width: 100%  !important;
+   margin-left: 0  !important;
+}
+.job-search .search_criterion_box select {
+    font-size: 1.125rem;
+}
+@media (max-width: 576px) {
+    .job-search .search_criterion_box select {
+        font-size: .875rem;
+    }
+}
+.job-search-config .location-search input, .job-search-config .chosen-container {
+    border: 1px solid #DE792E;
+    border-radius: 0;
+    font-size: 1.125rem;
+}
+@media (max-width: 576px) {
+    .job-search-config .location-search input, .job-search-config .chosen-container  {
+        font-size: .875rem;
+    }
+}
+.job-search-config .chosen-container-active .chosen-single {
+    border: 0;
+    font-size: 1.125rem;
+}
+@media (max-width: 576px) {
+    .job-search-config .chosen-container-active .chosen-single {
+        font-size: .875rem;
+    }
+}
+.job-search-config .chosen-results {
+    border: 1px solid #DE792E;
+    border-radius: 0;
+    font-size: 1.125rem;
+}
+@media (max-width: 576px) {
+   .job-search-config .chosen-results {
+        font-size: .875rem;
+    }
+}
+.job-search-config .chosen-container .chosen-drop {
+    /*border: 1px solid #DE792E;*/
+    border: 0;
+    border-radius: 0;
+}
+/* --- Border zwischen Search und result ausblenden */
+.job-search .searchBoxTop {
+    border: 0;
+}
+/* --- Abstaende der einzelnen Bereiche */
+.job-search .job-abo,  .job-search .extended-search,  .job-search .extended-search, .job-search .location-search, .job-search .keyword-search {
+    padding-bottom: .5rem;
+}
+/* --- Button "Stellenangebote abonnieren" */
+.job-search .job-abo {
+    padding-top: 1rem;
+}
+.job-search .job-abo a {
+    font-size: 1.2rem;
+    display: block;
+}
+@media (max-width: 576px) {
+   .job-search .job-abo a {
+        font-size: .625rem;
+    }
+}
+.job-search .job-abo .btn {
+    /*display: inline-block;*/
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    border-radius: 0;
+    letter-spacing: .7px;
+    padding: .75rem 2.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    transition: all 0.15s ease-in-out;
+    width: inherit;
+}
+@media (max-width: 576px) {
+  .job-search .job-abo .btn {
+        font-size: .625rem;
+    }
+}
+.job-search .job-abo .btn-primary {
+    color: #DE792E;
+    background-color: transparent;
+    background-image: none;
+    border-color: #DE792E;
+}
+.job-search .job-abo .btn-primary:hover {
+    color: #fff;
+    background-color: #DE792E;
+    border-color: #DE792E;
+}
+
+/* ----- result list -------------- */
+/* --- result count
+.result_count_div {
+    font-size: 1.75rem;
+    color: #233043;
+    font-weight: bold;
+    line-height: 2rem;
+    padding-top: -1rem;
+}
+@media (max-width: 576px) {
+    .result_count_div {
+        font-size: 1.25rem;
+    }
+}
+/* --- Tabellen Header */
+.job-search .matchContainer .matchHeadline {
+    border-bottom: 1px solid #4a494a;
+}
+/* --- Items */
+.job-search .matchElement {
+    padding: 15px 0;
+    border-bottom: 1px solid #4a494a;
+    color: #4a494a;
+}
+.job-search .odd a, .job-search .even a{
+   color: #233043;
+   font-weight: 700;
+}
+.job-search-result-panel {
+    margin-top: -1rem;
+}
+/* ---- Spalten-Aufteilung*/
+/*@media (max-width: 576px) {
+    .job-search .matchElement .date  {
+        width: 100% !important;
+    }
+     .job-search .matchElement .title {
+        width: 100% !important;
+    } 
+    .job-search .matchElement .audience {
+        width: 100% !important;
+     }
+     .job-search .matchElement 
+    .ProjectGeoLocationCity {
+        width: 100% !important;
+    }
+    .job-search .matchHeadline {
+       display: none !important;
+    }
+}*/
+
+/* ----- hide footer  -------------- */
+.widget-footer {
+    display: none;
+}
+
+.table.table-hover .application-status {
+width: 15%;
+padding: 8px;
+display: none; 
+}
+#application-profile-additional-attachments {
+  display:none;
+}</style>
+<style type="text/css" id="widgetCssReset">
+body { background: #FFFFFF; }
+.page-wrapper { width: auto; padding: 0; margin: 0; }</style>
+</head>
+    <body class="widget-page">
+
+		<div class="page-wrapper">
+			<div class="container">
+
+					<div class="body-wrapper">
+						
+		<div class="jobs-widget-page">
+			<div>
+		<div class="job-search-panel">
+		
+			
+		
+			<div class="job-search">
+		<div class="internal-account-hint span3">
+			
+		</div>
+
+		<div class="searchBoxComplete">
+			<div class="searchBoxTop">
+				<section class="job-search-config searchBoxTopSmall">
+					<form class="search-form">
+						<section class="keyword-search">
+							<div class="keywordSearch">
+								<label for="keyword_search">Stichwortsuche</label>
+								<div class="loading-spinner" id="performing_keyword_search">
+									<img src="../../img/jobsearch/taloom_loader_small.gif" alt="searching"/>
+								</div>
+								<input id="keyword_search" type="text" class="input-xlarge" value="" name="jobSearch:jobSearchContainer:keyword_search"/>
+							</div>
+						</section>
+						<section class="location-search">
+							<div class="locationSearch search_criterion_box search_criterion_box_location">
+								<div class="resetLink selectAllLinkContainer">
+									<a href="#" onclick="resetLocationSearch();jQuery('.locationSearch .resetLink').hide(); return false;">Zurücksetzen</a>
+								</div>
+								<label for="geoLocation_search">Standortsuche</label>
+
+								<div class="loading-spinner" id="performing_location_search">
+									<img src="../../img/jobsearch/taloom_loader_small.gif" alt="searching"/>
+								</div>
+								<div>
+									<input id="geoLocation_search" type="text" class="input-xlarge" value="" name="jobSearch:jobSearchContainer:geoLocation_search_wrapper:geoLocation_search"/>
+									<div id="geoLocation_info">
+
+										<small>
+											Arbeit in
+											<a href="#" onclick="centerMapToSearch();" id="geoLocation_result"> </a>
+											<span class="search-result-no-map"></span>
+											im Umkreis von
+										</small>
+										<div id="geoLocation_radius">
+											<select name="jobSearch:jobSearchContainer:geoLocation_search_wrapper:geoLocationRadius" id="id1">
+<option value="1">1 km</option>
+<option value="5">5 km</option>
+<option value="10">10 km</option>
+<option selected="selected" value="25">25 km</option>
+<option value="50">50 km</option>
+<option value="75">75 km</option>
+<option value="100">100 km</option>
+</select>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						
+	
+	<section class="extended-search">
+		<div class="search-criteria-container">
+			
+				<div class="search_criterion_box">
+	<div class="searchFieldLabel">
+		<div class="selectAllLinkContainer"><a href="javascript:;" id="id2" data-select="#selector_0" class="js-toggle-all-select-options">Zurücksetzen</a></div>
+		<label for="searchFieldId" class="searchCriterionBoxHeader">Zielgruppe</label>
+	</div>
+	<select id="selector_0" multiple="multiple" size="5" class="SearchMultiSelectBox filter-options-select search_criterion_box_audience" aria-label="Zielgruppe oder Jobkategorie auswählen" name="audience[]" data-reset-link="#id2">
+<option  title = "Auszubildende" value="00001">Auszubildende</option>
+<option  title = "Berufseinsteiger" value="3a3af3667f000002010ad49215c3a5f4">Berufseinsteiger</option>
+<option  title = "Berufseinsteiger und -erfahrene" value="106ceaa6-e8cb-4184-a117-1e9248c072e7">Berufseinsteiger und -erfahrene</option>
+<option  title = "Berufserfahrene" value="3a3b1f6e7f000002010ad492e7837dd6">Berufserfahrene</option>
+<option  title = "Schüler/in" value="3a3ab7987f000002010ad4925ffa0cf4">Schüler/in</option>
+<option  title = "Schüler/in und Auszubildende" value="dd3d1984-171e-4a41-b685-fc95bebda306">Schüler/in und Auszubildende</option>
+<option  title = "Student/in" value="6179d1a00a0b0cce01ed3de8643a0e39">Student/in</option>
+</select>
+</div>
+			
+				<div class="search_criterion_box" style="display: none">
+	<div class="searchFieldLabel">
+		<div class="selectAllLinkContainer"><a href="javascript:;" id="id3" data-select="#selector_1" class="js-toggle-all-select-options">Zurücksetzen</a></div>
+		<label for="searchFieldId" class="searchCriterionBoxHeader">Jobkategorie</label>
+	</div>
+	<select id="selector_1" multiple="multiple" size="5" class="SearchMultiSelectBox filter-options-select search_criterion_box_jobcategory" aria-label="Zielgruppe oder Jobkategorie auswählen" name="jobcategory[]" data-reset-link="#id3">
+<option  title = "Ärzte" value="sam42_physicians">Ärzte</option>
+<option  title = "Administration und Sekretariat" value="sam42_administration">Administration und Sekretariat</option>
+<option  title = "Banken, Finanzdienstleister und Versicherungen" value="sam42_banking">Banken, Finanzdienstleister und Versicherungen</option>
+<option  title = "Bildung und Soziales" value="sam42_education">Bildung und Soziales</option>
+<option  title = "Design, Gestaltung und Architektur" value="sam42_design">Design, Gestaltung und Architektur</option>
+<option  title = "Einkauf, Materialwirtschaft und Logistik" value="sam42_purchase">Einkauf, Materialwirtschaft und Logistik</option>
+<option  title = "Finanzen" value="sam42_finance">Finanzen</option>
+<option  title = "Führungskräfte" value="sam42_management">Führungskräfte</option>
+<option  title = "Handwerk, Dienstleistung und Fertigung" value="sam42_manualwork">Handwerk, Dienstleistung und Fertigung</option>
+<option  title = "Ingenieure und technische Berufe" value="sam42_engineering">Ingenieure und technische Berufe</option>
+<option  title = "IT" value="sam42_it">IT</option>
+<option  title = "Marketing und Kommunikation" value="sam42_marketing">Marketing und Kommunikation</option>
+<option  title = "Naturwissenschaften und Forschung" value="sam42_science">Naturwissenschaften und Forschung</option>
+<option  title = "Öffentlicher Dienst" value="sam42_publicsector">Öffentlicher Dienst</option>
+<option  title = "Personal" value="sam42_hr">Personal</option>
+<option  title = "Pflege, Therapie und Assistenz" value="sam42_therapy">Pflege, Therapie und Assistenz</option>
+<option  title = "Recht" value="sam42_law">Recht</option>
+<option  title = "Vertrieb und Verkauf" value="sam42_sales">Vertrieb und Verkauf</option>
+</select>
+</div>
+			
+		</div>
+		<div class="hide" id="mobile_placeholder">Bitte wählen</div>
+	</section>
+	
+
+					</form>
+				</section>
+				<section class="job-abo">
+
+					<a href="./jobs?-1.-jobSearch-jobSearchContainer-jobAboLink" rel="nofollow" class="btn btn-primary">Stellenangebote abonnieren</a>
+
+				</section>
+
+				
+			</div>
+
+			<div id="jobsContainer" class="job-search-results">
+				<div>
+		<div class="job-search-result-panel">
+			<section id="job-search-map" class="jobMapContainer">
+				<div id="map_canvas"></div>
+			</section>
+
+			<section class="results">
+				<form>
+					<div class="result_count_div" id="job-search-result-count-label">
+						<p id="result_count_one" style="display: none;">Zu Ihrer Suchanfrage wurde eine Stellenanzeige gefunden:</p>
+						<p id="result_count_more" style="display: none;">Zu Ihrer Suchanfrage wurden <span id='jobs_result_count'>{0}</span> Stellenanzeigen gefunden:</p>
+						<p id="result_count_none" style="display: none;">Keine Stellenanzeigen gefunden.</p>
+					</div>
+					<div class="matchContainer">
+						<div class="matchElement matchHeadline">
+							<div id="matchValueHeadline1" class="matchValue date" onclick="reorderList(1); return false;">
+								<a href="#" onclick="return false;"><span>Datum</span><b class="caret"></b></a>
+							</div><div id="matchValueHeadline2" class="matchValue title" onclick="reorderList(2); return false;">
+								<a href="#" onclick="return false;"><span>Stellenangebot</span><b class="caret"></b></a>
+							</div><div id="matchValueHeadline3" class="matchValue audience" onclick="reorderList(3); return false;">
+								<a href="#" onclick="return false;"><span>Zielgruppe</span><b class="caret"></b></a>
+							</div><div id="matchValueHeadline4" class="matchValue ProjectGeoLocationCity" onclick="reorderList(4); return false;">
+								<a href="#" onclick="return false;"><span>Standort</span><b class="caret"></b></a>
+							</div>
+						</div>
+						<div class="outputContainer">
+							<div class="matchElement" id="job_id_67620152">
+								<div class="matchValue date">02.11.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67620152/Global-Director-m-w-d-Culture,-Organizational-People-Development,-Leadership-Learning-?jobDbPVId=289472452&amp;l=de" target="_blank">Global Director (m/w/d) Culture, Organizational &amp; People Development, Leadership &amp; Learning </a>
+		</div><div class="matchValue audience">Berufseinsteiger und -erfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_67825269">
+								<div class="matchValue date">02.11.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67825269/Verfasser-m-w-d-einer-Abschlussarbeit-Master-im-Bereich-Systems-Engineering?jobDbPVId=289472422&amp;l=de" target="_blank">Verfasser (m/w/d) einer Abschlussarbeit Master im Bereich Systems Engineering</a>
+		</div><div class="matchValue audience">Student/in</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_67851792">
+								<div class="matchValue date">02.11.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67851792/Global-Head-of-Payroll-Social-Security-m-w-d-?jobDbPVId=289472392&amp;l=de" target="_blank">Global Head of Payroll &amp; Social Security (m/w/d)</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_51042193">
+								<div class="matchValue date">02.11.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/51042193/Field-Service-Engineer-f-m-d-Marine-Industry-Division?jobDbPVId=289472377&amp;l=de" target="_blank">Field Service Engineer (f/m/d) Marine &amp; Industry Division</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">La Spezia</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66573753">
+								<div class="matchValue date">02.11.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66573753/Elektroniker-m-w-d-f%C3%BCr-die-Instandhaltung?jobDbPVId=289404777&amp;l=de" target="_blank">Elektroniker (m/w/d) für die Instandhaltung</a>
+		</div><div class="matchValue audience">Berufseinsteiger und -erfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Hannover</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66395798">
+								<div class="matchValue date">01.11.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66395798/Zerspanungsmechaniker-m-w-d-Dreh-Fr%C3%A4s-und-Schleiftechnik-vertikal?jobDbPVId=289353552&amp;l=de" target="_blank">Zerspanungsmechaniker (m/w/d)  Dreh- Fräs- und Schleiftechnik vertikal</a>
+		</div><div class="matchValue audience">Berufseinsteiger und -erfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Hannover</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66471858">
+								<div class="matchValue date">01.11.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66471858/Werkstudent-m-w-d-im-Product-Lifecycle-Management?jobDbPVId=289353532&amp;l=de" target="_blank">Werkstudent (m/w/d) im Product Lifecycle Management</a>
+		</div><div class="matchValue audience">Student/in</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_67808762">
+								<div class="matchValue date">01.11.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67808762/Technischer-Redakteur-m-w-d-?jobDbPVId=289353512&amp;l=de" target="_blank">Technischer Redakteur (m/w/d)</a>
+		</div><div class="matchValue audience">Berufseinsteiger und -erfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_67098975">
+								<div class="matchValue date">01.11.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67098975/Bachelorand-Masterand-Sch%C3%BCler-m-w-d-Initiativbewerbung-Praktikum?jobDbPVId=289353462&amp;l=de" target="_blank">Bachelorand / Masterand / Schüler (m/w/d) Initiativbewerbung Praktikum</a>
+		</div><div class="matchValue audience">Student/in</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Hannover</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_67822322">
+								<div class="matchValue date">01.11.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67822322/Werkstudent-m-w-d-im-Bereich-Corporate-Controlling?jobDbPVId=289353422&amp;l=de" target="_blank">Werkstudent (m/w/d) im Bereich Corporate Controlling</a>
+		</div><div class="matchValue audience">Student/in</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66530213">
+								<div class="matchValue date">29.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66530213/Meister-m-w-d-Pr%C3%BCfstand-Fahrzeuggetriebe?jobDbPVId=289203997&amp;l=de" target="_blank">Meister (m/w/d) Prüfstand Fahrzeuggetriebe</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_67758637">
+								<div class="matchValue date">29.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67758637/IT-AI-Infrastructure-Engineer-m-w-d-?jobDbPVId=289161710&amp;l=de" target="_blank">IT AI Infrastructure Engineer (m/w/d)</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_67348735">
+								<div class="matchValue date">29.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67348735/Business-Partner-Finance-m-w-d-Operations?jobDbPVId=289161702&amp;l=de" target="_blank">Business Partner Finance (m/w/d) Operations</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_67348750">
+								<div class="matchValue date">29.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67348750/Business-Partner-Finance-m-w-d-Commercial?jobDbPVId=289161694&amp;l=de" target="_blank">Business Partner Finance (m/w/d) Commercial</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_67703917">
+								<div class="matchValue date">29.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67703917/Technicien-ne-de-Montage?jobDbPVId=289161662&amp;l=de" target="_blank">Technicien(ne)de Montage</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Saint-Ouen-l&#039;Aumône</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_68436048">
+								<div class="matchValue date">29.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/68436048/Specialist-Trade-Finance-m-w-d-?jobDbPVId=289155348&amp;l=de" target="_blank">Specialist Trade Finance (m/w/d) </a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66447853">
+								<div class="matchValue date">29.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66447853/Senior-Data-Platform-Architect-m-w-d-?jobDbPVId=289125338&amp;l=de" target="_blank">Senior Data Platform Architect (m/w/d)</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_65070098">
+								<div class="matchValue date">28.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/65070098/Leiter-m-w-d-Logistik-Standort-Augsburg?jobDbPVId=288979677&amp;l=de" target="_blank">Leiter (m/w/d) Logistik Standort Augsburg</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_68372627">
+								<div class="matchValue date">28.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/68372627/Mechaniker-m-w-d-Getriebepr%C3%BCfstand?jobDbPVId=288954202&amp;l=de" target="_blank">Mechaniker (m/w/d) Getriebeprüfstand</a>
+		</div><div class="matchValue audience">Berufseinsteiger und -erfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66576183">
+								<div class="matchValue date">27.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66576183/Duales-Verbundstudium-Maschinenbau-Fachrichtung-Technischer-Produktdesigner-m-w-d-%E2%80%93-Start-01.09.2027-?jobDbPVId=288879693&amp;l=de" target="_blank">Duales-/Verbundstudium Maschinenbau - Fachrichtung Technischer Produktdesigner (m/w/d) – Start 01.09.2027 </a>
+		</div><div class="matchValue audience">Student/in</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_68228706">
+								<div class="matchValue date">26.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/68228706/Mitarbeiter-m-w-d-Produktionssteuerung?jobDbPVId=288711903&amp;l=de" target="_blank">Mitarbeiter (m/w/d) Produktionssteuerung</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_64876216">
+								<div class="matchValue date">25.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/64876216/Elektromonteur-m-w-d-Sondermaschinenbau?jobDbPVId=288656413&amp;l=de" target="_blank">Elektromonteur (m/w/d) Sondermaschinenbau</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66576228">
+								<div class="matchValue date">25.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66576228/Duales-Studium-Wirtschaftsingenieurwesen-m-w-d-%E2%80%93-Start-01.10.2027-?jobDbPVId=288656353&amp;l=de" target="_blank">Duales Studium Wirtschaftsingenieurwesen (m/w/d) – Start 01.10.2027 </a>
+		</div><div class="matchValue audience">Auszubildende</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_64789126">
+								<div class="matchValue date">23.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/64789126/Zerspanungsmechaniker-m-w-d-Rotationsteile?jobDbPVId=288602923&amp;l=de" target="_blank">Zerspanungsmechaniker (m/w/d) Rotationsteile</a>
+		</div><div class="matchValue audience">Berufseinsteiger und -erfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66251898">
+								<div class="matchValue date">23.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66251898/Auszubildender-zum-Zerspanungsmechaniker-m-w-d-f%C3%BCr-2027?jobDbPVId=288602883&amp;l=de" target="_blank">Auszubildender zum Zerspanungsmechaniker (m/w/d) für 2027</a>
+		</div><div class="matchValue audience">Auszubildende</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Rheine</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66252793">
+								<div class="matchValue date">23.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66252793/Auszubildender-zum-Mechatroniker-m-w-d-f%C3%BCr-2027?jobDbPVId=288602848&amp;l=de" target="_blank">Auszubildender zum Mechatroniker (m/w/d) für 2027</a>
+		</div><div class="matchValue audience">Auszubildende</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Rheine</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_68228466">
+								<div class="matchValue date">23.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/68228466/Meister-m-w-d-Fertigung?jobDbPVId=288599518&amp;l=de" target="_blank">Meister (m/w/d) Fertigung</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_61345337">
+								<div class="matchValue date">23.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/61345337/Sch%C3%BClerpraktikant-im-gewerblich-technischen-Bereich-m-w-d-2026?jobDbPVId=288553293&amp;l=de" target="_blank">Schülerpraktikant im gewerblich / technischen Bereich (m/w/d) 2026</a>
+		</div><div class="matchValue audience">Schüler/in</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_68281901">
+								<div class="matchValue date">22.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/68281901/ISMS-Program-Manager-m-w-d-?jobDbPVId=288515756&amp;l=de" target="_blank">ISMS Program Manager (m/w/d)</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66852015">
+								<div class="matchValue date">21.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66852015/Bachelor-of-Sciene-m-w-d-im-Studiengang-Wirtschaftsinformatik-und-nachhaltige-IT-?jobDbPVId=288344916&amp;l=de" target="_blank">Bachelor of Sciene (m/w/d) im Studiengang Wirtschaftsinformatik und nachhaltige IT </a>
+		</div><div class="matchValue audience">Auszubildende</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Rheine</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_67016425">
+								<div class="matchValue date">21.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67016425/Werkstudent-m-w-d-Logistik?jobDbPVId=288344886&amp;l=de" target="_blank">Werkstudent (m/w/d) Logistik</a>
+		</div><div class="matchValue audience">Student/in</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Rheine</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66851925">
+								<div class="matchValue date">21.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66851925/Bachelor-of-Engineering-m-w-d-im-Studiengang-Engineering-technischer-Systeme-mit-dem-Schwerpunkt-Maschinenbau-f%C3%BCr-2027?jobDbPVId=288344846&amp;l=de" target="_blank">Bachelor of Engineering (m/w/d) im Studiengang Engineering technischer Systeme mit dem Schwerpunkt Maschinenbau für 2027</a>
+		</div><div class="matchValue audience">Student/in</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Rheine</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_65400126">
+								<div class="matchValue date">21.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/65400126/Getriebepr%C3%BCfer-m-w-d-Pr%C3%BCfstand?jobDbPVId=288344811&amp;l=de" target="_blank">Getriebeprüfer (m/w/d) Prüfstand</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66847440">
+								<div class="matchValue date">21.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66847440/Auszubildender-zum-Zerspanungsmechaniker-m-w-d-f%C3%BCr-2027?jobDbPVId=288344781&amp;l=de" target="_blank">Auszubildender zum Zerspanungsmechaniker (m/w/d) für 2027</a>
+		</div><div class="matchValue audience">Auszubildende</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Hannover</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_60849857">
+								<div class="matchValue date">21.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/60849857/Sch%C3%BClerpraktikanten-m-w-d-Initiativbewerbung?jobDbPVId=288344776&amp;l=de" target="_blank">Schülerpraktikanten (m/w/d) Initiativbewerbung</a>
+		</div><div class="matchValue audience">Schüler/in und Auszubildende</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Rheine</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_68236701">
+								<div class="matchValue date">21.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/68236701/Werkstudent-m-w-d-zur-Unterst%C3%BCtzung-eines-Pr%C3%BCfstandprojekts?jobDbPVId=288306596&amp;l=de" target="_blank">Werkstudent (m/w/d) zur Unterstützung eines Prüfstandprojekts</a>
+		</div><div class="matchValue audience">Student/in</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_68232696">
+								<div class="matchValue date">21.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/68232696/Werkstoffpr%C3%BCfer-Labor-m-w-d-?jobDbPVId=288296101&amp;l=de" target="_blank">Werkstoffprüfer Labor (m/w/d)</a>
+		</div><div class="matchValue audience">Berufseinsteiger und -erfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_67028975">
+								<div class="matchValue date">20.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67028975/Serviceingenieur-m-w-d-VMS-Fahrzeuggetriebe?jobDbPVId=288263761&amp;l=de" target="_blank">Serviceingenieur (m/w/d) VMS Fahrzeuggetriebe</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_60842722">
+								<div class="matchValue date">19.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/60842722/Commercial-Project-Manager-Marine-m-f-d-?jobDbPVId=288121636&amp;l=de" target="_blank">Commercial Project Manager Marine (m/f/d)</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_61060477">
+								<div class="matchValue date">19.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/61060477/Zerspanungsmechaniker-m-w-d-Kubische-Teile?jobDbPVId=288088986&amp;l=de" target="_blank">Zerspanungsmechaniker (m/w/d) Kubische Teile</a>
+		</div><div class="matchValue audience">Berufseinsteiger und -erfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66576203">
+								<div class="matchValue date">18.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66576203/Duales-Verbundstudium-Mechatronik-Fachrichtung-Mechatronik-m-w-d-%E2%80%93-Start-01.09.2027-?jobDbPVId=287987581&amp;l=de" target="_blank">Duales-/Verbundstudium Mechatronik - Fachrichtung Mechatronik (m/w/d) – Start 01.09.2027 </a>
+		</div><div class="matchValue audience">Auszubildende</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_65102763">
+								<div class="matchValue date">18.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/65102763/Leitung-Kompetenzcenter-Reisen-m-w-d-?jobDbPVId=287987556&amp;l=de" target="_blank">Leitung Kompetenzcenter Reisen (m/w/d)</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_64708909">
+								<div class="matchValue date">17.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/64708909/Ingenieur-m-w-d-Inbetriebnahme-Pr%C3%BCfst%C3%A4nde?jobDbPVId=287972756&amp;l=de" target="_blank">Ingenieur (m/w/d) Inbetriebnahme Prüfstände</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_61921509">
+								<div class="matchValue date">16.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/61921509/Techniker-Inbetriebnahme-m-w-d-Pr%C3%BCfst%C3%A4nde?jobDbPVId=287903031&amp;l=de" target="_blank">Techniker Inbetriebnahme (m/w/d) Prüfstände</a>
+		</div><div class="matchValue audience">Berufseinsteiger und -erfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_67205530">
+								<div class="matchValue date">16.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67205530/Key-User-m-w-d-CAM-Programmierung?jobDbPVId=287842886&amp;l=de" target="_blank">Key User (m/w/d) CAM Programmierung</a>
+		</div><div class="matchValue audience">Berufseinsteiger und -erfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Hannover</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_68137341">
+								<div class="matchValue date">16.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/68137341/Produktionsplaner-m-w-d-Fahrzeuggetriebe?jobDbPVId=287830506&amp;l=de" target="_blank">Produktionsplaner (m/w/d) Fahrzeuggetriebe</a>
+		</div><div class="matchValue audience">Berufseinsteiger und -erfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_68126296">
+								<div class="matchValue date">15.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/68126296/Configuration-Manager-m-w-d-?jobDbPVId=287779291&amp;l=de" target="_blank">Configuration Manager (m/w/d)</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66243723">
+								<div class="matchValue date">15.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66243723/Process-Excellence-SAP-Experts-MM,-EWM,-PP,-SD,-FI-%E2%80%93-all-levels-m-w-d-?jobDbPVId=287758686&amp;l=de" target="_blank">Process Excellence &amp; SAP Experts / MM, EWM, PP, SD, FI – all levels (m/w/d) </a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_68116016">
+								<div class="matchValue date">15.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/68116016/Logistikmeister-m-w-d-Produktionslogistik?jobDbPVId=287746586&amp;l=de" target="_blank">Logistikmeister (m/w/d) Produktionslogistik</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_67395292">
+								<div class="matchValue date">14.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67395292/Pflichtpraktikum-m-w-d-im-Bereich-Finance-%E2%80%93-Financial-Planning-Analysis?jobDbPVId=287656061&amp;l=de" target="_blank">Pflichtpraktikum (m/w/d) im Bereich Finance – Financial Planning &amp; Analysis</a>
+		</div><div class="matchValue audience">Student/in</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66755660">
+								<div class="matchValue date">14.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66755660/Techniker-m-w-d-Elektrokonstruktion?jobDbPVId=287656006&amp;l=de" target="_blank">Techniker (m/w/d) Elektrokonstruktion</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_61395607">
+								<div class="matchValue date">14.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/61395607/Field-Service-Engineer-m-f-d-?jobDbPVId=287656001&amp;l=de" target="_blank">Field Service Engineer (m/f/d)</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Vlissingen</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66594913">
+								<div class="matchValue date">14.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66594913/Enterprise-Solution-Architekt-m-w-d-?jobDbPVId=287651796&amp;l=de" target="_blank">Enterprise-/Solution-Architekt (m/w/d)</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66594948">
+								<div class="matchValue date">14.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66594948/Rollout-and-Migration-Factory-Lead-m-w-d-?jobDbPVId=287651701&amp;l=de" target="_blank">Rollout and Migration Factory Lead (m/w/d)</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66594853">
+								<div class="matchValue date">14.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66594853/SAP-EWM-Senior-Consultant-m-w-d-?jobDbPVId=287651601&amp;l=de" target="_blank">SAP EWM Senior Consultant (m/w/d)</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66595718">
+								<div class="matchValue date">14.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66595718/SAP-FI-CO-Senior-Consultant-m-w-d-?jobDbPVId=287651556&amp;l=de" target="_blank">SAP FI/CO Senior Consultant (m/w/d)</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66596078">
+								<div class="matchValue date">14.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66596078/SAP-GTS-Senior-Consultant-m-w-d-?jobDbPVId=287651441&amp;l=de" target="_blank">SAP GTS Senior Consultant (m/w/d)</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66595173">
+								<div class="matchValue date">14.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66595173/SAP-PS-EPPM-Senior-Consultant-m-w-d-?jobDbPVId=287651281&amp;l=de" target="_blank">SAP PS/EPPM Senior Consultant (m/w/d)</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66595688">
+								<div class="matchValue date">14.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66595688/SAP-S-4-Service-Senior-Consultant-m-w-d-?jobDbPVId=287651201&amp;l=de" target="_blank">SAP S/4 Service Senior Consultant (m/w/d)</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_68096786">
+								<div class="matchValue date">14.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/68096786/Pflichtpraktikant-m-w-d-im-Bereich-Quality?jobDbPVId=287648186&amp;l=de" target="_blank">Pflichtpraktikant (m/w/d) im Bereich Quality</a>
+		</div><div class="matchValue audience">Student/in</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_68096041">
+								<div class="matchValue date">14.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/68096041/Werkstudent-f%C3%BCr-eine-Projektunterst%C3%BCtzung-in-der-Technologieentwicklung-m-w-d-?jobDbPVId=287646736&amp;l=de" target="_blank">Werkstudent für eine Projektunterstützung in der Technologieentwicklung (m/w/d) </a>
+		</div><div class="matchValue audience">Student/in</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_65357901">
+								<div class="matchValue date">14.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/65357901/Industriemechaniker-m-w-d-Fahrzeuggetriebe?jobDbPVId=287634451&amp;l=de" target="_blank">Industriemechaniker (m/w/d) Fahrzeuggetriebe</a>
+		</div><div class="matchValue audience">Berufseinsteiger und -erfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_67585052">
+								<div class="matchValue date">14.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67585052/Technischer-Projekteink%C3%A4ufer-m-w-d-Testsysteme?jobDbPVId=287607681&amp;l=de" target="_blank">Technischer Projekteinkäufer (m/w/d) Testsysteme</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_68081586">
+								<div class="matchValue date">14.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/68081586/CNC-Zerspanungsmechaniker-m-w-d-f%C3%BCr-die-vertikale-Dreh-und-Fr%C3%A4stechnik?jobDbPVId=287605286&amp;l=de" target="_blank">CNC-Zerspanungsmechaniker (m/w/d) für die vertikale Dreh- und Frästechnik</a>
+		</div><div class="matchValue audience">Berufseinsteiger und -erfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Rheine</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_65244981">
+								<div class="matchValue date">13.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/65244981/Werkstudent-m-w-d-im-Bereich-Cyber-Security?jobDbPVId=287548992&amp;l=de" target="_blank">Werkstudent (m/w/d) im Bereich Cyber-Security</a>
+		</div><div class="matchValue audience">Student/in</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_67356220">
+								<div class="matchValue date">11.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67356220/Produktionstechniker-m-w-d-?jobDbPVId=287321002&amp;l=de" target="_blank">Produktionstechniker (m/w/d)</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_67330685">
+								<div class="matchValue date">10.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67330685/Messtechniker-m-w-d-Qualit%C3%A4tssicherung?jobDbPVId=287273477&amp;l=de" target="_blank">Messtechniker (m/w/d) Qualitätssicherung</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66995710">
+								<div class="matchValue date">08.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66995710/Risspr%C3%BCfer-MT-und-PT-m-w-d-?jobDbPVId=287020337&amp;l=de" target="_blank">Rissprüfer MT und PT (m/w/d)</a>
+		</div><div class="matchValue audience">Berufseinsteiger und -erfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66580403">
+								<div class="matchValue date">07.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66580403/Werkstudent-m-w-d-Pr%C3%BCfstandsplanung-?jobDbPVId=286974072&amp;l=de" target="_blank">Werkstudent (m/w/d) Prüfstandsplanung </a>
+		</div><div class="matchValue audience">Student/in</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_67241780">
+								<div class="matchValue date">07.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67241780/Elektroniker-m-w-d-f%C3%BCr-Betriebstechnik-Mechatroniker-Instandhaltung?jobDbPVId=286973947&amp;l=de" target="_blank">Elektroniker (m/w/d) für Betriebstechnik / Mechatroniker Instandhaltung</a>
+		</div><div class="matchValue audience">Berufseinsteiger und -erfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Rheine</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66520478">
+								<div class="matchValue date">07.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66520478/Ausbildung-zum-Zerspanungsmechaniker-m-w-d-%E2%80%93-2027?jobDbPVId=286973792&amp;l=de" target="_blank">Ausbildung zum Zerspanungsmechaniker (m/w/d) – 2027</a>
+		</div><div class="matchValue audience">Auszubildende</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_65109728">
+								<div class="matchValue date">05.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/65109728/Experte-IFRS-HGB-m-w-d-?jobDbPVId=286765747&amp;l=de" target="_blank">Experte IFRS / HGB (m/w/d)</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_66532203">
+								<div class="matchValue date">05.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/66532203/Sales-Engineer-m-f-d-?jobDbPVId=286765712&amp;l=de" target="_blank">Sales Engineer (m/f/d)</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Vlissingen</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_65677926">
+								<div class="matchValue date">05.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/65677926/Mitarbeiter-m-w-d-Refurbishment-Field-Service?jobDbPVId=286744787&amp;l=de" target="_blank">Mitarbeiter (m/w/d) Refurbishment &amp; Field Service</a>
+		</div><div class="matchValue audience">Berufseinsteiger und -erfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Hannover</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_65511491">
+								<div class="matchValue date">04.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/65511491/Monteur-m-w-d-Sondermaschinenbau?jobDbPVId=286620487&amp;l=de" target="_blank">Monteur (m/w/d) Sondermaschinenbau</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Augsburg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_67214025">
+								<div class="matchValue date">04.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67214025/Elektromaschinenbauer-m-w-d-Hybride-Antriebstechnik?jobDbPVId=286620437&amp;l=de" target="_blank">Elektromaschinenbauer (m/w/d) Hybride Antriebstechnik</a>
+		</div><div class="matchValue audience">Berufserfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Starnberg</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div><div class="matchElement" id="job_id_67178010">
+								<div class="matchValue date">03.10.26</div><div target="_blank" class="matchValue title">
+			<a href="../../job/67178010/Zerspanungsmechaniker-m-w-d-Drehtechnik-horizontal?jobDbPVId=286603017&amp;l=de" target="_blank">Zerspanungsmechaniker (m/w/d)  Drehtechnik horizontal</a>
+		</div><div class="matchValue audience">Berufseinsteiger und -erfahrene</div><div class="matchValue ProjectGeoLocationCity">
+			<div>
+				<div class="location-container">
+					<span class="location-view-item">Hannover</span>
+
+					
+
+					
+				</div>
+
+			</div>
+
+		</div>
+							</div>
+						</div>
+						<div class="pagination pagination-centered"><ul id="job-search-pagination" class="taloom-pager"></ul></div>
+					</div>
+				</form>
+			</section>
+		</div>
+	</div>
+				
+			</div>
+		</div>
+
+		<div id="sg_modal" hidden="" data-wicket-placeholder=""></div>
+	</div>
+
+		</div>
+	</div>
+		</div>
+	
+						<footer class="widget-footer">
+	<span>
+		powered by 
+		<a href="https://softgarden.com" target="_blank">softgarden</a>
+		
+	</span>
+</footer>
+					</div>
+
+			</div>
+		</div>
+
+		
+		<script type="text/javascript" id="wicket-ajax-base-url">
+/*<![CDATA[*/
+Wicket.Ajax.baseUrl="de/widgets/jobs";
+/*]]>*/
+</script>
+<script type="text/javascript" src="//static.softgarden.de/thirdparty/chosen/1.8.7/chosen.jquery.min.js"></script>
+<script type="text/javascript" id="id2">
+/*<![CDATA[*/
+$('#id2').hide();
+/*]]>*/
+</script>
+<script type="text/javascript" id="id3">
+/*<![CDATA[*/
+$('#id3').hide();
+/*]]>*/
+</script>
+<script type="text/javascript" id="allJobLocations">
+/*<![CDATA[*/
+SG.allJobLocations = [];SG.allJobLocations.push({markerName: 'Global\x20Director\x20(m\/w\/d)\x20Culture,\x20Organizational\x20\x26\x20People\x20Development,\x20Leadership\x20\x26\x20Learning\x20', latitude: 48.3705449, longitude: 10.89779, postingId: 67620152, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Verfasser\x20(m\/w\/d)\x20einer\x20Abschlussarbeit\x20Master\x20im\x20Bereich\x20Systems\x20Engineering', latitude: 48.3705449, longitude: 10.89779, postingId: 67825269, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Global\x20Head\x20of\x20Payroll\x20\x26\x20Social\x20Security\x20(m\/w\/d)', latitude: 48.3705449, longitude: 10.89779, postingId: 67851792, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Field\x20Service\x20Engineer\x20(f\/m\/d)\x20Marine\x20\x26\x20Industry\x20Division', latitude: 44.1024504, longitude: 9.8240826, postingId: 51042193, geoName: 'La\x20Spezia,\x20Italien'});SG.allJobLocations.push({markerName: 'Elektroniker\x20(m\/w\/d)\x20für\x20die\x20Instandhaltung', latitude: 52.3758916, longitude: 9.7320104, postingId: 66573753, geoName: 'Hannover,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Zerspanungsmechaniker\x20(m\/w\/d)\x20\x20Dreh\x2d\x20Fräs\x2d\x20und\x20Schleiftechnik\x20vertikal', latitude: 52.3758916, longitude: 9.7320104, postingId: 66395798, geoName: 'Hannover,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Werkstudent\x20(m\/w\/d)\x20im\x20Product\x20Lifecycle\x20Managemen\x74', latitude: 48.3705449, longitude: 10.89779, postingId: 66471858, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Technischer\x20Redakteur\x20(m\/w\/d)', latitude: 48.3705449, longitude: 10.89779, postingId: 67808762, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Bachelorand\x20\/\x20Masterand\x20\/\x20Schüler\x20(m\/w\/d)\x20Initiativbewerbung\x20Praktikum', latitude: 52.3758916, longitude: 9.7320104, postingId: 67098975, geoName: 'Hannover,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Werkstudent\x20(m\/w\/d)\x20im\x20Bereich\x20Corporate\x20Controlling', latitude: 48.3705449, longitude: 10.89779, postingId: 67822322, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Meister\x20(m\/w\/d)\x20Prüfstand\x20Fahrzeuggetriebe', latitude: 48.3705449, longitude: 10.89779, postingId: 66530213, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'IT\x20AI\x20Infrastructure\x20Engineer\x20(m\/w\/d)', latitude: 48.3705449, longitude: 10.89779, postingId: 67758637, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Business\x20Partner\x20Finance\x20(m\/w\/d)\x20Operation\x73', latitude: 48.3705449, longitude: 10.89779, postingId: 67348735, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Business\x20Partner\x20Finance\x20(m\/w\/d)\x20Commercial', latitude: 48.3705449, longitude: 10.89779, postingId: 67348750, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Technicien(ne)de\x20Montage', latitude: 49.04313, longitude: 2.105287, postingId: 67703917, geoName: 'Saint\x2dOuen\x2dl\x27Aumône,\x20France'});SG.allJobLocations.push({markerName: 'Specialist\x20Trade\x20Finance\x20(m\/w\/d)\x20', latitude: 48.3705449, longitude: 10.89779, postingId: 68436048, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Senior\x20Data\x20Platform\x20Architect\x20(m\/w\/d)', latitude: 48.3705449, longitude: 10.89779, postingId: 66447853, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Leiter\x20(m\/w\/d)\x20Logistik\x20Standort\x20Augsburg', latitude: 48.3705449, longitude: 10.89779, postingId: 65070098, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Mechaniker\x20(m\/w\/d)\x20Getriebeprüfstand', latitude: 48.3705449, longitude: 10.89779, postingId: 68372627, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Duales\x2d\/Verbundstudium\x20Maschinenbau\x20\x2d\x20Fachrichtung\x20Technischer\x20Produktdesigner\x20(m\/w\/d)\x20–\x20Start\x2001.09.2027\x20', latitude: 48.3705449, longitude: 10.89779, postingId: 66576183, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Mitarbeiter\x20(m\/w\/d)\x20Produktionssteuerung', latitude: 48.3705449, longitude: 10.89779, postingId: 68228706, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Elektromonteur\x20(m\/w\/d)\x20Sondermaschinenbau', latitude: 48.3705449, longitude: 10.89779, postingId: 64876216, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Duales\x20Studium\x20Wirtschaftsingenieurwesen\x20(m\/w\/d)\x20–\x20Start\x2001.10.2027\x20', latitude: 48.3705449, longitude: 10.89779, postingId: 66576228, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Zerspanungsmechaniker\x20(m\/w\/d)\x20Rotationsteile', latitude: 48.3705449, longitude: 10.89779, postingId: 64789126, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Auszubildender\x20zum\x20Zerspanungsmechaniker\x20(m\/w\/d)\x20für\x202027', latitude: 52.2815691, longitude: 7.4434092, postingId: 66251898, geoName: 'Rheine,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Auszubildender\x20zum\x20Mechatroniker\x20(m\/w\/d)\x20für\x202027', latitude: 52.2815691, longitude: 7.4434092, postingId: 66252793, geoName: 'Rheine,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Meister\x20(m\/w\/d)\x20Fertigung', latitude: 48.3705449, longitude: 10.89779, postingId: 68228466, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Schülerpraktikant\x20im\x20gewerblich\x20\/\x20technischen\x20Bereich\x20(m\/w\/d)\x202026', latitude: 48.3705449, longitude: 10.89779, postingId: 61345337, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'ISMS\x20Program\x20Manager\x20(m\/w\/d)', latitude: 48.3705449, longitude: 10.89779, postingId: 68281901, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Bachelor\x20of\x20Sciene\x20(m\/w\/d)\x20im\x20Studiengang\x20Wirtschaftsinformatik\x20und\x20nachhaltige\x20IT\x20', latitude: 52.2815691, longitude: 7.4434092, postingId: 66852015, geoName: 'Rheine,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Werkstudent\x20(m\/w\/d)\x20Logistik', latitude: 52.2815691, longitude: 7.4434092, postingId: 67016425, geoName: 'Rheine,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Bachelor\x20of\x20Engineering\x20(m\/w\/d)\x20im\x20Studiengang\x20Engineering\x20technischer\x20Systeme\x20mit\x20dem\x20Schwerpunkt\x20Maschinenbau\x20für\x202027', latitude: 52.2815691, longitude: 7.4434092, postingId: 66851925, geoName: 'Rheine,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Getriebeprüfer\x20(m\/w\/d)\x20Prüfstand', latitude: 48.3705449, longitude: 10.89779, postingId: 65400126, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Auszubildender\x20zum\x20Zerspanungsmechaniker\x20(m\/w\/d)\x20für\x202027', latitude: 52.3758916, longitude: 9.7320104, postingId: 66847440, geoName: 'Hannover,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Schülerpraktikanten\x20(m\/w\/d)\x20Initiativbewerbung', latitude: 52.2815691, longitude: 7.4434092, postingId: 60849857, geoName: 'Rheine,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Werkstudent\x20(m\/w\/d)\x20zur\x20Unterstützung\x20eines\x20Prüfstandprojekt\x73', latitude: 48.3705449, longitude: 10.89779, postingId: 68236701, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Werkstoffprüfer\x20Labor\x20(m\/w\/d)', latitude: 48.3705449, longitude: 10.89779, postingId: 68232696, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Serviceingenieur\x20(m\/w\/d)\x20VMS\x20Fahrzeuggetriebe', latitude: 48.3705449, longitude: 10.89779, postingId: 67028975, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Commercial\x20Project\x20Manager\x20Marine\x20(m\/f\/d)', latitude: 48.3705449, longitude: 10.89779, postingId: 60842722, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Zerspanungsmechaniker\x20(m\/w\/d)\x20Kubische\x20Teile', latitude: 48.3705449, longitude: 10.89779, postingId: 61060477, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Duales\x2d\/Verbundstudium\x20Mechatronik\x20\x2d\x20Fachrichtung\x20Mechatronik\x20(m\/w\/d)\x20–\x20Start\x2001.09.2027\x20', latitude: 48.3705449, longitude: 10.89779, postingId: 66576203, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Leitung\x20Kompetenzcenter\x20Reisen\x20(m\/w\/d)', latitude: 48.3705449, longitude: 10.89779, postingId: 65102763, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Ingenieur\x20(m\/w\/d)\x20Inbetriebnahme\x20Prüfstände', latitude: 48.3705449, longitude: 10.89779, postingId: 64708909, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Techniker\x20Inbetriebnahme\x20(m\/w\/d)\x20Prüfstände', latitude: 48.3705449, longitude: 10.89779, postingId: 61921509, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Key\x20User\x20(m\/w\/d)\x20CAM\x20Programmierung', latitude: 52.3758916, longitude: 9.7320104, postingId: 67205530, geoName: 'Hannover,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Produktionsplaner\x20(m\/w\/d)\x20Fahrzeuggetriebe', latitude: 48.3705449, longitude: 10.89779, postingId: 68137341, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Configuration\x20Manager\x20(m\/w\/d)', latitude: 48.3705449, longitude: 10.89779, postingId: 68126296, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Process\x20Excellence\x20\x26\x20SAP\x20Experts\x20\/\x20MM,\x20EWM,\x20PP,\x20SD,\x20FI\x20–\x20all\x20levels\x20(m\/w\/d)\x20', latitude: 48.3705449, longitude: 10.89779, postingId: 66243723, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Logistikmeister\x20(m\/w\/d)\x20Produktionslogistik', latitude: 48.3705449, longitude: 10.89779, postingId: 68116016, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Pflichtpraktikum\x20(m\/w\/d)\x20im\x20Bereich\x20Finance\x20–\x20Financial\x20Planning\x20\x26\x20Analysi\x73', latitude: 48.3705449, longitude: 10.89779, postingId: 67395292, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Techniker\x20(m\/w\/d)\x20Elektrokonstruktion', latitude: 48.3705449, longitude: 10.89779, postingId: 66755660, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Field\x20Service\x20Engineer\x20(m\/f\/d)', latitude: 51.4536672, longitude: 3.5709125, postingId: 61395607, geoName: 'Vlissingen,\x20Niederlande'});SG.allJobLocations.push({markerName: 'Enterprise\x2d\/Solution\x2dArchitekt\x20(m\/w\/d)', latitude: 48.3705449, longitude: 10.89779, postingId: 66594913, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Rollout\x20and\x20Migration\x20Factory\x20Lead\x20(m\/w\/d)', latitude: 48.3705449, longitude: 10.89779, postingId: 66594948, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'SAP\x20EWM\x20Senior\x20Consultant\x20(m\/w\/d)', latitude: 48.3705449, longitude: 10.89779, postingId: 66594853, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'SAP\x20FI\/CO\x20Senior\x20Consultant\x20(m\/w\/d)', latitude: 48.3705449, longitude: 10.89779, postingId: 66595718, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'SAP\x20GTS\x20Senior\x20Consultant\x20(m\/w\/d)', latitude: 48.3705449, longitude: 10.89779, postingId: 66596078, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'SAP\x20PS\/EPPM\x20Senior\x20Consultant\x20(m\/w\/d)', latitude: 48.3705449, longitude: 10.89779, postingId: 66595173, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'SAP\x20S\/4\x20Service\x20Senior\x20Consultant\x20(m\/w\/d)', latitude: 48.3705449, longitude: 10.89779, postingId: 66595688, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Pflichtpraktikant\x20(m\/w\/d)\x20im\x20Bereich\x20Quality', latitude: 48.3705449, longitude: 10.89779, postingId: 68096786, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Werkstudent\x20für\x20eine\x20Projektunterstützung\x20in\x20der\x20Technologieentwicklung\x20(m\/w\/d)\x20', latitude: 48.3705449, longitude: 10.89779, postingId: 68096041, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Industriemechaniker\x20(m\/w\/d)\x20Fahrzeuggetriebe', latitude: 48.3705449, longitude: 10.89779, postingId: 65357901, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Technischer\x20Projekteinkäufer\x20(m\/w\/d)\x20Testsysteme', latitude: 48.3705449, longitude: 10.89779, postingId: 67585052, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'CNC\x2dZerspanungsmechaniker\x20(m\/w\/d)\x20für\x20die\x20vertikale\x20Dreh\x2d\x20und\x20Frästechnik', latitude: 52.2815691, longitude: 7.4434092, postingId: 68081586, geoName: 'Rheine,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Werkstudent\x20(m\/w\/d)\x20im\x20Bereich\x20Cyber\x2dSecurity', latitude: 48.3705449, longitude: 10.89779, postingId: 65244981, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Produktionstechniker\x20(m\/w\/d)', latitude: 48.3705449, longitude: 10.89779, postingId: 67356220, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Messtechniker\x20(m\/w\/d)\x20Qualitätssicherung', latitude: 48.3705449, longitude: 10.89779, postingId: 67330685, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Rissprüfer\x20MT\x20und\x20PT\x20(m\/w\/d)', latitude: 48.3705449, longitude: 10.89779, postingId: 66995710, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Werkstudent\x20(m\/w\/d)\x20Prüfstandsplanung\x20', latitude: 48.3705449, longitude: 10.89779, postingId: 66580403, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Elektroniker\x20(m\/w\/d)\x20für\x20Betriebstechnik\x20\/\x20Mechatroniker\x20Instandhaltung', latitude: 52.2815691, longitude: 7.4434092, postingId: 67241780, geoName: 'Rheine,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Ausbildung\x20zum\x20Zerspanungsmechaniker\x20(m\/w\/d)\x20–\x202027', latitude: 48.3705449, longitude: 10.89779, postingId: 66520478, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Experte\x20IFRS\x20\/\x20HGB\x20(m\/w\/d)', latitude: 48.3705449, longitude: 10.89779, postingId: 65109728, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Sales\x20Engineer\x20(m\/f\/d)', latitude: 51.4536672, longitude: 3.5709125, postingId: 66532203, geoName: 'Vlissingen,\x20Niederlande'});SG.allJobLocations.push({markerName: 'Mitarbeiter\x20(m\/w\/d)\x20Refurbishment\x20\x26\x20Field\x20Service', latitude: 52.3758916, longitude: 9.7320104, postingId: 65677926, geoName: 'Hannover,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Monteur\x20(m\/w\/d)\x20Sondermaschinenbau', latitude: 48.3705449, longitude: 10.89779, postingId: 65511491, geoName: 'Augsburg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Elektromaschinenbauer\x20(m\/w\/d)\x20Hybride\x20Antriebstechnik', latitude: 47.9999615, longitude: 11.339009, postingId: 67214025, geoName: '82319\x20Starnberg,\x20Deutschland'});SG.allJobLocations.push({markerName: 'Zerspanungsmechaniker\x20(m\/w\/d)\x20\x20Drehtechnik\x20horizontal', latitude: 52.3758916, longitude: 9.7320104, postingId: 67178010, geoName: 'Hannover,\x20Deutschland'});
+/*]]>*/
+</script>
+<script type="text/javascript" id="jobMapInit">
+/*<![CDATA[*/
+window.jQuery('#job-search-map').hide();
+/*]]>*/
+</script>
+<script type="text/javascript" src="https://static.softgarden.de/thirdparty/leaflet/1.9.4/leaflet.js"></script>
+<script type="text/javascript" src="/thirdparty/jquery/query/jquery.query-2.2.3.js"></script>
+<script type="text/javascript" src="../../wicket/resource/com.softgarden.staffit.webclient.webfrontend.pages.main.js.JavaScriptReference/jobSearchLive-ver-DF58093895DAE1EA109A34586D3118B6.js"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+Wicket.Event.add(window, "domready", function(event) { 
+Wicket.Ajax.ajax({"u":"./jobs?-1.0-jobSearch-jobSearchContainer-keyword_search","m":"POST","c":"keyword_search","e":"input change","ch":"keyword_search|d","tr":{"id":"keyword_search","d":10,"p":true}});;
+$('#id1').chosen({width: "100%",disable_search: true,no_results_text: "Kein Eintrag gefunden",placeholder_text_single: "Bitte wählen",placeholder_text_multiple: "Bitte wählen"});requestAnimationFrame(function() {  var $input = $('#id1_chosen .chosen-search input');  if ($input.length && !$input.attr('aria-label')) {    $input.attr('aria-label', 'Search options');  }});;
+Wicket.Event.publish(Wicket.Event.Topic.AJAX_HANDLERS_BOUND);
+;});
+/*]]>*/
+</script>
+
+    </body>
+</html>
