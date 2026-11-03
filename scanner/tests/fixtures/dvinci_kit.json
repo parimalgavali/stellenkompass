@@ -1,0 +1,430 @@
+[
+ {
+  "id": 170977,
+  "language": "de",
+  "position": "(Junior) SAP Applikationsbetreuer/in (w/m/d)",
+  "jobPublicationURL": "https://jobs.pse.kit.edu/de/jobs/170977/junior-sap-applikationsbetreuerin-wmd",
+  "startDate": "2026-10-29T23:00Z",
+  "endDate": "2026-11-30T22:59:59.999Z",
+  "introduction": "<p>Das Scientific Computing Center ist das Informationstechnologie-Zentrum des KIT.</p><p>Neugierig auf eine aufregende und vielseitige Rolle in einem agilen Team? Entdecken Sie mehr über SCC als Ihren beruflichen Place to be: KIT - SCC - Über uns - Arbeiten am SCC</p>",
+  "tasks": "<p>Die Abteilung SCC-IOR betreibt die SAP-Systeme des KIT zur Unterstützung der Verwaltungsprozesse. Zur Verstärkung unseres Teams suchen wir eine/n (Junior) SAP Applikationsbetreuer/in für den Bereich Personalwesen/HR (SAP HCM) mit den Aufgabenschwerpunkten:</p><ul><li>Aufnahme und Umsetzung von Anforderungen      der Fachabteilungen (Durchführung von Customizing sowie      Programmierarbeiten in",
+  "profile": "<p>Sie bringen mit:</p><ul><li>ein abgeschlossenes Hochschulstudium (FH/DH/Bachelor) der Fachrichtung Wirtschaftsinformatik, Informatik, BWL, Verwaltungswissenschaft oder vergleichbarer Fachrichtungen</li><li>sehr gute Deutsch- sowie mindestens gute Englischkenntnisse</li><li>idealerweise Erfahrung in der Betreuung von IT-Systemen und/oder Kenntnisse in den Fachprozessen Personalwesen/HR</li><li>e",
+  "weOffer": "",
+  "jobOpening": {
+   "id": 166488,
+   "categories": [
+    {
+     "id": 11,
+     "internalName": "INFORMATIONSTECHNOLOGIE",
+     "name": "Information technology (IT)"
+    }
+   ],
+   "location": "Eggenstein-Leopoldshafen (and Karlsruhe)",
+   "targetGroups": [
+    {
+     "id": 1,
+     "internalName": "PROFESSIONALS",
+     "name": "Experienced"
+    },
+    {
+     "id": 11,
+     "internalName": "BERUFSEINSTIEG",
+     "name": "Entry level"
+    }
+   ],
+   "workingTimes": [
+    {
+     "id": 1,
+     "internalName": "FULL_TIME",
+     "name": "Full-time"
+    }
+   ],
+   "locations": [
+    {
+     "id": "EGGENSTEINLEOPOLDSHAFEN_UND_KARLSRUHE",
+     "name": "Eggenstein-Leopoldshafen (and Karlsruhe)",
+     "country": {
+      "name": "Germany",
+      "isoA2": "DE"
+     },
+     "latitude": null,
+     "longitude": null,
+     "additionalInformation": null,
+     "address": {
+      "address1": null,
+      "address2": "Hermann-von-Helmholtz-Platz 1",
+      "address3": null,
+      "address4": null,
+      "address5": null,
+      "usState": null,
+      "zipCode": "76344",
+      "city": "Eggenstein-Leopoldshafen",
+      "country": {
+       "name": "Germany",
+       "isoA2": "DE"
+      }
+     }
+    }
+   ],
+   "contractPeriod": null,
+   "company": {
+    "name": "Scientific Computing Center (SCC)"
+   }
+  }
+ },
+ {
+  "id": 170942,
+  "language": "en",
+  "position": "Academic Researcher (f/m/d)",
+  "jobPublicationURL": "https://jobs.pse.kit.edu/en/jobs/170942/academic-researcher-fmd",
+  "startDate": "2026-10-19T22:00Z",
+  "endDate": "2026-11-22T22:59:59.999Z",
+  "introduction": "<p>The Institute for Nuclear Waste Management at the Karlsruhe Institute of Technology (KIT-INE, https://www.ine.kit.edu) conducts safety research for the final disposal of radioactive waste. The institute operates a controlled area for work with radioactive materials and is equipped with a comprehensive range of analytical and spectroscopic instruments.<br></p>",
+  "tasks": "<p>Comprehensive sorption experiments will be conducted with selected radionuclides on natural rock samples. The work will include:</p><ul><li>Planning of the sorption experiments and defining experimental parameters and boundary conditions</li><li>Conducting sorption experiments in glove boxes, including dilute as well in saline solutions</li><li>Quantification of the sorption experiments and ana",
+  "profile": "<p>You hold a master’s degree in a scientific field and a Ph.D. in chemistry, earth sciences, or a related field.</p><p><strong>Expertise</strong></p><ul><li>Knowledge of mineralogy/geology and geochemical modeling</li><li>Knowledge in the field of final repository safety research </li><li>Good written and spoken German and English</li></ul><p><strong>Practical experience</strong></p><ul><li>Plann",
+  "weOffer": "",
+  "jobOpening": {
+   "id": 166457,
+   "categories": [
+    {
+     "id": 26,
+     "internalName": "WISSENSCHAFT_1",
+     "name": "Research and teaching"
+    }
+   ],
+   "location": "Eggenstein-Leopoldshafen (and Karlsruhe)",
+   "targetGroups": [
+    {
+     "id": 1,
+     "internalName": "PROFESSIONALS",
+     "name": "Experienced"
+    },
+    {
+     "id": 9,
+     "internalName": "POSTDOC",
+     "name": "Postdoc"
+    }
+   ],
+   "workingTimes": [
+    {
+     "id": 1,
+     "internalName": "FULL_TIME",
+     "name": "Full-time"
+    }
+   ],
+   "locations": [
+    {
+     "id": "EGGENSTEINLEOPOLDSHAFEN_UND_KARLSRUHE",
+     "name": "Eggenstein-Leopoldshafen (and Karlsruhe)",
+     "country": {
+      "name": "Germany",
+      "isoA2": "DE"
+     },
+     "latitude": null,
+     "longitude": null,
+     "additionalInformation": null,
+     "address": {
+      "address1": null,
+      "address2": "Hermann-von-Helmholtz-Platz 1",
+      "address3": null,
+      "address4": null,
+      "address5": null,
+      "usState": null,
+      "zipCode": "76344",
+      "city": "Eggenstein-Leopoldshafen",
+      "country": {
+       "name": "Germany",
+       "isoA2": "DE"
+      }
+     }
+    }
+   ],
+   "contractPeriod": null,
+   "company": {
+    "name": "Institut für Nukleare Entsorgung (INE)"
+   }
+  }
+ },
+ {
+  "id": 170941,
+  "language": "de",
+  "position": "Akademische Mitarbeiterin / Akademischer Mitarbeiter (w/m/d)",
+  "jobPublicationURL": "https://jobs.pse.kit.edu/de/jobs/170941/akademische-mitarbeiterin-akademischer-mitarbeiter-wmd",
+  "startDate": "2026-10-19T22:00Z",
+  "endDate": "2026-11-22T22:59:59.999Z",
+  "introduction": "<p>Das Institut für Nukleare Entsorgung des Karlsruher Instituts für Technologie (KIT-INE, https://www.ine.kit.edu) befasst sich mit der Sicherheitsforschung zur Endlagerung radioaktiver Abfälle. Das Institut betreibt einen Kontrollbereich für Arbeiten mit radioaktiven Stoffen und besitzt eine umfassende analytische und spektroskopische Ausstattung.<br></p>",
+  "tasks": "<p>Es werden Sorptionsexperimente mit ausgewählten Radionukliden an natürlichen Gesteinsproben durchgeführt. Hierbei erfolgt: </p><ul><li>Planung der Sorptionsexperimente und Definition experimenteller Parameter und Randbedingungen</li><li>Durchführung von Sorptionsexperimenten in Handschuhboxen, sowohl in verdünnten als auch in salinaren Lösungen</li><li>Quantifizierung der Sorptionsexperimente u",
+  "profile": "<p>Sie verfügen über ein abgeschlossenes wissenschaftliches Hochschulstudium (Master) sowie über eine Promotion in Chemie oder Geowissenschaften oder einem verwandten Fachgebiet.</p><p><strong>Fachkenntnisse</strong></p><ul><li>Kenntnisse in Mineralogie/Geologie sowie geochemischer Modellierung</li><li>Kenntnisse im Bereich der Endlagersicherheitsforschung </li><li>Gute Deutsch- und Englischkenntn",
+  "weOffer": "",
+  "jobOpening": {
+   "id": 166457,
+   "categories": [
+    {
+     "id": 26,
+     "internalName": "WISSENSCHAFT_1",
+     "name": "Research and teaching"
+    }
+   ],
+   "location": "Eggenstein-Leopoldshafen (and Karlsruhe)",
+   "targetGroups": [
+    {
+     "id": 1,
+     "internalName": "PROFESSIONALS",
+     "name": "Experienced"
+    },
+    {
+     "id": 9,
+     "internalName": "POSTDOC",
+     "name": "Postdoc"
+    }
+   ],
+   "workingTimes": [
+    {
+     "id": 1,
+     "internalName": "FULL_TIME",
+     "name": "Full-time"
+    }
+   ],
+   "locations": [
+    {
+     "id": "EGGENSTEINLEOPOLDSHAFEN_UND_KARLSRUHE",
+     "name": "Eggenstein-Leopoldshafen (and Karlsruhe)",
+     "country": {
+      "name": "Germany",
+      "isoA2": "DE"
+     },
+     "latitude": null,
+     "longitude": null,
+     "additionalInformation": null,
+     "address": {
+      "address1": null,
+      "address2": "Hermann-von-Helmholtz-Platz 1",
+      "address3": null,
+      "address4": null,
+      "address5": null,
+      "usState": null,
+      "zipCode": "76344",
+      "city": "Eggenstein-Leopoldshafen",
+      "country": {
+       "name": "Germany",
+       "isoA2": "DE"
+      }
+     }
+    }
+   ],
+   "contractPeriod": null,
+   "company": {
+    "name": "Institut für Nukleare Entsorgung (INE)"
+   }
+  }
+ },
+ {
+  "id": 170988,
+  "language": "de",
+  "position": "Akademische Mitarbeiterin / Akademischer Mitarbeiter (PostDoc) im Bereich FSI / Aeroelastik / Rotordynamik (w/m/d)",
+  "jobPublicationURL": "https://jobs.pse.kit.edu/de/jobs/170988/akademische-mitarbeiterin-akademischer-mitarbeiter-postdoc-im-bereich-fsi-aeroelastik-rotordynamik-wmd",
+  "startDate": "2026-11-01T23:00Z",
+  "endDate": "2026-11-30T22:59:59.999Z",
+  "introduction": "",
+  "tasks": "<p>Sie haben die Möglichkeit sich aktiv in die     Spitzenforschung im Bereich der Flugantriebe und Energieanlagen der Zukunft     einzubringen. Unter anderem werden neue Dichtungstechnologien für den     effizienten Betrieb zukünftiger Flugtriebwerke und stationärer Turbomaschinen     erforscht. Aufgrund stark transienter Beanspruchungen werden die Auslegung und     Entwicklung dieser Komponenten",
+  "profile": "<p>Sie verfügen über:</p>  <ul data-list-style-type=\"disc\">     <li>eine hervorragend abgeschlossene         ingenieurwissenschaftliche Promotion vorzugsweise auf einem oder mehreren der         folgenden Gebiete:<ul data-list-style-type=\"circle\">             <li>Fluid-Struktur-Interaktion</li>             <li>Aeroelastik</li>             <li>Aeroakustik</li>             <li>Rotordynamik</li>     ",
+  "weOffer": "",
+  "jobOpening": {
+   "id": 166495,
+   "categories": [
+    {
+     "id": 26,
+     "internalName": "WISSENSCHAFT_1",
+     "name": "Research and teaching"
+    }
+   ],
+   "location": "Karlsruhe (and Eggenstein-Leopoldshafen)",
+   "targetGroups": [
+    {
+     "id": 9,
+     "internalName": "POSTDOC",
+     "name": "Postdoc"
+    }
+   ],
+   "workingTimes": [
+    {
+     "id": 1,
+     "internalName": "FULL_TIME",
+     "name": "Full-time"
+    }
+   ],
+   "locations": [
+    {
+     "id": "KARLSRUHE_UND_EGGENSTEINLEOPOLDSHAFEN",
+     "name": "Karlsruhe (and Eggenstein-Leopoldshafen)",
+     "country": {
+      "name": "Germany",
+      "isoA2": "DE"
+     },
+     "latitude": null,
+     "longitude": null,
+     "additionalInformation": null,
+     "address": {
+      "address1": null,
+      "address2": "Kaiserstraße 12",
+      "address3": null,
+      "address4": null,
+      "address5": null,
+      "usState": null,
+      "zipCode": "76131",
+      "city": "Karlsruhe",
+      "country": {
+       "name": "Germany",
+       "isoA2": "DE"
+      }
+     }
+    }
+   ],
+   "contractPeriod": null,
+   "company": {
+    "name": "Institut für Thermische Strömungsmaschinen (ITS)"
+   }
+  }
+ },
+ {
+  "id": 170964,
+  "language": "de",
+  "position": "Akademische Mitarbeiterin / Akademischer Mitarbeiter (w/m/d)",
+  "jobPublicationURL": "https://jobs.pse.kit.edu/de/jobs/170964/akademische-mitarbeiterin-akademischer-mitarbeiter-wmd-75-teilzeit-phd",
+  "startDate": "2026-10-26T23:00Z",
+  "endDate": "2026-11-20T22:59:59.999Z",
+  "introduction": "<p>Die Forschungsgruppe am Institut für Biologische und Chemische Systeme - Funktionale Molekulare Systeme (IBCS-FMS) erforscht DNA-basierte funktionelle Materialien an der Schnittstelle von Nanotechnologie, Biophysik, Soft Matter und Informationsverarbeitung.</p>",
+  "tasks": "<p>Ziel der Tätigkeit ist die Entwicklung und Untersuchung DNA-basierter Hydrogele mit programmierbaren, thermodynamischen und mechanischen Eigenschaften zur Informationsspeicherung, Biosensorik und Informationsverarbeitung.</p><p>Ihre Tätigkeiten im Einzelnen:</p><ul><li>Entwicklung von coarse-grained Modellen für DNA-Nanostrukturen</li><li>Durchführung von oxDNA-Simulation und&nbsp;LAMMPS-Simula",
+  "profile": "<ul><li>Wissenschaftliches Hochschulstudium in Physik, Chemie, Materialwissenschaften, Biophysik, Computational Science, Bioengineering oder verwandten Fächern</li><li>Erfahrung mit molekularer Simulation</li><li>Statistische Physik und Biophysik</li><li>Soft Matter</li><li>Computational Modelling</li><li>Python, Matlab oder vergleichbare Programmiersprachen</li><li>Idealerweise oxDNA, LAMMPS und ",
+  "weOffer": "",
+  "jobOpening": {
+   "id": 166475,
+   "categories": [
+    {
+     "id": 26,
+     "internalName": "WISSENSCHAFT_1",
+     "name": "Research and teaching"
+    }
+   ],
+   "location": "Eggenstein-Leopoldshafen (and Karlsruhe)",
+   "targetGroups": [
+    {
+     "id": 1,
+     "internalName": "PROFESSIONALS",
+     "name": "Experienced"
+    },
+    {
+     "id": 8,
+     "internalName": "BERUFSBEGLEITENDE_PROMOTION",
+     "name": "Doctorate alongside employment"
+    }
+   ],
+   "workingTimes": [
+    {
+     "id": 2,
+     "internalName": "PART_TIME",
+     "name": "Part-time"
+    }
+   ],
+   "locations": [
+    {
+     "id": "EGGENSTEINLEOPOLDSHAFEN_UND_KARLSRUHE",
+     "name": "Eggenstein-Leopoldshafen (and Karlsruhe)",
+     "country": {
+      "name": "Germany",
+      "isoA2": "DE"
+     },
+     "latitude": null,
+     "longitude": null,
+     "additionalInformation": null,
+     "address": {
+      "address1": null,
+      "address2": "Hermann-von-Helmholtz-Platz 1",
+      "address3": null,
+      "address4": null,
+      "address5": null,
+      "usState": null,
+      "zipCode": "76344",
+      "city": "Eggenstein-Leopoldshafen",
+      "country": {
+       "name": "Germany",
+       "isoA2": "DE"
+      }
+     }
+    }
+   ],
+   "contractPeriod": null,
+   "company": {
+    "name": "Institut für Biologische und Chemische Systeme - Funktionelle Molekulare Systeme (IBCS-FMS)"
+   }
+  }
+ },
+ {
+  "id": 144293,
+  "language": "de",
+  "position": "Ausbildung Baustoffprüferin / Baustoffprüfer (w/m/d)",
+  "jobPublicationURL": "https://jobs.pse.kit.edu/de/jobs/144293/ausbildung-baustoffpruferin-baustoffprufer-wmd-fachrichtung-mortel-und-betontechnik",
+  "startDate": null,
+  "endDate": null,
+  "introduction": "<p><strong>Du     möchtest mit einer Berufsausbildung oder einem dualen Studium am KIT     durchstarten?</strong> Wir bieten dir viele spannende Möglichkeiten. Ob es nun für dich die Ausbildung als Veranstaltungskaufmann oder die IT-Ausbildung in Karlsruhe wird - wir geben dir das Know-how für deinen Erfolg und deine Zukunft. <strong>Werde Teil unseres Teams!</strong></p>",
+  "tasks": "<ul><li>Durchführung von Frisch- und Festbetonprüfungen</li><li>Prüfungen zur Überwachung und Zertifizierung von Bauprodukten</li><li>Durchführung und Protokollierung wissenschaftlicher Versuche</li><li>Durchführung von Bauwerksuntersuchungen</li><li>Instandhaltungs- und Kalibrierungsarbeiten einzelner Laborgeräte</li></ul>",
+  "profile": "<ul><li>Schulabschluss: mind. guter Hauptschulabschluss</li><li>Interesse an naturwissenschaftlichen Vorgängen</li><li>Zuverlässige und gewissenhafte Arbeitsweise</li><li>Mathematisch-technisches Verständnis</li><li>Lernbereitschaft und Engagement</li><li>Handwerkliches Geschick</li></ul>",
+  "weOffer": "",
+  "jobOpening": {
+   "id": 142561,
+   "categories": [
+    {
+     "id": 25,
+     "internalName": "AUSZUBILDENDE_UND_DUALSTUDIERENDE",
+     "name": "Apprentices and Dual Students"
+    }
+   ],
+   "location": "Eggenstein-Leopoldshafen (and Karlsruhe)",
+   "targetGroups": [
+    {
+     "id": 6,
+     "internalName": "AUSBILDUNG__DUALES_STUDIUM",
+     "name": "Apprentices / Dual Students"
+    }
+   ],
+   "workingTimes": [
+    {
+     "id": 1,
+     "internalName": "FULL_TIME",
+     "name": "Full-time"
+    }
+   ],
+   "locations": [
+    {
+     "id": "EGGENSTEINLEOPOLDSHAFEN_UND_KARLSRUHE",
+     "name": "Eggenstein-Leopoldshafen (and Karlsruhe)",
+     "country": {
+      "name": "Germany",
+      "isoA2": "DE"
+     },
+     "latitude": null,
+     "longitude": null,
+     "additionalInformation": null,
+     "address": {
+      "address1": null,
+      "address2": "Hermann-von-Helmholtz-Platz 1",
+      "address3": null,
+      "address4": null,
+      "address5": null,
+      "usState": null,
+      "zipCode": "76344",
+      "city": "Eggenstein-Leopoldshafen",
+      "country": {
+       "name": "Germany",
+       "isoA2": "DE"
+      }
+     }
+    }
+   ],
+   "contractPeriod": null,
+   "company": {
+    "name": "PEBA-BAW"
+   }
+  }
+ }
+]

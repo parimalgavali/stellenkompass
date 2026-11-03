@@ -4,6 +4,7 @@ from stellenkompass_scanner.sources import (
     arbeitnow,
     ashby,
     bundesagentur,
+    dvinci,
     greenhouse,
     lever,
     personio,
@@ -276,3 +277,23 @@ def test_smartrecruiters_caps_new_details(fixture, monkeypatch):
     fetcher, _ = _sr_fetcher(fixture, _sr_ad)
     jobs = smartrecruiters.parse(smartrecruiters.fetch(fetcher, "BoschGroup"), "BoschGroup")
     assert fetcher.details == [] and len(jobs) == 1
+
+
+def test_dvinci_kit(fixture):
+    jobs = dvinci.parse(fixture("dvinci_kit.json"), "jobs.pse.kit.edu", company="KIT")
+    assert len(jobs) == 4  # the Ausbildung place is left out
+    assert not any("Ausbildung" in j.title for j in jobs)
+    job = jobs[0]
+    assert job.id == "dvinci:jobs.pse.kit.edu-170977"
+    assert (job.company, job.city, job.language) == ("KIT", "Eggenstein-Leopoldshafen", "de")
+    assert "Scientific Computing Center (SCC)" in job.tags
+    assert job.url.startswith("https://jobs.pse.kit.edu/de/jobs/170977/")
+    assert {j.language for j in jobs} == {"de", "en"}
+    assert any(j.job_type == "part_time" for j in jobs)
+
+
+def test_dvinci_one_role_per_opening(fixture):
+    jobs = dvinci.parse(fixture("dvinci_kit.json"), "jobs.pse.kit.edu", company="KIT")
+    twin = next(j for j in jobs if j.source_job_id == "170942")
+    assert twin.language == "en" and twin.aliases == ["dvinci:jobs.pse.kit.edu-170941"]
+    assert not any(j.source_job_id == "170941" for j in jobs)

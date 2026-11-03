@@ -87,3 +87,10 @@ Short records. Newest at the bottom. Format: context → decision → why.
 - Cache = last `jobs.json`: adapters with `USES_PREVIOUS` get last scan's jobs as `known`. Same id and same `releasedDate` → reuse snippet and skills, no request. No separate cache file.
 - At most 150 new detail requests per board and run (`MAX_DETAILS`); the rest get text on later runs.
 - A failed detail keeps the role and its previous text; failures are logged as a warning.
+
+## D18. University/research pilot: inventory first, d.vinci for KIT (2026-11-03)
+- `docs/research/institutions.md` records each pilot institution as `enabled`, `pending` or `blocked`. A portal without a working collector is never counted as covered.
+- robots.txt and HTTP 403 are respected: TUM, Fraunhofer, DLR and DFKI stay `blocked`.
+- d.vinci (`/jobPublication/list.json`) is the public feed its job widgets load. It isn't documented publicly, so it's treated like any public widget feed, and the adapter fails safely if the shape changes.
+- Ausbildung/dual-study places are skipped (as in D9). Contact persons in the feed are never stored.
+- One role per `jobOpening.id`: the English ad is kept if there is one; the other language ads add their text and become aliases.

@@ -14,6 +14,7 @@ _SOURCE_RANK = {
     "smartrecruiters": 0,
     "recruitee": 0,
     "teamtailor": 0,
+    "dvinci": 0,
     "arbeitnow": 1,
     "bundesagentur": 1,
 }
