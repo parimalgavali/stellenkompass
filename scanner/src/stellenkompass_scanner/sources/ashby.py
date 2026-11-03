@@ -13,7 +13,16 @@ def fetch(fetcher: Fetcher, board: str) -> dict:
 
 
 def _country(entry: dict) -> str:
-    return ((entry.get("address") or {}).get("postalAddress") or {}).get("addressCountry") or ""
+    """Primary locations nest the country in postalAddress; secondary ones may not."""
+    address = entry.get("address") or {}
+    return (address.get("postalAddress") or address).get("addressCountry") or ""
+
+
+def _workplace(item: dict) -> str | None:
+    kind = (item.get("workplaceType") or "").lower()
+    if kind in ("onsite", "hybrid", "remote"):
+        return kind
+    return "remote" if item.get("isRemote") else None
 
 
 def parse(raw: dict, board: str, company: str | None = None) -> list[Job]:
@@ -24,7 +33,8 @@ def parse(raw: dict, board: str, company: str | None = None) -> list[Job]:
         secondary = item.get("secondaryLocations") or []
         locations = [item.get("location", "")] + [s.get("location", "") for s in secondary]
         countries = [_country(item)] + [_country(s) for s in secondary]
-        if item.get("isRemote") or item.get("workplaceType") == "Remote":
+        workplace = _workplace(item)
+        if workplace == "remote":
             locations.append("Remote")
         job = build_job(
             source="ashby",
@@ -36,7 +46,7 @@ def parse(raw: dict, board: str, company: str | None = None) -> list[Job]:
             url=item.get("jobUrl", ""),
             description=item.get("descriptionPlain", ""),
             country_codes=countries,
-            remote=bool(item.get("isRemote")) or item.get("workplaceType") == "Remote",
+            workplace=workplace,
             type_hints=[item.get("employmentType", "")],
             posted_at=iso_date(item.get("publishedAt")),
             tags=[item.get("department", ""), item.get("workplaceType", "")],

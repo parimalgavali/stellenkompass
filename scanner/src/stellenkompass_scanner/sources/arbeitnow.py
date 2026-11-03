@@ -32,7 +32,7 @@ def parse(items: list[dict]) -> list[Job]:
             locations=[item.get("location", "")] + (["Remote"] if item.get("remote") else []),
             url=item.get("url", ""),
             description=html_to_text(item.get("description")),
-            remote=bool(item.get("remote")),
+            workplace="remote" if item.get("remote") else None,
             type_hints=item.get("job_types") or [],
             posted_at=iso_date(item.get("created_at")),
             tags=item.get("tags") or [],

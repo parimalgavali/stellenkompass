@@ -49,7 +49,7 @@ def parse(raw: dict, board: str, company: str | None = None) -> list[Job]:
             + (["Remote"] if loc.get("remote") else []),
             url=f"https://jobs.smartrecruiters.com/{board}/{item['id']}",
             country_codes=["de"],
-            remote=bool(loc.get("remote")),
+            workplace="remote" if loc.get("remote") else "hybrid" if loc.get("hybrid") else None,
             type_hints=[
                 (item.get("typeOfEmployment") or {}).get("label", ""),
                 (item.get("experienceLevel") or {}).get("label", ""),

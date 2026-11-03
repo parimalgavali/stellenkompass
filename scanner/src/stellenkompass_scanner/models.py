@@ -14,7 +14,8 @@ class Job:
     url: str
     source: str
     city: str = ""
-    remote: bool = False
+    remote: bool = False  # fully remote only
+    workplace_type: str = "unknown"  # onsite / hybrid / remote / unknown
     job_type: str = "full_time"
     language: str = "en"
     posted_at: str = ""

@@ -17,8 +17,8 @@ def parse(raw: list[dict], board: str, company: str | None = None) -> list[Job]:
     for item in records(raw, None, "id"):
         cats = item.get("categories") or {}
         locations = [cats.get("location", "")] + list(cats.get("allLocations") or [])
-        remote = (item.get("workplaceType") or "").lower() == "remote"
-        if remote:
+        workplace = (item.get("workplaceType") or "").lower()
+        if workplace == "remote":
             locations.append("Remote")
         job = build_job(
             source="lever",
@@ -30,7 +30,7 @@ def parse(raw: list[dict], board: str, company: str | None = None) -> list[Job]:
             url=item.get("hostedUrl", ""),
             description=item.get("descriptionPlain") or item.get("openingPlain") or "",
             country_codes=[item.get("country", "")],
-            remote=remote,
+            workplace=workplace,
             type_hints=[cats.get("commitment", "")],
             posted_at=iso_date(item.get("createdAt")),
             tags=[cats.get("team", ""), cats.get("department", "")],

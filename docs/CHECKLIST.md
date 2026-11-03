@@ -62,9 +62,9 @@ Plan: [PLANS.md](PLANS.md) phases 5–12. Review: [research/source-expansion-han
 - [x] Validate before writing; atomic replace of `data/*.json`; `collected` / `carried` / `duplicates_removed` in the report
 
 ### Phase 7: Geography
-- [ ] Country per location; explicit foreign country beats a city-name match
-- [ ] Ashby secondary addresses; German small towns with country DE kept
-- [ ] `workplace_type`: onsite / hybrid / remote
+- [x] Country per location; explicit foreign country beats a city-name match
+- [x] Ashby secondary addresses; German small towns with country DE kept
+- [x] `workplace_type`: onsite / hybrid / remote / unknown (`remote` = fully remote only)
 
 ### Phase 8: UI discoverability
 - [ ] Search includes location; city filter lists all cities

@@ -39,6 +39,7 @@ export function JobCard({ job, profile, tracked, onSave }: Props) {
           <span className="chip">{JOB_TYPE_LABEL[job.job_type]}</span>
           <span className="chip">{job.language === 'de' ? 'German' : 'English'}</span>
           {job.remote && <span className="chip">Remote</span>}
+          {job.workplace_type === 'hybrid' && <span className="chip">Hybrid</span>}
           {match?.keywords.map((k) => (
             <span key={k} className="chip chip-match">
               {k}
