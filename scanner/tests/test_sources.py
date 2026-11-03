@@ -7,7 +7,9 @@ from stellenkompass_scanner.sources import (
     greenhouse,
     lever,
     personio,
+    recruitee,
     smartrecruiters,
+    teamtailor,
 )
 from stellenkompass_scanner.sources._common import Capped, records
 
@@ -136,3 +138,42 @@ def test_ashby_flat_secondary_address_in_small_german_town():
     }]}  # fmt: skip
     jobs = ashby.parse(raw, "x")
     assert len(jobs) == 1 and jobs[0].workplace_type == "onsite"
+
+
+def test_recruitee_country_per_location(fixture):
+    raw = fixture("recruitee_exeon.json")
+    jobs = recruitee.parse(raw, "exeon", company="Exeon")
+    # Every Exeon offer lists Zürich (CH) plus a remote location coded DE.
+    assert len(jobs) == len(raw["offers"]) > 0
+    assert jobs[0].id == f"recruitee:exeon-{raw['offers'][0]['id']}"
+    assert jobs[0].url.startswith("https://exeon.recruitee.com/o/")
+    assert jobs[0].posted_at.endswith("Z") and jobs[0].workplace_type == "hybrid"
+    swiss = {**raw["offers"][0], "id": 1, "locations": [{"city": "Berlin", "country_code": "CH"}]}
+    assert recruitee.parse({"offers": [swiss]}, "exeon") == []
+
+
+def test_teamtailor_rss(fixture):
+    jobs = teamtailor.parse([fixture("teamtailor_proxima.xml")], "proxima", company="Proxima")
+    # 8 items: 6 in Düsseldorf, Germany; 2 in Chicago, United States.
+    assert len(jobs) == 6
+    assert all(j.city == "Düsseldorf" and j.workplace_type == "onsite" for j in jobs)
+    assert jobs[0].id.startswith("teamtailor:proxima-") and len(jobs[0].source_job_id) == 36
+    assert jobs[0].url.startswith("https://proxima.teamtailor.com/jobs/")
+    assert jobs[0].posted_at.endswith("Z")
+
+
+def test_teamtailor_paginates_past_first_page():
+    item = "<item><guid>g{}</guid><title>T</title><link>u</link></item>"
+
+    class Pages:
+        def __init__(self):
+            self.offsets = []
+
+        def get_text(self, url, params=None):
+            self.offsets.append(params["offset"])
+            n = 100 if params["offset"] == 0 else 3
+            return "<rss><channel>" + "".join(item.format(i) for i in range(n)) + "</channel></rss>"
+
+    pages = Pages()
+    raw = teamtailor.fetch(pages, "careers.example.de")
+    assert pages.offsets == [0, 100] and len(raw) == 2

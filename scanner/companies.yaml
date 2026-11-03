@@ -6,6 +6,8 @@
 #   lever:           jobs.lever.co/<board>
 #   smartrecruiters: jobs.smartrecruiters.com/<board>
 #   personio:        <board>.jobs.personio.de
+#   recruitee:       <board>.recruitee.com
+#   teamtailor:      <board>.teamtailor.com, or the careers host itself (e.g. careers.example.de)
 
 aggregators:
   arbeitnow: true
@@ -113,3 +115,11 @@ personio:
   - { board: 1komma5grad, name: 1KOMMA5° }
   - { board: everphone, name: Everphone }
   - { board: clark, name: CLARK }
+
+recruitee:
+  - { board: exeon, name: Exeon }
+  - { board: makersitegmbh, name: Makersite }
+  - { board: tether, name: Tether }
+
+teamtailor:
+  - { board: proxima, name: Proxima }
