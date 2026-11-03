@@ -33,3 +33,13 @@ and its [docs](https://career-ops.org/docs). We take ideas, not code.
 - LLM scoring, CV PDF tailoring, auto-filled applications: out of scope (no keys, no automation; D10).
 - Playwright scraping of stateful portals (Interamt): conflicts with "public APIs and feeds only".
 - Affiliate apply links, README-as-site.
+
+## Upstream boards re-checked (2026-11-03)
+Each board from the parent list's roles was run through our adapters; only boards with roles in Germany were added (52 boards: 30 SmartRecruiters, 8 Workday, 4 Ashby, 3 Greenhouse, 2 Lever, 2 Recruitee, 2 Teamtailor, 1 Personio).
+
+Skipped:
+- No roles in Germany: Lombard Odier, Lonza, Julius Baer, DB (Workday), Accelleron, Huntsman, Arxada, Bossard, H&M, CERN, Bitpanda, IMC, Wingtra, ANYbotics, skydio, adaptyv, DeepJudge, CH Media, Kellerhals Carrard, small Swiss boards.
+- Retail, hospitality, security and vet staffing (JYSK, Securitas, Accor, Relais & Châteaux, Rentokil, Ace & Tate, Mountfitchet, MET, AniCura) and a recruiter (David Kennedy): many roles, little overlap with our search, and each new SmartRecruiters board costs up to 150 detail requests per run.
+- Doctolib: its Greenhouse board is on the EU host, which our adapter doesn't read yet. GE Vernova: no Germany facet, so the scan hits the page cap.
+- Parloa on Greenhouse: already on Ashby.
+
