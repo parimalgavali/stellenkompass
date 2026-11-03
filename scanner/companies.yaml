@@ -1,0 +1,47 @@
+# Companies whose public job boards we scan every day.
+# To follow a new company: open its careers page, see which platform hosts the jobs
+# (the apply link usually shows it), and add the board name under that platform.
+#   greenhouse:      boards.greenhouse.io/<board>  or  job-boards.greenhouse.io/<board>
+#   ashby:           jobs.ashbyhq.com/<board>
+#   lever:           jobs.lever.co/<board>
+#   smartrecruiters: jobs.smartrecruiters.com/<board>
+#   personio:        <board>.jobs.personio.de
+
+aggregators:
+  arbeitnow: true
+
+greenhouse:
+  - { board: n26, name: N26 }
+  - { board: celonis, name: Celonis }
+  - { board: getyourguide, name: GetYourGuide }
+  - { board: helsing, name: Helsing }
+  - { board: contentful, name: Contentful }
+  - { board: hellofresh, name: HelloFresh }
+  - { board: sumup, name: SumUp }
+  - { board: raisin, name: Raisin }
+  - { board: commercetools, name: commercetools }
+  - { board: flix, name: Flix }
+  - { board: solarisbank, name: Solaris }
+  - { board: moia, name: MOIA }
+
+ashby:
+  - { board: parloa, name: Parloa }
+  - { board: n8n, name: n8n }
+  - { board: forto, name: Forto }
+  - { board: billie, name: Billie }
+  - { board: pliant, name: Pliant }
+  - { board: wayve, name: Wayve }
+  - { board: deepl, name: DeepL }
+
+lever:
+  - { board: pigment, name: Pigment }
+  - { board: agicap, name: Agicap }
+  - { board: contentsquare, name: Contentsquare }
+
+smartrecruiters:
+  - { board: BoschGroup, name: Bosch }
+  - { board: Continental, name: Continental }
+
+personio:
+  - { board: tado, name: tado° }
+  - { board: ottonova, name: ottonova }

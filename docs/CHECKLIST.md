@@ -10,16 +10,19 @@ Updated after every PR. `[x]` = done and merged.
 - [x] Create repo `parimalgavali/stellenkompass` with plan, research, decisions, checklist
 
 ## Phase 1: Scanner
-- [ ] Python project (`scanner/`), lint (ruff), tests (pytest), CI on GitHub Actions
-- [ ] Common job format + Germany filter + language and job-type detection
-- [ ] Adapter: Arbeitnow
-- [ ] Adapter: Greenhouse
-- [ ] Adapter: Ashby
-- [ ] Adapter: SmartRecruiters
-- [ ] Adapter: Lever
-- [ ] Adapter: Personio
-- [ ] Remove duplicates across sources
-- [ ] Write `data/jobs.json` + `data/scan_report.json` (counts and errors per source)
+- [x] Python project (`scanner/`), lint (ruff), tests (pytest), CI on GitHub Actions
+- [x] Common job format + Germany filter + language and job-type detection
+- [x] Adapter: Arbeitnow
+- [x] Adapter: Greenhouse
+- [x] Adapter: Ashby
+- [x] Adapter: SmartRecruiters
+- [x] Adapter: Lever
+- [x] Adapter: Personio
+- [x] Remove duplicates across sources
+- [x] Write `data/jobs.json` + `data/scan_report.json` (counts and errors per source)
+
+
+First real scan (2026-11-03): 2,911 roles in Germany from 27 boards + Arbeitnow, 113 duplicates removed, 0 source errors, about 1 minute.
 
 ## Phase 2: Web app v1
 - [ ] React + Vite + TypeScript app (`web/`), lint, tests

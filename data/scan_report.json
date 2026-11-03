@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-11-03T05:14:48Z",
+  "total_jobs": 2911,
+  "sources": {
+    "arbeitnow": {
+      "boards": 1,
+      "jobs": 1504,
+      "errors": [],
+      "seconds": 34.4
+    },
+    "greenhouse": {
+      "boards": 12,
+      "jobs": 528,
+      "errors": [],
+      "seconds": 9.4
+    },
+    "ashby": {
+      "boards": 7,
+      "jobs": 117,
+      "errors": [],
+      "seconds": 4.1
+    },
+    "smartrecruiters": {
+      "boards": 2,
+      "jobs": 849,
+      "errors": [],
+      "seconds": 10.0
+    },
+    "lever": {
+      "boards": 3,
+      "jobs": 16,
+      "errors": [],
+      "seconds": 2.3
+    },
+    "personio": {
+      "boards": 2,
+      "jobs": 10,
+      "errors": [],
+      "seconds": 2.6
+    }
+  }
+}
