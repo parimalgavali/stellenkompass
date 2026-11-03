@@ -33,12 +33,17 @@ export interface SourceReport {
   jobs: number
   errors: { board: string; error: string }[]
   carried?: number
+  capped?: { board: string; carry: boolean }[]
+  status?: 'complete' | 'partial' | 'failed'
   seconds: number
 }
 
 export interface ScanReport {
   generated_at: string
   total_jobs: number
+  collected?: number
+  carried?: number
+  duplicates_removed?: number
   sources: Record<string, SourceReport>
 }
 

@@ -5,7 +5,7 @@ from __future__ import annotations
 from ..http import Fetcher
 from ..models import Job
 from ..text import iso_date
-from ._common import build_job
+from ._common import build_job, records
 
 
 def fetch(fetcher: Fetcher, board: str) -> dict:
@@ -18,7 +18,7 @@ def _country(entry: dict) -> str:
 
 def parse(raw: dict, board: str, company: str | None = None) -> list[Job]:
     jobs = []
-    for item in raw.get("jobs", []):
+    for item in records(raw, "jobs", "id"):
         if item.get("isListed") is False:
             continue
         secondary = item.get("secondaryLocations") or []

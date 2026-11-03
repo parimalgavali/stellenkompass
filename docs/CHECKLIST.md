@@ -57,9 +57,9 @@ Plan: [PLANS.md](PLANS.md) phases 5–12. Review: [research/source-expansion-han
 - [x] Tracker and `first_seen` survive a job moving to another source (aliases)
 
 ### Phase 6: Safe scans
-- [ ] Board outcome: complete / capped / partial / failed in `scan_report.json`
-- [ ] Capped or failed scans never drop roles; bad records don't kill a board
-- [ ] Validate before writing; atomic replace of `data/*.json`; `duplicates_removed` written to the report
+- [x] Source `status` (complete / partial / failed) + `capped` boards in `scan_report.json`
+- [x] Capped or failed boards never drop roles; wrong response shape = failure; records without an id are skipped
+- [x] Validate before writing; atomic replace of `data/*.json`; `collected` / `carried` / `duplicates_removed` in the report
 
 ### Phase 7: Geography
 - [ ] Country per location; explicit foreign country beats a city-name match

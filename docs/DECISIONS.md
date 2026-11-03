@@ -52,3 +52,10 @@ Short records. Newest at the bottom. Format: context → decision → why.
 - Each scan merges the previous scan's id and aliases into `aliases`, and `first_seen` is the earliest date over them. The web app finds a tracker entry by id or alias.
 - Carry-over of a failed board matches `source` + `source_board` exactly (old rows without `source_board` fall back to the id prefix once).
 - Not yet: roles removed by dedupe are not stored, so a failed aggregator can't bring back copies that were only aliases (Phase 6 state file).
+
+## D12. Safe scans (2026-11-03)
+- A source fetcher raises `Capped(raw, carry)` when it stops at its page limit (Arbeitnow 30 pages, SmartRecruiters 20). The roles it got are kept, and last scan's roles from that board that are missing now are carried over, like a failed board.
+- The BA is capped by design (`max_per_query` is a search sample), so its cap is reported but nothing is carried, or old BA roles would never expire.
+- `records()` checks the response shape: a missing record list is a failure (and is carried over), not an empty board. Records without an id, title or URL are skipped.
+- `write_outputs` validates (not empty, unique ids, title/url/source set) and writes via temp file + `os.replace`. On failure the scan exits 1 and the old files stay.
+- Report: per-source `status` (complete / partial / failed) and `capped`; top-level `collected`, `carried`, `duplicates_removed`.

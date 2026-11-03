@@ -5,7 +5,7 @@ from __future__ import annotations
 from ..http import Fetcher
 from ..models import Job
 from ..text import iso_date
-from ._common import build_job
+from ._common import build_job, records
 
 
 def fetch(fetcher: Fetcher, board: str) -> list[dict]:
@@ -14,7 +14,7 @@ def fetch(fetcher: Fetcher, board: str) -> list[dict]:
 
 def parse(raw: list[dict], board: str, company: str | None = None) -> list[Job]:
     jobs = []
-    for item in raw:
+    for item in records(raw, None, "id"):
         cats = item.get("categories") or {}
         locations = [cats.get("location", "")] + list(cats.get("allLocations") or [])
         remote = (item.get("workplaceType") or "").lower() == "remote"

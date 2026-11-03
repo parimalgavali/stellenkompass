@@ -5,7 +5,7 @@ from __future__ import annotations
 from ..http import Fetcher
 from ..models import Job
 from ..text import html_to_text, iso_date
-from ._common import build_job
+from ._common import Capped, build_job, records
 
 URL = "https://www.arbeitnow.com/api/job-board-api"
 
@@ -14,11 +14,11 @@ def fetch(fetcher: Fetcher, options: dict | None = None, max_pages: int = 30) ->
     items: list[dict] = []
     for page in range(1, max_pages + 1):
         body = fetcher.get_json(URL, params={"page": page})
-        data = body.get("data") or []
+        data = records(body, "data", "slug")
         items.extend(data)
         if not data or not (body.get("links") or {}).get("next"):
-            break
-    return items
+            return items
+    raise Capped(items)
 
 
 def parse(items: list[dict]) -> list[Job]:

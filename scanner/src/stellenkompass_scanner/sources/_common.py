@@ -7,6 +7,23 @@ from ..skills import extract_skills
 from ..text import snippet
 
 
+class Capped(Exception):  # noqa: N818 - a signal, not an error
+    """The source has more pages than we fetched; `raw` holds what we got."""
+
+    def __init__(self, raw, carry: bool = True):
+        super().__init__("page limit reached")
+        self.raw = raw
+        self.carry = carry  # keep last scan's roles that are missing now
+
+
+def records(container, key: str | None, id_key: str) -> list[dict]:
+    """The record list of a response; wrong shape raises, records without an id are skipped."""
+    items = container.get(key) if key and isinstance(container, dict) else container
+    if not isinstance(items, list):
+        raise ValueError(f"unexpected response shape: no {key or 'record'} list")
+    return [i for i in items if isinstance(i, dict) and i.get(id_key) not in (None, "")]
+
+
 def build_job(
     *,
     source: str,
@@ -28,6 +45,8 @@ def build_job(
 
     Company boards pass `board`; ids are `source:board-job_id`, aggregators `source:job_id`.
     """
+    if not title.strip() or not url:
+        return None  # a record we cannot show or link to
     locations = [x.strip() for x in locations if x and x.strip()]
     if not in_germany(locations, country_codes):
         return None

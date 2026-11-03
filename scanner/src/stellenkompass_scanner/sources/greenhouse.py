@@ -5,7 +5,7 @@ from __future__ import annotations
 from ..http import Fetcher
 from ..models import Job
 from ..text import html_to_text, iso_date
-from ._common import build_job
+from ._common import build_job, records
 
 
 def fetch(fetcher: Fetcher, board: str) -> dict:
@@ -16,7 +16,7 @@ def fetch(fetcher: Fetcher, board: str) -> dict:
 
 def parse(raw: dict, board: str, company: str | None = None) -> list[Job]:
     jobs = []
-    for item in raw.get("jobs", []):
+    for item in records(raw, "jobs", "id"):
         locations = [(item.get("location") or {}).get("name", "")]
         locations += [o.get("location") or o.get("name") or "" for o in item.get("offices") or []]
         hints = [str(m.get("value") or "") for m in item.get("metadata") or []]
