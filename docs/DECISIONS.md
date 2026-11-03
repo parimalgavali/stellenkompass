@@ -101,3 +101,9 @@ Short records. Newest at the bottom. Format: context → decision → why.
 - Germany: the `locationCountry`-style facet if the site has one, else every `locations` facet value naming Germany; those roles get country DE. Without either, all roles are read and decided by location text (capped at 50 pages, so big global tenants without a facet aren't added).
 - No job text in the list (no detail requests for now), so skills come from the title only. "Posted 30+ Days Ago" gives no date.
 
+## D20. SAP SuccessFactors via the tile route (2026-11-03)
+- Idea from career-ops; our own code. `/tile-search-results/` is the fragment the site's search page loads and is not disallowed by robots.txt. The JSON search under `/services/` is disallowed, so it is never used (this keeps DLR and SAP out).
+- `country: DE` per board sends the Germany facet; only set where the facet was checked to work (some sites ignore it). Otherwise the country comes from "City, DE, PLZ" fields, or the location text.
+- Paging advances by the tiles returned and stops when a page adds no new ids. ZF and Volkswagen repeat pages, so they are not added.
+- City falls back to the job URL slug. Ausbildung/dual study skipped (D9). No job text yet.
+

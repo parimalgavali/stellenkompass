@@ -16,8 +16,8 @@ narrow HTML parser. None of the pilot pages had JobPosting JSON-LD.
 |---|---|---|---|---|---|---|
 | KIT | University + research | [kit.edu](https://www.kit.edu/karriere/stellenangebote.php) | d.vinci | `jobs.pse.kit.edu/jobPublication/list.json` | enabled | 73 ads → 39 roles: 21 Ausbildung/dual-study ads skipped, 13 openings published in German and English kept once. Includes SCC (IT centre) and PhD/postdoc roles. |
 | TUM | University | [tum.de](https://www.tum.de/ueber-die-tum/karriere-und-jobs/stellenangebote) | Own portal (portal.mytum.de) | `portal.mytum.de/jobs/asRss` | blocked | robots.txt: `Disallow: /`. The RSS is also not well-formed XML. |
-| Fraunhofer | Research network | [jobs.fraunhofer.de](https://jobs.fraunhofer.de/) | SAP SuccessFactors | `/services/rss/job/` | blocked | `/services/` is disallowed in robots.txt; the RSS returns only 20 items. |
-| DLR | Research | [jobs.dlr.de](https://jobs.dlr.de/) | SAP SuccessFactors | same as Fraunhofer | blocked | Same robots.txt rules as Fraunhofer. |
+| Fraunhofer | Research network | [jobs.fraunhofer.de](https://jobs.fraunhofer.de/) | SAP SuccessFactors | `/tile-search-results/` (allowed; `/services/` is disallowed) | enabled | About 700 roles in Germany via the `successfactors` adapter (D20). Some tiles have no city. |
+| DLR | Research | [jobs.dlr.de](https://jobs.dlr.de/) | SAP SuccessFactors | `/tile-search-results/` | blocked | The allowed tile route returns no roles; the JSON search is under the disallowed `/services/`. |
 | Max Planck Society | Research network | [mpg.de/stellenboerse](https://www.mpg.de/stellenboerse) | References b-ite | none found | pending | Institutes also post on their own sites. |
 | Helmholtz | Research network | [helmholtz.de/karriere](https://www.helmholtz.de/karriere/) | none (links to centres) | none | pending | Check each centre (FZ Jülich, DESY, KIT, HZB, …). |
 | FZ Jülich | Helmholtz centre | [fz-juelich.de](https://www.fz-juelich.de/de/karriere/stellenangebote) | not identified | none | pending | |

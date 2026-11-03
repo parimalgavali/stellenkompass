@@ -145,3 +145,13 @@ workday:
   - { board: alcon, instance: wd5, site: careers_alcon, name: Alcon }
   - { board: ferring, instance: wd3, site: Ferring, name: Ferring }
   - { board: roche, instance: wd3, site: roche-ext, name: Roche }
+
+# SAP SuccessFactors career sites: board = host. Set `country: DE` only where the
+# site's Germany facet works (see the adapter docstring).
+successfactors:
+  - { board: jobs.fraunhofer.de, country: DE, name: Fraunhofer }
+  - { board: jobs.schaeffler.com, country: DE, name: Schaeffler }
+  - { board: jobs.hensoldt.net, name: HENSOLDT }
+  - { board: jobs.bayer.com, country: DE, name: Bayer }
+  - { board: careers.eon.com, country: DE, name: E.ON }
+  - { board: jobs.rwe.com, country: DE, name: RWE }

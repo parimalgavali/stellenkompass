@@ -10,6 +10,7 @@ from stellenkompass_scanner.sources import (
     personio,
     recruitee,
     smartrecruiters,
+    successfactors,
     teamtailor,
     workday,
 )
@@ -376,3 +377,51 @@ def test_workday_parses_philips(fixture):
         "2026-10-27",
     ]
     assert jobs[1].city == "Hamburg" and jobs[1].job_type == "working_student"
+
+
+def _sf_pages(name):
+    from pathlib import Path
+
+    return (Path(__file__).parent / "fixtures" / name).read_text("utf-8")
+
+
+def test_successfactors_fraunhofer_city_from_url():
+    raw = {"country": "DE", "pages": [_sf_pages("successfactors_fraunhofer.html")]}
+    jobs = successfactors.parse(raw, "jobs.fraunhofer.de", company="Fraunhofer")
+    first, second = jobs[:2]
+    assert first.id == "successfactors:jobs.fraunhofer.de-1403333433"
+    assert (first.city, first.job_type) == ("Duisburg", "thesis")
+    assert second.city == "Darmstadt" and "&apos;" not in second.url
+    assert not any("Ausbildung" in j.title for j in jobs)
+
+
+def test_successfactors_hensoldt_country_and_date_from_fields():
+    raw = {"country": "", "pages": [_sf_pages("successfactors_hensoldt.html")]}
+    jobs = successfactors.parse(raw, "jobs.hensoldt.net", company="HENSOLDT")
+    assert jobs[0].location == "Ulm" and jobs[0].posted_at == "2026-11-03T00:00:00Z"
+    assert jobs[0].url.startswith("https://jobs.hensoldt.net/job/Ulm-")
+
+
+def _tile(i):
+    return (
+        f'<li class="job-tile job-id-{i} x" data-url="/job/Berlin-Dev-10115/{i}/">'
+        f'<a class="jobTitle-link" href="#">Dev</a></li>'
+    )
+
+
+def test_successfactors_stops_when_page_repeats_and_caps(monkeypatch):
+    class Pages:
+        def __init__(self, repeat):
+            self.repeat, self.params = repeat, []
+
+        def get_text(self, url, params=None):
+            self.params.append(params)
+            n = params["startrow"]
+            return "".join(_tile(0 if self.repeat else n + k) for k in range(2))
+
+    fake = Pages(repeat=True)
+    raw = successfactors.fetch(fake, "jobs.example.de", country="DE")
+    assert len(raw["pages"]) == 1 and fake.params[0]["optionsFacetsDD_country"] == "DE"
+    monkeypatch.setattr(successfactors, "MAX_PAGES", 3)
+    with pytest.raises(Capped):
+        successfactors.fetch(Pages(repeat=False), "jobs.example.de")

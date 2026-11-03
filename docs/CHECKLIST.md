@@ -90,7 +90,7 @@ Plan: [PLANS.md](PLANS.md) phases 5–12. Review: [research/source-expansion-han
 
 ### Phase 11b: Ideas from reference projects (`docs/research/reference-projects.md`)
 - [x] Workday adapter (D19)
-- [ ] SuccessFactors (RMK) adapter, re-check Fraunhofer/DLR
+- [x] SuccessFactors (RMK) adapter, re-check Fraunhofer/DLR (D20: Fraunhofer enabled, DLR still blocked)
 - [ ] softgarden + join.com adapters
 - [ ] Re-check the 110 upstream boards for German roles
 - [ ] Seniority label + filter (Junior, Graduate/Trainee, Senior, Lead)
