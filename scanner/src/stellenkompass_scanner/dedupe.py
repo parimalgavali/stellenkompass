@@ -16,6 +16,7 @@ _SOURCE_RANK = {
     "teamtailor": 0,
     "dvinci": 0,
     "workday": 0,
+    "successfactors": 0,
     "arbeitnow": 1,
     "bundesagentur": 1,
 }

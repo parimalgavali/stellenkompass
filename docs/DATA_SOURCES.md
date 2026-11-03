@@ -42,6 +42,7 @@ Every adapter returns roles in this shape (see `scanner/stellenkompass_scanner/m
 | Teamtailor | Public RSS `https://<host>/jobs.rss`, paged with `offset`/`per_page` (100 per page, max 20 pages) | `scanner/companies.yaml` → `teamtailor` |
 | d.vinci | Public widget feed `https://<host>/jobPublication/list.json` (universities, research); Ausbildung skipped | `scanner/companies.yaml` → `dvinci`, see `docs/research/institutions.md` |
 | Workday | Public CXS route `POST https://<tenant>.<wdN>.myworkdayjobs.com/wday/cxs/<tenant>/<site>/jobs`, filtered to Germany by facet; title and location only, no job text | `scanner/companies.yaml` → `workday` (`board`, `instance`, `site`) |
+| SAP SuccessFactors | Career-site HTML fragment `https://<host>/tile-search-results/?startrow=N` (robots.txt allows it; `/services/` is disallowed); Germany facet where it works; Ausbildung skipped | `scanner/companies.yaml` → `successfactors` (`board` = host, optional `country: DE`) |
 
 ### Adding a company board
 1. Open the company's careers page and click a role. The apply link shows the platform and board name:
