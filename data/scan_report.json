@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-03T11:29:05Z",
-  "total_jobs": 14926,
-  "collected": 13562,
+  "generated_at": "2026-11-03T11:45:33Z",
+  "total_jobs": 14930,
+  "collected": 13566,
   "carried": 1370,
   "duplicates_removed": 6,
   "sources": {
@@ -16,12 +16,12 @@
       ],
       "capped": [],
       "status": "failed",
-      "seconds": 22.8,
+      "seconds": 22.6,
       "carried": 1370
     },
     "bundesagentur": {
       "boards": 1,
-      "jobs": 4416,
+      "jobs": 4419,
       "errors": [],
       "capped": [
         {
@@ -30,7 +30,7 @@
         }
       ],
       "status": "partial",
-      "seconds": 60.0,
+      "seconds": 57.7,
       "carried": 0
     },
     "greenhouse": {
@@ -39,7 +39,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 39.7,
+      "seconds": 40.4,
       "carried": 0
     },
     "ashby": {
@@ -53,11 +53,11 @@
     },
     "smartrecruiters": {
       "boards": 35,
-      "jobs": 4267,
+      "jobs": 4268,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 347.8,
+      "seconds": 203.6,
       "carried": 0
     },
     "lever": {
@@ -66,16 +66,16 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 13.1,
+      "seconds": 11.3,
       "carried": 0
     },
     "personio": {
       "boards": 6,
-      "jobs": 274,
+      "jobs": 272,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 11.7,
+      "seconds": 10.8,
       "carried": 0
     },
     "recruitee": {
@@ -84,7 +84,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 11.0,
+      "seconds": 8.1,
       "carried": 0
     },
     "teamtailor": {
@@ -93,7 +93,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 7.4,
+      "seconds": 5.9,
       "carried": 0
     },
     "dvinci": {
@@ -102,7 +102,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 2.2,
+      "seconds": 2.1,
       "carried": 0
     },
     "workday": {
@@ -116,11 +116,11 @@
     },
     "successfactors": {
       "boards": 6,
-      "jobs": 1400,
+      "jobs": 1402,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 84.9,
+      "seconds": 82.0,
       "carried": 0
     },
     "softgarden": {
