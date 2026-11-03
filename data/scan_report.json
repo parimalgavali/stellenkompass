@@ -1,18 +1,23 @@
 {
-  "generated_at": "2026-11-03T05:14:48Z",
-  "total_jobs": 2911,
+  "generated_at": "2026-11-03T05:58:31Z",
+  "total_jobs": 1460,
   "sources": {
     "arbeitnow": {
       "boards": 1,
-      "jobs": 1504,
-      "errors": [],
-      "seconds": 34.4
+      "jobs": 0,
+      "errors": [
+        {
+          "board": "arbeitnow",
+          "error": "HTTP 429"
+        }
+      ],
+      "seconds": 16.6
     },
     "greenhouse": {
       "boards": 12,
       "jobs": 528,
       "errors": [],
-      "seconds": 9.4
+      "seconds": 9.6
     },
     "ashby": {
       "boards": 7,
@@ -24,13 +29,13 @@
       "boards": 2,
       "jobs": 849,
       "errors": [],
-      "seconds": 10.0
+      "seconds": 9.5
     },
     "lever": {
       "boards": 3,
       "jobs": 16,
       "errors": [],
-      "seconds": 2.3
+      "seconds": 5.4
     },
     "personio": {
       "boards": 2,
