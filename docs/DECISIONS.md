@@ -40,3 +40,8 @@ Short records. Newest at the bottom. Format: context → decision → why.
 ## D9. Bundesagentur für Arbeit via search terms (2026-11-03)
 - Decision: read the BA Jobsuche API v6 with a list of search terms in `companies.yaml` (tech, data, AI, Werkstudent, Praktikum, Abschlussarbeit), last 30 days, max 500 roles per term, Germany only. Keep regular jobs and internships; drop apprenticeships and self-employment. Language is `de`, link is the BA job page. Company boards win in dedupe.
 - Why: the BA is the biggest German job board (~1M postings), so a full copy would bury the roles we care about and make `jobs.json` huge. Search terms keep it focused and are easy to change. The earlier "403" was the retired v4 path, not a block, so it works from GitHub Actions too.
+
+## D10. Adopt the source review: fix correctness before adding sources (2026-11-03)
+- Decision: follow [research/source-expansion-handoff.md](research/source-expansion-handoff.md). First job identity, safe scans, geography and UI search (Phases 5–8), then new boards and platforms. The catalog is a backlog; sources are enabled one at a time after verification. Drop the "3 roles minimum" rule.
+- Deviations: (1) the BA source stays on (the review predates it); it uses the public key from the BA's own apps, with the caveat in DATA_SOURCES. (2) We start with a smaller state model than the review sketches: exact source ids + aliases + one compact scanner state file outside `data/`, and add freshness fields only when a feature needs them.
+- Why: the review found real bugs we confirmed in code (dedupe merges distinct openings, prefix-based carry-over, output written before validation). Adding more sources on top would multiply them.
