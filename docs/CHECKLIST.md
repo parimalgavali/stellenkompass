@@ -22,13 +22,13 @@ Updated after every PR. `[x]` = done and merged.
 - [ ] Write `data/jobs.json` + `data/scan_report.json` (counts and errors per source)
 
 ## Phase 2: Web app v1
-- [ ] React + Vite + TypeScript app (`web/`), lint, tests
-- [ ] Jobs list with search and filters (language, city, job type, remote, source, posted)
-- [ ] My profile: keywords + followed companies (browser only), match highlight
-- [ ] Tracker: Saved → Applied → Interview → Offer / Rejected, dates, notes
-- [ ] Today view: follow-ups, interviews, new matches
-- [ ] Export / import personal data (JSON)
-- [ ] Light/dark theme, works on phone
+- [x] React + Vite + TypeScript app (`web/`), lint, tests
+- [x] Jobs list with search and filters (language, city, job type, remote, source, posted)
+- [x] My profile: keywords + followed companies (browser only), match highlight
+- [x] Tracker: Saved → Applied → Interview → Offer / Rejected, dates, notes
+- [x] Today view: follow-ups, interviews, new matches
+- [x] Export / import personal data (JSON)
+- [x] Light/dark theme, works on phone
 
 ## Phase 3: Daily automation and hosting
 - [ ] Daily scan workflow commits fresh `jobs.json`
