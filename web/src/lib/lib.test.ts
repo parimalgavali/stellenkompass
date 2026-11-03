@@ -164,3 +164,11 @@ describe('job identity', () => {
     expect(liveIdSet([moved]).has(old.id)).toBe(true)
   })
 })
+
+describe('search', () => {
+  it('matches location and snippet text', () => {
+    const jobs = [job({ id: 'a', location: 'Tettnang, Germany' }), job({ id: 'b', snippet: 'Wir nutzen Kubernetes' })]
+    expect(filterJobs(jobs, { ...EMPTY_FILTERS, q: 'tettnang' }, noProfile).map((j) => j.id)).toEqual(['a'])
+    expect(filterJobs(jobs, { ...EMPTY_FILTERS, q: 'kubernetes' }, noProfile).map((j) => j.id)).toEqual(['b'])
+  })
+})

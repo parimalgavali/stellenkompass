@@ -67,8 +67,8 @@ Plan: [PLANS.md](PLANS.md) phases 5–12. Review: [research/source-expansion-han
 - [x] `workplace_type`: onsite / hybrid / remote / unknown (`remote` = fully remote only)
 
 ### Phase 8: UI discoverability
-- [ ] Search includes location; city filter lists all cities
-- [ ] Label "English ad" (posting language), not "English only"
+- [x] Search includes location and snippet; city filter lists all cities
+- [x] Label "English ad" / "German ad" (posting language), not "English only"
 
 ### Phase 9: Onboarding + new platforms
 - [ ] Re-check skipped boards (Wunderflats, kununu, KONUX, Dataiku, Rasa, HeyJobs, Spotify, Clark)

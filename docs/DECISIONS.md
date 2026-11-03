@@ -66,3 +66,7 @@ Short records. Newest at the bottom. Format: context → decision → why.
 - `workplace_type` comes from the source (Ashby, Lever, SmartRecruiters, Arbeitnow) or from "hybrid"/"remote" in the location text. BA "Homeoffice möglich" counts as hybrid. The web app shows a Hybrid chip; the Remote filter means fully remote.
 - Effect (test scan): Ashby 422 → 388. The 34 dropped roles are "Remote · Europe"-style postings whose locations all carry non-German codes (ElevenLabs, Synthesia, Linear, Cohere). Remote roles scoped to "Europe/EMEA" without codes are still kept by text. Phase 12 adds explicit remote-Europe eligibility.
 - Not yet: no municipality/postcode list for uncoded small towns.
+
+## D14. Search and language labels (2026-11-03)
+- Text search covers title, company, location, snippet, tags and skills, so towns outside our city list can be found by name. The city filter lists every city in the scan.
+- The language filter and chips say "English ad" / "German ad": `language` is the posting's language, and an English ad can still require German.
