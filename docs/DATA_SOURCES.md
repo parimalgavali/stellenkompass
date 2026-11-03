@@ -22,6 +22,7 @@ Every adapter returns roles in this shape (see `scanner/stellenkompass_scanner/m
 | `tags` | Short tags from the source (skills, categories) |
 | `skills` | Skills found in title + description by `skills.py` (curated list, max 12) |
 | `snippet` | First ~300 characters of the description, plain text |
+| `workplace_type` | `onsite` / `hybrid` / `remote` / `unknown`; `remote` is true only for fully remote |
 | `source_board` | Company board slug (empty for aggregators) |
 | `source_job_id` | The source's own id for the role |
 | `aliases` | Earlier ids of this role and its copies on other sources (keeps tracker links and `first_seen`) |

@@ -6,6 +6,14 @@ from ..models import Job
 from ..skills import extract_skills
 from ..text import snippet
 
+WORKPLACES = ("onsite", "hybrid", "remote")
+
+
+def _workplace_from_text(text: str) -> str:
+    if "hybrid" in text.lower():
+        return "hybrid"
+    return "remote" if is_remote(text) else "unknown"
+
 
 class Capped(Exception):  # noqa: N818 - a signal, not an error
     """The source has more pages than we fetched; `raw` holds what we got."""
@@ -35,7 +43,7 @@ def build_job(
     url: str,
     description: str = "",
     country_codes: list[str] | None = None,
-    remote: bool | None = None,
+    workplace: str | None = None,
     type_hints: list[str] | None = None,
     posted_at: str = "",
     tags: list[str] | None = None,
@@ -47,10 +55,12 @@ def build_job(
     """
     if not title.strip() or not url:
         return None  # a record we cannot show or link to
-    locations = [x.strip() for x in locations if x and x.strip()]
     if not in_germany(locations, country_codes):
         return None
+    locations = [x.strip() for x in locations if x and x.strip()]
     location_text = " · ".join(dict.fromkeys(locations))
+    if workplace not in WORKPLACES:
+        workplace = _workplace_from_text(location_text)
     lang = language if language in ("en", "de") else detect_language(f"{title} {description}")
     return Job(
         id=f"{source}:{board}-{job_id}" if board else f"{source}:{job_id}",
@@ -58,7 +68,8 @@ def build_job(
         company=company.strip(),
         location=location_text,
         city=city_of(*locations),
-        remote=bool(remote) if remote is not None else is_remote(location_text),
+        remote=workplace == "remote",
+        workplace_type=workplace,
         job_type=detect_job_type(title, type_hints),
         language=lang,
         url=url,

@@ -9,6 +9,7 @@ export interface Job {
   source: string
   city: string
   remote: boolean
+  workplace_type?: 'onsite' | 'hybrid' | 'remote' | 'unknown'
   job_type: JobType
   language: 'en' | 'de'
   posted_at: string

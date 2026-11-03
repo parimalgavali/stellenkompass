@@ -28,7 +28,8 @@ def test_ashby_uses_address_country(fixture):
     jobs = ashby.parse(fixture("ashby_parloa.json"), "parloa", company="Parloa")
     assert len(jobs) == 1
     assert jobs[0].city == "Berlin"
-    assert jobs[0].remote is True
+    # isRemote is true, but workplaceType says Hybrid: not fully remote.
+    assert jobs[0].workplace_type == "hybrid" and jobs[0].remote is False
     assert jobs[0].url.startswith("https://jobs.ashbyhq.com/parloa/")
 
 
@@ -90,7 +91,7 @@ def test_bundesagentur_keeps_jobs_in_germany(fixture):
     first = jobs[0]
     assert first.id == "bundesagentur:14225-3170264583da19a7-S"
     assert first.job_type == "working_student"
-    assert first.remote is True
+    assert first.workplace_type == "hybrid" and first.remote is False
     assert first.posted_at.endswith("T00:00:00Z")
 
 
@@ -124,3 +125,14 @@ def test_records_rejects_wrong_shape_and_skips_bad_records():
     with pytest.raises(ValueError):
         records({"error": "maintenance"}, "jobs", "id")
     assert records({"jobs": [{"id": 1}, "x", {"title": "no id"}]}, "jobs", "id") == [{"id": 1}]
+
+
+def test_ashby_flat_secondary_address_in_small_german_town():
+    raw = {"jobs": [{
+        "id": "1", "title": "Engineer", "jobUrl": "https://jobs.ashbyhq.com/x/1",
+        "location": "New York", "workplaceType": "OnSite",
+        "address": {"postalAddress": {"addressCountry": "United States"}},
+        "secondaryLocations": [{"location": "Tettnang", "address": {"addressCountry": "Germany"}}],
+    }]}  # fmt: skip
+    jobs = ashby.parse(raw, "x")
+    assert len(jobs) == 1 and jobs[0].workplace_type == "onsite"

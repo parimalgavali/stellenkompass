@@ -59,3 +59,10 @@ Short records. Newest at the bottom. Format: context → decision → why.
 - `records()` checks the response shape: a missing record list is a failure (and is carried over), not an empty board. Records without an id, title or URL are skipped.
 - `write_outputs` validates (not empty, unique ids, title/url/source set) and writes via temp file + `os.replace`. On failure the scan exits 1 and the old files stay.
 - Report: per-source `status` (complete / partial / failed) and `capped`; top-level `collected`, `carried`, `duplicates_removed`.
+
+## D13. Country per location and workplace type (2026-11-03)
+- `in_germany(locations, country_codes)`: `country_codes[i]` belongs to `locations[i]`. A coded location is decided by its code only (Frankfurt + US is out, an unlisted town + DE is in). Uncoded locations are still read as text (city list, "Germany", states). One German location is enough.
+- Ashby reads the country from `address.postalAddress` or a flat `address` (secondary locations), and trusts `workplaceType` over `isRemote`.
+- `workplace_type` comes from the source (Ashby, Lever, SmartRecruiters, Arbeitnow) or from "hybrid"/"remote" in the location text. BA "Homeoffice möglich" counts as hybrid. The web app shows a Hybrid chip; the Remote filter means fully remote.
+- Effect (test scan): Ashby 422 → 388. The 34 dropped roles are "Remote · Europe"-style postings whose locations all carry non-German codes (ElevenLabs, Synthesia, Linear, Cohere). Remote roles scoped to "Europe/EMEA" without codes are still kept by text. Phase 12 adds explicit remote-Europe eligibility.
+- Not yet: no municipality/postcode list for uncoded small towns.

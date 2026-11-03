@@ -83,8 +83,9 @@ def parse(items: list[dict]) -> list[Job]:
             company=item.get("firma", ""),
             locations=[p.get("ort") or "Germany" for p in places],
             url=DETAIL_URL.format(refnr),
-            country_codes=["de"],
-            remote=bool(item.get("homeofficemoeglich")),
+            country_codes=["de"] * len(places),
+            # "Home office possible" is partly remote, not fully remote.
+            workplace="hybrid" if item.get("homeofficemoeglich") else None,
             type_hints=_hints(item),
             posted_at=iso_date(item.get("datumErsteVeroeffentlichung")),
             tags=item.get("alleBerufe") or [],

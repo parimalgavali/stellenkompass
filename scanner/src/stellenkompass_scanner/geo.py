@@ -119,9 +119,22 @@ def remote_open_to_germany(text: str) -> bool:
     return is_remote(low) and any(scope in low for scope in _REMOTE_SCOPE)
 
 
+GERMAN_CODES = {"de", "deu", "germany", "deutschland"}
+
+
 def in_germany(locations: list[str], country_codes: list[str] | None = None) -> bool:
-    codes = {c.lower() for c in (country_codes or []) if c}
-    if codes & {"de", "deu", "germany", "deutschland"}:
-        return True
-    joined = " | ".join(x for x in locations if x)
-    return mentions_germany(joined) or remote_open_to_germany(joined)
+    """True when at least one location is in Germany.
+
+    `country_codes[i]` belongs to `locations[i]` (shorter lists leave the rest without a code).
+    A coded location is decided by its code alone, so "Frankfurt" with code US stays out and
+    an unlisted German town with code DE stays in. Only uncoded locations are read as text.
+    """
+    codes = [(c or "").strip().lower() for c in (country_codes or [])]
+    free: list[str] = []
+    for i, loc in enumerate(list(locations) + [""] * max(0, len(codes) - len(locations))):
+        code = codes[i] if i < len(codes) else ""
+        if code in GERMAN_CODES:
+            return True
+        if not code and loc and loc.strip():
+            free.append(loc)
+    return any(mentions_germany(x) for x in free) or remote_open_to_germany(" | ".join(free))
