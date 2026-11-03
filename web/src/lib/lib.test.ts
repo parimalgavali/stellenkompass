@@ -4,7 +4,7 @@ import { matchJob } from './match'
 import { newMatches, todayItems } from './today'
 import { makeBackup, mergeBackup, parseBackup } from './backup'
 import { canonicalSkills, extractSkills, fitScore } from './skills'
-import { setStage, trackJob, updateTracked } from './tracker'
+import { findTracked, liveIdSet, setStage, trackJob, updateTracked } from './tracker'
 import { relativeTime } from './time'
 import { JOBS, NOW, job } from '../test/data'
 import type { Tracker } from '../types'
@@ -151,5 +151,16 @@ describe('skills and fit', () => {
     const merged = mergeBackup(profile, {}, makeBackup({ keywords: [], companies: [], skills: ['python', 'SQL'] }, {}))
     expect(merged.profile.skills).toEqual(['Python', 'SQL'])
     expect(mergeBackup({ keywords: [], companies: [] }, {}, makeBackup({ keywords: [], companies: [] }, {})).profile).not.toHaveProperty('skills')
+  })
+})
+
+describe('job identity', () => {
+  it('finds and keeps a saved role after it moves to another source', () => {
+    const old = job()
+    const t = trackJob({}, old, NOW)
+    const moved = { ...old, id: 'greenhouse:acme-9', aliases: [old.id] }
+    expect(findTracked(t, moved)?.id).toBe(old.id)
+    expect(trackJob(t, moved, NOW)).toBe(t)
+    expect(liveIdSet([moved]).has(old.id)).toBe(true)
   })
 })

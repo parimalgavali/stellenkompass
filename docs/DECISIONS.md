@@ -45,3 +45,10 @@ Short records. Newest at the bottom. Format: context → decision → why.
 - Decision: follow [research/source-expansion-handoff.md](research/source-expansion-handoff.md). First job identity, safe scans, geography and UI search (Phases 5–8), then new boards and platforms. The catalog is a backlog; sources are enabled one at a time after verification. Drop the "3 roles minimum" rule.
 - Deviations: (1) the BA source stays on (the review predates it); it uses the public key from the BA's own apps, with the caveat in DATA_SOURCES. (2) We start with a smaller state model than the review sketches: exact source ids + aliases + one compact scanner state file outside `data/`, and add freshness fields only when a feature needs them.
 - Why: the review found real bugs we confirmed in code (dedupe merges distinct openings, prefix-based carry-over, output written before validation). Adding more sources on top would multiply them.
+
+## D11. Job identity and aliases (2026-11-03)
+- Ids stay `source:board-job_id` (aggregators `source:job_id`), so saved roles keep working. New fields: `source_board`, `source_job_id`, `aliases`.
+- Dedupe: same id → one job. Same company/title/city on several sources → keep all jobs of the best-ranked source (different ids there are different openings); other sources' ids become `aliases`.
+- Each scan merges the previous scan's id and aliases into `aliases`, and `first_seen` is the earliest date over them. The web app finds a tracker entry by id or alias.
+- Carry-over of a failed board matches `source` + `source_board` exactly (old rows without `source_board` fall back to the id prefix once).
+- Not yet: roles removed by dedupe are not stored, so a failed aggregator can't bring back copies that were only aliases (Phase 6 state file).

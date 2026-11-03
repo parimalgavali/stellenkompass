@@ -77,10 +77,6 @@ def scan(fetcher: Fetcher, config: dict[str, Any]) -> tuple[list[Job], dict[str,
     return jobs, report
 
 
-def _id_prefix(source: str, board: str) -> str:
-    return f"{source}:" if source in AGGREGATORS else f"{source}:{board}-"
-
-
 def carry_over_failed(
     jobs: list[Job], report: dict[str, Any], previous: dict[str, Any] | None
 ) -> int:
@@ -88,19 +84,38 @@ def carry_over_failed(
     old = [j for j in (previous or {}).get("jobs", []) if isinstance(j, dict) and "id" in j]
     carried = 0
     for source, entry in report.items():
-        prefixes = tuple(_id_prefix(source, e["board"]) for e in entry["errors"])
-        kept = [Job.from_dict(j) for j in old if prefixes and j["id"].startswith(prefixes)]
+        failed = {e["board"] for e in entry["errors"]}
+        kept = [Job.from_dict(j) for j in old if _from_failed(j, source, failed)]
         entry["carried"] = len(kept)
         jobs.extend(kept)
         carried += len(kept)
     return carried
 
 
+def _from_failed(job: dict, source: str, failed: set[str]) -> bool:
+    """Was this previous job scanned from one of the failed boards of `source`?"""
+    if not failed or job.get("source", job["id"].split(":", 1)[0]) != source:
+        return False
+    if source in AGGREGATORS:
+        return source in failed
+    if "source_board" in job:
+        return job["source_board"] in failed
+    # jobs.json from before source_board existed (one transitional run): old prefix match.
+    return job["id"].startswith(tuple(f"{source}:{b}-" for b in failed))
+
+
 def carry_first_seen(jobs: list[Job], previous: dict[str, Any] | None, now: str) -> None:
-    """Keep the date we first saw each job across runs, so the app can show 'new'."""
-    seen = {j["id"]: j.get("first_seen") for j in (previous or {}).get("jobs", [])}
+    """Keep first_seen and old ids across runs, also when a role moves to another source."""
+    old: dict[str, dict] = {}
+    for prev in (previous or {}).get("jobs", []):
+        for ident in [prev["id"], *(prev.get("aliases") or [])]:
+            old.setdefault(ident, prev)
     for job in jobs:
-        job.first_seen = seen.get(job.id) or now
+        matches = [old[i] for i in dict.fromkeys([job.id, *job.aliases]) if i in old]
+        dates = [m["first_seen"] for m in matches if m.get("first_seen")]
+        job.first_seen = min(dates) if dates else now
+        history = [i for m in matches for i in [m["id"], *(m.get("aliases") or [])]]
+        job.aliases = [i for i in dict.fromkeys([*job.aliases, *history]) if i != job.id]
 
 
 def write_outputs(

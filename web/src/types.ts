@@ -16,6 +16,10 @@ export interface Job {
   tags: string[]
   skills?: string[]
   snippet: string
+  source_board?: string
+  source_job_id?: string
+  /** Earlier ids of this role, or its copies on other sources. */
+  aliases?: string[]
 }
 
 export interface JobsFile {

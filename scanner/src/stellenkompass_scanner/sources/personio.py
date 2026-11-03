@@ -32,7 +32,8 @@ def parse(raw: str, board: str, company: str | None = None) -> list[Job]:
         )
         job = build_job(
             source="personio",
-            source_id=f"{board}-{job_id}",
+            board=board,
+            job_id=job_id,
             title=_text(pos, "name"),
             company=company or _text(pos, "subcompany") or board,
             locations=offices,

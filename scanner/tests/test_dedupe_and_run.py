@@ -7,9 +7,9 @@ from stellenkompass_scanner.models import Job
 from stellenkompass_scanner.run import carry_first_seen, carry_over_failed, scan, write_outputs
 
 
-def _job(source, title="Data Engineer (m/w/d)", company="Acme GmbH", city="Berlin"):
+def _job(source, title="Data Engineer (m/w/d)", company="Acme GmbH", city="Berlin", n=1):
     return Job(
-        id=f"{source}:{title}", title=title, company=company, location=city, url="u",
+        id=f"{source}:{title}-{city}-{n}", title=title, company=company, location=city, url="u",
         source=source, city=city,
     )  # fmt: skip
 
@@ -108,3 +108,40 @@ def test_failed_boards_keep_last_scan_jobs():
 def test_carry_over_without_previous_scan():
     jobs, report = scan(FakeFetcher(), CONFIG)
     assert carry_over_failed(jobs, report, None) == 0
+
+
+def test_dedupe_keeps_distinct_openings_and_aliases_copies():
+    a, b = _job("greenhouse", n=1), _job("greenhouse", n=2)
+    copy = _job("arbeitnow", "Data Engineer", "Acme")
+    kept = dedupe([copy, a, b, _job("greenhouse", n=1)])
+    assert sorted(j.id for j in kept) == sorted([a.id, b.id])
+    assert copy.id in kept[0].aliases
+
+
+def test_carry_over_matches_exact_board():
+    report = {"greenhouse": {"errors": [{"board": "foo", "error": "HTTP 500"}]}}
+    previous = {
+        "jobs": [
+            {"id": "greenhouse:foo-1", "title": "A", "company": "Foo", "location": "Berlin",
+             "url": "u", "source": "greenhouse", "source_board": "foo"},
+            {"id": "greenhouse:foo-bar-2", "title": "B", "company": "Foo Bar", "location": "Berlin",
+             "url": "u", "source": "greenhouse", "source_board": "foo-bar"},
+        ]
+    }  # fmt: skip
+    jobs = []
+    assert carry_over_failed(jobs, report, previous) == 1
+    assert [j.id for j in jobs] == ["greenhouse:foo-1"]
+
+
+def test_first_seen_and_history_follow_aliases():
+    job = _job("greenhouse")
+    job.aliases = ["arbeitnow:acme-data-engineer"]
+    previous = {
+        "jobs": [
+            {"id": "arbeitnow:acme-data-engineer", "first_seen": "2026-10-01T00:00:00Z",
+             "aliases": ["arbeitnow:older-slug"]},
+        ]
+    }  # fmt: skip
+    carry_first_seen([job], previous, "2026-11-03T05:00:00Z")
+    assert job.first_seen == "2026-10-01T00:00:00Z"
+    assert job.aliases == ["arbeitnow:acme-data-engineer", "arbeitnow:older-slug"]

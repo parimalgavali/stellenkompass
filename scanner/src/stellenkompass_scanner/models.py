@@ -22,6 +22,10 @@ class Job:
     tags: list[str] = field(default_factory=list)
     skills: list[str] = field(default_factory=list)
     snippet: str = ""
+    source_board: str = ""  # empty for aggregators
+    source_job_id: str = ""
+    # Ids this role had before, or copies of it on other sources; keeps tracker links alive.
+    aliases: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict:
         return asdict(self)

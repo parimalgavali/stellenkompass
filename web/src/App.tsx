@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { Job, JobsFile, Profile, ScanReport, TrackedJob, Tracker } from './types'
 import { KEYS, readStored, useStored } from './lib/storage'
-import { setStage, trackJob, untrack, updateTracked } from './lib/tracker'
+import { liveIdSet, setStage, trackJob, untrack, updateTracked } from './lib/tracker'
 import { newMatches, todayItems } from './lib/today'
 import { relativeTime } from './lib/time'
 import { JobsPage } from './components/JobsPage'
@@ -56,7 +56,7 @@ export default function App() {
   }, [theme])
 
   const jobs = useMemo(() => jobsFile?.jobs ?? [], [jobsFile])
-  const liveIds = useMemo(() => new Set(jobs.map((j) => j.id)), [jobs])
+  const liveIds = useMemo(() => liveIdSet(jobs), [jobs])
   const fresh = useMemo(() => newMatches(jobs, profile, lastVisit), [jobs, profile, lastVisit])
   const dueCount = todayItems(tracker).length + fresh.length
 
