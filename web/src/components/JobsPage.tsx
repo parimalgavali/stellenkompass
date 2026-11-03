@@ -26,7 +26,7 @@ export function JobsPage({ jobs, profile, tracker, onSave }: Props) {
 
   const newest = useMemo(() => sortNewest(jobs), [jobs])
   const sorted = useMemo(() => (byFit && mySkills.length ? sortByFit(newest, mySkills) : newest), [newest, byFit, mySkills])
-  const cities = useMemo(() => topValues(jobs, (j) => j.city).slice(0, 40), [jobs])
+  const cities = useMemo(() => topValues(jobs, (j) => j.city), [jobs])
   const skills = useMemo(() => topValues(jobs, (j) => j.skills ?? []).slice(0, 60), [jobs])
   const sources = useMemo(() => topValues(jobs, (j) => j.source), [jobs])
   const results = useMemo(() => filterJobs(sorted, filters, profile), [sorted, filters, profile])
@@ -45,9 +45,9 @@ export function JobsPage({ jobs, profile, tracker, onSave }: Props) {
       />
       <div className="filters">
         <select value={filters.language} onChange={(e) => set({ language: e.target.value as Filters['language'] })} aria-label="Language">
-          <option value="">Any language</option>
-          <option value="en">English</option>
-          <option value="de">German</option>
+          <option value="">Any ad language</option>
+          <option value="en">English ad</option>
+          <option value="de">German ad</option>
         </select>
         <select value={filters.city} onChange={(e) => set({ city: e.target.value })} aria-label="City">
           <option value="">All cities</option>

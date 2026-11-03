@@ -39,7 +39,7 @@ export function filterJobs(jobs: Job[], f: Filters, profile: Profile, now: Date 
     if (f.source && job.source !== f.source) return false
     if (cutoff && new Date(job.posted_at || job.first_seen).getTime() < cutoff) return false
     if (terms.length) {
-      const text = `${job.title} ${job.company} ${job.tags.join(' ')} ${(job.skills ?? []).join(' ')}`.toLowerCase()
+      const text = [job.title, job.company, job.location, job.snippet, ...job.tags, ...(job.skills ?? [])].join(' ').toLowerCase()
       if (!terms.every((t) => text.includes(t))) return false
     }
     if (f.matchesOnly && !matchJob(job, profile)) return false
