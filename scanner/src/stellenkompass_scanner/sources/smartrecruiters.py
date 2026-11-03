@@ -7,6 +7,7 @@ fetched for new or re-released postings: otherwise last scan's snippet and skill
 from __future__ import annotations
 
 import logging
+import re
 
 from ..geo import STATE_CODES, STATES, city_of
 from ..http import Fetcher
@@ -69,8 +70,25 @@ def _wanted(location: dict) -> bool:
     return (location.get("country") or "").lower() == "de" and _german_region(location)
 
 
+_GERMANY_BOX = (47.2, 55.1, 5.8, 15.1)  # lat min/max, lon min/max
+_POSTCODE = re.compile(r"\d{5}")
+
+
 def _german_region(location: dict) -> bool:
-    """The API's country=de filter also returns some foreign sites, so check region or city."""
+    """The API's country=de filter also returns some foreign sites (e.g. Shanghai, tagged de).
+
+    Coordinates decide when present; else a German postcode, a state or a known city.
+    Regions are often non-standard ("NDS", "Mittelfranken"), so they alone can't decide.
+    """
+    try:
+        lat, lon = float(location["latitude"]), float(location["longitude"])
+    except (KeyError, TypeError, ValueError):
+        pass
+    else:
+        lat_min, lat_max, lon_min, lon_max = _GERMANY_BOX
+        return lat_min <= lat <= lat_max and lon_min <= lon <= lon_max
+    if _POSTCODE.fullmatch((location.get("postalCode") or "").strip()):
+        return True
     region = (location.get("region") or "").lower()
     if region in STATE_CODES or any(s in region for s in STATES):
         return True

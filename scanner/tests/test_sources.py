@@ -43,10 +43,24 @@ def test_smartrecruiters_drops_foreign_sites_tagged_de(fixture):
     jobs = smartrecruiters.parse(fixture("smartrecruiters_bosch.json"), "BoschGroup", "Bosch")
     cities = {j.city for j in jobs}
     assert "Shanghai" not in cities
-    assert "Stuttgart" in cities
+    assert {"Stuttgart", "Ansbach"} <= cities
     assert all(j.job_type == "internship" for j in jobs)
     assert all(j.language == "de" for j in jobs)
     assert jobs[0].url.startswith("https://jobs.smartrecruiters.com/BoschGroup/")
+
+
+@pytest.mark.parametrize(
+    ("location", "kept"),
+    [
+        ({"city": "Zeven", "region": "NDS", "latitude": "53.27", "longitude": "9.30"}, True),
+        ({"city": "Ansbach", "region": "Mittelfranken", "postalCode": "91522"}, True),
+        ({"city": "Stuttgart", "region": "BW"}, True),
+        ({"city": "Shanghai", "region": "SHANGHAI", "address": "Shanghai"}, False),
+        ({"city": "Shanghai", "region": "SH", "latitude": "31.2", "longitude": "121.5"}, False),
+    ],
+)
+def test_smartrecruiters_region_check(location, kept):
+    assert smartrecruiters._german_region(location) is kept
 
 
 def test_lever_country_code(fixture):
@@ -250,7 +264,7 @@ def test_smartrecruiters_fetches_details_for_german_postings(fixture):
     fetcher, listing = _sr_fetcher(fixture, _sr_ad)
     raw = smartrecruiters.fetch(fetcher, "BoschGroup")
     jobs = smartrecruiters.parse(raw, "BoschGroup", "Bosch")
-    assert len(fetcher.details) == len(jobs) == 1  # only for postings that are kept
+    assert len(fetcher.details) == len(jobs) == 2  # only for postings that are kept
     assert all({"Python", "SQL"} <= set(j.skills) and j.snippet for j in jobs)
 
 
@@ -272,14 +286,14 @@ def test_smartrecruiters_detail_failure_keeps_role(fixture):
 
     fetcher, _ = _sr_fetcher(fixture, broken)
     jobs = smartrecruiters.parse(smartrecruiters.fetch(fetcher, "BoschGroup"), "BoschGroup")
-    assert len(jobs) == 1 and all(j.snippet == "" for j in jobs)
+    assert len(jobs) == 2 and all(j.snippet == "" for j in jobs)
 
 
 def test_smartrecruiters_caps_new_details(fixture, monkeypatch):
     monkeypatch.setattr(smartrecruiters, "MAX_DETAILS", 0)
     fetcher, _ = _sr_fetcher(fixture, _sr_ad)
     jobs = smartrecruiters.parse(smartrecruiters.fetch(fetcher, "BoschGroup"), "BoschGroup")
-    assert fetcher.details == [] and len(jobs) == 1
+    assert fetcher.details == [] and len(jobs) == 2
 
 
 def test_dvinci_kit(fixture):
