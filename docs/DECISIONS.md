@@ -123,4 +123,4 @@ Short records. Newest at the bottom. Format: context → decision → why.
 
 ## D24. Roles that left the scan (2026-11-03)
 - Idea from career-ops liveness checks, done without extra requests: a Saved or Applied role whose id and aliases are not in the latest `jobs.json` shows on Today as "Role may have closed", with **Close** or **Still open** (`stillOpen` stops the reminder).
-- Nothing is flagged while jobs are loading or failed to load. A source that failed keeps its roles by carry-over (D11), so a failed scan doesn't flag them either.
+- Nothing is flagged while jobs are loading or failed to load. A source that failed keeps its roles by carry-over (D6), so a failed scan doesn't flag them either.
