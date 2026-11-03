@@ -9,7 +9,7 @@ from __future__ import annotations
 from ..http import Fetcher
 from ..models import Job
 from ..text import iso_date
-from ._common import build_job
+from ._common import Capped, build_job, records
 
 URL = "https://rest.arbeitsagentur.de/jobboerse/jobsuche-service/pc/v6/jobs"
 HEADERS = {"X-API-Key": "jobboerse-jobsuche"}
@@ -27,6 +27,7 @@ def fetch(fetcher: Fetcher, options: dict | None = None) -> list[dict]:
     opts = {**DEFAULTS, **(options or {})}
     pages = max(1, -(-int(opts["max_per_query"]) // PAGE_SIZE))
     found: dict[str, dict] = {}
+    capped = False
     for query in opts["queries"]:
         for page in range(1, pages + 1):
             params = {
@@ -37,11 +38,20 @@ def fetch(fetcher: Fetcher, options: dict | None = None) -> list[dict]:
                 "page": page,
             }
             body = fetcher.get_json(URL, params=params, headers=HEADERS)
-            items = body.get("ergebnisliste") or []
+            items = (
+                records(body, "ergebnisliste", "referenznummer")
+                if body.get("ergebnisliste") is not None
+                else []
+            )
             for item in items:
                 found.setdefault(item["referenznummer"], item)
             if len(items) < PAGE_SIZE or page * PAGE_SIZE >= (body.get("maxErgebnisse") or 0):
                 break
+        else:
+            capped = True
+    if capped:
+        # A search sample by design (max_per_query); missing roles are not carried over.
+        raise Capped(list(found.values()), carry=False)
     return list(found.values())
 
 

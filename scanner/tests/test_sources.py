@@ -1,3 +1,5 @@
+import pytest
+
 from stellenkompass_scanner.sources import (
     arbeitnow,
     ashby,
@@ -7,6 +9,7 @@ from stellenkompass_scanner.sources import (
     personio,
     smartrecruiters,
 )
+from stellenkompass_scanner.sources._common import Capped, records
 
 
 def test_greenhouse_keeps_only_germany(fixture):
@@ -108,7 +111,16 @@ class _BaPages:
 
 def test_bundesagentur_fetch_caps_pages_and_dedupes_queries():
     fetcher = _BaPages()
-    items = bundesagentur.fetch(fetcher, {"queries": ["A", "B"], "max_per_query": 150})
+    with pytest.raises(Capped) as cap:
+        bundesagentur.fetch(fetcher, {"queries": ["A", "B"], "max_per_query": 150})
+    items = cap.value.raw
+    assert cap.value.carry is False
     assert [(q, p) for q, p, _ in fetcher.calls] == [("A", 1), ("A", 2), ("B", 1), ("B", 2)]
     assert all(h == bundesagentur.HEADERS for _, _, h in fetcher.calls)
     assert len(items) == 200
+
+
+def test_records_rejects_wrong_shape_and_skips_bad_records():
+    with pytest.raises(ValueError):
+        records({"error": "maintenance"}, "jobs", "id")
+    assert records({"jobs": [{"id": 1}, "x", {"title": "no id"}]}, "jobs", "id") == [{"id": 1}]

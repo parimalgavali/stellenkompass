@@ -6,7 +6,7 @@ from ..geo import STATE_CODES, STATES, city_of
 from ..http import Fetcher
 from ..models import Job
 from ..text import iso_date
-from ._common import build_job
+from ._common import Capped, build_job, records
 
 PAGE = 100
 
@@ -16,11 +16,11 @@ def fetch(fetcher: Fetcher, board: str, max_pages: int = 20) -> dict:
     content: list[dict] = []
     for page in range(max_pages):
         body = fetcher.get_json(url, params={"limit": PAGE, "offset": page * PAGE, "country": "de"})
-        batch = body.get("content") or []
+        batch = records(body, "content", "id")
         content.extend(batch)
         if len(batch) < PAGE or len(content) >= body.get("totalFound", 0):
-            break
-    return {"content": content}
+            return {"content": content}
+    raise Capped({"content": content})
 
 
 def _german_region(location: dict) -> bool:
