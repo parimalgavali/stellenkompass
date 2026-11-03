@@ -19,11 +19,7 @@ Short records. Newest at the bottom. Format: context → decision → why.
 ## D4. Name: Stellenkompass (2026-11-03)
 - "Stellen" (German: positions) + "Kompass". Unique, says what it does.
 
-## D5: Web app keeps personal data in the browser
-
-- **Decision:** the web app is a static React app. Profile (keywords, companies) and tracker live in
-  `localStorage`. Profile → Backup exports and imports them as one JSON file (merge or replace).
-- **Why:** no login and no server (D2, D3). A friend's data never leaves their browser. Tracked roles
-  keep a copy of the title, company and link, so they stay after the role drops out of the scan.
-- **Also:** hash routing (`#/jobs`, `#/today`, …) so GitHub Pages needs no rewrite rules; plain CSS
-  with light/dark themes; vitest + Testing Library for tests; oxlint for lint.
+## D5. Web app keeps personal data in the browser (2026-11-03)
+- Decision: static React app; profile (keywords, companies) and tracker live in `localStorage`. Profile → Backup exports/imports one JSON file (merge or replace).
+- Why: no login and no server (D2, D3); a friend's data never leaves their browser. Tracked roles keep a copy of title, company and link, so they survive after the role leaves the scan.
+- Also: hash routing (`#/jobs`, `#/today`, …) so GitHub Pages needs no rewrites; plain CSS with light/dark theme; vitest + Testing Library; oxlint.
