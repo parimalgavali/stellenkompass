@@ -81,3 +81,9 @@ Short records. Newest at the bottom. Format: context → decision → why.
 - Lever: `region: eu` → `api.eu.lever.co`. Postings are paged (`skip` + `limit=100`, max 20 pages → `Capped`).
 - Personio: `domain` is `jobs.personio.de` (default) or `jobs.personio.com`; with `languages`, one feed per language is fetched and merged by position id (first language gives the title, all add description text, so ids don't change).
 - No EU Lever tenant with German roles is configured yet; .de and .com serve the same Personio feed for today's boards.
+
+## D17. SmartRecruiters job text from posting details, cached via last scan (2026-11-03)
+- The list route has no job text, so German postings get their detail (`ref`, only on `api.smartrecruiters.com`); its `jobAd.sections` become the description (snippet, skills, fit score).
+- Cache = last `jobs.json`: adapters with `USES_PREVIOUS` get last scan's jobs as `known`. Same id and same `releasedDate` → reuse snippet and skills, no request. No separate cache file.
+- At most 150 new detail requests per board and run (`MAX_DETAILS`); the rest get text on later runs.
+- A failed detail keeps the role and its previous text; failures are logged as a warning.

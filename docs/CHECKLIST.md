@@ -78,7 +78,8 @@ Plan: [PLANS.md](PLANS.md) phases 5–12. Review: [research/source-expansion-han
 ### Phase 10: Adapter depth
 - [x] Lever EU host + pagination
 - [x] Personio `.com` + language variants
-- [ ] SmartRecruiters full job text (cached)
+- [x] SmartRecruiters full job text (cached)
+- [ ] SmartRecruiters: German towns whose `region` is a district (e.g. Ansbach, "Mittelfranken") are dropped by the region check
 
 ### Phase 11: Universities and research
 - [ ] Institution inventory (Hochschulkompass) + JobPosting JSON-LD extractor

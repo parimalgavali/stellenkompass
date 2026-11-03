@@ -1,17 +1,30 @@
-"""SmartRecruiters public postings API: https://developers.smartrecruiters.com/docs/posting-api"""
+"""SmartRecruiters public postings API: https://developers.smartrecruiters.com/docs/posting-api
+
+The list has no job text, so German postings also get their detail (`ref`). Details are only
+fetched for new or re-released postings: otherwise last scan's snippet and skills are reused.
+"""
 
 from __future__ import annotations
+
+import logging
 
 from ..geo import STATE_CODES, STATES, city_of
 from ..http import Fetcher
 from ..models import Job
-from ..text import iso_date
+from ..text import html_to_text, iso_date
 from ._common import Capped, build_job, records
 
 PAGE = 100
+DETAIL_HOST = "https://api.smartrecruiters.com/"
+MAX_DETAILS = 150  # new detail requests per board and run; the rest follow on later runs
+USES_PREVIOUS = True
+log = logging.getLogger(__name__)
 
 
-def fetch(fetcher: Fetcher, board: str, max_pages: int = 20) -> dict:
+def fetch(
+    fetcher: Fetcher, board: str, max_pages: int = 20, known: dict[str, dict] | None = None
+) -> dict:
+    """`known` maps last scan's job ids to their saved fields."""
     url = f"https://api.smartrecruiters.com/v1/companies/{board}/postings"
     content: list[dict] = []
     for page in range(max_pages):
@@ -19,8 +32,41 @@ def fetch(fetcher: Fetcher, board: str, max_pages: int = 20) -> dict:
         batch = records(body, "content", "id")
         content.extend(batch)
         if len(batch) < PAGE or len(content) >= body.get("totalFound", 0):
-            return {"content": content}
-    raise Capped({"content": content})
+            return {"content": _add_details(fetcher, board, content, known or {})}
+    raise Capped({"content": _add_details(fetcher, board, content, known or {})})
+
+
+def _add_details(fetcher: Fetcher, board: str, content: list[dict], known: dict) -> list[dict]:
+    fetched = failed = 0
+    for item in content:
+        if not _wanted(item.get("location") or {}):
+            continue
+        prev = known.get(f"smartrecruiters:{board}-{item['id']}") or {}
+        if not prev.get("snippet"):
+            prev = {}
+        if prev and prev.get("posted_at") == iso_date(item.get("releasedDate")):
+            item["_cached"] = prev
+            continue
+        ref = item.get("ref") or ""
+        if fetched >= MAX_DETAILS or not ref.startswith(DETAIL_HOST):
+            item["_cached"] = prev
+            continue
+        fetched += 1
+        try:
+            sections = (fetcher.get_json(ref).get("jobAd") or {}).get("sections") or {}
+            item["_description"] = " ".join(
+                html_to_text(s.get("text") or "") for s in sections.values() if isinstance(s, dict)
+            )
+        except Exception:  # noqa: BLE001 - keep the summary and the old text
+            failed += 1
+            item["_cached"] = prev
+    if failed:
+        log.warning("smartrecruiters/%s: %d detail requests failed", board, failed)
+    return content
+
+
+def _wanted(location: dict) -> bool:
+    return (location.get("country") or "").lower() == "de" and _german_region(location)
 
 
 def _german_region(location: dict) -> bool:
@@ -35,7 +81,7 @@ def parse(raw: dict, board: str, company: str | None = None) -> list[Job]:
     jobs = []
     for item in raw.get("content", []):
         loc = item.get("location") or {}
-        if (loc.get("country") or "").lower() != "de" or not _german_region(loc):
+        if not _wanted(loc):
             continue
         city = loc.get("city") or ""
         language = ((item.get("language") or {}).get("code") or "")[:2]
@@ -48,6 +94,7 @@ def parse(raw: dict, board: str, company: str | None = None) -> list[Job]:
             locations=[f"{city}, Germany" if city else "Germany"]
             + (["Remote"] if loc.get("remote") else []),
             url=f"https://jobs.smartrecruiters.com/{board}/{item['id']}",
+            description=item.get("_description", ""),
             country_codes=["de"],
             workplace="remote" if loc.get("remote") else "hybrid" if loc.get("hybrid") else None,
             type_hints=[
@@ -61,5 +108,9 @@ def parse(raw: dict, board: str, company: str | None = None) -> list[Job]:
         if job:
             if city and not job.city:
                 job.city = city
+            cached = item.get("_cached") or {}
+            if not job.snippet and cached:
+                job.snippet = cached.get("snippet") or ""
+                job.skills = cached.get("skills") or job.skills
             jobs.append(job)
     return jobs
