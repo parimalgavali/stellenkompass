@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { EMPTY_FILTERS, filterJobs, sortNewest } from './filters'
+import { EMPTY_FILTERS, filterJobs, sortNewest, topValues } from './filters'
 import { matchJob } from './match'
 import { newMatches, todayItems } from './today'
 import { makeBackup, mergeBackup, parseBackup } from './backup'
@@ -26,6 +26,14 @@ describe('filters', () => {
     const f = { ...EMPTY_FILTERS, matchesOnly: true }
     expect(filterJobs(JOBS, f, { keywords: ['machine learning'], companies: [] }, NOW)).toHaveLength(1)
   })
+  it('filters by skill and searches skills', () => {
+    expect(filterJobs(JOBS, { ...EMPTY_FILTERS, skill: 'Airflow' }, noProfile, NOW).map((j) => j.id)).toEqual(['greenhouse:acme-1'])
+    expect(filterJobs(JOBS, { ...EMPTY_FILTERS, q: 'airflow' }, noProfile, NOW)).toHaveLength(1)
+    expect(filterJobs([job({ skills: undefined })], { ...EMPTY_FILTERS, skill: 'Airflow' }, noProfile, NOW)).toHaveLength(0)
+  })
+  it('counts skills across roles', () => {
+    expect(topValues([...JOBS, job({ id: 'b' })], (j) => j.skills ?? [])[0]).toEqual(['Python', 2])
+  })
   it('sorts newest first', () => {
     expect(sortNewest(JOBS)[0].id).toBe('lever:y-3')
   })
@@ -36,6 +44,7 @@ describe('matchJob', () => {
     expect(matchJob(job(), { keywords: ['data engineer', 'sql'], companies: [] })?.keywords).toEqual(['data engineer', 'sql'])
     expect(matchJob(job({ title: 'Database admin', tags: [] }), { keywords: ['data'], companies: [] })).toBeNull()
     expect(matchJob(job({ title: 'Büro Manager', tags: [] }), { keywords: ['buro'], companies: [] })).not.toBeNull()
+    expect(matchJob(job({ tags: [] }), { keywords: ['airflow'], companies: [] })?.keywords).toEqual(['airflow'])
   })
   it('matches followed companies', () => {
     expect(matchJob(job({ company: 'N26 GmbH' }), { keywords: [], companies: ['n26'] })?.company).toBe(true)

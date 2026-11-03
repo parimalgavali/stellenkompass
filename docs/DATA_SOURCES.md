@@ -20,6 +20,7 @@ Every adapter returns roles in this shape (see `scanner/stellenkompass_scanner/m
 | `source` | `arbeitnow`, `greenhouse`, `ashby`, `smartrecruiters`, `lever`, `personio` |
 | `posted_at` | ISO date if known |
 | `tags` | Short tags from the source (skills, categories) |
+| `skills` | Skills found in title + description by `skills.py` (curated list, max 12) |
 | `snippet` | First ~300 characters of the description, plain text |
 
 ## Sources

@@ -17,6 +17,7 @@ export function job(over: Partial<Job> = {}): Job {
     posted_at: '2026-11-02T08:00:00Z',
     first_seen: '2026-11-02T08:00:00Z',
     tags: ['Python', 'SQL'],
+    skills: ['Python', 'SQL', 'Airflow'],
     snippet: '',
     ...over,
   }
@@ -24,6 +25,6 @@ export function job(over: Partial<Job> = {}): Job {
 
 export const JOBS: Job[] = [
   job(),
-  job({ id: 'ashby:x-2', title: 'Werkstudent Machine Learning', company: 'Parloa', city: 'Munich', language: 'de', job_type: 'working_student', source: 'ashby', tags: [], posted_at: '2026-10-01T08:00:00Z', first_seen: '2026-10-01T08:00:00Z' }),
-  job({ id: 'lever:y-3', title: 'Frontend Developer', company: 'Pigment', city: 'Hamburg', remote: true, source: 'lever', tags: ['React'], posted_at: '2026-11-03T06:00:00Z', first_seen: '2026-11-03T06:00:00Z' }),
+  job({ id: 'ashby:x-2', title: 'Werkstudent Machine Learning', company: 'Parloa', city: 'Munich', language: 'de', job_type: 'working_student', source: 'ashby', tags: [], skills: ['Machine Learning'], posted_at: '2026-10-01T08:00:00Z', first_seen: '2026-10-01T08:00:00Z' }),
+  job({ id: 'lever:y-3', title: 'Frontend Developer', company: 'Pigment', city: 'Hamburg', remote: true, source: 'lever', tags: ['React'], skills: ['React', 'TypeScript'], posted_at: '2026-11-03T06:00:00Z', first_seen: '2026-11-03T06:00:00Z' }),
 ]

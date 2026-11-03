@@ -27,3 +27,8 @@ Short records. Newest at the bottom. Format: context → decision → why.
 ## D6. A failed source keeps its last good roles (2026-11-03)
 - Decision: when a source or board fails, the scanner copies that board's roles from the previous `jobs.json` and records `carried` in `scan_report.json`. 429s wait for `Retry-After` (max 60 s).
 - Why: the first scan from GitHub Actions got HTTP 429 from Arbeitnow and dropped from 2,911 to 1,460 roles. Showing yesterday's roles beats showing none; roles that are really gone vanish after the next good scan.
+
+## D7. Skill tags from a curated list (2026-11-03)
+- Decision: `scanner/.../skills.py` holds ~75 skills, each with regex aliases (EN + DE, e.g. "maschinelles Lernen" → Machine Learning). Each job gets `skills` from title + full description.
+- Why: deterministic, fast and testable; no LLM or API key. It's also the base for the CV fit score: same list, CV skills ∩ role skills.
+- Add a skill: one line in `_SKILLS` plus a test case in `tests/test_skills.py`.

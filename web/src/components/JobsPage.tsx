@@ -23,6 +23,7 @@ export function JobsPage({ jobs, profile, tracker, onSave }: Props) {
 
   const sorted = useMemo(() => sortNewest(jobs), [jobs])
   const cities = useMemo(() => topValues(jobs, (j) => j.city).slice(0, 40), [jobs])
+  const skills = useMemo(() => topValues(jobs, (j) => j.skills ?? []).slice(0, 60), [jobs])
   const sources = useMemo(() => topValues(jobs, (j) => j.source), [jobs])
   const results = useMemo(() => filterJobs(sorted, filters, profile), [sorted, filters, profile])
   const hasProfile = profile.keywords.length + profile.companies.length > 0
@@ -49,6 +50,14 @@ export function JobsPage({ jobs, profile, tracker, onSave }: Props) {
           {cities.map(([c, n]) => (
             <option key={c} value={c}>
               {c} ({n})
+            </option>
+          ))}
+        </select>
+        <select value={filters.skill} onChange={(e) => set({ skill: e.target.value })} aria-label="Skill">
+          <option value="">Any skill</option>
+          {skills.map(([s, n]) => (
+            <option key={s} value={s}>
+              {s} ({n})
             </option>
           ))}
         </select>
