@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-11-03T08:24:12Z",
-  "total_jobs": 8750,
-  "collected": 8845,
+  "generated_at": "2026-11-03T08:46:45Z",
+  "total_jobs": 8778,
+  "collected": 8891,
   "carried": 0,
-  "duplicates_removed": 95,
+  "duplicates_removed": 113,
   "sources": {
     "arbeitnow": {
       "boards": 1,
-      "jobs": 1493,
+      "jobs": 1497,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 52.3,
+      "seconds": 44.8,
       "carried": 0
     },
     "bundesagentur": {
       "boards": 1,
-      "jobs": 4403,
+      "jobs": 4406,
       "errors": [],
       "capped": [
         {
@@ -25,7 +25,7 @@
         }
       ],
       "status": "partial",
-      "seconds": 52.2,
+      "seconds": 58.4,
       "carried": 0
     },
     "greenhouse": {
@@ -34,25 +34,25 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 35.0,
+      "seconds": 33.1,
       "carried": 0
     },
     "ashby": {
       "boards": 24,
-      "jobs": 389,
+      "jobs": 388,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 16.8,
+      "seconds": 17.4,
       "carried": 0
     },
     "smartrecruiters": {
       "boards": 5,
-      "jobs": 1380,
+      "jobs": 1381,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 563.9,
+      "seconds": 367.9,
       "carried": 0
     },
     "lever": {
@@ -61,7 +61,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 25.0,
+      "seconds": 7.5,
       "carried": 0
     },
     "personio": {
@@ -70,7 +70,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 8.5,
+      "seconds": 9.1,
       "carried": 0
     },
     "recruitee": {
@@ -79,7 +79,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 3.0,
+      "seconds": 3.4,
       "carried": 0
     },
     "teamtailor": {
@@ -88,7 +88,16 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 1.2,
+      "seconds": 1.1,
+      "carried": 0
+    },
+    "dvinci": {
+      "boards": 1,
+      "jobs": 39,
+      "errors": [],
+      "capped": [],
+      "status": "complete",
+      "seconds": 2.2,
       "carried": 0
     }
   }
