@@ -17,7 +17,7 @@ Every adapter returns roles in this shape (see `scanner/stellenkompass_scanner/m
 | `job_type` | `full_time`, `working_student`, `internship`, `part_time` or `other` |
 | `language` | `en` or `de`: language the posting is written in |
 | `url` | Link to the original posting (apply there) |
-| `source` | `arbeitnow`, `bundesagentur`, `greenhouse`, `ashby`, `smartrecruiters`, `lever`, `personio` |
+| `source` | `arbeitnow`, `bundesagentur`, `greenhouse`, `ashby`, `smartrecruiters`, `lever`, `personio`, `recruitee`, `teamtailor` |
 | `posted_at` | ISO date if known |
 | `tags` | Short tags from the source (skills, categories) |
 | `skills` | Skills found in title + description by `skills.py` (curated list, max 12) |
@@ -38,6 +38,8 @@ Every adapter returns roles in this shape (see `scanner/stellenkompass_scanner/m
 | SmartRecruiters | Public postings API per company, `country=de` | `scanner/companies.yaml` → `smartrecruiters` |
 | Lever | Public postings API per company | `scanner/companies.yaml` → `lever` |
 | Personio | Public XML feed per company | `scanner/companies.yaml` → `personio` |
+| Recruitee | Public offers API `https://<board>.recruitee.com/api/offers/` | `scanner/companies.yaml` → `recruitee` |
+| Teamtailor | Public RSS `https://<host>/jobs.rss`, paged with `offset`/`per_page` (100 per page, max 20 pages) | `scanner/companies.yaml` → `teamtailor` |
 
 ### Adding a company board
 1. Open the company's careers page and click a role. The apply link shows the platform and board name:
@@ -46,6 +48,8 @@ Every adapter returns roles in this shape (see `scanner/stellenkompass_scanner/m
    - `jobs.lever.co/<board>` → `lever`
    - `jobs.smartrecruiters.com/<board>` → `smartrecruiters` (case-sensitive, e.g. `BoschGroup`)
    - `<board>.jobs.personio.de` → `personio`
+   - `<board>.recruitee.com` → `recruitee`
+   - `<board>.teamtailor.com` (or a custom careers host with a `/jobs.rss` feed) → `teamtailor`
 2. Check that it has roles in Germany (from `scanner/`):
    ```bash
    uv run python -c "from stellenkompass_scanner.http import HttpFetcher; from stellenkompass_scanner.sources import greenhouse as s; print(len(s.parse(s.fetch(HttpFetcher(), 'n26'), 'n26')))"

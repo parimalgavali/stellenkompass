@@ -4,7 +4,17 @@ Company boards have `fetch(fetcher, board)` and `parse(raw, board)`; aggregators
 `fetch(fetcher, options)` and `parse(raw)`, with options from their section in companies.yaml.
 """
 
-from . import arbeitnow, ashby, bundesagentur, greenhouse, lever, personio, smartrecruiters
+from . import (
+    arbeitnow,
+    ashby,
+    bundesagentur,
+    greenhouse,
+    lever,
+    personio,
+    recruitee,
+    smartrecruiters,
+    teamtailor,
+)
 
 PER_COMPANY = {
     "greenhouse": greenhouse,
@@ -12,6 +22,8 @@ PER_COMPANY = {
     "smartrecruiters": smartrecruiters,
     "lever": lever,
     "personio": personio,
+    "recruitee": recruitee,
+    "teamtailor": teamtailor,
 }
 
 AGGREGATORS = {

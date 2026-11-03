@@ -72,8 +72,8 @@ Plan: [PLANS.md](PLANS.md) phases 5–12. Review: [research/source-expansion-han
 
 ### Phase 9: Onboarding + new platforms
 - [x] Re-check skipped boards: 7 added; Rasa left out (worldwide remote only)
-- [ ] Recruitee adapter
-- [ ] Teamtailor adapter (RSS, paginated past 100)
+- [x] Recruitee adapter (Exeon, Makersite, Tether)
+- [x] Teamtailor adapter (RSS, paginated past 100; Proxima)
 
 ### Phase 10: Adapter depth
 - [ ] Lever EU host + pagination

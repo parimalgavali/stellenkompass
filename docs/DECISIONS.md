@@ -70,3 +70,8 @@ Short records. Newest at the bottom. Format: context → decision → why.
 ## D14. Search and language labels (2026-11-03)
 - Text search covers title, company, location, snippet, tags and skills, so towns outside our city list can be found by name. The city filter lists every city in the scan.
 - The language filter and chips say "English ad" / "German ad": `language` is the posting's language, and an English ad can still require German.
+
+## D15. Recruitee and Teamtailor (2026-11-03)
+- Recruitee: `/api/offers/`; id = offer `id`, url = `careers_url`, one country code per entry in `locations`. Workplace from the `remote` / `hybrid` / `on_site` flags (hybrid, or remote + on-site → hybrid).
+- Teamtailor: `jobs.rss`; id = RSS `guid` (never title/date), country per `tt:location`, `remoteStatus` fully / hybrid / none → remote / hybrid / onsite. Paged with `offset` + `per_page=100`; stopping at 20 pages raises `Capped`. The board is the careers host (`name` → `name.teamtailor.com`, or a custom host with a dot).
+- Tenants: found by guessing and from links in Arbeitnow ads, then checked for roles in Germany. Few German tenants so far; add more as they are found (one role is enough).
