@@ -15,6 +15,8 @@ export interface Job {
   job_type: JobType
   /** From the title; missing when it doesn't say. */
   seniority?: Seniority | ''
+  /** Smallest number of years of experience the ad asks for. */
+  experience_years?: number | null
   language: 'en' | 'de'
   posted_at: string
   first_seen: string

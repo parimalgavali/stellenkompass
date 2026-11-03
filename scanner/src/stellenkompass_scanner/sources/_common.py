@@ -1,6 +1,11 @@
 from __future__ import annotations
 
-from ..classify import detect_job_type, detect_language, detect_seniority
+from ..classify import (
+    detect_experience_years,
+    detect_job_type,
+    detect_language,
+    detect_seniority,
+)
 from ..geo import city_of, in_germany, is_remote
 from ..models import Job
 from ..skills import extract_skills
@@ -72,6 +77,7 @@ def build_job(
         workplace_type=workplace,
         job_type=detect_job_type(title, type_hints),
         seniority=detect_seniority(title),
+        experience_years=detect_experience_years(f"{title}\n{description}"),
         language=lang,
         url=url,
         source=source,
