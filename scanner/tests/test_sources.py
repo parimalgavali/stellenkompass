@@ -11,6 +11,7 @@ from stellenkompass_scanner.sources import (
     recruitee,
     smartrecruiters,
     teamtailor,
+    workday,
 )
 from stellenkompass_scanner.sources._common import Capped, records
 
@@ -297,3 +298,81 @@ def test_dvinci_one_role_per_opening(fixture):
     twin = next(j for j in jobs if j.source_job_id == "170942")
     assert twin.language == "en" and twin.aliases == ["dvinci:jobs.pse.kit.edu-170941"]
     assert not any(j.source_job_id == "170941" for j in jobs)
+
+
+class _Workday:
+    def __init__(self, facets, sizes):
+        self.facets, self.sizes, self.bodies = facets, sizes, []
+
+    def post_json(self, url, body):
+        self.bodies.append(body)
+        if body["limit"] == 1:
+            return {"total": sum(self.sizes), "facets": self.facets, "jobPostings": []}
+        n = body["offset"] // 20
+        size = self.sizes[n] if n < len(self.sizes) else 0
+        posts = [{"title": "T", "externalPath": f"/job/Berlin/T_{n}-{i}"} for i in range(size)]
+        return {"total": sum(self.sizes) if n == 0 else 0, "jobPostings": posts}
+
+
+def test_workday_uses_country_facet_and_first_page_total():
+    facets = [
+        {
+            "facetParameter": "locationMainGroup",
+            "values": [
+                {
+                    "facetParameter": "locationCountry",
+                    "values": [{"descriptor": "Germany", "id": "de1"}, {"descriptor": "France"}],
+                }
+            ],
+        }
+    ]
+    fake = _Workday(facets, [20, 20, 5])
+    raw = workday.fetch(fake, "acme", "wd3", "Careers")
+    assert raw["germany"] and len(raw["pages"]) == 3
+    assert fake.bodies[1]["appliedFacets"] == {"locationCountry": ["de1"]}
+
+
+def test_workday_falls_back_to_location_facets_naming_germany():
+    facets = [
+        {
+            "facetParameter": "locations",
+            "values": [
+                {"descriptor": "Berlin, Germany", "id": "b"},
+                {"descriptor": "Paris, France", "id": "p"},
+            ],
+        }
+    ]
+    fake = _Workday(facets, [3])
+    raw = workday.fetch(fake, "acme", "wd3", "Careers")
+    assert raw["germany"] and fake.bodies[1]["appliedFacets"] == {"locations": ["b"]}
+
+
+def test_workday_caps_and_reads_text_without_facet(monkeypatch):
+    monkeypatch.setattr(workday, "MAX_PAGES", 2)
+    with pytest.raises(Capped) as cap:
+        workday.fetch(_Workday([], [20, 20, 20]), "acme", "wd3", "Careers")
+    assert not cap.value.raw["germany"]
+    jobs = workday.parse(cap.value.raw, "acme")
+    assert len(jobs) == 40 and jobs[0].city == "Berlin"
+
+
+def test_workday_parses_philips(fixture):
+    from datetime import date
+
+    raw = fixture("workday_philips.json")
+    jobs = workday.parse(raw, "philips", company="Philips", today=date(2026, 11, 3))
+    assert len(jobs) == 4  # the repeated posting is kept once
+    first = jobs[0]
+    assert first.id == "workday:philips-589309-1"
+    assert first.location == "Germany - Home Based"
+    assert first.url == (
+        "https://philips.wd3.myworkdayjobs.com/jobs-and-careers"
+        "/job/Germany---Home-Based/Field-Specialist-IGT--all-genders--Region-Kln-Bonn_589309-1"
+    )
+    assert [j.posted_at[:10] for j in jobs] == [
+        "2026-11-03",
+        "2026-11-02",
+        "2026-10-30",
+        "2026-10-27",
+    ]
+    assert jobs[1].city == "Hamburg" and jobs[1].job_type == "working_student"
