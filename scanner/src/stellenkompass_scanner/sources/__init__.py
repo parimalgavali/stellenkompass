@@ -8,6 +8,7 @@ from . import (
     arbeitnow,
     ashby,
     bundesagentur,
+    dvinci,
     greenhouse,
     lever,
     personio,
@@ -24,6 +25,7 @@ PER_COMPANY = {
     "personio": personio,
     "recruitee": recruitee,
     "teamtailor": teamtailor,
+    "dvinci": dvinci,
 }
 
 AGGREGATORS = {

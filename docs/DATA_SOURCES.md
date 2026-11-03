@@ -40,6 +40,7 @@ Every adapter returns roles in this shape (see `scanner/stellenkompass_scanner/m
 | Personio | Public XML feed per company (`domain: jobs.personio.com`, `languages: [de, en]` optional) | `scanner/companies.yaml` → `personio` |
 | Recruitee | Public offers API `https://<board>.recruitee.com/api/offers/` | `scanner/companies.yaml` → `recruitee` |
 | Teamtailor | Public RSS `https://<host>/jobs.rss`, paged with `offset`/`per_page` (100 per page, max 20 pages) | `scanner/companies.yaml` → `teamtailor` |
+| d.vinci | Public widget feed `https://<host>/jobPublication/list.json` (universities, research); Ausbildung skipped | `scanner/companies.yaml` → `dvinci`, see `docs/research/institutions.md` |
 
 ### Adding a company board
 1. Open the company's careers page and click a role. The apply link shows the platform and board name:

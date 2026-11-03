@@ -125,3 +125,7 @@ recruitee:
 
 teamtailor:
   - { board: proxima, name: Proxima }
+
+# d.vinci hosts (universities, research). See docs/research/institutions.md.
+dvinci:
+  - { board: jobs.pse.kit.edu, name: KIT }

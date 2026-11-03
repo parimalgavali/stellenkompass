@@ -82,8 +82,11 @@ Plan: [PLANS.md](PLANS.md) phases 5–12. Review: [research/source-expansion-han
 - [ ] SmartRecruiters: German towns whose `region` is a district (e.g. Ansbach, "Mittelfranken") are dropped by the region check
 
 ### Phase 11: Universities and research
-- [ ] Institution inventory (Hochschulkompass) + JobPosting JSON-LD extractor
-- [ ] Pilot: TUM, KIT, RWTH, DFKI, Fraunhofer, Max Planck, Helmholtz
+- [x] Pilot inventory of 12 institutions: `docs/research/institutions.md`
+- [x] d.vinci adapter, KIT enabled
+- [ ] Full institution inventory from Hochschulkompass
+- [ ] JobPosting JSON-LD extractor (none of the pilot pages has JSON-LD)
+- [ ] Pilot follow-ups: Uni Bonn HTML parser, Max Planck institutes, Helmholtz centres, find more d.vinci hosts
 
 ### Phase 12: Later sources
 - [ ] Public sector (INTERAMT, service.bund.de)
