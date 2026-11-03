@@ -1,6 +1,6 @@
 # Checklist
 
-Updated after every PR. `[x]` = done and merged.
+Updated after every PR. `[x]` = done and merged. How we work: [WORKFLOW.md](WORKFLOW.md).
 
 ## Phase 0: Research and setup
 - [x] Read REA (Reverse Engineer Anything) and its responsible-use rules
@@ -36,7 +36,8 @@ First real scan (2026-11-03): 2,911 roles in Germany from 27 boards + Arbeitnow,
 ## Phase 3: Daily automation and hosting
 - [x] Daily scan workflow commits fresh `jobs.json` (`.github/workflows/daily.yml`, 05:15 Berlin)
 - [x] Deploy to GitHub Pages workflow
-- [ ] Enable Pages (Parimal enables Pages: Settings → Pages → Source: GitHub Actions)
+- [ ] Enable Pages (Parimal: Settings → Pages → Source: GitHub Actions). Until then the deploy step fails with "Get Pages site failed"; the bot token can't enable it (HTTP 403).
+- [x] Working loop documented → [WORKFLOW.md](WORKFLOW.md)
 - [x] Scan health shown in the app (footer: last scan time + roles per source)
 
 ## Phase 4: Better matching (v2)
