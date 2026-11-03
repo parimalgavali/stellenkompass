@@ -39,6 +39,7 @@ First real scan (2026-11-03): 2,911 roles in Germany from 27 boards + Arbeitnow,
 - [ ] Enable Pages (Parimal: Settings → Pages → Source: GitHub Actions). Until then the deploy step fails with "Get Pages site failed"; the bot token can't enable it (HTTP 403).
 - [x] Working loop documented → [WORKFLOW.md](WORKFLOW.md)
 - [x] Scan health shown in the app (footer: last scan time + roles per source)
+- [x] Failed source keeps last scan's roles; 429s honour `Retry-After` (first live scan lost all Arbeitnow roles to a 429)
 
 ## Phase 4: Better matching (v2)
 - [ ] CV upload (in browser) + fit score

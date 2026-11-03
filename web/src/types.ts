@@ -27,6 +27,7 @@ export interface SourceReport {
   boards: number
   jobs: number
   errors: { board: string; error: string }[]
+  carried?: number
   seconds: number
 }
 
