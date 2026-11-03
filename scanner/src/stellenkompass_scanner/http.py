@@ -26,6 +26,7 @@ class Fetcher(Protocol):
         self, url: str, params: dict | None = None, headers: dict | None = None
     ) -> Any: ...
     def get_text(self, url: str, params: dict | None = None) -> str: ...
+    def post_json(self, url: str, body: dict) -> Any: ...
 
 
 class HttpFetcher:
@@ -40,14 +41,19 @@ class HttpFetcher:
             follow_redirects=True,
         )
 
-    def _get(self, url: str, params: dict | None, headers: dict | None = None) -> httpx.Response:
+    def _get(
+        self, url: str, params: dict | None, headers: dict | None = None, body: dict | None = None
+    ) -> httpx.Response:
         last: Exception | None = None
         wait = self.pause
         for attempt in range(self.retries + 1):
             time.sleep(wait)
             wait = self.pause * 4 * (attempt + 1)
             try:
-                response = self._client.get(url, params=params, headers=headers)
+                if body is None:
+                    response = self._client.get(url, params=params, headers=headers)
+                else:
+                    response = self._client.post(url, json=body, headers=headers)
                 if response.status_code in (429, 500, 502, 503, 504):
                     last = httpx.HTTPStatusError(
                         f"HTTP {response.status_code}", request=response.request, response=response
@@ -66,6 +72,9 @@ class HttpFetcher:
 
     def get_text(self, url: str, params: dict | None = None) -> str:
         return self._get(url, params).text
+
+    def post_json(self, url: str, body: dict) -> Any:
+        return self._get(url, None, body=body).json()
 
     def close(self) -> None:
         self._client.close()

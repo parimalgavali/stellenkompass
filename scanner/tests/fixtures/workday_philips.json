@@ -1,0 +1,57 @@
+{
+ "site": "jobs-and-careers",
+ "instance": "wd3",
+ "germany": true,
+ "pages": [
+  {
+   "total": 5,
+   "jobPostings": [
+    {
+     "title": "Field Specialist IGT (all genders) Region Köln/Bonn",
+     "externalPath": "/job/Germany---Home-Based/Field-Specialist-IGT--all-genders--Region-Kln-Bonn_589309-1",
+     "locationsText": "2 Locations",
+     "postedOn": "Posted Today",
+     "bulletFields": [
+      "589309"
+     ]
+    },
+    {
+     "title": "Werkstudent / Praktikum Projektmanagement - Produktivität (all genders)",
+     "externalPath": "/job/Hamburg/Werkstudent---Praktikum-Projektmanagement---Produktivitt--all-genders-_589673-1",
+     "locationsText": "Hamburg",
+     "postedOn": "Posted Yesterday",
+     "bulletFields": [
+      "589673"
+     ]
+    },
+    {
+     "title": "Customer Demand Planner (All genders)",
+     "externalPath": "/job/Hamburg/Customer-Demand-Planner--All-genders-_590301-2",
+     "locationsText": "Hamburg",
+     "postedOn": "Posted 4 Days Ago",
+     "bulletFields": [
+      "590301"
+     ]
+    },
+    {
+     "title": "Product Security Architect (All Genders)",
+     "externalPath": "/job/Munich/Product-Security-Architect--All-Genders-_592636-1",
+     "locationsText": "Munich",
+     "postedOn": "Posted 7 Days Ago",
+     "bulletFields": [
+      "592636"
+     ]
+    },
+    {
+     "title": "Field Specialist IGT (all genders) Region Köln/Bonn",
+     "externalPath": "/job/Germany---Home-Based/Field-Specialist-IGT--all-genders--Region-Kln-Bonn_589309-1",
+     "locationsText": "2 Locations",
+     "postedOn": "Posted Today",
+     "bulletFields": [
+      "589309"
+     ]
+    }
+   ]
+  }
+ ]
+}

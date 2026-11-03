@@ -94,3 +94,10 @@ Short records. Newest at the bottom. Format: context → decision → why.
 - d.vinci (`/jobPublication/list.json`) is the public feed its job widgets load. It isn't documented publicly, so it's treated like any public widget feed, and the adapter fails safely if the shape changes.
 - Ausbildung/dual-study places are skipped (as in D9). Contact persons in the feed are never stored.
 - One role per `jobOpening.id`: the English ad is kept if there is one; the other language ads add their text and become aliases.
+
+## D19. Workday via its public CXS route (2026-11-03)
+- Idea from career-ops (`docs/research/reference-projects.md`); our own code. The route is what the career site itself calls; robots.txt allows the site paths.
+- Config: `board` = tenant, plus `instance` (`wd3`, …) and `site` from the careers URL.
+- Germany: the `locationCountry`-style facet if the site has one, else every `locations` facet value naming Germany; those roles get country DE. Without either, all roles are read and decided by location text (capped at 50 pages, so big global tenants without a facet aren't added).
+- No job text in the list (no detail requests for now), so skills come from the title only. "Posted 30+ Days Ago" gives no date.
+

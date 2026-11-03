@@ -15,6 +15,7 @@ from . import (
     recruitee,
     smartrecruiters,
     teamtailor,
+    workday,
 )
 
 PER_COMPANY = {
@@ -26,6 +27,7 @@ PER_COMPANY = {
     "recruitee": recruitee,
     "teamtailor": teamtailor,
     "dvinci": dvinci,
+    "workday": workday,
 }
 
 AGGREGATORS = {

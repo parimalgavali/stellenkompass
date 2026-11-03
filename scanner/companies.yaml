@@ -129,3 +129,19 @@ teamtailor:
 # d.vinci hosts (universities, research). See docs/research/institutions.md.
 dvinci:
   - { board: jobs.pse.kit.edu, name: KIT }
+
+# Workday: board = tenant; instance and site come from the careers URL
+# https://<board>.<instance>.myworkdayjobs.com/<site>
+workday:
+  - { board: philips, instance: wd3, site: jobs-and-careers, name: Philips }
+  - { board: accenture, instance: wd103, site: AccentureCareers, name: Accenture }
+  - { board: hitachi, instance: wd1, site: hitachi, name: Hitachi }
+  - { board: nvidia, instance: wd5, site: NVIDIAExternalCareerSite, name: NVIDIA }
+  - { board: jj, instance: wd5, site: JJ, name: Johnson & Johnson }
+  - { board: getec, instance: wd103, site: External_Careers, name: GETEC }
+  - { board: logitech, instance: wd5, site: Logitech, name: Logitech }
+  - { board: csl, instance: wd1, site: CSL_External, name: CSL }
+  - { board: thermofisher, instance: wd5, site: ThermoFisherCareers, name: Thermo Fisher }
+  - { board: alcon, instance: wd5, site: careers_alcon, name: Alcon }
+  - { board: ferring, instance: wd3, site: Ferring, name: Ferring }
+  - { board: roche, instance: wd3, site: roche-ext, name: Roche }
