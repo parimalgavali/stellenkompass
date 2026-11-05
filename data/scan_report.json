@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-11-04T12:04:20Z",
-  "total_jobs": 15033,
-  "collected": 15150,
-  "carried": 0,
-  "duplicates_removed": 117,
+  "generated_at": "2026-11-05T12:16:19Z",
+  "total_jobs": 15068,
+  "collected": 15205,
+  "carried": 24,
+  "duplicates_removed": 161,
   "sources": {
     "arbeitnow": {
       "boards": 1,
-      "jobs": 1461,
+      "jobs": 1486,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 49.2,
+      "seconds": 50.1,
       "carried": 0
     },
     "bundesagentur": {
       "boards": 1,
-      "jobs": 4441,
+      "jobs": 4448,
       "errors": [],
       "capped": [
         {
@@ -25,61 +25,61 @@
         }
       ],
       "status": "partial",
-      "seconds": 51.1,
+      "seconds": 54.3,
       "carried": 0
     },
     "greenhouse": {
       "boards": 35,
-      "jobs": 937,
+      "jobs": 948,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 39.5,
+      "seconds": 32.9,
       "carried": 0
     },
     "ashby": {
       "boards": 28,
-      "jobs": 471,
+      "jobs": 470,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 20.2,
+      "seconds": 18.6,
       "carried": 0
     },
     "smartrecruiters": {
       "boards": 35,
-      "jobs": 4341,
+      "jobs": 4349,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 285.3,
+      "seconds": 365.5,
       "carried": 0
     },
     "lever": {
       "boards": 6,
-      "jobs": 99,
+      "jobs": 101,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 61.0,
+      "seconds": 38.0,
       "carried": 0
     },
     "personio": {
       "boards": 6,
-      "jobs": 273,
+      "jobs": 272,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 10.0,
+      "seconds": 9.9,
       "carried": 0
     },
     "recruitee": {
       "boards": 5,
-      "jobs": 162,
+      "jobs": 161,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 5.6,
+      "seconds": 6.4,
       "carried": 0
     },
     "teamtailor": {
@@ -88,12 +88,12 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 5.3,
+      "seconds": 5.4,
       "carried": 0
     },
     "dvinci": {
       "boards": 1,
-      "jobs": 43,
+      "jobs": 45,
       "errors": [],
       "capped": [],
       "status": "complete",
@@ -102,21 +102,26 @@
     },
     "workday": {
       "boards": 20,
-      "jobs": 1380,
+      "jobs": 1407,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 182.6,
+      "seconds": 191.0,
       "carried": 0
     },
     "successfactors": {
       "boards": 6,
-      "jobs": 1414,
-      "errors": [],
+      "jobs": 1390,
+      "errors": [
+        {
+          "board": "careers.eon.com",
+          "error": "Client error '403 Forbidden' for url 'https://careers.eon.com/tile-search-results/?q=&optionsFacetsDD_country=DE&startrow=0'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HT"
+        }
+      ],
       "capped": [],
-      "status": "complete",
-      "seconds": 68.9,
-      "carried": 0
+      "status": "partial",
+      "seconds": 69.0,
+      "carried": 24
     },
     "softgarden": {
       "boards": 1,
@@ -124,7 +129,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 1.0,
+      "seconds": 1.1,
       "carried": 0
     }
   }
