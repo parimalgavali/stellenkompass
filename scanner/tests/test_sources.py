@@ -504,3 +504,21 @@ def test_join_fetch_stops_at_page_count(fixture):
 
     assert len(join.parse(join.fetch(Fake(), "accenture"), "accenture")) == 8
     assert calls == [None, {"page": 2}]
+
+
+def test_join_uses_page_name_and_marks_german_titles():
+    page = {
+        "company": {"name": "Hubside GmbH"},
+        "jobs": {
+            "items": [
+                {"id": 1, "title": "Backend Entwickler (m/w/d)", "country": {"iso3166": "DE"},
+                 "city": {"cityName": "Munich"}, "employmentType": {"name": "Employee"}},
+                {"id": 2, "title": "Data Engineer", "country": {"iso3166": "DE"},
+                 "city": {"cityName": "Berlin"}, "employmentType": {"name": "Employee"}},
+            ]
+        },
+    }  # fmt: skip
+    jobs = join.parse([page], "hubside", company="hubside")
+    assert {j.company for j in jobs} == {"Hubside GmbH"}
+    assert [j.language for j in jobs] == ["de", "en"]
+    assert join.parse([page], "hubside", company="Hubside")[0].company == "Hubside"
