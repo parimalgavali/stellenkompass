@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-10T12:35:19Z",
-  "total_jobs": 15823,
-  "collected": 15298,
-  "carried": 726,
-  "duplicates_removed": 201,
+  "generated_at": "2026-11-11T04:07:35Z",
+  "total_jobs": 16571,
+  "collected": 15958,
+  "carried": 945,
+  "duplicates_removed": 332,
   "sources": {
     "arbeitnow": {
       "boards": 1,
-      "jobs": 1674,
+      "jobs": 1807,
       "errors": [],
       "capped": [
         {
@@ -16,12 +16,12 @@
         }
       ],
       "status": "partial",
-      "seconds": 66.3,
-      "carried": 701
+      "seconds": 41.5,
+      "carried": 920
     },
     "bundesagentur": {
       "boards": 1,
-      "jobs": 4423,
+      "jobs": 4417,
       "errors": [],
       "capped": [
         {
@@ -30,16 +30,16 @@
         }
       ],
       "status": "partial",
-      "seconds": 52.0,
+      "seconds": 53.5,
       "carried": 0
     },
     "greenhouse": {
       "boards": 35,
-      "jobs": 897,
+      "jobs": 891,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 37.6,
+      "seconds": 35.5,
       "carried": 0
     },
     "ashby": {
@@ -53,29 +53,29 @@
     },
     "smartrecruiters": {
       "boards": 35,
-      "jobs": 4383,
+      "jobs": 4275,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 192.8,
+      "seconds": 103.4,
       "carried": 0
     },
     "lever": {
       "boards": 6,
-      "jobs": 100,
+      "jobs": 101,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 53.5,
+      "seconds": 52.7,
       "carried": 0
     },
     "personio": {
       "boards": 6,
-      "jobs": 271,
+      "jobs": 274,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 9.3,
+      "seconds": 9.6,
       "carried": 0
     },
     "recruitee": {
@@ -84,7 +84,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 5.5,
+      "seconds": 6.0,
       "carried": 0
     },
     "teamtailor": {
@@ -93,21 +93,21 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 5.5,
+      "seconds": 5.6,
       "carried": 0
     },
     "dvinci": {
       "boards": 1,
-      "jobs": 41,
+      "jobs": 38,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 1.8,
+      "seconds": 2.0,
       "carried": 0
     },
     "workday": {
       "boards": 20,
-      "jobs": 1399,
+      "jobs": 1393,
       "errors": [],
       "capped": [
         {
@@ -116,12 +116,12 @@
         }
       ],
       "status": "partial",
-      "seconds": 267.9,
+      "seconds": 237.5,
       "carried": 1
     },
     "successfactors": {
       "boards": 6,
-      "jobs": 1355,
+      "jobs": 1352,
       "errors": [
         {
           "board": "careers.eon.com",
@@ -130,16 +130,25 @@
       ],
       "capped": [],
       "status": "partial",
-      "seconds": 63.5,
+      "seconds": 70.4,
       "carried": 24
     },
     "softgarden": {
       "boards": 1,
-      "jobs": 56,
+      "jobs": 58,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 1.0,
+      "seconds": 1.1,
+      "carried": 0
+    },
+    "join": {
+      "boards": 393,
+      "jobs": 653,
+      "errors": [],
+      "capped": [],
+      "status": "complete",
+      "seconds": 250.1,
       "carried": 0
     }
   }
