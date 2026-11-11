@@ -1,0 +1,244 @@
+[
+ {
+  "company": {
+   "name": "Accenture"
+  },
+  "jobs": {
+   "items": [
+    {
+     "idParam": "16860001-advanced-ai-und-data-architect-engineer-all-genders",
+     "id": 16500870,
+     "remoteType": null,
+     "title": "Advanced AI & Data Architect / Engineer (all genders) ",
+     "createdAt": "2026-07-27T09:14:44.187Z",
+     "workplaceType": "ONSITE",
+     "city": {
+      "cityName": "Vienna",
+      "countryName": "Austria"
+     },
+     "employmentType": {
+      "name": "Employee"
+     },
+     "category": {
+      "name": "Data Processing, Data Engineer"
+     },
+     "country": {
+      "iso3166": "AT"
+     }
+    },
+    {
+     "idParam": "16816724-ai-und-data-science-consultant-all-genders",
+     "id": 16531533,
+     "remoteType": null,
+     "title": "AI & Data Science Consultant (all genders)",
+     "createdAt": "2026-08-03T10:58:21.260Z",
+     "workplaceType": "HYBRID",
+     "city": {
+      "cityName": "Vienna",
+      "countryName": "Austria"
+     },
+     "employmentType": {
+      "name": "Employee"
+     },
+     "category": {
+      "name": "IT"
+     },
+     "country": {
+      "iso3166": "AT"
+     }
+    },
+    {
+     "idParam": "16862569-consultant-infrastructure-und-capital-projects-all-genders",
+     "id": 16471398,
+     "remoteType": "COUNTRY",
+     "title": "Consultant Infrastructure & Capital Projects (all genders)",
+     "createdAt": "2026-07-20T12:45:07.334Z",
+     "workplaceType": "REMOTE",
+     "city": {
+      "cityName": "Frankfurt am Main",
+      "countryName": "Germany"
+     },
+     "employmentType": {
+      "name": "Employee"
+     },
+     "category": {
+      "name": "Management and Consulting"
+     },
+     "country": {
+      "iso3166": "DE"
+     }
+    },
+    {
+     "idParam": "16857001-executive-assistant-oeffentlicher-sektor-all-genders",
+     "id": 16531754,
+     "remoteType": null,
+     "title": "Executive Assistant Öffentlicher Sektor (all genders)",
+     "createdAt": "2026-08-03T11:26:22.881Z",
+     "workplaceType": "HYBRID",
+     "city": {
+      "cityName": "Düsseldorf",
+      "countryName": "Germany"
+     },
+     "employmentType": {
+      "name": "Employee"
+     },
+     "category": {
+      "name": "Assistance, Secretarial"
+     },
+     "country": {
+      "iso3166": "DE"
+     }
+    },
+    {
+     "idParam": "16863352-manager-deal-structuting-und-pricing-all-genders",
+     "id": 16297188,
+     "remoteType": null,
+     "title": "Manager Deal Structuting & Pricing (all genders)",
+     "createdAt": "2026-06-12T12:54:17.776Z",
+     "workplaceType": "ONSITE",
+     "city": {
+      "cityName": "Kronberg",
+      "countryName": "Germany"
+     },
+     "employmentType": {
+      "name": "Employee"
+     },
+     "category": {
+      "name": "Management, Team Leader"
+     },
+     "country": {
+      "iso3166": "DE"
+     }
+    }
+   ],
+   "pagination": {
+    "page": 1,
+    "pageCount": 4,
+    "pageSize": 5,
+    "perPage": 5,
+    "total": 18
+   }
+  }
+ },
+ {
+  "company": {
+   "name": "Accenture"
+  },
+  "jobs": {
+   "items": [
+    {
+     "idParam": "16933988-manufacturing-systems-specialist-pas-x-all-genders",
+     "id": 15981231,
+     "remoteType": null,
+     "title": "Manufacturing Systems Specialist PAS-X (all genders)",
+     "createdAt": "2026-04-09T07:57:19.771Z",
+     "workplaceType": "HYBRID",
+     "city": {
+      "cityName": "Frankfurt am Main",
+      "countryName": "Germany"
+     },
+     "employmentType": {
+      "name": "Employee"
+     },
+     "category": {
+      "name": "Business Consulting"
+     },
+     "country": {
+      "iso3166": "DE"
+     }
+    },
+    {
+     "idParam": "16896154-medizinische-kodierfachkraft-all-genders",
+     "id": 16010649,
+     "remoteType": null,
+     "title": "Medizinische Kodierfachkraft (all genders)",
+     "createdAt": "2026-04-14T17:07:19.508Z",
+     "workplaceType": "HYBRID",
+     "city": {
+      "cityName": "Kronberg",
+      "countryName": "Germany"
+     },
+     "employmentType": {
+      "name": "Employee"
+     },
+     "category": {
+      "name": "Management and Consulting"
+     },
+     "country": {
+      "iso3166": "DE"
+     }
+    },
+    {
+     "idParam": "16909614-projektingenieur-umspannwerke-all-genders",
+     "id": 15750197,
+     "remoteType": null,
+     "title": "Projektingenieur Umspannwerke (all genders)",
+     "createdAt": "2026-02-23T09:25:59.914Z",
+     "workplaceType": "HYBRID",
+     "city": {
+      "cityName": "Berlin",
+      "countryName": "Germany"
+     },
+     "employmentType": {
+      "name": "Employee"
+     },
+     "category": {
+      "name": "Construction Engineering"
+     },
+     "country": {
+      "iso3166": "DE"
+     }
+    },
+    {
+     "idParam": "16898391-projektmanager-wegerecht-und-genehmigungsmanagement-all-genders",
+     "id": 16471197,
+     "remoteType": "COUNTRY",
+     "title": "Projektmanager Wegerecht & Genehmigungsmanagement (all genders)",
+     "createdAt": "2026-07-20T12:30:55.562Z",
+     "workplaceType": "REMOTE",
+     "city": {
+      "cityName": "Frankfurt am Main",
+      "countryName": "Germany"
+     },
+     "employmentType": {
+      "name": "Employee"
+     },
+     "category": {
+      "name": "Engineering"
+     },
+     "country": {
+      "iso3166": "DE"
+     }
+    },
+    {
+     "idParam": "16894364-rockwell-pharmasuite-mes-project-manager-all-genders",
+     "id": 16487995,
+     "remoteType": null,
+     "title": "Rockwell PharmaSuite MES Project Manager (all genders)",
+     "createdAt": "2026-07-24T08:00:52.350Z",
+     "workplaceType": "HYBRID",
+     "city": {
+      "cityName": "Frankfurt am Main",
+      "countryName": "Germany"
+     },
+     "employmentType": {
+      "name": "Employee"
+     },
+     "category": {
+      "name": "Consulting"
+     },
+     "country": {
+      "iso3166": "DE"
+     }
+    }
+   ],
+   "pagination": {
+    "page": 2,
+    "pageCount": 4,
+    "pageSize": 5,
+    "perPage": 5,
+    "total": 18
+   }
+  }
+ }
+]

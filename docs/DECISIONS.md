@@ -109,7 +109,7 @@ Short records. Newest at the bottom. Format: context → decision → why.
 
 ## D21. softgarden widget; join.com later (2026-11-03)
 - softgarden: the job widget that company careers sites embed (`/de/widgets/jobs`), our own parser. No country field, so Germany comes from the city text. Title-only skills. Only RENK found so far (58 roles); tenants are added one by one.
-- join.com: its public GraphQL route is allowed by robots.txt, but none of our or the reference list's companies use it, and its company sitemap (14k slugs) has no country. Deferred until we have German companies on it.
+- join.com: its public GraphQL route is allowed by robots.txt, but none of our or the reference list's companies use it, and its company sitemap (14k slugs) has no country. Deferred until we have German companies on it. Superseded by D26.
 
 ## D22. Seniority from the title (2026-11-03)
 - Idea from the reference projects' level filters; our own rules in `classify.detect_seniority`.
@@ -130,3 +130,9 @@ Short records. Newest at the bottom. Format: context → decision → why.
 - Source field first: d.vinci `endDate` (end of the publication, KIT). Otherwise the ad text: a cue (Bewerbungsfrist, Bewerbungsschluss, Application deadline, Closing date, "bewerben Sie sich bis", "apply by/before/until") followed within 40 characters by a date (30.11.2026, 2026-11-30, December 16, 2026, 15. Januar 2027).
 - Past dates and dates over a year ahead are dropped. Few ads have one (about 0.5% of Greenhouse ads).
 - Web: "Closes in N days" chip within 30 days; Today shows a saved role closing within 3 days as "Closing soon". The deadline is copied into the tracker when you save.
+
+## D26. JOIN from public company pages (2026-11-03)
+- Prompted by Firecrawl Alexandria listing JOIN as a job provider (`docs/research/alexandria.md`); our own code, no Firecrawl.
+- `join.com/companies/<slug>?page=N` embeds the job list as Next.js page data (five per page, `pageData` or `initialState`). robots.txt only disallows `/*/lp/`, so the GraphQL route isn't needed.
+- Each job has a country code, city, workplace type and employment type, so Germany is decided by the code (D13). Apprenticeships are skipped (D9). No ad text yet, so skills come from the title only.
+- Boards come from the public company sitemap (13.5k companies, 9.7k with roles in Germany, mostly trades, care and retail). Only the 393 whose German roles on page 1 are all tech (software, IT, data, SAP, product) are added; that's about 450 requests, roughly 6 more minutes per daily scan.

@@ -10,6 +10,7 @@ from . import (
     bundesagentur,
     dvinci,
     greenhouse,
+    join,
     lever,
     personio,
     recruitee,
@@ -32,6 +33,7 @@ PER_COMPANY = {
     "workday": workday,
     "successfactors": successfactors,
     "softgarden": softgarden,
+    "join": join,
 }
 
 AGGREGATORS = {

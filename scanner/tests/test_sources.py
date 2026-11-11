@@ -1,3 +1,5 @@
+import json
+
 import pytest
 
 from stellenkompass_scanner.sources import (
@@ -6,6 +8,7 @@ from stellenkompass_scanner.sources import (
     bundesagentur,
     dvinci,
     greenhouse,
+    join,
     lever,
     personio,
     recruitee,
@@ -454,3 +457,68 @@ def test_softgarden_parses_widget_and_skips_training():
     assert "&amp;" not in first.title and len({j.id for j in jobs}) == len(jobs)
     assert not any("Ausbildung" in j.title for j in jobs)
     assert any(j.job_type == "thesis" for j in jobs)
+
+
+def test_join_keeps_german_roles_with_workplace(fixture):
+    jobs = join.parse(fixture("join_accenture.json"), "accenture")
+    assert len(jobs) == 8  # two Vienna roles left out
+    first = jobs[0]
+    assert first.id == "join:accenture-16471398"
+    assert first.company == "Accenture"
+    assert first.url == (
+        "https://join.com/companies/accenture/"
+        "16862569-consultant-infrastructure-und-capital-projects-all-genders"
+    )
+    assert first.workplace_type == "remote" and first.city == "Frankfurt"
+    assert {j.workplace_type for j in jobs} == {"remote", "hybrid", "onsite"}
+
+
+def test_join_skips_apprenticeships_and_repeats(fixture):
+    pages = fixture("join_accenture.json")
+    item = dict(pages[0]["jobs"]["items"][2], employmentType={"name": "Apprenticeship"})
+    pages[0]["jobs"]["items"][2] = item
+    pages.append(pages[1])
+    assert len(join.parse(pages, "accenture")) == 7
+
+
+def test_join_fetch_stops_at_page_count(fixture):
+    pages = fixture("join_accenture.json")
+    html = [
+        '<script id="__NEXT_DATA__" type="application/json">'
+        + json.dumps(
+            {
+                "props": {
+                    "pageProps": {key: dict(p, jobs=dict(p["jobs"], pagination={"pageCount": 2}))}
+                }
+            }
+        )
+        + "</script>"
+        for key, p in zip(("pageData", "initialState"), pages, strict=True)
+    ]
+    calls = []
+
+    class Fake:
+        def get_text(self, url, params=None):
+            calls.append(params)
+            return html[len(calls) - 1]
+
+    assert len(join.parse(join.fetch(Fake(), "accenture"), "accenture")) == 8
+    assert calls == [None, {"page": 2}]
+
+
+def test_join_uses_page_name_and_marks_german_titles():
+    page = {
+        "company": {"name": "Hubside GmbH"},
+        "jobs": {
+            "items": [
+                {"id": 1, "title": "Backend Entwickler (m/w/d)", "country": {"iso3166": "DE"},
+                 "city": {"cityName": "Munich"}, "employmentType": {"name": "Employee"}},
+                {"id": 2, "title": "Data Engineer", "country": {"iso3166": "DE"},
+                 "city": {"cityName": "Berlin"}, "employmentType": {"name": "Employee"}},
+            ]
+        },
+    }  # fmt: skip
+    jobs = join.parse([page], "hubside", company="hubside")
+    assert {j.company for j in jobs} == {"Hubside GmbH"}
+    assert [j.language for j in jobs] == ["de", "en"]
+    assert join.parse([page], "hubside", company="Hubside")[0].company == "Hubside"

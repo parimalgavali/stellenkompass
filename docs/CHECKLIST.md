@@ -92,7 +92,8 @@ Plan: [PLANS.md](PLANS.md) phases 5–12. Review: [research/source-expansion-han
 - [x] Workday adapter (D19)
 - [x] SuccessFactors (RMK) adapter, re-check Fraunhofer/DLR (D20: Fraunhofer enabled, DLR still blocked)
 - [x] softgarden adapter (D21: RENK)
-- [ ] join.com adapter, once we know German companies on it (D21)
+- [x] join.com adapter from public company pages (D26)
+- [ ] JOIN ad text (detail page) for skills and language
 - [x] Re-check the 110 upstream boards for German roles (52 added; skips in reference-projects.md)
 - [x] ~~Greenhouse EU host for Doctolib~~: dropped. Doctolib's Greenhouse board is gone (API 404, job links redirect to an error page), and `boards-api.eu.greenhouse.io` doesn't resolve
 - [x] Seniority label + filter (Junior, Graduate/Trainee, Senior, Lead) (D22)

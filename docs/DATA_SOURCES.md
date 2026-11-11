@@ -17,7 +17,7 @@ Every adapter returns roles in this shape (see `scanner/stellenkompass_scanner/m
 | `job_type` | `full_time`, `working_student`, `internship`, `part_time` or `other` |
 | `language` | `en` or `de`: language the posting is written in |
 | `url` | Link to the original posting (apply there) |
-| `source` | `arbeitnow`, `bundesagentur`, `greenhouse`, `ashby`, `smartrecruiters`, `lever`, `personio`, `recruitee`, `teamtailor` |
+| `source` | `arbeitnow`, `bundesagentur`, `greenhouse`, `ashby`, `smartrecruiters`, `lever`, `personio`, `recruitee`, `teamtailor`, `dvinci`, `workday`, `successfactors`, `softgarden`, `join` |
 | `posted_at` | ISO date if known |
 | `tags` | Short tags from the source (skills, categories) |
 | `skills` | Skills found in title + description by `skills.py` (curated list, max 12) |
@@ -44,6 +44,7 @@ Every adapter returns roles in this shape (see `scanner/stellenkompass_scanner/m
 | Workday | Public CXS route `POST https://<tenant>.<wdN>.myworkdayjobs.com/wday/cxs/<tenant>/<site>/jobs`, filtered to Germany by facet; title and location only, no job text | `scanner/companies.yaml` → `workday` (`board`, `instance`, `site`) |
 | SAP SuccessFactors | Career-site HTML fragment `https://<host>/tile-search-results/?startrow=N` (robots.txt allows it; `/services/` is disallowed); Germany facet where it works; Ausbildung skipped | `scanner/companies.yaml` → `successfactors` (`board` = host, optional `country: DE`) |
 | softgarden | Career widget `https://<tenant>.softgarden.io/de/widgets/jobs` (all roles on one page; robots.txt allows it); Germany from city text; Ausbildung skipped | `scanner/companies.yaml` → `softgarden` (`board` = tenant) |
+| JOIN | Public company page `https://join.com/companies/<slug>?page=N` (job list embedded as page data, 5 per page); country code per job; apprenticeships skipped; title only | `scanner/companies.yaml` → `join` (`board` = slug) |
 
 ### Adding a company board
 1. Open the company's careers page and click a role. The apply link shows the platform and board name:
@@ -53,6 +54,7 @@ Every adapter returns roles in this shape (see `scanner/stellenkompass_scanner/m
    - `jobs.smartrecruiters.com/<board>` → `smartrecruiters` (case-sensitive, e.g. `BoschGroup`)
    - `<board>.jobs.personio.de` → `personio`
    - `<board>.recruitee.com` → `recruitee`
+   - `join.com/companies/<board>` → `join`
    - `<board>.teamtailor.com` (or a custom careers host with a `/jobs.rss` feed) → `teamtailor`
 2. Check that it has roles in Germany (from `scanner/`):
    ```bash
