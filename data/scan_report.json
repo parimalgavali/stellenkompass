@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-11T04:07:35Z",
-  "total_jobs": 16571,
-  "collected": 15958,
-  "carried": 945,
-  "duplicates_removed": 332,
+  "generated_at": "2026-11-11T11:50:42Z",
+  "total_jobs": 16776,
+  "collected": 16111,
+  "carried": 980,
+  "duplicates_removed": 315,
   "sources": {
     "arbeitnow": {
       "boards": 1,
-      "jobs": 1807,
+      "jobs": 1839,
       "errors": [],
       "capped": [
         {
@@ -16,12 +16,12 @@
         }
       ],
       "status": "partial",
-      "seconds": 41.5,
-      "carried": 920
+      "seconds": 64.4,
+      "carried": 952
     },
     "bundesagentur": {
       "boards": 1,
-      "jobs": 4417,
+      "jobs": 4428,
       "errors": [],
       "capped": [
         {
@@ -30,61 +30,61 @@
         }
       ],
       "status": "partial",
-      "seconds": 53.5,
+      "seconds": 50.4,
       "carried": 0
     },
     "greenhouse": {
       "boards": 35,
-      "jobs": 891,
+      "jobs": 893,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 35.5,
+      "seconds": 35.2,
       "carried": 0
     },
     "ashby": {
       "boards": 28,
-      "jobs": 470,
+      "jobs": 468,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 19.7,
+      "seconds": 19.1,
       "carried": 0
     },
     "smartrecruiters": {
       "boards": 35,
-      "jobs": 4275,
+      "jobs": 4389,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 103.4,
+      "seconds": 199.7,
       "carried": 0
     },
     "lever": {
       "boards": 6,
-      "jobs": 101,
+      "jobs": 100,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 52.7,
+      "seconds": 11.8,
       "carried": 0
     },
     "personio": {
       "boards": 6,
-      "jobs": 274,
+      "jobs": 273,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 9.6,
+      "seconds": 9.3,
       "carried": 0
     },
     "recruitee": {
       "boards": 5,
-      "jobs": 157,
+      "jobs": 158,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 6.0,
+      "seconds": 5.5,
       "carried": 0
     },
     "teamtailor": {
@@ -102,12 +102,12 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 2.0,
+      "seconds": 1.5,
       "carried": 0
     },
     "workday": {
       "boards": 20,
-      "jobs": 1393,
+      "jobs": 1395,
       "errors": [],
       "capped": [
         {
@@ -116,12 +116,12 @@
         }
       ],
       "status": "partial",
-      "seconds": 237.5,
-      "carried": 1
+      "seconds": 254.5,
+      "carried": 2
     },
     "successfactors": {
       "boards": 6,
-      "jobs": 1352,
+      "jobs": 1353,
       "errors": [
         {
           "board": "careers.eon.com",
@@ -130,7 +130,7 @@
       ],
       "capped": [],
       "status": "partial",
-      "seconds": 70.4,
+      "seconds": 62.9,
       "carried": 24
     },
     "softgarden": {
@@ -139,17 +139,22 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 1.1,
+      "seconds": 0.9,
       "carried": 0
     },
     "join": {
       "boards": 393,
-      "jobs": 653,
-      "errors": [],
+      "jobs": 647,
+      "errors": [
+        {
+          "board": "comselect",
+          "error": "Client error '410 Gone' for url 'https://join.com/companies/comselect'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/410"
+        }
+      ],
       "capped": [],
-      "status": "complete",
-      "seconds": 250.1,
-      "carried": 0
+      "status": "partial",
+      "seconds": 230.0,
+      "carried": 2
     }
   }
 }
