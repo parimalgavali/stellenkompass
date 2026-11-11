@@ -18,6 +18,7 @@ _SOURCE_RANK = {
     "workday": 0,
     "successfactors": 0,
     "softgarden": 0,
+    "join": 0,
     "arbeitnow": 1,
     "bundesagentur": 1,
 }
