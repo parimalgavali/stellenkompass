@@ -1,27 +1,27 @@
 {
-  "generated_at": "2026-11-13T12:08:58Z",
-  "total_jobs": 16778,
-  "collected": 14270,
-  "carried": 2532,
-  "duplicates_removed": 24,
+  "generated_at": "2026-11-14T11:26:25Z",
+  "total_jobs": 17650,
+  "collected": 15784,
+  "carried": 2149,
+  "duplicates_removed": 283,
   "sources": {
     "arbeitnow": {
       "boards": 1,
-      "jobs": 0,
-      "errors": [
+      "jobs": 1967,
+      "errors": [],
+      "capped": [
         {
           "board": "arbeitnow",
-          "error": "HTTP 429"
+          "carry": true
         }
       ],
-      "capped": [],
-      "status": "failed",
-      "seconds": 22.8,
-      "carried": 2503
+      "status": "partial",
+      "seconds": 73.3,
+      "carried": 1640
     },
     "bundesagentur": {
       "boards": 1,
-      "jobs": 4415,
+      "jobs": 4437,
       "errors": [],
       "capped": [
         {
@@ -30,34 +30,34 @@
         }
       ],
       "status": "partial",
-      "seconds": 54.9,
+      "seconds": 58.1,
       "carried": 0
     },
     "greenhouse": {
       "boards": 35,
-      "jobs": 908,
+      "jobs": 904,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 41.2,
+      "seconds": 39.8,
       "carried": 0
     },
     "ashby": {
       "boards": 28,
-      "jobs": 477,
+      "jobs": 479,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 20.7,
+      "seconds": 21.3,
       "carried": 0
     },
     "smartrecruiters": {
       "boards": 35,
-      "jobs": 4417,
+      "jobs": 4432,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 203.3,
+      "seconds": 129.4,
       "carried": 0
     },
     "lever": {
@@ -66,16 +66,16 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 37.8,
+      "seconds": 14.0,
       "carried": 0
     },
     "personio": {
       "boards": 6,
-      "jobs": 277,
+      "jobs": 278,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 10.9,
+      "seconds": 11.8,
       "carried": 0
     },
     "recruitee": {
@@ -84,7 +84,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 6.6,
+      "seconds": 6.8,
       "carried": 0
     },
     "teamtailor": {
@@ -93,7 +93,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 5.8,
+      "seconds": 7.5,
       "carried": 0
     },
     "dvinci": {
@@ -102,13 +102,50 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 1.9,
+      "seconds": 2.3,
       "carried": 0
     },
     "workday": {
       "boards": 20,
-      "jobs": 1417,
-      "errors": [],
+      "jobs": 934,
+      "errors": [
+        {
+          "board": "hitachi",
+          "error": "Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "board": "nvidia",
+          "error": "Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "board": "jj",
+          "error": "Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "board": "logitech",
+          "error": "Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "board": "csl",
+          "error": "Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "board": "thermofisher",
+          "error": "Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "board": "alcon",
+          "error": "Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "board": "msd",
+          "error": "Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "board": "amgen",
+          "error": "Expecting value: line 1 column 1 (char 0)"
+        }
+      ],
       "capped": [
         {
           "board": "roche",
@@ -116,8 +153,8 @@
         }
       ],
       "status": "partial",
-      "seconds": 244.7,
-      "carried": 3
+      "seconds": 157.3,
+      "carried": 483
     },
     "successfactors": {
       "boards": 6,
@@ -130,21 +167,21 @@
       ],
       "capped": [],
       "status": "partial",
-      "seconds": 67.4,
+      "seconds": 75.6,
       "carried": 24
     },
     "softgarden": {
       "boards": 1,
-      "jobs": 55,
+      "jobs": 56,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 1.3,
+      "seconds": 1.1,
       "carried": 0
     },
     "join": {
       "boards": 393,
-      "jobs": 597,
+      "jobs": 590,
       "errors": [
         {
           "board": "comselect",
@@ -153,7 +190,7 @@
       ],
       "capped": [],
       "status": "partial",
-      "seconds": 257.4,
+      "seconds": 252.2,
       "carried": 2
     }
   }
