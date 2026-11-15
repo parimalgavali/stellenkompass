@@ -18,7 +18,7 @@ from stellenkompass_scanner.sources import (
     teamtailor,
     workday,
 )
-from stellenkompass_scanner.sources._common import Capped, records
+from stellenkompass_scanner.sources._common import Capped, build_job, records
 
 
 def test_greenhouse_keeps_only_germany(fixture):
@@ -522,3 +522,33 @@ def test_join_uses_page_name_and_marks_german_titles():
     assert {j.company for j in jobs} == {"Hubside GmbH"}
     assert [j.language for j in jobs] == ["de", "en"]
     assert join.parse([page], "hubside", company="Hubside")[0].company == "Hubside"
+
+
+@pytest.mark.parametrize(
+    ("url", "kept"),
+    [
+        ("https://jobs.example.com/1", True),
+        (" https://jobs.example.com/1 ", True),
+        ("javascript:alert(1)", False),
+        ("JavaScript:alert(1)//https://x", False),
+        ("data:text/html,<script>alert(1)</script>", False),
+        ("http://jobs.example.com/1", False),
+        ("https:///no-host", False),
+        ("//jobs.example.com/1", False),
+        ("", False),
+    ],
+)
+def test_build_job_only_keeps_https_links(url, kept):
+    job = build_job(
+        source="greenhouse",
+        job_id="1",
+        board="acme",
+        title="Data Engineer",
+        company="Acme",
+        locations=["Berlin, Germany"],
+        country_codes=["DE"],
+        url=url,
+    )
+    assert (job is not None) is kept
+    if job:
+        assert job.url == url.strip()

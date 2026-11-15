@@ -1,4 +1,5 @@
 import { STAGES, type Profile, type Tracker } from '../types'
+import { safeUrl } from './url'
 
 export interface Backup {
   app: 'stellenkompass'
@@ -33,7 +34,7 @@ export function parseBackup(text: string): Backup {
   }
   if (!d.tracker || typeof d.tracker !== 'object') throw new Error('The tracker in this file is broken.')
   for (const [id, job] of Object.entries(d.tracker)) {
-    if (!job || job.id !== id || typeof job.title !== 'string' || !STAGES.includes(job.stage)) {
+    if (!job || job.id !== id || typeof job.title !== 'string' || !STAGES.includes(job.stage) || !safeUrl(job.url)) {
       throw new Error(`Tracked role "${id}" in this file is broken.`)
     }
   }

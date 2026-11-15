@@ -2,6 +2,7 @@ import { findTracked } from '../lib/tracker'
 import type { Job, Profile, TrackedJob, Tracker } from '../types'
 import { todayItems, type TodayItem } from '../lib/today'
 import { JobCard } from './JobCard'
+import { safeUrl } from '../lib/url'
 
 interface Props {
   tracker: Tracker
@@ -61,7 +62,7 @@ export function TodayPage({ tracker, liveIds, newMatches, profile, onUpdate, onS
             <article key={`${item.kind}-${item.job.id}`} className="card">
               <div className="card-main">
                 <div className="eyebrow">{TITLE[item.kind]}</div>
-                <a className="card-title" href={item.job.url} target="_blank" rel="noreferrer">
+                <a className="card-title" href={safeUrl(item.job.url)} target="_blank" rel="noreferrer">
                   {item.job.title}
                 </a>
                 <div className="card-meta">

@@ -25,7 +25,7 @@ def test_missing_country_falls_back_to_text():
 
 def _job(location: str, **kw):
     return build_job(source="arbeitnow", job_id="x", title="Engineer", company="Foo",
-                     locations=[location], url="u", **kw)  # fmt: skip
+                     locations=[location], url="https://example.com/x", **kw)  # fmt: skip
 
 
 def test_workplace_type():

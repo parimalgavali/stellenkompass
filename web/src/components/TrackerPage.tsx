@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { STAGES, STAGE_LABEL, type Stage, type TrackedJob, type Tracker } from '../types'
 import { formatDate, fromDateInput, toDateInput } from '../lib/time'
+import { safeUrl } from '../lib/url'
 
 interface Props {
   tracker: Tracker
@@ -35,7 +36,7 @@ export function TrackerPage({ tracker, liveIds, onUpdate, onRemove }: Props) {
         {shown.map((job) => (
           <article key={job.id} className="card card-tracked">
             <div className="card-main">
-              <a className="card-title" href={job.url} target="_blank" rel="noreferrer">
+              <a className="card-title" href={safeUrl(job.url)} target="_blank" rel="noreferrer">
                 {job.title}
               </a>
               <div className="card-meta">
