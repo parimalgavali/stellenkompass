@@ -1,27 +1,22 @@
 {
-  "generated_at": "2026-11-14T11:26:25Z",
-  "total_jobs": 17650,
-  "collected": 15784,
-  "carried": 2149,
-  "duplicates_removed": 283,
+  "generated_at": "2026-11-15T11:55:22Z",
+  "total_jobs": 15942,
+  "collected": 16128,
+  "carried": 29,
+  "duplicates_removed": 215,
   "sources": {
     "arbeitnow": {
       "boards": 1,
-      "jobs": 1967,
+      "jobs": 1859,
       "errors": [],
-      "capped": [
-        {
-          "board": "arbeitnow",
-          "carry": true
-        }
-      ],
-      "status": "partial",
-      "seconds": 73.3,
-      "carried": 1640
+      "capped": [],
+      "status": "complete",
+      "seconds": 64.6,
+      "carried": 0
     },
     "bundesagentur": {
       "boards": 1,
-      "jobs": 4437,
+      "jobs": 4421,
       "errors": [],
       "capped": [
         {
@@ -30,16 +25,16 @@
         }
       ],
       "status": "partial",
-      "seconds": 58.1,
+      "seconds": 57.8,
       "carried": 0
     },
     "greenhouse": {
       "boards": 35,
-      "jobs": 904,
+      "jobs": 903,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 39.8,
+      "seconds": 30.8,
       "carried": 0
     },
     "ashby": {
@@ -48,7 +43,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 21.3,
+      "seconds": 18.6,
       "carried": 0
     },
     "smartrecruiters": {
@@ -57,7 +52,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 129.4,
+      "seconds": 59.6,
       "carried": 0
     },
     "lever": {
@@ -66,7 +61,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 14.0,
+      "seconds": 13.0,
       "carried": 0
     },
     "personio": {
@@ -75,7 +70,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 11.8,
+      "seconds": 10.5,
       "carried": 0
     },
     "recruitee": {
@@ -84,7 +79,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 6.8,
+      "seconds": 6.2,
       "carried": 0
     },
     "teamtailor": {
@@ -93,7 +88,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 7.5,
+      "seconds": 6.1,
       "carried": 0
     },
     "dvinci": {
@@ -107,45 +102,8 @@
     },
     "workday": {
       "boards": 20,
-      "jobs": 934,
-      "errors": [
-        {
-          "board": "hitachi",
-          "error": "Expecting value: line 1 column 1 (char 0)"
-        },
-        {
-          "board": "nvidia",
-          "error": "Expecting value: line 1 column 1 (char 0)"
-        },
-        {
-          "board": "jj",
-          "error": "Expecting value: line 1 column 1 (char 0)"
-        },
-        {
-          "board": "logitech",
-          "error": "Expecting value: line 1 column 1 (char 0)"
-        },
-        {
-          "board": "csl",
-          "error": "Expecting value: line 1 column 1 (char 0)"
-        },
-        {
-          "board": "thermofisher",
-          "error": "Expecting value: line 1 column 1 (char 0)"
-        },
-        {
-          "board": "alcon",
-          "error": "Expecting value: line 1 column 1 (char 0)"
-        },
-        {
-          "board": "msd",
-          "error": "Expecting value: line 1 column 1 (char 0)"
-        },
-        {
-          "board": "amgen",
-          "error": "Expecting value: line 1 column 1 (char 0)"
-        }
-      ],
+      "jobs": 1404,
+      "errors": [],
       "capped": [
         {
           "board": "roche",
@@ -153,8 +111,8 @@
         }
       ],
       "status": "partial",
-      "seconds": 157.3,
-      "carried": 483
+      "seconds": 218.4,
+      "carried": 3
     },
     "successfactors": {
       "boards": 6,
@@ -167,7 +125,7 @@
       ],
       "capped": [],
       "status": "partial",
-      "seconds": 75.6,
+      "seconds": 75.3,
       "carried": 24
     },
     "softgarden": {
@@ -181,7 +139,7 @@
     },
     "join": {
       "boards": 393,
-      "jobs": 590,
+      "jobs": 589,
       "errors": [
         {
           "board": "comselect",
@@ -190,7 +148,7 @@
       ],
       "capped": [],
       "status": "partial",
-      "seconds": 252.2,
+      "seconds": 227.6,
       "carried": 2
     }
   }
