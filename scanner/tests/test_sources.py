@@ -536,6 +536,7 @@ def test_join_uses_page_name_and_marks_german_titles():
         ("https:///no-host", False),
         ("//jobs.example.com/1", False),
         ("", False),
+        (None, False),
     ],
 )
 def test_build_job_only_keeps_https_links(url, kept):

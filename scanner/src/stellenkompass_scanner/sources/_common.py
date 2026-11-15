@@ -72,7 +72,7 @@ def build_job(
 
     Company boards pass `board`; ids are `source:board-job_id`, aggregators `source:job_id`.
     """
-    url = url.strip()
+    url = url.strip() if isinstance(url, str) else ""
     if not title.strip() or not is_https_url(url):
         return None  # a record we cannot show or safely link to
     if not in_germany(locations, country_codes):
