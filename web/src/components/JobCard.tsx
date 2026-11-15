@@ -3,6 +3,7 @@ import { JOB_TYPE_LABEL, SENIORITY_LABEL, STAGE_LABEL } from '../types'
 import { matchJob } from '../lib/match'
 import { fitScore } from '../lib/skills'
 import { closesText, daysLeft, relativeTime } from '../lib/time'
+import { safeUrl } from '../lib/url'
 
 interface Props {
   job: Job
@@ -24,7 +25,7 @@ export function JobCard({ job, profile, tracked, onSave }: Props) {
   return (
     <article className="card">
       <div className="card-main">
-        <a className="card-title" href={job.url} target="_blank" rel="noreferrer">
+        <a className="card-title" href={safeUrl(job.url)} target="_blank" rel="noreferrer">
           {job.title}
         </a>
         <div className="card-meta">

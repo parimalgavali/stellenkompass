@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from urllib.parse import urlsplit
+
 from ..classify import (
     clean_deadline,
     detect_deadline,
@@ -29,6 +31,15 @@ class Capped(Exception):  # noqa: N818 - a signal, not an error
         super().__init__("page limit reached")
         self.raw = raw
         self.carry = carry  # keep last scan's roles that are missing now
+
+
+def is_https_url(url: str) -> bool:
+    """Only https links with a host may reach the site (no javascript:, data:, ...)."""
+    try:
+        parts = urlsplit(url)
+    except ValueError:
+        return False
+    return parts.scheme.lower() == "https" and bool(parts.hostname)
 
 
 def records(container, key: str | None, id_key: str) -> list[dict]:
@@ -61,8 +72,9 @@ def build_job(
 
     Company boards pass `board`; ids are `source:board-job_id`, aggregators `source:job_id`.
     """
-    if not title.strip() or not url:
-        return None  # a record we cannot show or link to
+    url = url.strip() if isinstance(url, str) else ""
+    if not title.strip() or not is_https_url(url):
+        return None  # a record we cannot show or safely link to
     if not in_germany(locations, country_codes):
         return None
     locations = [x.strip() for x in locations if x and x.strip()]

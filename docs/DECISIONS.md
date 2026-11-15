@@ -136,3 +136,8 @@ Short records. Newest at the bottom. Format: context → decision → why.
 - `join.com/companies/<slug>?page=N` embeds the job list as Next.js page data (five per page, `pageData` or `initialState`). robots.txt only disallows `/*/lp/`, so the GraphQL route isn't needed.
 - Each job has a country code, city, workplace type and employment type, so Germany is decided by the code (D13). Apprenticeships are skipped (D9). No ad text yet, so skills come from the title only.
 - Boards come from the public company sitemap (13.5k companies, 9.7k with roles in Germany, mostly trades, care and retail). Only the 393 whose German roles on page 1 are all tech (software, IT, data, SAP, product) are added; that's about 450 requests, roughly 6 more minutes per daily scan.
+
+## D27. Only http(s) job links (2026-11-15)
+- Job URLs come from third-party feeds and from imported backup files, so a `javascript:` or `data:` link could reach an `<a href>`.
+- Scanner: `build_job` drops a role whose URL is not `https://` with a host (`is_https_url`).
+- Web: every job title link goes through `safeUrl` (only `http:` / `https:`, else no `href`); `parseBackup` rejects a tracked role whose `url` isn't one.

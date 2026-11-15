@@ -6,6 +6,7 @@ import { makeBackup, mergeBackup, parseBackup } from './backup'
 import { canonicalSkills, extractSkills, fitScore } from './skills'
 import { findTracked, liveIdSet, setStage, trackJob, updateTracked } from './tracker'
 import { daysLeft, relativeTime } from './time'
+import { safeUrl } from './url'
 import { JOBS, NOW, job } from '../test/data'
 import type { Tracker } from '../types'
 
@@ -116,6 +117,16 @@ describe('tracker and today', () => {
   })
 })
 
+describe('safeUrl', () => {
+  it('keeps http(s) links and drops script and junk', () => {
+    expect(safeUrl('https://jobs.example.com/1')).toBe('https://jobs.example.com/1')
+    expect(safeUrl('http://jobs.example.com/1')).toBe('http://jobs.example.com/1')
+    for (const url of ['javascript:alert(1)', ' JavaScript:alert(1)', 'data:text/html,x', 'vbscript:x', '/relative', '', undefined]) {
+      expect(safeUrl(url)).toBeUndefined()
+    }
+  })
+})
+
 describe('backup', () => {
   const profile = { keywords: ['python'], companies: ['N26'] }
   const tracker = trackJob({}, job(), NOW)
@@ -131,6 +142,13 @@ describe('backup', () => {
     expect(() => parseBackup('{"app":"other"}')).toThrow(/not a Stellenkompass/)
     const bad = makeBackup(profile, { x: { ...tracker[job().id], stage: 'ghosted' as never } })
     expect(() => parseBackup(JSON.stringify(bad))).toThrow(/broken/)
+  })
+
+  it('rejects tracked roles with a non-http link', () => {
+    for (const url of ['javascript:alert(1)', 'data:text/html,x', 'not a url', 42]) {
+      const bad = makeBackup(profile, { [job().id]: { ...tracker[job().id], url: url as string } })
+      expect(() => parseBackup(JSON.stringify(bad))).toThrow(/broken/)
+    }
   })
 
   it('merges without duplicates and keeps the newer role', () => {
