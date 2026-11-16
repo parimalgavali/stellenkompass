@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-15T17:48:45Z",
-  "total_jobs": 15926,
-  "collected": 14253,
-  "carried": 1697,
-  "duplicates_removed": 24,
+  "generated_at": "2026-11-16T12:41:35Z",
+  "total_jobs": 15818,
+  "collected": 12745,
+  "carried": 3095,
+  "duplicates_removed": 22,
   "sources": {
     "arbeitnow": {
       "boards": 1,
@@ -16,12 +16,12 @@
       ],
       "capped": [],
       "status": "failed",
-      "seconds": 42.9,
+      "seconds": 21.8,
       "carried": 1668
     },
     "bundesagentur": {
       "boards": 1,
-      "jobs": 4419,
+      "jobs": 4417,
       "errors": [],
       "capped": [
         {
@@ -30,52 +30,52 @@
         }
       ],
       "status": "partial",
-      "seconds": 53.4,
+      "seconds": 58.6,
       "carried": 0
     },
     "greenhouse": {
       "boards": 35,
-      "jobs": 901,
+      "jobs": 890,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 32.5,
+      "seconds": 35.3,
       "carried": 0
     },
     "ashby": {
       "boards": 28,
-      "jobs": 480,
+      "jobs": 468,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 18.5,
+      "seconds": 20.6,
       "carried": 0
     },
     "smartrecruiters": {
       "boards": 35,
-      "jobs": 4432,
+      "jobs": 4414,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 59.3,
+      "seconds": 117.7,
       "carried": 0
     },
     "lever": {
       "boards": 6,
-      "jobs": 102,
+      "jobs": 103,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 20.1,
+      "seconds": 41.3,
       "carried": 0
     },
     "personio": {
       "boards": 6,
-      "jobs": 278,
+      "jobs": 273,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 10.4,
+      "seconds": 11.3,
       "carried": 0
     },
     "recruitee": {
@@ -84,7 +84,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 5.8,
+      "seconds": 6.3,
       "carried": 0
     },
     "teamtailor": {
@@ -93,35 +93,107 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 5.6,
+      "seconds": 5.9,
       "carried": 0
     },
     "dvinci": {
       "boards": 1,
-      "jobs": 39,
+      "jobs": 38,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 1.9,
+      "seconds": 2.0,
       "carried": 0
     },
     "workday": {
       "boards": 20,
-      "jobs": 1402,
-      "errors": [],
-      "capped": [
+      "jobs": 4,
+      "errors": [
+        {
+          "board": "philips",
+          "error": "HTTP 429"
+        },
+        {
+          "board": "accenture",
+          "error": "HTTP 429"
+        },
+        {
+          "board": "hitachi",
+          "error": "HTTP 429"
+        },
+        {
+          "board": "nvidia",
+          "error": "HTTP 429"
+        },
+        {
+          "board": "jj",
+          "error": "HTTP 429"
+        },
+        {
+          "board": "getec",
+          "error": "HTTP 429"
+        },
+        {
+          "board": "csl",
+          "error": "HTTP 429"
+        },
+        {
+          "board": "thermofisher",
+          "error": "HTTP 429"
+        },
+        {
+          "board": "alcon",
+          "error": "HTTP 429"
+        },
+        {
+          "board": "ferring",
+          "error": "HTTP 429"
+        },
         {
           "board": "roche",
-          "carry": true
+          "error": "HTTP 429"
+        },
+        {
+          "board": "rhe",
+          "error": "HTTP 429"
+        },
+        {
+          "board": "richemont",
+          "error": "HTTP 429"
+        },
+        {
+          "board": "msd",
+          "error": "HTTP 429"
+        },
+        {
+          "board": "lindtspruengli",
+          "error": "HTTP 429"
+        },
+        {
+          "board": "vontobel",
+          "error": "HTTP 429"
+        },
+        {
+          "board": "alpiq",
+          "error": "HTTP 429"
+        },
+        {
+          "board": "pierrefabre",
+          "error": "HTTP 429"
+        },
+        {
+          "board": "amgen",
+          "error": "HTTP 429"
         }
       ],
+      "capped": [],
       "status": "partial",
-      "seconds": 221.7,
-      "carried": 3
+      "seconds": 277.5,
+      "carried": 1401
     },
     "successfactors": {
       "boards": 6,
-      "jobs": 1340,
+      "jobs": 1294,
       "errors": [
         {
           "board": "careers.eon.com",
@@ -130,7 +202,7 @@
       ],
       "capped": [],
       "status": "partial",
-      "seconds": 67.5,
+      "seconds": 74.7,
       "carried": 24
     },
     "softgarden": {
@@ -144,7 +216,7 @@
     },
     "join": {
       "boards": 393,
-      "jobs": 578,
+      "jobs": 562,
       "errors": [
         {
           "board": "comselect",
@@ -153,7 +225,7 @@
       ],
       "capped": [],
       "status": "partial",
-      "seconds": 244.0,
+      "seconds": 248.6,
       "carried": 2
     }
   }
