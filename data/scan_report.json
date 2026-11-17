@@ -1,27 +1,27 @@
 {
-  "generated_at": "2026-11-16T12:41:35Z",
-  "total_jobs": 15818,
-  "collected": 12745,
-  "carried": 3095,
-  "duplicates_removed": 22,
+  "generated_at": "2026-11-17T13:18:24Z",
+  "total_jobs": 16358,
+  "collected": 13930,
+  "carried": 3007,
+  "duplicates_removed": 579,
   "sources": {
     "arbeitnow": {
       "boards": 1,
-      "jobs": 0,
-      "errors": [
+      "jobs": 1977,
+      "errors": [],
+      "capped": [
         {
           "board": "arbeitnow",
-          "error": "HTTP 429"
+          "carry": true
         }
       ],
-      "capped": [],
-      "status": "failed",
-      "seconds": 21.8,
-      "carried": 1668
+      "status": "partial",
+      "seconds": 70.4,
+      "carried": 695
     },
     "bundesagentur": {
       "boards": 1,
-      "jobs": 4417,
+      "jobs": 4529,
       "errors": [],
       "capped": [
         {
@@ -30,52 +30,52 @@
         }
       ],
       "status": "partial",
-      "seconds": 58.6,
+      "seconds": 58.3,
       "carried": 0
     },
     "greenhouse": {
       "boards": 35,
-      "jobs": 890,
+      "jobs": 893,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 35.3,
+      "seconds": 43.3,
       "carried": 0
     },
     "ashby": {
       "boards": 28,
-      "jobs": 468,
+      "jobs": 472,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 20.6,
+      "seconds": 21.1,
       "carried": 0
     },
     "smartrecruiters": {
       "boards": 35,
-      "jobs": 4414,
+      "jobs": 4397,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 117.7,
+      "seconds": 141.6,
       "carried": 0
     },
     "lever": {
       "boards": 6,
-      "jobs": 103,
+      "jobs": 101,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 41.3,
+      "seconds": 42.6,
       "carried": 0
     },
     "personio": {
       "boards": 6,
-      "jobs": 273,
+      "jobs": 274,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 11.3,
+      "seconds": 10.9,
       "carried": 0
     },
     "recruitee": {
@@ -84,7 +84,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 6.3,
+      "seconds": 6.7,
       "carried": 0
     },
     "teamtailor": {
@@ -93,7 +93,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 5.9,
+      "seconds": 5.8,
       "carried": 0
     },
     "dvinci": {
@@ -102,12 +102,12 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 2.0,
+      "seconds": 2.4,
       "carried": 0
     },
     "workday": {
       "boards": 20,
-      "jobs": 4,
+      "jobs": 0,
       "errors": [
         {
           "board": "philips",
@@ -131,6 +131,10 @@
         },
         {
           "board": "getec",
+          "error": "HTTP 429"
+        },
+        {
+          "board": "logitech",
           "error": "HTTP 429"
         },
         {
@@ -187,45 +191,65 @@
         }
       ],
       "capped": [],
-      "status": "partial",
-      "seconds": 277.5,
-      "carried": 1401
+      "status": "failed",
+      "seconds": 294.5,
+      "carried": 1405
     },
     "successfactors": {
       "boards": 6,
-      "jobs": 1294,
+      "jobs": 409,
       "errors": [
+        {
+          "board": "jobs.fraunhofer.de",
+          "error": "HTTP 503"
+        },
+        {
+          "board": "jobs.schaeffler.com",
+          "error": "HTTP 503"
+        },
+        {
+          "board": "jobs.bayer.com",
+          "error": "Client error '404 Not Found' for url 'https://jobs.bayer.com/tile-search-results/?q=&optionsFacetsDD_country=DE&startrow=0'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTT"
+        },
         {
           "board": "careers.eon.com",
           "error": "Client error '403 Forbidden' for url 'https://careers.eon.com/tile-search-results/?q=&optionsFacetsDD_country=DE&startrow=0'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HT"
+        },
+        {
+          "board": "jobs.rwe.com",
+          "error": "The read operation timed out"
         }
       ],
       "capped": [],
       "status": "partial",
-      "seconds": 74.7,
-      "carried": 24
+      "seconds": 309.2,
+      "carried": 905
     },
     "softgarden": {
       "boards": 1,
-      "jobs": 56,
+      "jobs": 57,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 1.1,
+      "seconds": 1.2,
       "carried": 0
     },
     "join": {
       "boards": 393,
-      "jobs": 562,
+      "jobs": 557,
       "errors": [
         {
           "board": "comselect",
           "error": "Client error '410 Gone' for url 'https://join.com/companies/comselect'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/410"
+        },
+        {
+          "board": "ruthardt",
+          "error": "Client error '410 Gone' for url 'https://join.com/companies/ruthardt'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/410"
         }
       ],
       "capped": [],
       "status": "partial",
-      "seconds": 248.6,
+      "seconds": 247.6,
       "carried": 2
     }
   }
