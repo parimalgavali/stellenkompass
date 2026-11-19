@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-18T12:59:43Z",
-  "total_jobs": 17116,
-  "collected": 15352,
-  "carried": 2046,
-  "duplicates_removed": 282,
+  "generated_at": "2026-11-19T12:58:15Z",
+  "total_jobs": 17480,
+  "collected": 15279,
+  "carried": 2495,
+  "duplicates_removed": 294,
   "sources": {
     "arbeitnow": {
       "boards": 1,
-      "jobs": 2308,
+      "jobs": 2236,
       "errors": [],
       "capped": [
         {
@@ -16,12 +16,12 @@
         }
       ],
       "status": "partial",
-      "seconds": 66.1,
-      "carried": 826
+      "seconds": 64.4,
+      "carried": 1191
     },
     "bundesagentur": {
       "boards": 1,
-      "jobs": 4539,
+      "jobs": 4595,
       "errors": [],
       "capped": [
         {
@@ -30,34 +30,34 @@
         }
       ],
       "status": "partial",
-      "seconds": 52.3,
+      "seconds": 61.3,
       "carried": 0
     },
     "greenhouse": {
       "boards": 35,
-      "jobs": 904,
+      "jobs": 926,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 37.4,
+      "seconds": 36.0,
       "carried": 0
     },
     "ashby": {
       "boards": 28,
-      "jobs": 473,
+      "jobs": 475,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 19.7,
+      "seconds": 20.9,
       "carried": 0
     },
     "smartrecruiters": {
       "boards": 35,
-      "jobs": 4384,
+      "jobs": 4374,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 142.0,
+      "seconds": 175.1,
       "carried": 0
     },
     "lever": {
@@ -66,12 +66,12 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 61.7,
+      "seconds": 86.6,
       "carried": 0
     },
     "personio": {
       "boards": 6,
-      "jobs": 277,
+      "jobs": 280,
       "errors": [],
       "capped": [],
       "status": "complete",
@@ -80,41 +80,41 @@
     },
     "recruitee": {
       "boards": 5,
-      "jobs": 159,
+      "jobs": 160,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 6.0,
+      "seconds": 6.5,
       "carried": 0
     },
     "teamtailor": {
       "boards": 3,
-      "jobs": 72,
+      "jobs": 71,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 5.2,
+      "seconds": 5.7,
       "carried": 0
     },
     "dvinci": {
       "boards": 1,
-      "jobs": 39,
+      "jobs": 40,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 2.1,
+      "seconds": 2.0,
       "carried": 0
     },
     "workday": {
       "boards": 20,
-      "jobs": 267,
+      "jobs": 188,
       "errors": [
         {
-          "board": "philips",
+          "board": "accenture",
           "error": "HTTP 429"
         },
         {
-          "board": "accenture",
+          "board": "hitachi",
           "error": "HTTP 429"
         },
         {
@@ -126,11 +126,7 @@
           "error": "HTTP 429"
         },
         {
-          "board": "logitech",
-          "error": "HTTP 429"
-        },
-        {
-          "board": "thermofisher",
+          "board": "csl",
           "error": "HTTP 429"
         },
         {
@@ -172,16 +168,20 @@
         {
           "board": "pierrefabre",
           "error": "HTTP 429"
+        },
+        {
+          "board": "amgen",
+          "error": "HTTP 429"
         }
       ],
       "capped": [],
       "status": "partial",
-      "seconds": 280.0,
-      "carried": 1140
+      "seconds": 312.2,
+      "carried": 1224
     },
     "successfactors": {
       "boards": 6,
-      "jobs": 1241,
+      "jobs": 1243,
       "errors": [
         {
           "board": "jobs.bayer.com",
@@ -194,12 +194,12 @@
       ],
       "capped": [],
       "status": "partial",
-      "seconds": 56.5,
+      "seconds": 69.9,
       "carried": 78
     },
     "softgarden": {
       "boards": 1,
-      "jobs": 59,
+      "jobs": 61,
       "errors": [],
       "capped": [],
       "status": "complete",
@@ -221,7 +221,7 @@
       ],
       "capped": [],
       "status": "partial",
-      "seconds": 243.0,
+      "seconds": 267.2,
       "carried": 2
     }
   }
