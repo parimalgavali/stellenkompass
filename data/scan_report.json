@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-23T14:32:18Z",
-  "total_jobs": 18641,
-  "collected": 16269,
-  "carried": 2635,
-  "duplicates_removed": 263,
+  "generated_at": "2026-11-24T14:49:26Z",
+  "total_jobs": 18886,
+  "collected": 16170,
+  "carried": 2989,
+  "duplicates_removed": 273,
   "sources": {
     "arbeitnow": {
       "boards": 1,
-      "jobs": 2307,
+      "jobs": 2267,
       "errors": [],
       "capped": [
         {
@@ -16,12 +16,12 @@
         }
       ],
       "status": "partial",
-      "seconds": 64.8,
-      "carried": 2311
+      "seconds": 75.2,
+      "carried": 2634
     },
     "bundesagentur": {
       "boards": 1,
-      "jobs": 4623,
+      "jobs": 4633,
       "errors": [],
       "capped": [
         {
@@ -30,52 +30,52 @@
         }
       ],
       "status": "partial",
-      "seconds": 60.4,
+      "seconds": 53.8,
       "carried": 0
     },
     "greenhouse": {
       "boards": 35,
-      "jobs": 943,
+      "jobs": 936,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 34.2,
+      "seconds": 40.3,
       "carried": 0
     },
     "ashby": {
       "boards": 28,
-      "jobs": 497,
+      "jobs": 496,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 20.3,
+      "seconds": 19.7,
       "carried": 0
     },
     "smartrecruiters": {
       "boards": 35,
-      "jobs": 4336,
+      "jobs": 4309,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 118.1,
+      "seconds": 135.2,
       "carried": 0
     },
     "lever": {
       "boards": 6,
-      "jobs": 104,
+      "jobs": 106,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 50.0,
+      "seconds": 19.9,
       "carried": 0
     },
     "personio": {
       "boards": 6,
-      "jobs": 280,
+      "jobs": 281,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 6.1,
+      "seconds": 6.3,
       "carried": 0
     },
     "recruitee": {
@@ -84,21 +84,21 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 5.4,
+      "seconds": 6.1,
       "carried": 0
     },
     "teamtailor": {
       "boards": 3,
-      "jobs": 67,
+      "jobs": 62,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 5.4,
+      "seconds": 5.7,
       "carried": 0
     },
     "dvinci": {
       "boards": 1,
-      "jobs": 35,
+      "jobs": 36,
       "errors": [],
       "capped": [],
       "status": "complete",
@@ -107,14 +107,18 @@
     },
     "workday": {
       "boards": 20,
-      "jobs": 1225,
+      "jobs": 1193,
       "errors": [
         {
           "board": "hitachi",
           "error": "HTTP 429"
         },
         {
-          "board": "csl",
+          "board": "nvidia",
+          "error": "HTTP 429"
+        },
+        {
+          "board": "msd",
           "error": "HTTP 429"
         }
       ],
@@ -125,12 +129,12 @@
         }
       ],
       "status": "partial",
-      "seconds": 257.3,
-      "carried": 244
+      "seconds": 244.0,
+      "carried": 275
     },
     "successfactors": {
       "boards": 6,
-      "jobs": 1256,
+      "jobs": 1254,
       "errors": [
         {
           "board": "jobs.bayer.com",
@@ -143,21 +147,21 @@
       ],
       "capped": [],
       "status": "partial",
-      "seconds": 66.8,
+      "seconds": 62.3,
       "carried": 78
     },
     "softgarden": {
       "boards": 1,
-      "jobs": 57,
+      "jobs": 59,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 1.2,
+      "seconds": 1.1,
       "carried": 0
     },
     "join": {
       "boards": 393,
-      "jobs": 377,
+      "jobs": 376,
       "errors": [
         {
           "board": "comselect",
@@ -170,7 +174,7 @@
       ],
       "capped": [],
       "status": "partial",
-      "seconds": 246.5,
+      "seconds": 236.8,
       "carried": 2
     }
   }
