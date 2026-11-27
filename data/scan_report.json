@@ -1,27 +1,27 @@
 {
-  "generated_at": "2026-11-26T13:50:58Z",
-  "total_jobs": 19336,
-  "collected": 14174,
-  "carried": 5190,
-  "duplicates_removed": 28,
+  "generated_at": "2026-11-27T13:48:11Z",
+  "total_jobs": 19866,
+  "collected": 16314,
+  "carried": 3868,
+  "duplicates_removed": 316,
   "sources": {
     "arbeitnow": {
       "boards": 1,
-      "jobs": 0,
-      "errors": [
+      "jobs": 2305,
+      "errors": [],
+      "capped": [
         {
           "board": "arbeitnow",
-          "error": "HTTP 429"
+          "carry": true
         }
       ],
-      "capped": [],
-      "status": "failed",
-      "seconds": 23.6,
-      "carried": 5045
+      "status": "partial",
+      "seconds": 62.5,
+      "carried": 3584
     },
     "bundesagentur": {
       "boards": 1,
-      "jobs": 4617,
+      "jobs": 4628,
       "errors": [],
       "capped": [
         {
@@ -30,34 +30,34 @@
         }
       ],
       "status": "partial",
-      "seconds": 60.9,
+      "seconds": 58.1,
       "carried": 0
     },
     "greenhouse": {
       "boards": 35,
-      "jobs": 939,
+      "jobs": 943,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 33.6,
+      "seconds": 31.9,
       "carried": 0
     },
     "ashby": {
       "boards": 28,
-      "jobs": 500,
+      "jobs": 506,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 19.0,
+      "seconds": 19.4,
       "carried": 0
     },
     "smartrecruiters": {
       "boards": 35,
-      "jobs": 4345,
+      "jobs": 4283,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 147.5,
+      "seconds": 124.8,
       "carried": 0
     },
     "lever": {
@@ -66,7 +66,7 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 11.8,
+      "seconds": 12.5,
       "carried": 0
     },
     "personio": {
@@ -84,21 +84,21 @@
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 6.9,
+      "seconds": 6.8,
       "carried": 0
     },
     "teamtailor": {
       "boards": 3,
-      "jobs": 62,
+      "jobs": 63,
       "errors": [],
       "capped": [],
       "status": "complete",
-      "seconds": 5.8,
+      "seconds": 5.5,
       "carried": 0
     },
     "dvinci": {
       "boards": 1,
-      "jobs": 39,
+      "jobs": 42,
       "errors": [],
       "capped": [],
       "status": "complete",
@@ -107,14 +107,18 @@
     },
     "workday": {
       "boards": 20,
-      "jobs": 1393,
+      "jobs": 1255,
       "errors": [
         {
           "board": "csl",
           "error": "HTTP 429"
         },
         {
-          "board": "amgen",
+          "board": "thermofisher",
+          "error": "HTTP 429"
+        },
+        {
+          "board": "msd",
           "error": "HTTP 429"
         }
       ],
@@ -125,12 +129,12 @@
         }
       ],
       "status": "partial",
-      "seconds": 290.7,
-      "carried": 65
+      "seconds": 252.6,
+      "carried": 204
     },
     "successfactors": {
       "boards": 6,
-      "jobs": 1289,
+      "jobs": 1304,
       "errors": [
         {
           "board": "jobs.bayer.com",
@@ -143,12 +147,12 @@
       ],
       "capped": [],
       "status": "partial",
-      "seconds": 74.6,
+      "seconds": 66.2,
       "carried": 78
     },
     "softgarden": {
       "boards": 1,
-      "jobs": 59,
+      "jobs": 60,
       "errors": [],
       "capped": [],
       "status": "complete",
@@ -157,7 +161,7 @@
     },
     "join": {
       "boards": 393,
-      "jobs": 371,
+      "jobs": 365,
       "errors": [
         {
           "board": "comselect",
@@ -166,11 +170,15 @@
         {
           "board": "ruthardt",
           "error": "Client error '410 Gone' for url 'https://join.com/companies/ruthardt'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/410"
+        },
+        {
+          "board": "worldwideplacementlimitedcouk",
+          "error": "Client error '404 Not Found' for url 'https://join.com/companies/worldwideplacementlimitedcouk'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404"
         }
       ],
       "capped": [],
       "status": "partial",
-      "seconds": 249.4,
+      "seconds": 252.5,
       "carried": 2
     }
   }
